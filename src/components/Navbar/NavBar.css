@@ -1,0 +1,31 @@
+nav {
+  	background-color: grey;
+	position: relative;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 50px;
+}
+
+#brand {
+	float: left;
+	margin-left: 2%;
+}
+
+ul {
+	float: right;
+	margin-right: 2%;
+	display: inline-block;
+	padding: 0;
+	width: auto;
+}
+
+ul li:first-child{
+	padding-right: 10%;
+	float: clear;
+}
+
+ul > li {
+	list-style: none;
+	display: inline;
+}
