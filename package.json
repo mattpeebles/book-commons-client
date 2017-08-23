@@ -2,10 +2,18 @@
   "name": "book-commons-client",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "enzyme": "^2.9.1",
+    "react-scripts": "^1.0.11",
+    "react-test-renderer": "^15.6.1"
+  },
   "dependencies": {
     "react": "^15.6.1",
+    "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.11"
+    "react-router-dom": "^4.1.2",
+    "react-scripts": "^1.0.11"
   },
   "scripts": {
     "start": "react-scripts start",
