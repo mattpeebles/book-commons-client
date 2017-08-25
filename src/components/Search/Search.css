@@ -1,20 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-	text-align: center;
-	position: relative;
-}
-
-main {
-   position: relative;
-   height: 100vh;
-   /* or height: 73.61% */
-   /* or height: 35vh */
-   /* or height: ANY HEIGHT */
-}
-
 #container {
   position: absolute;
   top: 50%;

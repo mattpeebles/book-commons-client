@@ -16,7 +16,7 @@ export default function Ebook(props){
 	})
 
 	return (
-		<div>
+		<div id="results" className="align-self-end col-12 col-md-8">
 			{results}
 		</div>
 	)

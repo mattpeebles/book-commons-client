@@ -3,9 +3,16 @@ import React from 'react'
 
 
 export default function SearchForm(props){
+	
+	function search(e){
+		e.preventDefault()
+		console.log(window.location.origin + '/results')
+		window.location.href = window.location.origin + '/results'
+	}
+
 	return (
 		<div>
-			<form id="bookSearchForm">
+			<form id="bookSearchForm" onSubmit={search}>
 				<input id="bookSearch" type="text" name="bookSearch" placeholder="Search the public domain" />
 			</form>
 		</div>

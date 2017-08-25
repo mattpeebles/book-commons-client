@@ -2,18 +2,15 @@ import React from 'react'
 
 import NavBrand from './NavBrand'
 import NavLinks	from './NavLinks'
-
-import './NavBar.css'
+import NavButton from './NavButton'
 
 export default function NavBar(props){
+	let links = ['register', 'login']
 	return(
-
-		<div>
-			<nav>
-				<NavBrand />
-				<NavLinks links={['login', 'register']}/>
-			</nav>
-		</div>
-
+		<nav className="navbar navbar-expand-lg navbar-light bg-light">
+			<NavBrand />
+			<NavButton />
+			<NavLinks links={links}/>
+		</nav>
 	)
 }
