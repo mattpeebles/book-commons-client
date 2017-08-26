@@ -9,6 +9,7 @@ export default class NavPills extends React.Component{
 	}
 
 	render(){		
+		
 		if(this.props.supplement === 'author'){
 			return (
 				<div className="col-md-12">

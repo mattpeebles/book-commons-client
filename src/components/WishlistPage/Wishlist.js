@@ -100,7 +100,7 @@ export default class Wishlist extends React.Component{
 		return(
 			<main>
 
-				<Header title="Wishlist" subtitle={this.state.currentList} subtitleId="wishListName" />
+				<Header headerId="header" title="Wishlist" subtitle={this.state.currentList} subtitleId="wishListName" />
 
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">

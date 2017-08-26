@@ -128,7 +128,7 @@ export default class Result extends React.Component{
 		
 		return(
 			<main>
-				<Header title="Results" />
+				<Header headerId='header' title="Results" />
 
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">

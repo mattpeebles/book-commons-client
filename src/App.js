@@ -6,6 +6,8 @@ import Results from './components/ResultsPage/Results'
 import Wishlist from './components/WishlistPage/Wishlist'
 import NavBar from './components/Navbar/NavBar'
 import Footer from './components/Footer/Footer'
+import LoginRegister from './components/LoginRegister/LoginRegister'
+
 
 export default class App extends React.Component{
 
@@ -20,6 +22,8 @@ export default class App extends React.Component{
 						<Route exact path='/results' component={Results} />
 						<Route exact path='/wishlist' component={Wishlist} />
 						<Route path='/wishlist/:params' component={Wishlist} />
+						<Route exact path='/login' component={LoginRegister} />
+						<Route exact path='/register' component={LoginRegister} />					
 					</main>
 					<Footer />
 				</div>

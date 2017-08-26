@@ -10,6 +10,7 @@ export default function NavBar(props){
 			<NavBrand name={'Book Commons'}/>
 			<NavButton />
 			<NavLinks links={props.links}/>
+
 		</nav>
 	)
 }

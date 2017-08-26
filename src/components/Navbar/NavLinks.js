@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+import NavSearch from './NavSearch'
 
 export default function NavLinks(props){
 	
@@ -14,6 +14,7 @@ export default function NavLinks(props){
 
 	return(
 		<div className="collapse navbar-collapse" id="navbarSupportedContent">
+			<NavSearch />
 			<ul className="navbar-nav mr-auto">
 				{links}
 			</ul>

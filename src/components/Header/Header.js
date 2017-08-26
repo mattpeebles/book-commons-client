@@ -6,7 +6,7 @@ export default function Header(props){
 	
 	if(!props.subtitle){
 		return (
-			<h1>{props.title}</h1>
+			<h1 id={props.headerId}>{props.title}</h1>
 		)
 	}
 
