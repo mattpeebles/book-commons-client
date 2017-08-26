@@ -1,0 +1,84 @@
+
+#header{
+	margin-top: 2%;
+}
+
+
+#main-container{
+	min-height: 100vh;
+	width: 100%;
+}
+
+#main-row{
+	height: 100%;
+	margin-top: 3%;
+}
+
+/*results*/
+	#results{
+		height: auto;
+		width: 100%;
+		padding: 0;
+	}
+
+/*author*/
+
+	#wishlists-container{
+		display: none;
+	}
+/**/
+
+
+
+@media screen and (min-width: 768px){
+
+	#main-container{
+		min-height: auto;
+		width: 100%;
+	}
+
+	#main-row{
+		height: 100%;
+		margin-top: 3%;
+	}
+
+	/*results*/
+		#results{
+			height: auto;
+		}
+
+	/*wishlist*/
+
+		#wishlists-container{
+			display: inherit;
+			text-align: center;
+			position: fixed;
+			right: 0
+		}
+
+		#wishlists-row{
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#wishlistTitle{
+			text-align: center;
+		}
+
+		#wishlists{
+			height: auto;
+			border: 1px solid black;
+		}
+
+		#lists-container{
+			height: auto;
+			text-align: left;
+		}
+
+		#wishlistLists{
+			text-align: left;
+		}
+
+	/**/
+}

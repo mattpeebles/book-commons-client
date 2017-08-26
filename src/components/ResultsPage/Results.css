@@ -1,4 +1,4 @@
-header{
+#header{
 	margin-top: 2%;
 }
 
@@ -14,73 +14,12 @@ header{
 	margin-bottom: 10%;
 }
 
-/*results*/
-	#results{
-		height: auto;
-		width: 100%;
-		padding: 0;
-	}
+#results{
+	height: auto;
+	width: 100%;
+	padding: 0;
+}
 
-	.result{
-		padding-left: 0;
-		padding-right: 0;
-		height: auto;
-		position: relative;
-		margin-left: auto;
-		margin-right: auto;
-		font-size: 14px;
-		border-top: 1px solid black;
-	}
-
-	.wishlistSelect{
-
-	}
-
-	.cover{
-		background-color: red;
-		height: auto;
-		width: 75px;
-	}
-
-	.bookInfo{
-		height: 100%;
-		width: 95%;
-	}
-
-	.title {
-		font-size: 22px;
-		text-align: left;
-	}
-
-	.bookAuthor{
-		font-size: 18px;
-		text-align: left;
-	}
-
-	.preview, .abbr{
-		display: none;
-	}
-
-
-	.location{
-		font-size: 10px;
-		text-align: right;
-	}
-
-	.icon{
-		width: 12px;
-		height: 12px;
-		background-color: red;
-		margin-right: 1%;
-	}
-/**/
-
-/*author*/
-
-	#supplement-container{
-		display: none;
-	}
-/**/
 
 
 
@@ -102,113 +41,7 @@ header{
 		margin-bottom: 5%;
 	}
 
-	/*results*/
-		#results{
-			height: auto;
-		}
-
-		.result{
-			padding-left: 0;
-			padding-right: 0;
-			width: 90%;
-			height: auto;
-			margin-bottom: 1%;
-			border: none;
-		}
-
-		.wishlistSelect{
-			width: 100%;
-		}
-
-		.cover{
-			background-color: red;
-			height: auto;
-			width: 100%;
-		}
-
-		.bookInfo{
-			height: 100%;
-			border: 1px solid black;
-		}
-
-		.title {
-			text-align: left;
-			font-size: 22px;
-		}
-
-		.bookAuthor{
-			text-align: left;
-			font-size: 18px;
-		}
-
-
-		.location{
-			text-align: right;
-		}
-
-		.format{
-			text-align: left;
-		}
-
-		.preview, .abbr{
-			display: initial;
-		}
-
-		.location{
-			font-size: 12px;
-		}
-
-		.icon{
-			width: 12px;
-			height: 12px;
-			background-color: red;
-			margin-right: 1%;
-		}
-	/**/
-
-	/*author*/
-
-		#supplement-container{
-			height: 100%;
-			display: inherit;
-		}
-
-		.supplementType{
-			height: auto;
-			width: 100%;
-			text-align: center;
-			border: 1px solid black;
-		}
-
-		.supplementImageContainer{
-			height: 150px;
-			width: 150px;
-			margin-bottom: 1%;
-			position: relative;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		#photoContainer{
-			background-color: red;
-		}
-
-		#coverContainer{
-			background-color: blue;
-		}
-
-		#summaryContainer{
-			height: 250px;
-			overflow: hidden;
-		}
-
-		#summary{
-			text-align: left;
-		}
-
-		#read-more > p{
-			margin-bottom: 0;
-			padding-bottom: 0;
-		}
-	/**/
+	#results{
+		height: auto;
+	}
 }

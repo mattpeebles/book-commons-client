@@ -1,8 +1,8 @@
 import React from 'react'
 
 import Ebook from '../Ebook/Ebook'
-import NavPills from './NavPills'
-import SupplementInfo from './SupplementInfo'
+import NavPills from '../Inputs/NavPills'
+import SupplementInfo from './Supplement/SupplementInfo'
 
 import './Results.css'
 
@@ -106,7 +106,7 @@ export default class Result extends React.Component{
 									location: '/'
 								},
 			'bookSupplement': {
-								title: 'Cheese',
+								title: 'Lorem',
 								published: '1843',
 								cover: '/',
 								summary: 'Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
@@ -124,6 +124,7 @@ export default class Result extends React.Component{
 
 
 	render(){
+		let dropdownLinks = ['Save to Wishlist']
 		
 		return(
 			<main>
@@ -134,7 +135,7 @@ export default class Result extends React.Component{
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={results} />
+						<Ebook results={results} dropdownLinks = {dropdownLinks}/>
 
 						<div id="supplement-container" className="col-md-4 row">						
 							<NavPills toggleSupplement={this.toggleSupplement.bind(this)} supplement={this.state.supplement}/>

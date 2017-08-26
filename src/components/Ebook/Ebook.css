@@ -1,0 +1,122 @@
+
+	.rightAligned{
+		position: absolute;
+		right: 2px;
+		top: 2px;
+	}
+
+	.result{
+		padding-left: 0;
+		padding-right: 0;
+		height: auto;
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+		font-size: 14px;
+		border-top: 1px solid black;
+	}
+
+	.wishlistSelect{
+
+	}
+
+	.cover{
+		background-color: red;
+		height: auto;
+		width: 75px;
+	}
+
+	.bookInfo{
+		height: 100%;
+		width: 95%;
+	}
+
+	.title {
+		font-size: 22px;
+		text-align: left;
+	}
+
+	.bookAuthor{
+		font-size: 18px;
+		text-align: left;
+	}
+
+	.preview, .abbr{
+		display: none;
+	}
+
+
+	.location{
+		font-size: 10px;
+		text-align: right;
+	}
+
+	.icon{
+		width: 12px;
+		height: 12px;
+		background-color: red;
+		margin-right: 1%;
+	}
+
+
+@media screen and (min-width: 700px){
+		.result{
+			padding-left: 0;
+			padding-right: 0;
+			width: 90%;
+			height: auto;
+			margin-bottom: 1%;
+			border: none;
+		}
+
+		.wishlistSelect{
+			width: 100%;
+		}
+
+		.cover{
+			background-color: red;
+			height: auto;
+			width: 100%;
+		}
+
+		.bookInfo{
+			height: 100%;
+			border: 1px solid black;
+			width: 90%;
+		}
+
+		.title {
+			text-align: left;
+			font-size: 22px;
+		}
+
+		.bookAuthor{
+			text-align: left;
+			font-size: 18px;
+		}
+
+
+		.location{
+			text-align: right;
+		}
+
+		.format{
+			text-align: left;
+		}
+
+		.preview, .abbr{
+			display: initial;
+		}
+
+		.location{
+			font-size: 12px;
+		}
+
+		.icon{
+			width: 12px;
+			height: 12px;
+			background-color: red;
+			margin-right: 1%;
+		}
+	/**/
+}

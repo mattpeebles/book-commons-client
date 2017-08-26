@@ -1,12 +1,14 @@
 import React from 'react'
 
-
+import Dropdown from '../Inputs/Dropdown'
 export default function BookInfo(props){
+
 	return (
 		<div className="row">
-			<div className="title col-12 text-truncate">
+			<div className="title col text-truncate">
 				{props.title}
 			</div>
+			<Dropdown dropdownLinks={props.dropdownLinks}/>
 			<div className="bookAuthor text-truncate col-12">
 				{props.author}
 			</div>

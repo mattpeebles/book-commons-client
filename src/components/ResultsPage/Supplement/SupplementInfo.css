@@ -1,0 +1,57 @@
+
+/*author*/
+
+	#supplement-container{
+		display: none;
+	}
+/**/
+
+
+
+@media screen and (min-width: 700px){
+
+
+		#supplement-container{
+			height: 100%;
+			display: inherit;
+		}
+
+		.supplementType{
+			height: auto;
+			width: 100%;
+			text-align: center;
+			border: 1px solid black;
+		}
+
+		.supplementImageContainer{
+			height: 150px;
+			width: 150px;
+			margin-bottom: 1%;
+			position: relative;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#photoContainer{
+			background-color: red;
+		}
+
+		#coverContainer{
+			background-color: blue;
+		}
+
+		#summaryContainer{
+			height: 250px;
+			overflow: hidden;
+		}
+
+		#summary{
+			text-align: left;
+		}
+
+		#read-more > p{
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+	/**/
+}

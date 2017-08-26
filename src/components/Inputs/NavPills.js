@@ -8,7 +8,7 @@ export default class NavPills extends React.Component{
 		this.props.toggleSupplement(e.target.id)
 	}
 
-	render(){	
+	render(){		
 		if(this.props.supplement === 'author'){
 			return (
 				<div className="col-md-12">
