@@ -1,11 +1,20 @@
 import React from 'react'
 import {shallow} from 'enzyme'
+import {expect, should} from 'chai'
 
 import NavBrand from './NavBrand'
 
 
 describe('<NavBrand />', () => {
 	it('Should render without crashing', () => {
-		shallow(<NavBrand />)
+		const name = 'Kanye'
+		shallow(<NavBrand name={name} />)
+	})
+
+	it('Should render brand name exactly', () => {
+		const name = 'Kanye'
+		const wrapper = shallow(<NavBrand name={name} />)
+
+		expect(wrapper.text()).to.be.equal(name)
 	})
 })

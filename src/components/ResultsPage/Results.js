@@ -1,12 +1,19 @@
 import React from 'react'
 
 import Ebook from '../Ebook/Ebook'
+import Header from '../Header/Header'
 import NavPills from '../Inputs/NavPills'
 import SupplementInfo from './Supplement/SupplementInfo'
 
 import './Results.css'
 
-let results = [
+export default class Result extends React.Component{
+	constructor(props){
+		super(props)
+		this.state = {
+			'supplement': 'author',
+			'details': 'authorSupplement',
+			'results': [
 			{
 				'title': "The Story of Brevity: How I Learned To Pare Down My Writing to Get to the Main Point in Short Order and Not Wax Eloquent about Superfluous Details that Either have No Bearing on My Original Point or Lack Concision",
 				'author': "Hubert Blaine Wolferuhigschlegelsteinhausenbergerkraftenwerkdorffschlosszeug",
@@ -90,14 +97,7 @@ let results = [
 				'location': 'project gutenberg',
 				'locationIcon': '/',
 				'locationUrl': '/'
-			}]
-
-export default class Result extends React.Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			'supplement': 'author',
-			'details': 'authorSupplement',
+			}],
 			'authorSupplement': {
 									name: 'M. Ipsum',
 									dates: '1800-1900',
@@ -128,14 +128,12 @@ export default class Result extends React.Component{
 		
 		return(
 			<main>
-				<header>
-					<h1 id="header">Results</h1>
-				</header>
+				<Header title="Results" />
 
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={results} dropdownLinks = {dropdownLinks}/>
+						<Ebook results={this.state.results} dropdownLinks={dropdownLinks}/>
 
 						<div id="supplement-container" className="col-md-4 row">						
 							<NavPills toggleSupplement={this.toggleSupplement.bind(this)} supplement={this.state.supplement}/>

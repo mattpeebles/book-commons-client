@@ -1,6 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import SearchHeader from './SearchHeader'
+import Header from '../Header/Header'
 import SearchForm from './SearchForm'
 
 
@@ -10,9 +9,8 @@ export default function Search(props){
 	return(
 		<main role='main'>
 			<div id="container">
-				<SearchHeader />
+				<Header headerId='header' title='Book Commons' subtitle='Search through the public domain'/>
 				<SearchForm />
-				<Link to="results"><button id="advanced">Advanced Search</button></Link>
 			</div>
 		</main>
 	)

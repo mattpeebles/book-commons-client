@@ -13,7 +13,12 @@ export default function SearchForm(props){
 	return (
 		<div>
 			<form id="bookSearchForm" onSubmit={search}>
-				<input id="bookSearch" type="text" name="bookSearch" placeholder="Search the public domain" />
+				<div className="form-group">
+					<input id="bookSearch" type="text" name="bookSearch" placeholder="Search the public domain" />
+				</div>
+				<div className="form-group">
+					<input id='bookSearchSubmit' type='submit' value="Commons Search" />
+				</div>
 			</form>
 		</div>
 	)

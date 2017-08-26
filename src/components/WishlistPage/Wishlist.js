@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Ebook from '../Ebook/Ebook'
+import Header from '../Header/Header'
 import WishlistsContainer from './WishlistsContainer'
 
 import './Wishlist.css'
@@ -94,18 +95,18 @@ export default class Wishlist extends React.Component{
 
 	render(){
 		let dropdownLinks = ['Change Wishlist', 'Delete']
+		let wishlistLinks = ["Biographies", "French Literature", "SciFi", "Russian Literature"]
+
 		return(
 			<main>
-				<header>
-					<h1 id="header">Wishlist</h1>
-					<h2 id="wishListName">{this.state.currentList}</h2>
-				</header>
+
+				<Header title="Wishlist" subtitle={this.state.currentList} subtitleId="wishListName" />
 
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
 						<Ebook results={this.state.wishlists[this.state.currentList]} dropdownLinks={dropdownLinks}/>
-						<WishlistsContainer changeWishlist={this.changeWishlist.bind(this)} />
+						<WishlistsContainer changeWishlist={this.changeWishlist.bind(this)} links={wishlistLinks}/>
 					</div>
 				</div>
 
