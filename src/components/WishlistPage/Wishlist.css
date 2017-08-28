@@ -5,13 +5,18 @@
 
 
 #main-container{
-	min-height: 100vh;
+	min-height: auto;
 	width: 100%;
 }
 
 #main-row{
 	height: 100%;
 	margin-top: 3%;
+}
+
+#settings{
+	position: absolute;
+	right: 2%;
 }
 
 /*results*/

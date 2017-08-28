@@ -99,9 +99,8 @@ export default class Wishlist extends React.Component{
 
 		return(
 			<main>
-
+				<a id="settings" href="/settings/wishlist"><button className="btn btn-default"><img alt='cog-icon' src="https://useiconic.com/open-iconic/svg/cog.svg" /></button></a>
 				<Header headerId="header" title="Wishlist" subtitle={this.state.currentList} subtitleId="wishListName" />
-
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						

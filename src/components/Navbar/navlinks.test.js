@@ -21,7 +21,7 @@ describe('<NavLinks />', () => {
 		const links = ['Login', 'Register']
 		const wrapper = shallow(<NavLinks links={links}/>)
 		wrapper.find('a').nodes.forEach((node, index) => {
-			expect(node.props.href).to.be.equal(`/${links[index]}`)
+			expect(node.props.href).to.be.equal(`/${links[index].toLowerCase()}`)
 		})
 	})
 })

@@ -7,13 +7,13 @@ export default function NavLinks(props){
 	
 	let links = props.links.map((link, index) => {
 		
-		if (link ==="wishlist"){
+		if (link ==="Wishlists"){
 			return <NavDropdown key={index} title={link} />
 		}
 
 		return (
 			<li key={index} className="nav-item">
-	        	<a className="nav-link" href={"/" + link}>{link}</a>
+	        	<a className="nav-link" href={"/" + link.toLowerCase()}>{link}</a>
 	    	</li>
 	    )
 	})

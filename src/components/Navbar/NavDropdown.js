@@ -4,7 +4,7 @@ export default function NavDropdown(props){
 	const wishlistLinks = ["Biographies", "French Literature", "SciFi", "Russian Literature"]
 
 	const links = wishlistLinks.map((link, index) => {
-			return <a key={index} className="dropdown-item" href={"/wishlist/" + link}>{link}</a>
+			return <a key={index} className="dropdown-item" href={"/wishlist"}>{link}</a>
 	})
 
 
