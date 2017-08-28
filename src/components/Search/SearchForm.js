@@ -11,7 +11,7 @@ export default function SearchForm(props){
 	}
 
 	return (
-		<div>
+		<div className="col-12">
 			<form id="bookSearchForm" onSubmit={search}>
 				<div className="form-group">
 					<input id="bookSearch" type="text" name="bookSearch" placeholder="Search the public domain" />

@@ -5,5 +5,4 @@ A public domain book search that aggregates a variety of databases to display re
 
 
 TODO: 
--Bootstrap Landing Page to prevent collosion of navbar
--Add dropdown in navbar for wishlist, so user can navigate wishlists on mobile
+-Add form to add or edit wishlists
