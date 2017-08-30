@@ -22,7 +22,7 @@ export class WLSettings extends React.Component{
 											{link}
 										</div>
 										<div className="col">
-											{this.props.wishlists[link].length} items
+											{this.props.wishlists[link].length} books
 										</div>
 									</div>
 									<div className="col-auto row">
@@ -40,18 +40,24 @@ export class WLSettings extends React.Component{
 		})
 
 		let newWishlist;
+		let addButton;
 
 		if(this.props.addWishlist === true){
 			newWishlist = <AddWishlist />
 		}
 
+		if(this.props.addWishlist === false){
+			addButton = 	
+				<div className="addContainer col-12">
+					<button className="btn btn-default addWLButton" onClick={() => this.props.dispatch(addWishlistForm(true))}>Add A Wishlist</button>
+				</div>
+		}
+
 		return (
 			<div className="container" >
 				<Header headerId="header" subtitleId="subtitle" title="Settings" subtitle="Wishlists"/>
+				{addButton}
 				<div className="row">
-					<div className="addContainer col-12">
-						<button className="btn btn-default addWLButton" onClick={() => this.props.dispatch(addWishlistForm(true))}>Add A Wishlist</button>
-					</div>
 					{newWishlist}
 					{formatLinks}
 				</div>
