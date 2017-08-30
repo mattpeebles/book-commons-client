@@ -30,7 +30,7 @@ export class App extends React.Component{
 					<main>
 						<Route exact path='/' component={LandingPage} />
 						<Route exact path='/results' component={Results} />
-						<Route exact path='/wishlist' component={Wishlist} />
+						
 						<Route exact path='/settings/wishlist' component={WLSettings} />						
 						<Route path='/wishlist/:id' component={Wishlist} />
 					</main>

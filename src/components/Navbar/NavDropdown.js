@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import {changeWishlist} from '../../actions/actions'
 
@@ -7,7 +8,6 @@ import {changeWishlist} from '../../actions/actions'
 export class NavDropdown extends React.Component{
 	
 	handleClick(e){
-		e.preventDefault()
 		this.props.dispatch(changeWishlist(e.target.text))
 	}
 
@@ -16,7 +16,7 @@ export class NavDropdown extends React.Component{
 
 
 		const links = this.props.wishlistLinks.map((link, index) => {
-				return <a key={index} className="dropdown-item" href={"/wishlist"} onClick={(e) => this.handleClick(e)}>{link}</a>
+				return <Link key={index} className="dropdown-item" to={`/wishlist/${link.toLowerCase()}`} onClick={(e) => this.handleClick(e)}>{link}</Link>
 		})
 
 

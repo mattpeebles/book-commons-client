@@ -1,18 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {changeWishlist} from '../../actions/actions'
 
 export class WishlistLinks extends React.Component{
 		
 	handleClick(e){
-		e.preventDefault()
 		this.props.dispatch(changeWishlist(e.target.text))
 	}
 
 	render(){
 
 		let links = this.props.links.map((link, index) => {
-			return (<li key={index}><a href={"/wishlist"} onClick={e => this.handleClick(e)}>{link}</a></li>)
+			return (<li key={index}><Link to={`/wishlist/${link.toLowerCase()}`} onClick={e => this.handleClick(e)}>{link}</Link></li>)
 		})
 
 		return(

@@ -2,7 +2,8 @@ import {
 	TOGGLE_LOGIN_REGISTER,
 	SHOW_LOGIN_REGISTER,
 	CHANGE_WISHLIST,
-	TOGGLE_SUPPLEMENT
+	TOGGLE_SUPPLEMENT,
+	ADD_WISHLIST_FORM
 } from '../actions/actions'
 
 
@@ -111,6 +112,7 @@ const initialState = {
 											summary: 'Magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
 											location: '/'},
 					currentList: 'Biographies',
+					addWishlist: false,
 					wishlists: {
 								'Biographies': [
 								{'title': "The Story of Brevity: How I Learned To Pare Down My Writing to Get to the Main Point in Short Order and Not Wax Eloquent about Superfluous Details that Either have No Bearing on My Original Point or Lack Concision",
@@ -231,5 +233,10 @@ export default (state, action) => {
 		})
 	}
 
+	if(action.type === ADD_WISHLIST_FORM){
+		state = Object.assign({}, initialState, {
+			addWishlist: action.addWishlist
+		})
+	}
 	return state
 }

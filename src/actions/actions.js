@@ -23,3 +23,9 @@ export const toggleSupplement = (info) => ({
 	'supplement': info,
 	'details': `${info}Supplement`
 })
+
+export const ADD_WISHLIST_FORM = 'ADD_WISHLIST_FORM'
+export const addWishlistForm = (bool) => ({
+	type: ADD_WISHLIST_FORM,
+	'addWishlist': bool
+})
