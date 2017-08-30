@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux';
 
 import BookDetails from './BookDetails'
 import BookInfo from './BookInfo'
@@ -7,19 +8,10 @@ import NoResults from '../NoResults/NoResults'
 
 import './Ebook.css'
 
-export default class Ebook extends React.Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			saving: false
-		}
-	}
-
-
-	render(){
-			
-		let results;
+export class Ebook extends React.Component{
 		
+	render(){
+		let results;
 		if(this.props.results){
 			results = this.props.results.map((result, index) => {
 				return <div className="result col-12 row" id={index} key={index}>
@@ -44,3 +36,9 @@ export default class Ebook extends React.Component{
 		)
 	}
 }
+
+const mapStateToProps = state => ({
+        results: state.results
+});
+
+export default connect(mapStateToProps)(Ebook);

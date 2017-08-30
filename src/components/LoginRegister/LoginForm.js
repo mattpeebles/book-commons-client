@@ -1,18 +1,32 @@
 import React from 'react'
+import {connect} from 'react-redux';
 
-export default function Login(props){
-	return(
-		<form>
-		  <label>Login</label>
-		  <div className="form-group">
-		    <label for="loginEmail">Email</label>
-		    <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email" />
-		  </div>
-		  <div className="form-group">
-		    <label for="loginPassword">Password</label>
-		    <input type="password" className="form-control" id="loginPassword" placeholder="Password" />
-		  </div>
-		  <button type="submit" className="btn btn-primary">Submit</button>
-		</form>
-	)
+import {toggleLoginRegister, showLoginRegister} from '../../actions/actions'
+
+export class LoginForm extends React.Component{
+
+	render(){
+		return(
+			<div className="module form-module">
+			  <div className="toggle"><i className="fa fa-times fa-pencil"></i>
+				<button className="toggleButton btn btn-default" onClick={() => this.props.dispatch(toggleLoginRegister('register'))}>Register</button>
+			  </div>
+			  <div className="closeForm">
+				<button className="btn btn-danger" onClick={() => this.props.dispatch(showLoginRegister(false))}>X</button>
+			  </div>			  
+			  <div className="form">
+			    <h2>Login to your account</h2>
+			    <form>
+			      <input type="text" placeholder="Email"/>
+			      <input type="password" placeholder="Password"/>
+			      <button className="submitButton">Login</button>
+			    </form>
+			  </div>
+			  <div className="cta"><a href="/">Forgot your password?</a></div>
+			</div>
+		)
+	}
 }
+
+
+export default connect()(LoginForm)

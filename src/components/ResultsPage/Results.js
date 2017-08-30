@@ -133,7 +133,7 @@ export default class Result extends React.Component{
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={this.state.results} dropdownLinks={dropdownLinks}/>
+						<Ebook dropdownLinks={dropdownLinks}/>
 
 						<div id="supplement-container" className="col-md-4 row">						
 							<NavPills toggleSupplement={this.toggleSupplement.bind(this)} supplement={this.state.supplement}/>

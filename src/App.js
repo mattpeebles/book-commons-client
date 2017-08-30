@@ -1,5 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom' 
+import {connect} from 'react-redux'
+
 
 import LandingPage from './components/LandingPage'
 import Results from './components/ResultsPage/Results'
@@ -10,22 +12,27 @@ import Footer from './components/Footer/Footer'
 import LoginRegister from './components/LoginRegister/LoginRegister'
 
 
-export default class App extends React.Component{
+export class App extends React.Component{
 
 	render(){
-		let links = ['Register', 'Login', 'Wishlists']
+		
+		let loginRegisterForm;
+
+		if(this.props.clicked === true){
+			loginRegisterForm = <LoginRegister />
+		}
+
 		return(
 			<Router>
 				<div>
-					<NavBar links={links}/>
+					<NavBar />
+					{loginRegisterForm}
 					<main>
 						<Route exact path='/' component={LandingPage} />
 						<Route exact path='/results' component={Results} />
 						<Route exact path='/wishlist' component={Wishlist} />
 						<Route exact path='/settings/wishlist' component={WLSettings} />						
 						<Route path='/wishlist/:id' component={Wishlist} />
-						<Route exact path='/login' component={LoginRegister} />
-						<Route exact path='/register' component={LoginRegister} />					
 					</main>
 					<Footer />
 				</div>
@@ -33,3 +40,11 @@ export default class App extends React.Component{
 		)
 	}
 }
+
+
+const mapStateToProps = state => ({
+	clicked: state.loginRegisterForm.clicked
+})
+
+
+export default connect(mapStateToProps)(App)

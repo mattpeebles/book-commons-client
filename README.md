@@ -5,4 +5,11 @@ A public domain book search that aggregates a variety of databases to display re
 
 
 TODO: 
--Add form to add or edit wishlists
+
+- Add form to add or edit wishlists
+- Transistion sophisticated unit tests to redux
+- add tests for actions
+- add tests for reducers
+- add tests for wishlist settings
+- transistion app to redux/stateless
+ - wishlist in particular

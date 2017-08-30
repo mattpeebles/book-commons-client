@@ -2,7 +2,7 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import {expect, should} from 'chai'
 
-import NavLinks from './NavLinks'
+import {NavLinks} from './NavLinks'
 
 
 describe('<NavLinks />', () => {
