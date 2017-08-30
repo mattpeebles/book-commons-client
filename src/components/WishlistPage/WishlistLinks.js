@@ -1,16 +1,18 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {changeWishlist} from '../../actions/actions'
 
-export default class WishlistsLinks extends React.Component{
+export class WishlistLinks extends React.Component{
 		
-	handleWishlistChange(e){
+	handleClick(e){
 		e.preventDefault()
-		this.props.changeWishlist(e.target.text)
+		this.props.dispatch(changeWishlist(e.target.text))
 	}
 
 	render(){
 
 		let links = this.props.links.map((link, index) => {
-			return (<li key={index}><a href={"/wishlist/" + link} onClick={this.handleWishlistChange.bind(this)}>{link}</a></li>)
+			return (<li key={index}><a href={"/wishlist"} onClick={e => this.handleClick(e)}>{link}</a></li>)
 		})
 
 		return(
@@ -20,5 +22,6 @@ export default class WishlistsLinks extends React.Component{
 		)	
 	}
 
-
 }
+
+export default connect()(WishlistLinks)

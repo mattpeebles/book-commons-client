@@ -13,7 +13,7 @@ export default function WishlistsContainer(props){
 						<div id="lists-container" className="col-md-12">
 							<div id="wishlistsList">
 								<ol>
-									<WishlistLinks changeWishlist={props.changeWishlist} links={props.links}/>
+									<WishlistLinks links={props.links}/>
 								</ol>
 							</div>
 						</div>

@@ -2,7 +2,7 @@ import React from 'react'
 import {shallow, mount} from 'enzyme'
 import {expect, should} from 'chai'
 
-import Results from './Results'
+import {Results} from './Results'
 import AuthorSupplement from './Supplement/AuthorSupplement'
 import BookSupplement from './Supplement/BookSupplement'
 

@@ -11,7 +11,7 @@ import FormatLocation from './FormatLocation'
 
 describe('<Result />', () => {
 	it('should render without crashing', () => {
-		shallow(<Ebook />)
+		shallow(<Ebook results={[]}/>)
 	})
 
 	it('should render all subcomponents', () => {

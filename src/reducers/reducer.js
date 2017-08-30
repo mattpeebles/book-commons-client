@@ -1,6 +1,8 @@
 import {
 	TOGGLE_LOGIN_REGISTER,
-	SHOW_LOGIN_REGISTER
+	SHOW_LOGIN_REGISTER,
+	CHANGE_WISHLIST,
+	TOGGLE_SUPPLEMENT
 } from '../actions/actions'
 
 
@@ -130,7 +132,8 @@ const initialState = {
 								'formats': ['epub', 'mobi', 'pdf'],
 								'location': 'feedbooks',
 								'locationIcon': '/',
-								'locationUrl': '/'}],
+								'locationUrl': '/'}
+							],
 
 							'French Literature': [{'title': "Jefferson and His Time",
 								'author': "Thomas Malone",
@@ -182,7 +185,9 @@ const initialState = {
 								'formats': ['epub', 'mobi', 'pdf'],
 								'location': 'project gutenberg',
 								'locationIcon': '/',
-								'locationUrl': '/'}]
+								'locationUrl': '/'}],
+							
+							"Russian Literature": []
 					}
 				}
 
@@ -210,5 +215,21 @@ export default (state, action) => {
 
 		return state
 	}
+
+	if(action.type === CHANGE_WISHLIST){
+		state = Object.assign({}, initialState, {
+			currentList: action.currentList
+		})
+
+		return state
+	}
+
+	if(action.type === TOGGLE_SUPPLEMENT){
+		state = Object.assign({}, initialState, {
+			supplement: action.supplement,
+			details: action.details
+		})
+	}
+
 	return state
 }

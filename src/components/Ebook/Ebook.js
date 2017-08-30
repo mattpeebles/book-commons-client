@@ -12,7 +12,12 @@ export class Ebook extends React.Component{
 		
 	render(){
 		let results;
-		if(this.props.results){
+
+		if(this.props.results.length === 0) {
+			results = <NoResults />
+		}
+
+		else{
 			results = this.props.results.map((result, index) => {
 				return <div className="result col-12 row" id={index} key={index}>
 					<div className="bookInfo col">
@@ -24,11 +29,6 @@ export class Ebook extends React.Component{
 			})	
 		}
 
-
-		else {
-			results = <NoResults />
-		}
-
 		return (
 			<div id="results" className="align-self-end col-12 col-md-8">
 				{results}
@@ -37,8 +37,4 @@ export class Ebook extends React.Component{
 	}
 }
 
-const mapStateToProps = state => ({
-        results: state.results
-});
-
-export default connect(mapStateToProps)(Ebook);
+export default connect()(Ebook);
