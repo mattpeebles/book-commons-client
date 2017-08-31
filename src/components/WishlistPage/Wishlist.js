@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import {Link} from 'react-router-dom'
 
 import Ebook from '../Ebook/Ebook'
 import Header from '../Header/Header'
@@ -16,13 +16,13 @@ export class Wishlist extends React.Component{
 
 		return(
 			<main>
-				<a id="settings" href="/settings/wishlist"><button className="btn btn-default"><img alt='cog-icon' src="https://useiconic.com/open-iconic/svg/cog.svg" /></button></a>
+				<Link id="settings" to="/settings/wishlist"><button className="btn btn-default"><img alt='cog-icon' src="https://useiconic.com/open-iconic/svg/cog.svg" /></button></Link>
 				<Header headerId="header" title="Wishlist" subtitle={this.props.currentList} subtitleId="wishListName" />
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={this.props.wishlists[this.props.currentList]} dropdownLinks={dropdownLinks}/>
-						<WishlistsContainer links={Object.keys(this.props.wishlists)}/>
+						<Ebook results={this.props.wishlistItems.filter(item => item.wishlist === this.props.currentList)} dropdownLinks={dropdownLinks}/>
+						<WishlistsContainer links={this.props.wishlists}/>
 					</div>
 				</div>
 
@@ -33,7 +33,8 @@ export class Wishlist extends React.Component{
 
 const mapStateToProps = state => ({
 	currentList: state.currentList,
-	wishlists: state.wishlists
+	wishlists: state.wishlists,
+	wishlistItems: state.wishlistItems
 })
 
 export default connect(mapStateToProps)(Wishlist)

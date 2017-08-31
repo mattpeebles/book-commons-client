@@ -6,6 +6,6 @@ import {NavDropdown} from './NavDropdown'
 
 describe('<NavDropdown />', () => {
 	it('Should render without crashing', () => {
-		shallow(<NavDropdown wishlistLinks={[]}/>)
+		shallow(<NavDropdown wishlists={[]}/>)
 	})
 })

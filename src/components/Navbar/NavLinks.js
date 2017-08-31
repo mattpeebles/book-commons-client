@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import {showLoginRegister} from '../../actions/actions'
 
@@ -10,12 +11,20 @@ export class NavLinks extends React.Component{
 
 	render(){ 
 		let links = this.props.links.map((link, index) => {
+
+			if (link ==="Wishlists" && this.props.wishlists.length === 0){
+				return (
+					<li key={index} className="nav-item">
+			        	<Link className="nav-link" to={`/settings/wishlist`}>Wishlist Settings</Link>
+			    	</li>
+			    )
+			}
 			
-			if (link ==="Wishlists"){
+			else if (link ==="Wishlists"){
 				return <NavDropdown key={index} title={link} />
 			}
 
-			else if(link === 'Login/Register'){
+			if(link === 'Login/Register'){
 				return ( 
 					<li key={index} className="nav-item">
 			        	<a className="nav-link" onClick={()=> this.props.dispatch(showLoginRegister(!this.props.clicked))}>{link}</a>
@@ -25,7 +34,8 @@ export class NavLinks extends React.Component{
 
 			return (
 				<li key={index} className="nav-item">
-		        	<a className="nav-link" href={"/" + link.toLowerCase()}>{link}</a>
+		        	<Link className="nav-link" to={`/${link.toLowerCase()}`}
+		        	>{link}</Link>
 		    	</li>
 		    )
 		})
@@ -44,6 +54,7 @@ export class NavLinks extends React.Component{
 const mapStateToProps = state => ({
 	clicked: state.loginRegisterForm.clicked,
 	links: state.navLinks,
+	wishlists: state.wishlists
 })
 
 export default connect(mapStateToProps)(NavLinks)

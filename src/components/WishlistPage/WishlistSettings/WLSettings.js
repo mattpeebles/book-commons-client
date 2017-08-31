@@ -4,16 +4,56 @@ import {connect} from 'react-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 
-import {addWishlistForm} from '../../../actions/actions'
+import {addWishlistForm, editWishlistTitle, deleteWishlist, toggleEditWishlistStatus} from '../../../actions/actions'
 
 import './WLSettings.css'
 
 
 export class WLSettings extends React.Component{
-	//let links = ["Biographies", "French Literature", "SciFi", "Russian Literature"]
+
+
+	toggleEditForm(e){
+		let value = e.target.id.split('-')[0]
+		this.props.dispatch(toggleEditWishlistStatus(value))
+	}
+
+	editListTitle(e){
+		e.preventDefault()
+		let oldTitle = e.target.id.split('-')[0]
+		console.log(oldTitle)
+		let newTitle = this.input.value
+		this.props.dispatch(editWishlistTitle(newTitle, oldTitle))
+	}
+
+	deleteList(e){
+		let value = e.target.id.split('-')[0]
+		this.props.dispatch(deleteWishlist(value))
+	}
+
+	addWishlistForm(e){
+		this.props.dispatch(addWishlistForm(true))
+	}
 
 	render(){
-			let formatLinks = Object.keys(this.props.wishlists).map((link, index) => {
+
+			let formatLinks = this.props.wishlists.map((link, index) => {
+				
+					//filters wishlists edit, first array item is result, takes value of result
+				if(this.props.wishlistsEdit.filter(list => Object.keys(list).toString() === link)[0][link]){
+					return (
+						<div key={index} className="col-12 col-md-6 settingsContainer">
+							<div className="col">
+								Edit Title
+							</div>
+							<form className="col" id={link+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
+								<input type="text" name="editTitle" placeholder={link} ref={input => this.input = input}/>
+								<input type="submit" name="editSubmit" />
+								<button type="cancel" id={link="-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
+							</form>
+						</div>
+					)
+				}
+
 				return (
 							<div key={index} className="col-12 col-md-6 settingsContainer">
 								<div className="row">
@@ -22,18 +62,17 @@ export class WLSettings extends React.Component{
 											{link}
 										</div>
 										<div className="col">
-											{this.props.wishlists[link].length} books
+											<span className="listTitle">{(this.props.wishlistItems.filter(item => item.wishlist === link)).length}</span> books
 										</div>
 									</div>
 									<div className="col-auto row">
 										<div className="col">
-											<button className="btn btn-default btn-sm">Edit</button>
+											<button id={link+"-Edit"} className="btn btn-default btn-sm" onClick={e => this.toggleEditForm(e)}>Edit</button>
 										</div>
 										<div className="col-auto">
-											<button className="btn btn-default btn-sm">Delete</button>
+											<button id={link+"-Delete"} className="btn btn-default btn-sm" onClick={e => this.deleteList(e)}>Delete</button>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						)
@@ -49,7 +88,7 @@ export class WLSettings extends React.Component{
 		if(this.props.addWishlist === false){
 			addButton = 	
 				<div className="addContainer col-12">
-					<button className="btn btn-default addWLButton" onClick={() => this.props.dispatch(addWishlistForm(true))}>Add A Wishlist</button>
+					<button className="btn btn-default addWLButton" onClick={(e) => this.addWishlistForm(e)}>Add A Wishlist</button>
 				</div>
 		}
 
@@ -68,7 +107,9 @@ export class WLSettings extends React.Component{
 
 const mapStateToProps = state => ({
 	wishlists: state.wishlists,
-	addWishlist: state.addWishlist
+	wishlistItems: state.wishlistItems,
+	addWishlist: state.addWishlist,
+	wishlistsEdit: state.wishlistsEdit
 })
 
 export default connect(mapStateToProps)(WLSettings)

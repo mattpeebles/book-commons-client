@@ -1,9 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {addWishlistForm} from '../../../actions/actions'
+import {addWishlistForm, addNewWishlist} from '../../../actions/actions'
 
 export class AddWishlist extends React.Component{
+     submitWishlist(e) {
+        let list = this.input.value
+
+        this.props.dispatch(addNewWishlist(list))
+      	this.props.dispatch(addWishlistForm(false))
+    }
+
 	render(){
 		return(
 					<div className="col-12 col-md-6 addWishlist">
@@ -12,8 +19,8 @@ export class AddWishlist extends React.Component{
 								New Wishlist
 							</div>
 							<div className="col-12">
-								<form>
-									<input type="text" placeholder="Wishlist name" />
+								<form onSubmit={e => this.submitWishlist(e)}>
+									<input type="text" name="newWishlist" placeholder="Wishlist name" ref={input => this.input = input}  />
 									<input type="submit" />
 									<button onClick={() => this.props.dispatch(addWishlistForm(false))}>Cancel</button>
 								</form>

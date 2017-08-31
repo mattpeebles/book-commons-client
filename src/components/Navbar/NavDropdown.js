@@ -13,9 +13,7 @@ export class NavDropdown extends React.Component{
 
 	render(){
 
-
-
-		const links = this.props.wishlistLinks.map((link, index) => {
+		const links = this.props.wishlists.map((link, index) => {
 				return <Link key={index} className="dropdown-item" to={`/wishlist/${link.toLowerCase()}`} onClick={(e) => this.handleClick(e)}>{link}</Link>
 		})
 
@@ -34,7 +32,7 @@ export class NavDropdown extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlistLinks: Object.keys(state.wishlists)
+	wishlists: state.wishlists
 })
 
 export default connect(mapStateToProps)(NavDropdown)
