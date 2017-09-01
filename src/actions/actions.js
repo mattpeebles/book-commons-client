@@ -20,14 +20,14 @@ export const changeWishlist = (list) => ({
 export const TOGGLE_SUPPLEMENT = 'TOGGLE_SUPPLEMENT'
 export const toggleSupplement = (info) => ({
 	type: TOGGLE_SUPPLEMENT,
-	'supplement': info,
-	'details': `${info}Supplement`
+	supplement: info,
+	details: `${info}Supplement`
 })
 
 export const ADD_WISHLIST_FORM = 'ADD_WISHLIST_FORM'
 export const addWishlistForm = (bool) => ({
 	type: ADD_WISHLIST_FORM,
-	'addWishlist': bool
+	addWishlist: bool
 })
 
 export const ADD_NEW_WISHLIST = 'ADD_NEW_WISHLIST'

@@ -6,8 +6,5 @@ A public domain book search that aggregates a variety of databases to display re
 
 TODO: 
 
-- Push new wishlist to state, add ability to edit wishlist
 - Transistion sophisticated unit tests to redux
-- add tests for actions
 - add tests for reducers
-- transistion app to redux/stateless
