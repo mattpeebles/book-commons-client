@@ -1,4 +1,4 @@
-import {SHOW_LOGIN_REGISTER, showLoginRegister, TOGGLE_LOGIN_REGISTER, toggleLoginRegister, 
+import {SHOW_LOGIN_REGISTER, showLoginRegister, TOGGLE_LOGIN_REGISTER, toggleLoginRegister, ADD_TO_WISHLIST, addToWishlist,
 		CHANGE_WISHLIST, changeWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, ADD_WISHLIST_FORM, addWishlistForm, 
 		ADD_NEW_WISHLIST, addNewWishlist, TOGGLE_EDIT_WISHLIST_STATUS, toggleEditWishlistStatus, 
 		EDIT_WISHLIST_TITLE, editWishlistTitle, DELETE_WISHLIST, deleteWishlist} from './actions'
@@ -18,6 +18,27 @@ describe('toggleLoginRegister', () => {
 		const action = toggleLoginRegister('form')
 		expect(action.type).to.be.equal(TOGGLE_LOGIN_REGISTER)
 		expect(action.form).to.be.equal('form')
+	})
+})
+
+describe('addToWishlist', () => {
+	it('should set item as ebook and list as wishlist', () => {
+		const ebook = {
+						'title': "Lorem",
+						'author': "Ip Sum",
+						'preview': "/",
+						'publishDate': "1832",
+						'languages': ['english', 'spanish', 'french'],
+						'pages': "643",
+						'formats': ['epub', 'mobi', 'pdf'],
+						'location': 'project gutenberg',
+						'locationIcon': '/',
+						'locationUrl': '/'}
+		const wishlist = 'Biographies'
+		const action = addToWishlist(ebook, wishlist)
+		expect(action.type).to.be.equal(ADD_TO_WISHLIST)
+		expect(action.item).to.be.equal(ebook)
+		expect(action.list).to.be.equal(wishlist)
 	})
 })
 

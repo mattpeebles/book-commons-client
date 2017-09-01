@@ -1,6 +1,7 @@
 import {
+	SHOW_LOGIN_REGISTER,	
 	TOGGLE_LOGIN_REGISTER,
-	SHOW_LOGIN_REGISTER,
+	ADD_TO_WISHLIST,
 	CHANGE_WISHLIST,
 	TOGGLE_SUPPLEMENT,
 	ADD_WISHLIST_FORM,
@@ -219,6 +220,17 @@ const initialState = {
 export default (state, action) => {
 	state = state || initialState;
 
+	
+	if (action.type === SHOW_LOGIN_REGISTER){
+		state = Object.assign({}, state, {
+			loginRegisterForm: {
+				clicked: action.clicked,
+			}
+		})
+
+		return state
+	}
+
 	if (action.type === TOGGLE_LOGIN_REGISTER){
 		state = Object.assign({}, state, {
 			loginRegisterForm: {
@@ -230,11 +242,14 @@ export default (state, action) => {
 		return state
 	}
 
-	if (action.type === SHOW_LOGIN_REGISTER){
+	if(action.type === ADD_TO_WISHLIST){
+		const ebook = action.item
+		ebook['wishlist'] = action.list
+
+		const wishlistItems = [...state.wishlistItems, ebook]
+
 		state = Object.assign({}, state, {
-			loginRegisterForm: {
-				clicked: action.clicked,
-			}
+			wishlistItems
 		})
 
 		return state

@@ -1,6 +1,7 @@
 import {
 	showLoginRegister,
 	toggleLoginRegister,
+	addToWishlist,
 	changeWishlist,
 	toggleSupplement,
 	addWishlistForm,
@@ -16,6 +17,17 @@ import {expect} from 'chai'
 describe('index reducer', () => {
 	let wishlist1 = 'fantasy';
 	let wishlist2 = 'american lit';
+	const ebook1 = {
+				'title': "Lorem",
+				'author': "Ip Sum",
+				'preview': "/",
+				'publishDate': "1832",
+				'languages': ['english', 'spanish', 'french'],
+				'pages': "643",
+				'formats': ['epub', 'mobi', 'pdf'],
+				'location': 'project gutenberg',
+				'locationIcon': '/',
+				'locationUrl': '/'}
 
 
 	describe('showLoginRegister', () => 
@@ -36,6 +48,22 @@ describe('index reducer', () => {
 
 			state = reducer(state, toggleLoginRegister('register'))
 			expect(state.loginRegisterForm.form).to.be.equal('register')
+
+		})
+	})
+
+	describe('addToWishlist', () => {
+		it('should add new item to wishlist', () => {
+			let state;
+			
+				//create new wishlist with no items
+			state = reducer(state, addNewWishlist(wishlist1))
+			expect(state.wishlists).to.include(wishlist1)
+			expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(0)
+
+				//add item
+			state = reducer(state, addToWishlist(ebook1, wishlist1))
+			expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(1)
 
 		})
 	})

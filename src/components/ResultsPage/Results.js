@@ -27,7 +27,7 @@ export class Results extends React.Component{
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={this.props.results} dropdownLinks={dropdownLinks}/>
+						<Ebook results={this.props.results} dropdownType='options' dropdownLinks={dropdownLinks}/>
 
 						<div id="supplement-container" className="col-md-4 row">						
 							<NavPills toggleSupplement={this.handleClick.bind(this)} supplement={this.props.supplement}/>

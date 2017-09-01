@@ -8,7 +8,7 @@ export default function BookInfo(props){
 			<div className="title col text-truncate">
 				{props.title}
 			</div>
-			<Dropdown dropdownLinks={props.dropdownLinks}/>
+			<Dropdown ebook={props.ebook} type={props.dropdownType} dropdownLinks={props.dropdownLinks}/>
 			<div className="bookAuthor text-truncate col-12">
 				{props.author}
 			</div>

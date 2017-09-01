@@ -11,6 +11,13 @@ export const toggleLoginRegister = (form) => ({
 	form: form,
 })
 
+export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST'
+export const addToWishlist = (item, list) => ({
+	type: ADD_TO_WISHLIST,
+	item: item,
+	list: list
+})
+
 export const CHANGE_WISHLIST = 'CHANGE_WISHLIST'
 export const changeWishlist = (list) => ({
 	type: CHANGE_WISHLIST,
