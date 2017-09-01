@@ -1,9 +1,10 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 
 
 export default function NavBrand(props){
 	return (
-			<a className="navbar-brand" id="brand" href="/">{props.name}</a>
+			<Link className="navbar-brand" id="brand" to={"/"}>{props.name}</Link>
 	)
 }

@@ -14,7 +14,6 @@ describe('<NavBrand />', () => {
 	it('Should render brand name exactly', () => {
 		const name = 'Kanye'
 		const wrapper = shallow(<NavBrand name={name} />)
-
-		expect(wrapper.text()).to.be.equal(name)
+		expect(wrapper.props().children).to.be.equal(name)
 	})
 })
