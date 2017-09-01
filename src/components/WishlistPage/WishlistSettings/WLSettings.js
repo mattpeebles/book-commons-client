@@ -48,7 +48,7 @@ export class WLSettings extends React.Component{
 							<form className="col" id={link+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
 								<input type="text" name="editTitle" placeholder={link} ref={input => this.input = input}/>
 								<input type="submit" name="editSubmit" />
-								<button type="cancel" id={link="-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
+								<button type="cancel" id={link+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
 							</form>
 						</div>
 					)
