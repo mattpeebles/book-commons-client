@@ -318,16 +318,19 @@ export default (state, action) => {
 			wishlistsEdit,
 			wishlistItems
 		})
-
+		
 		return state
+
 	}
 
 	if(action.type === DELETE_WISHLIST){
-		let wishlistArray = state.wishlists.filter(list => list !== action.deleteWishlist)
+		let wishlists = state.wishlists.filter(list => list !== action.deleteWishlist)
+		let wishlistsEdit = state.wishlistsEdit.filter(list => Object.keys(list).toString() !== action.deleteWishlist)
 		let wishlistItems = state.wishlistItems.filter(items => items.wishlist !== action.deleteWishlist)
 
 		state = Object.assign({}, state, {
-			wishlists: wishlistArray,
+			wishlists,
+			wishlistsEdit,
 			wishlistItems
 		})
 

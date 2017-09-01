@@ -7,4 +7,4 @@ A public domain book search that aggregates a variety of databases to display re
 TODO: 
 
 - Transistion sophisticated unit tests to redux
-- add tests for reducers
+- Add ability to add ebook to wishlist
