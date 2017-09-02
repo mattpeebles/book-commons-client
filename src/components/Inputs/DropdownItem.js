@@ -1,9 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {addToWishlist} from '../../actions/actions'
-
-//return (<button className="dropdown-item" key={index}>{item}</button>)
+import {addToWishlist, removeFromWishlist} from '../../actions/actions'
 
 export class DropdownItem extends React.Component{
 	
@@ -16,19 +14,46 @@ export class DropdownItem extends React.Component{
 		this.props.dispatch(addToWishlist(ebook, list))
 	}
 
+	removeEbook(e){
+		e.preventDefault()
+		let ebook = this.props.ebook
+		this.props.dispatch(removeFromWishlist(ebook))
+	}
 
 	render(){
 
 			//Wishlist render
-		if(this.props.type === 'button'){
-				let button = this.props.dropdownLinks.map((item, index) => {
-					return (<button className="dropdown-item" key={index}>{item}</button>)
-				})
+		if(this.props.type === 'wishlistDrop'){
+				
+					let items = this.props.dropdownLinks.map((item, index) => {
+						
+						if(item === 'Delete'){
+							return (<button className="dropdown-item" key={index} onClick={e => this.removeEbook(e)}>{item}</button>)
+						}
+
+						else if(item === 'Change Wishlist'){
+							let options = this.props.wishlists.map((item, index) => {
+								return <option key={index} value={item}>{item}</option>
+							})
+
+							return (
+								<form key={index} onSubmit={e => this.addBook(e)}>
+									<select name='wishlist'>
+										{options}
+									</select>
+									<input type='submit' value='Change Wishlist' />
+								</form>
+							)
+						}
+
+						return item
+						
+					})
 
 
 				return (
 					<div>
-						{button}
+						{items}
 					</div>
 				)		
 		}
@@ -51,7 +76,8 @@ export class DropdownItem extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.wishlists
+	wishlists: state.wishlists,
+	wishlistItems: state.wishlistItems
 })
 
 export default connect(mapStateToProps)(DropdownItem)

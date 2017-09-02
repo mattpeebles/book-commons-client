@@ -6,7 +6,6 @@ export default function SearchForm(props){
 	
 	function search(e){
 		e.preventDefault()
-		console.log(window.location.origin + '/results')
 		window.location.href = window.location.origin + '/results'
 	}
 

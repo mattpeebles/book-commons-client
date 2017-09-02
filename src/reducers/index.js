@@ -2,6 +2,7 @@ import {
 	SHOW_LOGIN_REGISTER,	
 	TOGGLE_LOGIN_REGISTER,
 	ADD_TO_WISHLIST,
+	REMOVE_FROM_WISHLIST,
 	CHANGE_WISHLIST,
 	TOGGLE_SUPPLEMENT,
 	ADD_WISHLIST_FORM,
@@ -242,18 +243,58 @@ export default (state, action) => {
 		return state
 	}
 
-	if(action.type === ADD_TO_WISHLIST){
-		const ebook = action.item
-		ebook['wishlist'] = action.list
+		//WILL BE FULLY FLESHED OUT IN THE BACKEND	
+	// if(action.type === ADD_TO_WISHLIST){
+		
+	// 	let {title, author, preview, publishDate, languages, 
+	// 	pages, formats, location, locationIcon, locationUrl} = action.item
+		
+	// 			//overly complicated, can just assing object
+	// 	let ebook = {
+	// 		wishlist: action.list,
+	// 		title,
+	// 		author,
+	// 		preview,
+	// 		publishDate,
+	// 		languages,
+	// 		pages,
+	// 		formats,
+	// 		location,
+	// 		locationIcon,
+	// 		locationUrl
 
-		const wishlistItems = [...state.wishlistItems, ebook]
+	// 	}
+			
+	// 		//prevents duplicates of same title from being added
+	// 	if(state.wishlistItems.filter(item => item.wishlist === ebook.wishlist && item.title === ebook.title).length >= 1){
+	// 		return state
+	// 	}
 
-		state = Object.assign({}, state, {
-			wishlistItems
-		})
+	// 	else {
+	// 		const wishlistItems = [...state.wishlistItems, ebook]
 
-		return state
-	}
+
+	// 		state = Object.assign({}, state, {
+	// 			wishlistItems
+	// 		})
+
+	// 		return state
+	// 	}
+	// }
+
+	// if(action.type === REMOVE_FROM_WISHLIST){
+	// 	const ebook = action.item
+
+	// 	console.log(state.wishlistItems.filter(item => item !== ebook))
+
+	// 	let wishlistItems = state.wishlistItems.filter(item => item !== ebook)
+
+	// 	state = Object.assign({}, state, {
+	// 		wishlistItems
+	// 	})
+
+	// 	return state
+	// }
 
 	if(action.type === CHANGE_WISHLIST){
 		state = Object.assign({}, state, {

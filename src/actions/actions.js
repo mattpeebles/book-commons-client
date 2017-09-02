@@ -18,6 +18,18 @@ export const addToWishlist = (item, list) => ({
 	list: list
 })
 
+// export const MOVE_BETWEEN_WISHLISTS = 'MOVE_BETWEEN_WISHLISTS'
+// export const moveBetweenWishlists = (item, oldList) => ({
+// 	type: MOVE_BETWEEN_WISHLISTS,
+// 	oldList: oldList
+// })
+
+export const REMOVE_FROM_WISHLIST = 'REMOVE_FROM_WISHLIST'
+export const removeFromWishlist = (item, list) => ({
+	type: REMOVE_FROM_WISHLIST,
+	item: item,
+})
+
 export const CHANGE_WISHLIST = 'CHANGE_WISHLIST'
 export const changeWishlist = (list) => ({
 	type: CHANGE_WISHLIST,

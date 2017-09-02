@@ -2,6 +2,7 @@ import {
 	showLoginRegister,
 	toggleLoginRegister,
 	addToWishlist,
+	removeFromWishlist,
 	changeWishlist,
 	toggleSupplement,
 	addWishlistForm,
@@ -52,21 +53,54 @@ describe('index reducer', () => {
 		})
 	})
 
-	describe('addToWishlist', () => {
-		it('should add new item to wishlist', () => {
-			let state;
+		//MOVING TO BACKEND
+	// describe('addToWishlist', () => {
+	// 	it('should add new item to wishlist', () => {
+	// 		let state;
 			
-				//create new wishlist with no items
-			state = reducer(state, addNewWishlist(wishlist1))
-			expect(state.wishlists).to.include(wishlist1)
-			expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(0)
+	// 			//create new wishlist with no items
+	// 		state = reducer(state, addNewWishlist(wishlist1))
+	// 		expect(state.wishlists).to.include(wishlist1)
+	// 		expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(0)
 
-				//add item
-			state = reducer(state, addToWishlist(ebook1, wishlist1))
-			expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(1)
+	// 			//add item
+	// 		state = reducer(state, addToWishlist(ebook1, wishlist1))
+	// 		expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(1)
 
-		})
-	})
+	// 	})
+
+	// 	it('should prevent duplicate items from being added', () => {
+	// 		let state;
+
+	// 		state = reducer(state, addNewWishlist(wishlist1))
+
+	// 		state = reducer(state, addToWishlist(ebook1, wishlist1))
+	// 		state = reducer(state, addToWishlist(ebook1, wishlist1))
+
+	// 		expect(state.wishlistItems.filter(item => item.title === ebook1.title && item.wishlist === ebook1.wishlist).length).to.be.equal(1)
+	// 	})
+	// })
+
+	// describe('removeFromWishlist', () => {
+	// 	it('should remove item from wishlist', () => {
+	// 		let state;
+			
+	// 			//create new wishlist with no items
+	// 		state = reducer(state, addNewWishlist(wishlist1))
+	// 		expect(state.wishlists).to.include(wishlist1)
+	// 		expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(0)
+
+	// 			//add item
+	// 		state = reducer(state, addToWishlist(ebook1, wishlist1))
+	// 		expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(1)
+
+	// 		ebook1['wishlist'] = wishlist1
+
+	// 		state = reducer(state, removeFromWishlist(ebook1))
+	// 		expect(state.wishlistItems.filter(item => item.wishlist === wishlist1).length).to.equal(0)
+
+	// 	})
+	// })
 
 	describe('changeWishlist', () => {
 		it('should change current wishlist to clicked', () => {

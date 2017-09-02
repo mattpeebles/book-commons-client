@@ -7,12 +7,12 @@ import {DropdownItem} from './DropdownItem'
 describe('<DropdownItem />', () => {
 	it('should render without crashing', () => {
 		let dropdownLinks = ['Save', 'Delete']
-		shallow(<DropdownItem type='button' dropdownLinks={dropdownLinks} />)
+		shallow(<DropdownItem type='wishlistDrop' dropdownLinks={dropdownLinks} />)
 	})
 
 	it('should render all links passed into as props', ()=> {
 		let dropdownLinks = ['Save', 'Delete']
-		let wrapper = shallow(<DropdownItem type='button' dropdownLinks={dropdownLinks} />)
+		let wrapper = shallow(<DropdownItem type='wishlistDrop' dropdownLinks={dropdownLinks} />)
 		expect(wrapper.children().length).to.be.equal(2)
 	})
 

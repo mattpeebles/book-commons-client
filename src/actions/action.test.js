@@ -1,5 +1,5 @@
 import {SHOW_LOGIN_REGISTER, showLoginRegister, TOGGLE_LOGIN_REGISTER, toggleLoginRegister, ADD_TO_WISHLIST, addToWishlist,
-		CHANGE_WISHLIST, changeWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, ADD_WISHLIST_FORM, addWishlistForm, 
+		REMOVE_FROM_WISHLIST, removeFromWishlist, CHANGE_WISHLIST, changeWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, ADD_WISHLIST_FORM, addWishlistForm, 
 		ADD_NEW_WISHLIST, addNewWishlist, TOGGLE_EDIT_WISHLIST_STATUS, toggleEditWishlistStatus, 
 		EDIT_WISHLIST_TITLE, editWishlistTitle, DELETE_WISHLIST, deleteWishlist} from './actions'
 
@@ -22,8 +22,7 @@ describe('toggleLoginRegister', () => {
 })
 
 describe('addToWishlist', () => {
-	it('should set item as ebook and list as wishlist', () => {
-		const ebook = {
+	const ebook = {
 						'title': "Lorem",
 						'author': "Ip Sum",
 						'preview': "/",
@@ -34,11 +33,32 @@ describe('addToWishlist', () => {
 						'location': 'project gutenberg',
 						'locationIcon': '/',
 						'locationUrl': '/'}
-		const wishlist = 'Biographies'
+	const wishlist = 'Biographies'
+	
+	it('should set item as ebook and list as wishlist', () => {
 		const action = addToWishlist(ebook, wishlist)
 		expect(action.type).to.be.equal(ADD_TO_WISHLIST)
 		expect(action.item).to.be.equal(ebook)
-		expect(action.list).to.be.equal(wishlist)
+	})
+})
+
+describe('removeFromWishlist', () => {
+	it('should remove ebook from wishlist', () => {
+		const ebook = {
+						'wishlist': 'Biographies',
+						'title': "Lorem",
+						'author': "Ip Sum",
+						'preview': "/",
+						'publishDate': "1832",
+						'languages': ['english', 'spanish', 'french'],
+						'pages': "643",
+						'formats': ['epub', 'mobi', 'pdf'],
+						'location': 'project gutenberg',
+						'locationIcon': '/',
+						'locationUrl': '/'}
+		const action = removeFromWishlist(ebook)
+		expect(action.type).to.be.equal(REMOVE_FROM_WISHLIST)
+		expect(action.item).to.be.equal(ebook)
 	})
 })
 

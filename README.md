@@ -7,4 +7,5 @@ A public domain book search that aggregates a variety of databases to display re
 TODO: 
 
 - Transistion sophisticated unit tests to redux
-- Add ability to add ebook to wishlist
+- Add ability to remove ebook from wishlist
+- Add ability to move ebook between wishlists
