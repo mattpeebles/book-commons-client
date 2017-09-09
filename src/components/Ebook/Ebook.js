@@ -55,7 +55,7 @@ export class Ebook extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlistItems: state.wishlistItems
+	wishlistItems: state.app.wishlistItems
 })
 
 export default connect(mapStateToProps)(Ebook);

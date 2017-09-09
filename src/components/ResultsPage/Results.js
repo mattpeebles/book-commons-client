@@ -42,11 +42,12 @@ export class Results extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	supplement: state.supplement,
-	details: state.details,
-	results: state.results,
-	authorSupplement: state.authorSupplement,
-	bookSupplement: state.bookSupplement
+	user: state.user,
+	supplement: state.app.supplement,
+	details: state.app.details,
+	results: state.app.results,
+	authorSupplement: state.app.authorSupplement,
+	bookSupplement: state.app.bookSupplement
 })
 
 export default connect(mapStateToProps)(Results)

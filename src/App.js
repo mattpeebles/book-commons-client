@@ -44,7 +44,7 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
-	clicked: state.loginRegisterForm.clicked
+	clicked: state.user.loginRegisterForm.clicked
 })
 
 

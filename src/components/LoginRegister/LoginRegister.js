@@ -19,7 +19,7 @@ export function LoginRegister(props){
 
 
 const mapStateToProps = state => ({
-	form: state.loginRegisterForm.form
+	form: state.user.loginRegisterForm.form
 })
 
 export default connect(mapStateToProps)(LoginRegister)

@@ -1,9 +1,17 @@
 import React from 'react'
-import {connect} from 'react-redux';
-
-import {toggleLoginRegister, showLoginRegister} from '../../actions/actions'
+import {reduxForm, Field} from 'redux-form';
+import {login, toggleLoginRegister, showLoginRegister} from '../../actions/userActions'
 
 export class LoginForm extends React.Component{
+
+    onSubmit(values) {
+        let user = {
+        	email: values.email,
+        	password: values.password
+        }
+
+        this.props.dispatch(login(user))
+    }
 
 	render(){
 		return(
@@ -16,9 +24,12 @@ export class LoginForm extends React.Component{
 			  </div>			  
 			  <div className="form">
 			    <h2>Login to your account</h2>
-			    <form>
-			      <input type="text" placeholder="Email"/>
-			      <input type="password" placeholder="Password"/>
+				<form
+	                onSubmit={this.props.handleSubmit(values =>
+	                    this.onSubmit(values)
+                )}>
+			      <Field name="email" id="email" component="input" type="text" placeholder="Email"/>
+			      <Field name="password" id="password" component="input" type="password" placeholder="Password"/>
 			      <button className="submitButton">Login</button>
 			    </form>
 			  </div>
@@ -29,4 +40,5 @@ export class LoginForm extends React.Component{
 }
 
 
-export default connect()(LoginForm)
+export default reduxForm({
+	form: 'login'})(LoginForm)
