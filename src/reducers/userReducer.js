@@ -1,9 +1,9 @@
 import {
 	SHOW_LOGIN_REGISTER,	
 	TOGGLE_LOGIN_REGISTER,
-	REGISTER_REQUEST,
-	REGISTER_SUCCESS,
-	REGISTER_ERROR,
+	// REGISTER_REQUEST,
+	// REGISTER_SUCCESS,
+	// REGISTER_ERROR,
 	LOGIN_REQUEST,
 	LOGIN_SUCCESS,
 	LOGIN_ERROR,
@@ -19,7 +19,7 @@ const initialState = {
 	loginRegisterForm: {display: false,
 						 form: 'login'},
 	loading : false,
-	user: {},
+	user: undefined,
 	error: null
 }
 
@@ -48,31 +48,31 @@ export default (state, action) => {
 		return state
 	}
 
-	if(action.type === REGISTER_REQUEST){
-		return Object.assign({}, state, {
-			loading: true,
-			error: null
-		})
-	}
+	// if(action.type === REGISTER_REQUEST){
+	// 	return Object.assign({}, state, {
+	// 		loading: true,
+	// 		error: null
+	// 	})
+	// }
 
-	if(action.type === REGISTER_SUCCESS){
-		return Object.assign({}, state, {
-			user: action.user,
-			loading: false,
-			error: null,
-			loginRegisterForm: {
-				display: true,
-				form: 'login'
-			}
-		})
-	}
+	// if(action.type === REGISTER_SUCCESS){
+	// 	return Object.assign({}, state, {
+	// 		user: action.user,
+	// 		loading: false,
+	// 		error: null,
+	// 		loginRegisterForm: {
+	// 			display: true,
+	// 			form: 'login'
+	// 		}
+	// 	})
+	// }
 
-	if (action.type === REGISTER_ERROR){
-		return Object.assign({}, state, {
-			error: action.error,
-			loading: false
-		})
-	}
+	// if (action.type === REGISTER_ERROR){
+	// 	return Object.assign({}, state, {
+	// 		error: action.error,
+	// 		loading: false
+	// 	})
+	// }
 
 	if(action.type === LOGIN_REQUEST){
 		return Object.assign({}, state, {
@@ -108,7 +108,7 @@ export default (state, action) => {
 
 	if(action.type === LOGOUT_SUCCESS){
 		return Object.assign({}, state, {
-			user: {},
+			user: undefined,
 			loading: false,
 			error: null,
 			loginRegisterForm: {display: false,

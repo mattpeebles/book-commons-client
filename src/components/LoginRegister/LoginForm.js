@@ -1,16 +1,15 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form';
-import {login, toggleLoginRegister, showLoginRegister} from '../../actions/userActions'
+import {login} from '../../actions/auth';
+import {toggleLoginRegister, showLoginRegister} from '../../actions/userActions'
 
 export class LoginForm extends React.Component{
 
     onSubmit(values) {
-        let user = {
-        	email: values.email,
-        	password: values.password
-        }
 
-        this.props.dispatch(login(user))
+    	const {email, password} = values
+
+        this.props.dispatch(login(email, password))
     }
 
 	render(){

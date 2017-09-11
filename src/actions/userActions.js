@@ -1,3 +1,4 @@
+import {SubmissionError} from 'redux-form';
 const {API_BASE_URL} = require('../config');
 
 export const SHOW_LOGIN_REGISTER = 'SHOW_LOGIN_REGISTER'
@@ -13,54 +14,77 @@ export const toggleLoginRegister = (form) => ({
 	form: form,
 })
 
-export const register = user => dispatch => {
-	dispatch(registerRequest())
-	return fetch(`${API_BASE_URL}/users`, {
-		method: 'POST',
-		body: JSON.stringify(user),
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	 .then(res => {
-        if (!res.ok) {
-            if (
-                res.headers.has('content-type') &&
-                res.headers
-                    .get('content-type')
-                    .startsWith('application/json')
-            ) {
-                // It's a nice JSON error returned by us, so decode it
-                return res.json().then(err => Promise.reject(err));
-            }
-            // It's a less informative error returned by express
-            return Promise.reject({
-                code: res.status,
-                message: res.statusText
-            });
-        }
-        
-        return res.json()
+export const registerUser = user => dispatch => {
+    return fetch(`${API_BASE_URL}/users`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
     })
-	 .then(res => {
-	 	dispatch(registerSuccess(res.user))
-	 })
-	 .catch(err => {
-	 	dispatch(registerError(err))
-	 })
-}
+       // .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        });
+};
 
-export const REGISTER_REQUEST = 'REGISTER_REQUEST'
-export const registerRequest = () => ({
-	type: REGISTER_REQUEST
-})
+// export const register = user => dispatch => {
+// 	dispatch(registerRequest())
+// 	return fetch(`${API_BASE_URL}/users`, {
+// 		method: 'POST',
+// 		body: JSON.stringify(user),
+// 		headers: {
+// 			'Content-Type': 'application/json'
+// 		}
+// 	})
+// 	 .then(res => {
+//         if (!res.ok) {
+//             if (
+//                 res.headers.has('content-type') &&
+//                 res.headers
+//                     .get('content-type')
+//                     .startsWith('application/json')
+//             ) {
+//                 // It's a nice JSON error returned by us, so decode it
+//                 return res.json().then(err => Promise.reject(err));
+//             }
+//             // It's a less informative error returned by express
+//             return Promise.reject({
+//                 code: res.status,
+//                 message: res.statusText
+//             });
+//         }
+        
+//         return res.json()
+//     })
+// 	 .then(res => {
+// 	 	dispatch(registerSuccess(res.user))
+// 	 })
+// 	 .catch(err => {
+// 	 	dispatch(registerError(err))
+// 	 })
+// }
+
+// export const REGISTER_REQUEST = 'REGISTER_REQUEST'
+// export const registerRequest = () => ({
+// 	type: REGISTER_REQUEST
+// })
 
 
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
-export const registerSuccess = (user) => ({
-	type: REGISTER_SUCCESS,
-	user
-})
+// export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
+// export const registerSuccess = (user) => ({
+// 	type: REGISTER_SUCCESS,
+// 	user
+// })
 
 export const REGISTER_ERROR = "REGISTER_ERROR"
 export const registerError = (error) => ({
