@@ -1,18 +1,17 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form';
-import {login} from '../../actions/auth';
-import {registerUser, toggleLoginRegister, showLoginRegister} from '../../actions/userActions'
+import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth';
+import {registerUser, } from '../../actions/userActions'
 import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
 
 export class RegisterForm extends React.Component{
 	
     onSubmit(values) {
         const {email, password} = values
-        const user = {email, password}
 
        return this.props
-        	.dispatch(registerUser(user))
-        	.then(() => this.props.dispatch(login(user)))
+        	.dispatch(registerUser(values))
+        	.then(() => this.props.dispatch(login(email, password)))
     }
 
 	render(){

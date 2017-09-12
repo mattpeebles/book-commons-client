@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {showLoginRegister, logout} from '../../actions/userActions'
+import {showLoginRegister} from '../../actions/auth'
 
 import NavSearch from './NavSearch'
 import NavDropdown from './NavDropdown'
@@ -33,13 +33,13 @@ export class NavLinks extends React.Component{
 			    )
 			}
 
-			if(link === 'Logout'){
-				return (
-					<li key={index} id={link} className="nav-item">
-			        	<a className="nav-link" onClick={()=> this.props.dispatch(logout())}>{link}</a>
-			    	</li>
-		    	)
-			}
+			// if(link === 'Logout'){
+			// 	return (
+			// 		<li key={index} id={link} className="nav-item">
+			//         	<a className="nav-link" onClick={()=> this.props.dispatch(logout())}>{link}</a>
+			//     	</li>
+		 //    	)
+			// }
 
 			return (
 				<li key={index} id={link} className="nav-item">
@@ -61,11 +61,12 @@ export class NavLinks extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	display: state.user.loginRegisterForm.display,
-	loggedIn: state.user.loggedIn,
+	display: state.auth.loginRegisterForm.display,
+	loggedIn: state.auth.loggedIn,
 	user: state.user.user,
-	links: state.user.navLinks,
-	wishlists: state.app.wishlists
+	links: state.auth.navLinks,
+	wishlists: state.wishlist.wishlists,
+	wishlistNames: state.wishlist.wishlistNames
 })
 
 export default connect(mapStateToProps)(NavLinks)

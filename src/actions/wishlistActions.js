@@ -1,43 +1,29 @@
 const {API_BASE_URL} = require('../config');
 
-export const fetchWishlists = () => dispatch => {
-	dispatch(fetchWishlistsRequest)
-	return fetch(`${API_BASE_URL}/wishlists`)
-		.then(res => {
-        if (!res.ok) {
-            if (
-                res.headers.has('content-type') &&
-                res.headers
-                    .get('content-type')
-                    .startsWith('application/json')
-            ) {
-                // It's a nice JSON error returned by us, so decode it
-                return res.json().then(err => Promise.reject(err));
+export const fetchWishlists = () => (dispatch, getState) => {
+    dispatch(fetchWishlistsRequest)
+	const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/wishlists`, {
+            method: 'GET',
+            headers: {
+                // Provide our email and password as login credentials
+                Authorization: `Bearer ${authToken}`
             }
-            // It's a less informative error returned by express
-            return Promise.reject({
-                code: res.status,
-                message: res.statusText
-            });
-        }
-        
-        return res.json()
-    })
-    .then(res => {
+        })
+		.then(res => res.json())
+        .then(res => {
 
-    	let wishlistNames = []
+        	let wishlistNames = []
 
-    	res.wishlists.forEach(list => {
-    		wishlistNames.push(list.id)
-    	})
+        	res.wishlists.forEach(list => {
+        		wishlistNames.push(list.id)
+        	})
 
-    	console.log(wishlistNames, res.wishlists )
-
-    	dispatch(fetchWishlistsSuccess(res.wishlists, wishlistNames))
-    })
-    .catch(err => {
-    	dispatch(fetchWishlistsError(err))
-    })
+        	dispatch(fetchWishlistsSuccess(res.wishlists, wishlistNames))
+        })
+        .catch(err => {
+        	dispatch(fetchWishlistsError(err))
+        })
 }
 
 

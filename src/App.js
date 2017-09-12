@@ -4,10 +4,6 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import {
-	showLoginRegister
-} from './actions/userActions'
-
-import {
 	fetchWishlists
 } from './actions/wishlistActions'
 
@@ -23,26 +19,17 @@ import LoginRegister from './components/LoginRegister/LoginRegister'
 
 export class App extends React.Component{
 
-	
-	componentWillReceiveProps(){
-		if(this.props.currentUser !== null){
-			this.props.dispatch(showLoginRegister(false))
-		}
-	}
-
 	render(){
 		
 		let loginRegisterForm;
-
-		console.log(this.props.auth)
-		
+				
 		if(this.props.display === true){
 			loginRegisterForm = <LoginRegister />
 		}
 
-		// if(this.props.user !== undefined){
-	 // 		setTimeout(() => this.props.dispatch(fetchWishlists()), 5000)
-		// }
+		if(this.props.user !== null){
+	 		this.props.dispatch(fetchWishlists())
+		}
 
 
 
@@ -67,9 +54,9 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
-	auth: state.auth,
-	currentUser: state.auth.currentUser,
-	display: state.user.loginRegisterForm.display
+	token: state.auth.authToken,
+	user: state.auth.currentUser,
+	display: state.auth.loginRegisterForm.display
 })
 
 

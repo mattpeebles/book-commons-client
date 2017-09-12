@@ -5,6 +5,19 @@ import {API_BASE_URL} from '../config';
 //import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
 
+
+export const SHOW_LOGIN_REGISTER = 'SHOW_LOGIN_REGISTER'
+export const showLoginRegister = (show) => ({
+    type: SHOW_LOGIN_REGISTER,
+    display: show
+})
+
+export const TOGGLE_LOGIN_REGISTER = 'TOGGLE_LOGIN_REGISTER'
+export const toggleLoginRegister = (form) => ({
+    type: TOGGLE_LOGIN_REGISTER,
+    form: form
+})
+
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
     type: SET_AUTH_TOKEN,
