@@ -27,11 +27,9 @@ export class App extends React.Component{
 			loginRegisterForm = <LoginRegister />
 		}
 
-		if(this.props.user !== null){
+		if(this.props.user !== null && this.props.wishlists === null){
 	 		this.props.dispatch(fetchWishlists())
 		}
-
-
 
 		return(
 			<Router>
@@ -54,6 +52,7 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
+	wishlists: state.wishlist.wishlists,
 	token: state.auth.authToken,
 	user: state.auth.currentUser,
 	display: state.auth.loginRegisterForm.display

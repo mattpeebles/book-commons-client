@@ -4,7 +4,8 @@ import {shallow, mount} from 'enzyme'
 import {RegisterForm} from './RegisterForm'
 
 const mockToggleLoginRegister = {
-    type: 'Toggle_LOGIN_REGISTER',
+    type: 'TOGGLE_LOGIN_REGISTER',
+    form: 'login'
 };
 jest.mock('../../actions/userActions', () => Object.assign({},
     require.requireActual('../../actions/userActions'),

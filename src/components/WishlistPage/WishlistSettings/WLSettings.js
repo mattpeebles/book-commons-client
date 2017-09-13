@@ -4,7 +4,10 @@ import {connect} from 'react-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 
-import {addWishlistForm, editWishlistTitle, deleteWishlist, toggleEditWishlistStatus} from '../../../actions/actions'
+import {editWishlistTitle, deleteWishlist, toggleEditWishlistStatus} from '../../../actions/actions'
+import {addWishlistForm} from '../../../actions/wishlistActions'
+
+
 
 import './WLSettings.css'
 
@@ -31,6 +34,7 @@ export class WLSettings extends React.Component{
 	}
 
 	addWishlistForm(e){
+		console.log('hi')
 		this.props.dispatch(addWishlistForm(true))
 	}
 
@@ -39,20 +43,22 @@ export class WLSettings extends React.Component{
 			let formatLinks = this.props.wishlists.map((link, index) => {
 				
 					//filters wishlists edit, first array item is result, takes value of result
-				if(this.props.wishlistsEdit.filter(list => Object.keys(list).toString() === link)[0][link]){
-					return (
-						<div key={index} className="col-12 col-md-6 settingsContainer">
-							<div className="col">
-								Edit Title
-							</div>
-							<form className="col" id={link+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
-								<input type="text" name="editTitle" placeholder={link} ref={input => this.input = input}/>
-								<input type="submit" name="editSubmit" />
-								<button type="cancel" id={link+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
-							</form>
-						</div>
-					)
-				}
+				// if(this.props.wishlists.filter(list => Object.keys(list).toString() === link)[0][link]){
+				// 	return (
+				// 		<div key={index} className="col-12 col-md-6 settingsContainer">
+				// 			<div className="col">
+				// 				Edit Title
+				// 			</div>
+				// 			<form className="col" id={link+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
+				// 				<input type="text" name="editTitle" placeholder={link} ref={input => this.input = input}/>
+				// 				<input type="submit" name="editSubmit" />
+				// 				<button type="cancel" id={link+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
+				// 			</form>
+				// 		</div>
+				// 	)
+				// }
+												//for book number
+												// {(this.props.wishlistItems.filter(item => item.wishlist === link)).length}
 
 				return (
 							<div key={index} className="col-12 col-md-6 settingsContainer">
@@ -62,7 +68,7 @@ export class WLSettings extends React.Component{
 											{link}
 										</div>
 										<div className="col">
-											<span className="listTitle">{(this.props.wishlistItems.filter(item => item.wishlist === link)).length}</span> books
+											<span className="listTitle">5</span> books
 										</div>
 									</div>
 									<div className="col-auto row">
@@ -106,9 +112,9 @@ export class WLSettings extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.wishlists,
+	wishlists: state.wishlist.wishlistNames,
 	wishlistItems: state.wishlistItems,
-	addWishlist: state.addWishlist,
+	addWishlist: state.wishlist.addWishlist,
 	wishlistsEdit: state.wishlistsEdit
 })
 

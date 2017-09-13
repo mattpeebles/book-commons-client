@@ -1,13 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {addWishlistForm, addNewWishlist} from '../../../actions/actions'
+import {addWishlistForm, addNewWishlist} from '../../../actions/wishlistActions'
 
 export class AddWishlist extends React.Component{
+     
      submitWishlist(e) {
-        let list = this.input.value
+        e.preventDefault()
+        let title = this.input.value
 
-        this.props.dispatch(addNewWishlist(list))
+        this.props.dispatch(addNewWishlist(title))
       	this.props.dispatch(addWishlistForm(false))
     }
 

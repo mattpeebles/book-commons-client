@@ -1,5 +1,5 @@
 import {ADD_TO_WISHLIST, addToWishlist,
-		REMOVE_FROM_WISHLIST, removeFromWishlist, CHANGE_WISHLIST, changeWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, ADD_WISHLIST_FORM, addWishlistForm, 
+		REMOVE_FROM_WISHLIST, removeFromWishlist, CHANGE_WISHLIST, changeWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, 
 		ADD_NEW_WISHLIST, addNewWishlist, TOGGLE_EDIT_WISHLIST_STATUS, toggleEditWishlistStatus, 
 		EDIT_WISHLIST_TITLE, editWishlistTitle, DELETE_WISHLIST, deleteWishlist} from './actions'
 
@@ -65,23 +65,14 @@ describe('toggleSupplement', () => {
 	})
 })
 
-describe('addWishlistForm', () => {
-	it('should change addwishlist value to boolean passed in', () => {
-		const bool = true
-		const action = addWishlistForm(bool)
-		expect(action.type).to.be.equal(ADD_WISHLIST_FORM)
-		expect(action.addWishlist).to.be.equal(bool)
-	})
-})
-
-describe('addNewWishlist', () => {
-	it('should add a new wishlist', () => {
-		const list = 'High Fantasy'
-		const action = addNewWishlist(list)
-		expect(action.type).to.be.equal(ADD_NEW_WISHLIST)
-		expect(action.newWishlist).to.be.equal(list)
-	})
-})
+// describe('addNewWishlist', () => {
+// 	it('should add a new wishlist', () => {
+// 		const list = 'High Fantasy'
+// 		const action = addNewWishlist(list)
+// 		expect(action.type).to.be.equal(ADD_NEW_WISHLIST)
+// 		expect(action.newWishlist).to.be.equal(list)
+// 	})
+// })
 
 describe('toggleEditWishlistStatus', () => {
 	it('should toggle boolean value of wishlist in wishlistEdit', () => {

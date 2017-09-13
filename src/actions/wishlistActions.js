@@ -1,3 +1,5 @@
+import {setCurrentUser} from './auth'
+
 const {API_BASE_URL} = require('../config');
 
 export const fetchWishlists = () => (dispatch, getState) => {
@@ -16,7 +18,7 @@ export const fetchWishlists = () => (dispatch, getState) => {
         	let wishlistNames = []
 
         	res.wishlists.forEach(list => {
-        		wishlistNames.push(list.id)
+        		wishlistNames.push(list.title)
         	})
 
         	dispatch(fetchWishlistsSuccess(res.wishlists, wishlistNames))
@@ -25,7 +27,6 @@ export const fetchWishlists = () => (dispatch, getState) => {
         	dispatch(fetchWishlistsError(err))
         })
 }
-
 
 export const FETCH_WISHLISTS_REQUEST = 'FETCH_WISHLISTS_REQUEST'
 export const fetchWishlistsRequest = () => ({
@@ -43,4 +44,57 @@ export const FETCH_WISHLISTS_ERROR = 'FETCH_WISHLISTS_ERROR'
 export const fetchWishlistsError = (error) => ({
 	type: FETCH_WISHLISTS_ERROR,
 	error
+})
+
+export const ADD_WISHLIST_FORM = 'ADD_WISHLIST_FORM'
+export const addWishlistForm = (bool) => ({
+    type: ADD_WISHLIST_FORM,
+    addWishlist: bool
+})
+
+export const addNewWishlist = (title) => (dispatch, getState) => {
+    dispatch(addNewWishlistRequest)
+    const token = getState().auth.authToken
+    let wishlist = JSON.stringify({
+        title: title
+    })
+
+    return fetch(`${API_BASE_URL}/wishlists`, {
+        method: 'POST',
+        body: wishlist,
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(res => {
+        let wishlistName = res.wishlist.title
+
+        let wishlist = res.wishlist
+
+        dispatch(addNewWishlistSuccess(wishlist, wishlistName))
+        dispatch(setCurrentUser(res.user))
+    })
+    .catch(err => {
+        dispatch(addNewWishlistError(err))
+    })
+}
+
+export const ADD_NEW_WISHLIST_REQUEST = 'ADD_NEW_WISHLIST_REQUEST'
+export const addNewWishlistRequest = () => ({
+    type: ADD_NEW_WISHLIST_REQUEST
+})
+
+export const ADD_NEW_WISHLIST_SUCCESS = 'ADD_NEW_WISHLIST_SUCCESS'
+export const addNewWishlistSuccess = (wishlist, wishlistName) => ({
+    type: ADD_NEW_WISHLIST_SUCCESS,
+    wishlist,
+    wishlistName
+})
+
+export const ADD_NEW_WISHLIST_ERROR = 'ADD_NEW_WISHLIST_ERROR'
+export const addNewWishlistError = (error) => ({
+    type: ADD_NEW_WISHLIST_ERROR,
+    error
 })

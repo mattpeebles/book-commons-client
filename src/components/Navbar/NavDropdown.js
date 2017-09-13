@@ -32,7 +32,7 @@ export class NavDropdown extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.app.wishlists
+	wishlists: state.wishlist.wishlistNames
 })
 
 export default connect(mapStateToProps)(NavDropdown)

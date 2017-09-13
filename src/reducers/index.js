@@ -3,7 +3,6 @@ import {
 	// REMOVE_FROM_WISHLIST,
 	CHANGE_WISHLIST,
 	TOGGLE_SUPPLEMENT,
-	ADD_WISHLIST_FORM,
 	ADD_NEW_WISHLIST,
 	TOGGLE_EDIT_WISHLIST_STATUS,
 	EDIT_WISHLIST_TITLE,
@@ -282,14 +281,6 @@ export default (state, action) => {
 			supplement: action.supplement,
 			details: action.details
 		})
-	}
-
-	if(action.type === ADD_WISHLIST_FORM){
-		state = Object.assign({}, state, {
-			addWishlist: action.addWishlist
-		})
-
-		return state
 	}
 
 	if(action.type === ADD_NEW_WISHLIST){

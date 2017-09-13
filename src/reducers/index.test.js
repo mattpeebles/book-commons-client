@@ -29,28 +29,6 @@ describe('index reducer', () => {
 				'locationUrl': '/'}
 
 
-	// describe('showLoginRegister', () => 
-	// 	it('should change to passed in boolean', () => {
-	// 		let state;
-	// 		state = reducer(state, showLoginRegister(true))
-	// 		expect(state.loginRegisterForm.clicked).to.be.equal(true)
-	// 		state = reducer(state, showLoginRegister(false))
-	// 		expect(state.loginRegisterForm.clicked).to.be.equal(false)			
-	// 	})
-	// )
-
-	// describe('toggleLoginRegister', () => {
-	// 	it('should toggle betweem register/login form', () => {
-	// 		let state;
-	// 		state = reducer(state, toggleLoginRegister('login'))
-	// 		expect(state.loginRegisterForm.form).to.be.equal('login')
-
-	// 		state = reducer(state, toggleLoginRegister('register'))
-	// 		expect(state.loginRegisterForm.form).to.be.equal('register')
-
-	// 	})
-	// })
-
 		//MOVING TO BACKEND
 	// describe('addToWishlist', () => {
 	// 	it('should add new item to wishlist', () => {
@@ -119,44 +97,44 @@ describe('index reducer', () => {
 		})
 	})
 
-	describe('addWishlistForm', () => {
-		it('set boolean of addWishlist', () => {
-			let state;
-			state = reducer(state, addWishlistForm(true))
-			expect(state.addWishlist).to.be.equal(true)
+	// describe('addWishlistForm', () => {
+	// 	it('set boolean of addWishlist', () => {
+	// 		let state;
+	// 		state = reducer(state, addWishlistForm(true))
+	// 		expect(state.addWishlist).to.be.equal(true)
 
-			state = reducer(state, addWishlistForm(false))
-			expect(state.addWishlist).to.be.equal(false)	
-		})
-	})
+	// 		state = reducer(state, addWishlistForm(false))
+	// 		expect(state.addWishlist).to.be.equal(false)	
+	// 	})
+	// })
 
-	describe('addNewWishlist', () => {
+	// describe('addNewWishlist', () => {
 
 		
-		it('should add wishlist to wishlist array and wishlist edit', () => {
-			let state;
-			let wishlist1 = 'fantasy'
-			state = reducer(state, addNewWishlist(wishlist1))
+	// 	it('should add wishlist to wishlist array and wishlist edit', () => {
+	// 		let state;
+	// 		let wishlist1 = 'fantasy'
+	// 		state = reducer(state, addNewWishlist(wishlist1))
 
-			expect(state.wishlists).to.include(wishlist1)
-		})
+	// 		expect(state.wishlists).to.include(wishlist1)
+	// 	})
 
-		it('should add wishlist object to wishlistsEdit with value false', () => {
-			let state;
+	// 	it('should add wishlist object to wishlistsEdit with value false', () => {
+	// 		let state;
 
-			state = reducer(state, addNewWishlist(wishlist1))
-			expect(state.wishlistsEdit).to.deep.include({[wishlist1]: false})
-		})
+	// 		state = reducer(state, addNewWishlist(wishlist1))
+	// 		expect(state.wishlistsEdit).to.deep.include({[wishlist1]: false})
+	// 	})
 
-		it('should retain old wishlists in wishlists array', () => {
-			let state;
+	// 	it('should retain old wishlists in wishlists array', () => {
+	// 		let state;
 
-			state = reducer(state, addNewWishlist(wishlist1))
-			state = reducer(state, addNewWishlist(wishlist2))
+	// 		state = reducer(state, addNewWishlist(wishlist1))
+	// 		state = reducer(state, addNewWishlist(wishlist2))
 
-			expect(state.wishlists).to.include(wishlist1, wishlist2)
-		})
-	})
+	// 		expect(state.wishlists).to.include(wishlist1, wishlist2)
+	// 	})
+	// })
 
 	describe('toggleEditWishlistStatus', () => {
 

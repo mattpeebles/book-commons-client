@@ -1,48 +1,118 @@
 import { 
-	fetchWishlists, fetchWishlistsRequest, FETCH_WISHLISTS_SUCCESS, fetchWishlistsSuccess
-} from './wishlistActions'
+	fetchWishlists, 
+	FETCH_WISHLISTS_SUCCESS, fetchWishlistsSuccess,
+	ADD_WISHLIST_FORM, addWishlistForm,
+	addNewWishlist, ADD_NEW_WISHLIST_SUCCESS, addNewWishlistSuccess
+} from './wishlistActions';
+
+const {API_BASE_URL} = require('../config');
+
+const token = 'randomAlphanumericaString'
+const getState = jest.fn().mockImplementation(() => {
+	return {
+		auth: {
+			authToken: token
+		}
+	} 
+});
 
 describe('fetchWishlists', () => {
 	it('should return wishlists and wishlistNames action', () => {
-			const wishlists = [893710983741, 193874198234, 13412341234, 5948719384]
+			const res = {
+				wishlists: [
+							{
+								id: 893710983741,
+								title: "Biographies",
+								items: []
+
+							}, 
+							{
+								id: 193874198234,
+								title: "SciFi",
+								items: []
+							}, 
+							{
+								id: 13412341234,
+								title: "Fantasy",
+								items: []
+							}, 
+							{
+								id: 5948719384,
+								title: "Literature",
+								items: []
+							}
+								]
+				}
+
 			const wishlistNames = ['Biographies', 'SciFi', 'Fantasy', 'Literature']
-			const action = fetchWishlistsSuccess(wishlists, wishlistNames)
-			expect(action.type).toEqual(FETCH_WISHLISTS_SUCCESS)
-			expect(action.wishlists).toEqual(wishlists)
-			expect(action.wishlistNames).toEqual(wishlistNames)
+	        
+	        global.fetch = jest.fn().mockImplementation(() =>
+	            Promise.resolve({
+	                ok: true,
+	                json() {
+	                    return res;
+	                }
+	            })
+	        );
+
+			function getState(){
+				return {
+					auth: {
+						authToken: token
+					}
+				} 
+			}
+
+			const dispatch = jest.fn()
+
+	        return fetchWishlists()(dispatch, getState).then(() => {
+	        	expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/wishlists`, {"headers": {"Authorization": `Bearer ${token}`}, "method": "GET"})
+	       		expect(dispatch).toHaveBeenCalledWith(fetchWishlistsSuccess(res.wishlists, wishlistNames))
+	        })
 	})
-})
+});
 
-describe('fetchWishlists', () => {
-	it('should return wishlists and wishlistNames', () => {
-		const wishlistData = [
-			{
-				id: 809813094,
-				title: 'Biographies',
-				ebooks: [21232, 1431234, 13413, 513412]
-			},
-			{
-				id: 4514513,
-				title: 'SciFi',
-				ebooks: [314, 142334, 6234513, 1234412]
-			},
-		];
 
-		global.fetch = jest.fn().mockImplementation(() =>
-            Promise.resolve({
-                ok: true,
-                json() {
-                    return wishlistData;
-                }
-            })
-        );
+describe('addWishlistForm', () => {
+	it('should change addwishlist value to boolean passed in', () => {
+		const bool = true
+		const action = addWishlistForm(bool)
+		expect(action.type).toEqual(ADD_WISHLIST_FORM)
+		expect(action.addWishlist).toEqual(bool)
+	})
+});
 
-        const dispatch = jest.fn()
+describe('addNewWishlist', () => {
+	it('should add new wishlist to database and state', () => {
+		const dispatch = jest.fn()
+		
+		let title = 'Literature'
+		
+		let wishlist = JSON.stringify({
+			title
+		})
 
-        return fetchWishlists()(dispatch).then(() => {
-        	expect(fetch).toHaveBeenCalledWith(`https://quiet-cliffs-16571.herokuapp.com/wishlists`)
-        	expect(dispatch).toHaveBeenCalledWith(fetchWishlistsRequest())
+		let res = {
+			wishlist: {
+				id: 321341234,
+				title: 'Literature',
+				items: []
+			}
+		};
 
-        })
+
+		global.fetch = jest.fn().mockImplementation(() => 
+			Promise.resolve({
+				ok: true,
+				json(){
+					return res
+				}
+			})
+		);
+
+		return addNewWishlist(title)(dispatch, getState).then(() => {
+			expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/wishlists`, {"body": `${wishlist}`, "headers": {"Authorization": `Bearer ${token}`,  "Content-Type": "application/json"}, "method": "POST"})
+			expect(dispatch).toHaveBeenCalledWith(addNewWishlistSuccess(res.wishlist, title))
+		})
 	})
 })

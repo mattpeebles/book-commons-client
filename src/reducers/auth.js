@@ -12,8 +12,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     if (action.type === SHOW_LOGIN_REGISTER){
-        console.log(action.display)
-
         state = Object.assign({}, state, {
             loginRegisterForm: {
                 display: action.display,
