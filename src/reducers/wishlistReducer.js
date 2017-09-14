@@ -5,7 +5,10 @@ import {
 	ADD_WISHLIST_FORM,	
 	ADD_NEW_WISHLIST_REQUEST,	
 	ADD_NEW_WISHLIST_SUCCESS,
-	ADD_NEW_WISHLIST_ERROR
+	ADD_NEW_WISHLIST_ERROR,
+	REMOVE_WISHLIST_REQUEST,
+	REMOVE_WISHLIST_SUCCESS,
+	REMOVE_WISHLIST_ERROR
 } from '../actions/wishlistActions'
 
 
@@ -14,7 +17,7 @@ const initialState = {
 	error: null,
 	currentList: undefined,
 	wishlistNames: [],
-	wishlists: [],
+	wishlists: null,
 	addWishlist: false
 }
 
@@ -77,6 +80,27 @@ export default (state, action) => {
 			loading: false
 		})
 	}
+
+	if (action.type === REMOVE_WISHLIST_REQUEST){
+		return Object.assign({}, state, {
+			error: null,
+			loading: true 
+		})
+	}
+	if (action.type === REMOVE_WISHLIST_SUCCESS){
+
+		return Object.assign({}, state, {
+			loading: false,
+			error: null
+		})
+	}
+	if (action.type === REMOVE_WISHLIST_ERROR){
+		return Object.assign({}, state, {
+			error: action.error,
+			loading: false 
+		})
+	}
+
 
 	return state;
 }

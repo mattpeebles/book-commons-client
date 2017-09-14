@@ -1,11 +1,15 @@
 import {
+	fetchWishlists,
 	fetchWishlistsRequest,
 	fetchWishlistsSuccess,
 	fetchWishlistsError,
 	addWishlistForm,
 	addNewWishlistRequest,
 	addNewWishlistSuccess,
-	addNewWishlistError
+	addNewWishlistError,
+	removeWishlistRequest,
+	removeWishlistSuccess,
+	removeWishlistError
 } from '../actions/wishlistActions'
 
 import {default as reducer} from './wishlistReducer'
@@ -31,7 +35,7 @@ describe('Wishlist Reducer', () => {
 
 		expect(state.currentList).to.equal(undefined)
 		expect(state.wishlistNames).to.deep.equal([])
-		expect(state.wishlists).to.deep.equal([])
+		expect(state.wishlists).equal(null)
 		expect(state.addWishlist).to.equal(false)
 		expect(state.loading).to.equal(false)
 		expect(state.error).to.equal(null)
@@ -121,6 +125,10 @@ describe('Wishlist Reducer', () => {
 		it('should update wishlistNames and wishlists with new wishlist', () => {
 			let state;
 
+				//mocking fetch a request because add new wishlist will
+				//never be called before fetch
+			state = reducer(state, fetchWishlistsSuccess([], []))
+
 			state = reducer(state, addNewWishlistSuccess(wishlist1, wishlist1.title))
 
 			expect(state.wishlistNames).to.include(wishlist1.title)
@@ -130,6 +138,9 @@ describe('Wishlist Reducer', () => {
 		it('should keep prior names and wishlists when new one is added', () => {
 			let state;
 
+				//mocking fetch a request because add new wishlist will
+				//never be called before fetch
+			state = reducer(state, fetchWishlistsSuccess([], []))
 			state = reducer(state, addNewWishlistSuccess(wishlist1, wishlist1.title))
 			state = reducer(state, addNewWishlistSuccess(wishlist2, wishlist2.title))
 
@@ -150,6 +161,47 @@ describe('Wishlist Reducer', () => {
 
 			expect(state.loading).to.be.equal(false)
 			expect(state.error).to.be.equal(err)
+		})
+	});
+
+	describe('removeWishlistRequest', () => {
+		it('should set loading to true', () =>{
+			let state;
+			state = reducer(state, removeWishlistRequest())
+
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+
+		})
+	})
+
+	describe('removeWishlistSuccess', () => {
+		it('should call fetchWishlists', () => {
+			let state;
+			
+				//mocking fetch a request because remove wishlist will
+				//never be called before fetch
+			state = reducer(state, fetchWishlistsSuccess([], []))
+
+			state = reducer(state, fetchWishlistsSuccess())
+
+
+
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+
+		})
+	})
+
+	describe('removeWishlistError', () => {
+		it('should ', () => {
+			let state;	
+			let err = 'Invalid Type Error'
+			state = reducer(state, removeWishlistError(err))
+
+
+			expect(state.error).to.be.equal(err)
+			expect(state.loading).to.be.equal(false)
 		})
 	})
 

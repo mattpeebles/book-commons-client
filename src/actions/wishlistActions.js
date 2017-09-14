@@ -3,6 +3,7 @@ import {setCurrentUser} from './auth'
 const {API_BASE_URL} = require('../config');
 
 export const fetchWishlists = () => (dispatch, getState) => {
+    console.log('fetchwishlists')
     dispatch(fetchWishlistsRequest)
 	const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/wishlists`, {
@@ -96,5 +97,42 @@ export const addNewWishlistSuccess = (wishlist, wishlistName) => ({
 export const ADD_NEW_WISHLIST_ERROR = 'ADD_NEW_WISHLIST_ERROR'
 export const addNewWishlistError = (error) => ({
     type: ADD_NEW_WISHLIST_ERROR,
+    error
+})
+
+
+export const removeWishlist = (title) => (dispatch, getState) => {
+    dispatch(removeWishlistRequest)
+    let token = getState().auth.authToken
+    let wishlist = getState().wishlist.wishlists.filter(list => list.title === title)[0];
+    
+    return fetch(`${API_BASE_URL}/wishlists/${wishlist.id}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => {
+        dispatch(removeWishlistSuccess())
+        dispatch(fetchWishlists())
+    })
+    .catch(err => {
+        dispatch(removeWishlistError(err))
+    })
+}
+
+export const REMOVE_WISHLIST_REQUEST = 'REMOVE_WISHLIST_REQUEST'
+export const removeWishlistRequest = () => ({
+    type: REMOVE_WISHLIST_REQUEST
+})
+
+export const REMOVE_WISHLIST_SUCCESS = 'REMOVE_WISHLIST_SUCCESS'
+export const removeWishlistSuccess = (title, wishlistId) => ({
+    type: REMOVE_WISHLIST_SUCCESS
+})
+
+export const REMOVE_WISHLIST_ERROR = 'REMOVE_WISHLIST_ERROR'
+export const removeWishlistError = (error) => ({
+    type: REMOVE_WISHLIST_ERROR,
     error
 })

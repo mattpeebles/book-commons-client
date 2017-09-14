@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 
-import {editWishlistTitle, deleteWishlist, toggleEditWishlistStatus} from '../../../actions/actions'
-import {addWishlistForm} from '../../../actions/wishlistActions'
+import {editWishlistTitle, toggleEditWishlistStatus} from '../../../actions/actions'
+import {fetchWishlists, addWishlistForm, removeWishlist} from '../../../actions/wishlistActions'
 
 
 
@@ -30,11 +30,11 @@ export class WLSettings extends React.Component{
 
 	deleteList(e){
 		let value = e.target.id.split('-')[0]
-		this.props.dispatch(deleteWishlist(value))
+		
+		this.props.dispatch(removeWishlist(value))
 	}
 
 	addWishlistForm(e){
-		console.log('hi')
 		this.props.dispatch(addWishlistForm(true))
 	}
 
