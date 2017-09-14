@@ -3,11 +3,16 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import {showLoginRegister} from '../../actions/auth'
+import {logout} from '../../actions/auth'
 
 import NavSearch from './NavSearch'
 import NavDropdown from './NavDropdown'
 
 export class NavLinks extends React.Component{
+
+	logout(){
+		this.props.dispatch(logout())
+	}
 
 	render(){ 
 		let links = this.props.links.map((link, index) => {
@@ -33,13 +38,13 @@ export class NavLinks extends React.Component{
 			    )
 			}
 
-			// if(link === 'Logout'){
-			// 	return (
-			// 		<li key={index} id={link} className="nav-item">
-			//         	<a className="nav-link" onClick={()=> this.props.dispatch(logout())}>{link}</a>
-			//     	</li>
-		 //    	)
-			// }
+			if(link === 'Logout'){
+				return (
+					<li key={index} id={link} className="nav-item">
+			        	<a className="nav-link" onClick={() => this.props.dispatch(logout())}>{link}</a>
+			    	</li>
+		    	)
+			}
 
 			return (
 				<li key={index} id={link} className="nav-item">

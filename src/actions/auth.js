@@ -29,13 +29,19 @@ export const setCurrentUser = currentUser => ({
     currentUser
 });
 
+export const SET_NAV_LINKS = 'SET_NAV_LINKS';
+export const setNavLinks = navLinks => ({
+    type: SET_NAV_LINKS,
+    navLinks
+})
+
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
-    const decodedToken = jwtDecode(authToken);
+    const decodedToken = jwtDecode(authToken); 
+    saveAuthToken(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(setCurrentUser(decodedToken.user));
-    saveAuthToken(authToken);
 };
 
 export const login = (email, password) => dispatch => {
@@ -55,7 +61,10 @@ export const login = (email, password) => dispatch => {
             // errors which follow a consistent format
             //.then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+            .then(({authToken}) => {
+                storeAuthInfo(authToken, dispatch)
+                dispatch(setNavLinks(['Wishlists', 'Logout']))
+            })
             .catch(err => {
                 const {code} = err;
                 if (code === 401) {
@@ -73,6 +82,7 @@ export const login = (email, password) => dispatch => {
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
+    
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
@@ -82,7 +92,10 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     })
         //.then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+        .then(({authToken}) => {
+            storeAuthInfo(authToken, dispatch)
+            dispatch(setNavLinks(['Wishlists', 'Logout']))
+        })
         .catch(err => {
             const {code} = err;
             if (code === 401) {
@@ -94,3 +107,10 @@ export const refreshAuthToken = () => (dispatch, getState) => {
             }
         });
 };
+
+export const logout = () => (dispatch) => {
+    clearAuthToken()
+    dispatch(setAuthToken(null))
+    dispatch(setCurrentUser(null))
+    dispatch(setNavLinks(['Login/Register']))
+}

@@ -1,5 +1,5 @@
 import {SET_AUTH_TOKEN, SET_CURRENT_USER, SHOW_LOGIN_REGISTER,    
-    TOGGLE_LOGIN_REGISTER,} from '../actions/auth';
+    TOGGLE_LOGIN_REGISTER, SET_NAV_LINKS} from '../actions/auth';
 
 const initialState = {
     loginRegisterForm: {display: false,
@@ -45,9 +45,14 @@ export default function reducer(state = initialState, action) {
             loginRegisterForm: {
                 display: false
             },
-            loggedIn: true,
-            navLinks: ['Wishlists', 'Logout'],
+            loggedIn: true
         });
+    }
+
+    if(action.type === SET_NAV_LINKS){
+        return Object.assign({}, state, {
+            navLinks: action.navLinks,
+        })
     }
     return state;
 }

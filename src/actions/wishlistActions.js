@@ -3,7 +3,6 @@ import {setCurrentUser} from './auth'
 const {API_BASE_URL} = require('../config');
 
 export const fetchWishlists = () => (dispatch, getState) => {
-    console.log('fetchwishlists')
     dispatch(fetchWishlistsRequest)
 	const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/wishlists`, {

@@ -1,6 +1,7 @@
 import {SHOW_LOGIN_REGISTER, showLoginRegister, 
 		TOGGLE_LOGIN_REGISTER, toggleLoginRegister,
 		SET_AUTH_TOKEN, setAuthToken,
+		SET_NAV_LINKS, setNavLinks,
 		SET_CURRENT_USER, setCurrentUser,
 		login, refreshAuthToken
 		} 
@@ -49,6 +50,18 @@ describe('setCurrentUser', () => {
 		expect(action.currentUser).toEqual(user)
 	})
 });
+
+describe('setNavLinks', () => {
+	it('should set navLinks to array passed in', () => {
+		let navLinks = ['Login/Register']
+
+		const action = setNavLinks(navLinks)
+
+		expect(action.type).toEqual(SET_NAV_LINKS)
+		expect(action.navLinks).toEqual(navLinks)
+
+	})
+})
 
 describe('login', () => {
 	it('should log user in by call storeAuthInfo', () => {

@@ -5,15 +5,13 @@ import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 
 import {editWishlistTitle, toggleEditWishlistStatus} from '../../../actions/actions'
-import {fetchWishlists, addWishlistForm, removeWishlist} from '../../../actions/wishlistActions'
-
+import {addWishlistForm, removeWishlist} from '../../../actions/wishlistActions'
 
 
 import './WLSettings.css'
 
 
 export class WLSettings extends React.Component{
-
 
 	toggleEditForm(e){
 		let value = e.target.id.split('-')[0]
@@ -40,8 +38,9 @@ export class WLSettings extends React.Component{
 
 	render(){
 
-			let formatLinks = this.props.wishlists.map((link, index) => {
+			let formatLinks = this.props.wishlists.map((list, index) => {
 				
+				let title = list.title
 					//filters wishlists edit, first array item is result, takes value of result
 				// if(this.props.wishlists.filter(list => Object.keys(list).toString() === link)[0][link]){
 				// 	return (
@@ -58,25 +57,27 @@ export class WLSettings extends React.Component{
 				// 	)
 				// }
 												//for book number
-												// {(this.props.wishlistItems.filter(item => item.wishlist === link)).length}
+												// 
+
+
 
 				return (
 							<div key={index} className="col-12 col-md-6 settingsContainer">
 								<div className="row">
 									<div className="col">
 										<div className="col">
-											{link}
+											{title}
 										</div>
 										<div className="col">
-											<span className="listTitle">5</span> books
+											<span className="listTitle">{list.items.length}</span> books
 										</div>
 									</div>
 									<div className="col-auto row">
 										<div className="col">
-											<button id={link+"-Edit"} className="btn btn-default btn-sm" onClick={e => this.toggleEditForm(e)}>Edit</button>
+											<button id={title+"-Edit"} className="btn btn-default btn-sm" onClick={e => this.toggleEditForm(e)}>Edit</button>
 										</div>
 										<div className="col-auto">
-											<button id={link+"-Delete"} className="btn btn-default btn-sm" onClick={e => this.deleteList(e)}>Delete</button>
+											<button id={title+"-Delete"} className="btn btn-default btn-sm" onClick={e => this.deleteList(e)}>Delete</button>
 										</div>
 									</div>
 								</div>
@@ -112,8 +113,9 @@ export class WLSettings extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.wishlist.wishlistNames,
-	wishlistItems: state.wishlistItems,
+	loggedIn: state.auth.loggedIn,
+	wishlistsNames: state.wishlist.wishlistNames,
+	wishlists: state.wishlist.wishlists,
 	addWishlist: state.wishlist.addWishlist,
 	wishlistsEdit: state.wishlistsEdit
 })

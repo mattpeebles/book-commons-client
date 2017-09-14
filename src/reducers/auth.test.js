@@ -2,7 +2,8 @@ import {
 	showLoginRegister,
 	toggleLoginRegister,
 	setAuthToken,
-	setCurrentUser
+	setCurrentUser,
+	setNavLinks
 } from '../actions/auth'
 
 import {default as reducer} from './auth'
@@ -53,6 +54,17 @@ describe('auth reducer', () => {
 		})
 	})
 
+	describe('setNavLinks', () => {
+		it('should set navLinks', () => {
+			const navLinks = ['Wishlists', 'Logout']
+
+			let state;
+			state = reducer(state, setNavLinks(navLinks))
+
+			expect(state.navLinks).to.deep.equal(navLinks)
+		})
+	})
+
 	describe('setCurrentUser', () => {
 		const user = {
 			id: 13149038134,
@@ -66,6 +78,5 @@ describe('auth reducer', () => {
 		expect(state.currentUser).to.be.equal(user)
 		expect(state.loginRegisterForm.display).to.be.equal(false)
 		expect(state.loggedIn).to.be.equal(true)
-		expect(state.navLinks).to.deep.equal(['Wishlists', 'Logout'])
 	})
 })

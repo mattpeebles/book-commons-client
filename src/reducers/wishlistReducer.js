@@ -15,6 +15,7 @@ import {
 const initialState = {
 	loading: false,
 	error: null,
+	firstFetch: false,
 	currentList: undefined,
 	wishlistNames: [],
 	wishlists: null,
@@ -36,6 +37,7 @@ export default (state, action) => {
 		return Object.assign({}, state, {
 			loading: false,
 			error: null,
+			firstFetch: true,
 			wishlistNames: action.wishlistNames,
 			wishlists: action.wishlists
 		})
