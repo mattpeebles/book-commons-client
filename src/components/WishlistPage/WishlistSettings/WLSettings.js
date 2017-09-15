@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 
-import {toggleEditWishlistStatus} from '../../../actions/actions'
-import {addWishlistForm, removeWishlist, editWishlistTitle} from '../../../actions/wishlistActions'
+import {toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle} from '../../../actions/wishlistActions'
 
 
 import './WLSettings.css'

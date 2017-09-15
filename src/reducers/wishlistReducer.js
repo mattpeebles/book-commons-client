@@ -2,6 +2,7 @@ import {
 	FETCH_WISHLISTS_REQUEST,
 	FETCH_WISHLISTS_SUCCESS,
 	FETCH_WISHLISTS_ERROR,
+	CHANGE_WISHLIST,
 	ADD_WISHLIST_FORM,	
 	ADD_NEW_WISHLIST_REQUEST,	
 	ADD_NEW_WISHLIST_SUCCESS,
@@ -25,6 +26,7 @@ const initialState = {
 	wishlistNames: [],
 	wishlists: null,
 	wishlistsEdit: null,
+	wishlistItems: [],
 	addWishlist: false
 }
 
@@ -40,10 +42,14 @@ export default (state, action) => {
 	}
 
 	if(action.type === FETCH_WISHLISTS_SUCCESS){
+		
+		let currentList = (action.wishlistNames !== undefined) ? action.wishlistNames[0] : undefined
+
 		return Object.assign({}, state, {
 			loading: false,
 			error: null,
 			firstFetch: true,
+			currentList: currentList,
 			wishlistNames: action.wishlistNames,
 			wishlists: action.wishlists,
 			wishlistsEdit: action.wishlistsEdit
@@ -55,6 +61,14 @@ export default (state, action) => {
 			error: action.error,
 			loading: false
 		})
+	}
+
+	if(action.type === CHANGE_WISHLIST){
+		state = Object.assign({}, state, {
+			currentList: action.currentList
+		})
+
+		return state
 	}
 
 	if(action.type === TOGGLE_EDIT_WISHLIST_STATUS){

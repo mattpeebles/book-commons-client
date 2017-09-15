@@ -1,7 +1,6 @@
 import {ADD_TO_WISHLIST, addToWishlist,
-		REMOVE_FROM_WISHLIST, removeFromWishlist, CHANGE_WISHLIST, changeWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, 
-		ADD_NEW_WISHLIST, addNewWishlist, TOGGLE_EDIT_WISHLIST_STATUS, toggleEditWishlistStatus, 
-		EDIT_WISHLIST_TITLE, editWishlistTitle, DELETE_WISHLIST, deleteWishlist} from './actions'
+		REMOVE_FROM_WISHLIST, removeFromWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, 
+} from './actions'
 
 import {expect} from 'chai'
 
@@ -46,15 +45,6 @@ describe('removeFromWishlist', () => {
 	})
 })
 
-describe('changeWishlist', () => {
-	it('should change current list in state', () => {
-		const list = 'Biographies'
-		const action = changeWishlist(list)
-		expect(action.type).to.be.equal(CHANGE_WISHLIST)
-		expect(action.currentList).to.be.equal(list)
-	})
-})
-
 describe('toggleSupplement', () => {
 	it('should update supplement and supplement details in state', () => {
 		const supplement = 'Author'
@@ -62,43 +52,5 @@ describe('toggleSupplement', () => {
 		expect(action.type).to.be.equal(TOGGLE_SUPPLEMENT)
 		expect(action.supplement).to.be.equal(supplement)
 		expect(action.details).to.be.equal(`${supplement}Supplement`)
-	})
-})
-
-// describe('addNewWishlist', () => {
-// 	it('should add a new wishlist', () => {
-// 		const list = 'High Fantasy'
-// 		const action = addNewWishlist(list)
-// 		expect(action.type).to.be.equal(ADD_NEW_WISHLIST)
-// 		expect(action.newWishlist).to.be.equal(list)
-// 	})
-// })
-
-describe('toggleEditWishlistStatus', () => {
-	it('should toggle boolean value of wishlist in wishlistEdit', () => {
-		const list = "Biographies"
-		const action = toggleEditWishlistStatus(list)
-		expect(action.type).to.be.equal(TOGGLE_EDIT_WISHLIST_STATUS)
-		expect(action.list).to.be.equal(list)
-	})
-})
-
-describe('editWishlistTitle', () => {
-	it('should edit title of old wishlist', () => {
-		const oldTitle = 'Biographies'
-		const newTitle = 'Magical Realism'
-		const action = editWishlistTitle(newTitle, oldTitle)
-		expect(action.type).to.be.equal(EDIT_WISHLIST_TITLE)
-		expect(action.oldTitle).to.be.equal(oldTitle)
-		expect(action.newTitle).to.be.equal(newTitle)
-	})
-})
-
-describe('deleteWishlist', () => {
-	it('should remove wishlist', () => {
-		const list = "Biograhpies"
-		const action = deleteWishlist(list)
-		expect(action.type).to.be.equal(DELETE_WISHLIST)
-		expect(action.deleteWishlist).to.be.equal(list)
 	})
 })

@@ -52,6 +52,12 @@ export const fetchWishlistsError = (error) => ({
 	error
 })
 
+export const CHANGE_WISHLIST = 'CHANGE_WISHLIST'
+export const changeWishlist = (list) => ({
+    type: CHANGE_WISHLIST,
+    currentList: list
+})
+
 export const TOGGLE_EDIT_WISHLIST_STATUS = 'TOGGLE_EDIT_WISHLIST_STATUS'
 export const toggleEditWishlistStatus = (list) => ({
     type: TOGGLE_EDIT_WISHLIST_STATUS,

@@ -65,7 +65,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Display external database results on results page
 - [ ] Add functions save to wishlist, delete from wishlist, change wishlist to dropdown links
 - [ ] Add account edit button to navbar
-- [ ] Add wishlist title update function and form to wl settings
+- [x] Add wishlist title update function and form to wl settings
 
 ### Tests <a name="todoTests"></a>
 - [ ] Project Gutenberg api call - reducer, action
@@ -73,7 +73,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Open Library api call - reducer, action
 - [ ] Feedbooks api call (tentative) - reducer, action
 - [ ] User email/password update - reducer, action
-- [ ] Wishlist title update - reducer, action
+- [x] Wishlist title update - reducer, action
 - [ ] Wishlist remove item - reducer, action
 - [ ] Ebook move item to another wishlist - reducer, action
 - [ ] Ebook save to wishlist - reducer, action

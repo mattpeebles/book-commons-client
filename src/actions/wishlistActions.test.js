@@ -1,6 +1,7 @@
 import { 
 	fetchWishlists, FETCH_WISHLISTS_SUCCESS, fetchWishlistsSuccess,
-	ADD_WISHLIST_FORM, addWishlistForm,
+	TOGGLE_EDIT_WISHLIST_STATUS, toggleEditWishlistStatus, 
+	ADD_WISHLIST_FORM, addWishlistForm, CHANGE_WISHLIST, changeWishlist,
 	addNewWishlist, ADD_NEW_WISHLIST_SUCCESS, addNewWishlistSuccess,
 	editWishlistTitle, EDIT_WISHLIST_TITLE_SUCCESS, editWishlistTitleSuccess,
 	removeWishlist, REMOVE_WISHLIST_SUCCESS, removeWishlistSuccess
@@ -88,6 +89,17 @@ describe('fetchWishlists', () => {
 	})
 });
 
+
+describe('toggleEditWishlistStatus', () => {
+	it('should toggle boolean value of wishlist in wishlistEdit', () => {
+		const list = 'Biographies'
+		const action = toggleEditWishlistStatus(list)
+		console.log(action.type)
+		expect(action.type).toEqual(TOGGLE_EDIT_WISHLIST_STATUS)
+		expect(action.list).toEqual(list)
+	})
+})
+
 describe('addWishlistForm', () => {
 	it('should change addwishlist value to boolean passed in', () => {
 		const bool = true
@@ -96,6 +108,15 @@ describe('addWishlistForm', () => {
 		expect(action.addWishlist).toEqual(bool)
 	})
 });
+
+describe('changeWishlist', () => {
+	it('should change current list in state', () => {
+		const list = 'Biographies'
+		const action = changeWishlist(list)
+		expect(action.type).toEqual(CHANGE_WISHLIST)
+		expect(action.currentList).toEqual(list)
+	})
+})
 
 describe('addNewWishlist', () => {
 	it('should add new wishlist to database and state', () => {
@@ -168,7 +189,6 @@ describe('editWishlistTitle', () => {
 		})
 	})
 })
-
 
 describe('removeWishlist', () => {
 	it('should remove wishlist from names and wishlists array', () => {

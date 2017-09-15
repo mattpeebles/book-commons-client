@@ -21,8 +21,8 @@ export class Wishlist extends React.Component{
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={this.props.wishlistItems.filter(item => item.wishlist === this.props.currentList)} dropdownType='wishlistDrop' dropdownLinks={dropdownLinks}/>
-						<WishlistsContainer links={this.props.wishlists}/>
+						<Ebook results={this.props.wishlistItems} dropdownType='wishlistDrop' dropdownLinks={dropdownLinks}/>
+						<WishlistsContainer links={this.props.wishlistNames}/>
 					</div>
 				</div>
 
@@ -32,9 +32,9 @@ export class Wishlist extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	currentList: state.app.currentList,
-	wishlists: state.app.wishlists,
-	wishlistItems: state.app.wishlistItems
+	currentList: state.wishlist.currentList,
+	wishlistNames: state.wishlist.wishlistNames,
+	wishlistItems: state.wishlist.wishlistItems
 })
 
 export default connect(mapStateToProps)(Wishlist)
