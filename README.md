@@ -15,7 +15,7 @@ A public domain book search that aggregates a variety of databases to display re
 
 ### Integration <a name="todoIntegration"></a>
 - [ ] User email/password update
-- [ ] Wishlist title update
+- [x] Wishlist title update
 - [ ] Wishlist remove item
 - [ ] Ebook move item to another wishlist
 - [ ] Ebook save to wishlist
@@ -32,7 +32,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Open Library api call
 - [ ] Feedbooks api call (tentative)
 - [ ] Email/password update - fetch, success, error, request
-- [ ] Wishlist title update - fetch, success, error, request
+- [x] Wishlist title update - fetch, success, error, request
 - [ ] Wishlist remove item - fetch, success, error, request
 - [ ] Ebook save to wishlist - fetch, success, error, request
 - [ ] Ebook move item to another wishlist - fetch, success, error, request
@@ -49,7 +49,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Open Library api call - fetch, success, error, request
 - [ ] Feedbooks api call (tentative) - fetch, success, error, request
 - [ ] Email/password update
-- [ ] Wishlist title update
+- [x] Wishlist title update
 - [ ] Wishlist remove item
 - [ ] Ebook save to wishlist
 - [ ] Ebook move item to another wishlist

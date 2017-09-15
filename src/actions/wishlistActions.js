@@ -15,13 +15,18 @@ export const fetchWishlists = () => (dispatch, getState) => {
 		.then(res => res.json())
         .then(res => {
 
-        	let wishlistNames = []
+        	let wishlistNames = [];
+            let wishlistsEdit = {};
 
         	res.wishlists.forEach(list => {
-        		wishlistNames.push(list.title)
+        		let title = list.title
+                wishlistNames.push(title)
+
+                wishlistsEdit[title] = false
         	})
 
-        	dispatch(fetchWishlistsSuccess(res.wishlists, wishlistNames))
+
+        	dispatch(fetchWishlistsSuccess(res.wishlists, wishlistNames, wishlistsEdit))
         })
         .catch(err => {
         	dispatch(fetchWishlistsError(err))
@@ -34,10 +39,11 @@ export const fetchWishlistsRequest = () => ({
 })
 
 export const FETCH_WISHLISTS_SUCCESS = 'FETCH_WISHLISTS_SUCCESS'
-export const fetchWishlistsSuccess = (wishlists, wishlistNames) => ({
+export const fetchWishlistsSuccess = (wishlists, wishlistNames, wishlistsEdit) => ({
 	type: FETCH_WISHLISTS_SUCCESS,
 	wishlists,
-	wishlistNames
+	wishlistNames,
+    wishlistsEdit
 })
 
 export const FETCH_WISHLISTS_ERROR = 'FETCH_WISHLISTS_ERROR'
@@ -46,11 +52,18 @@ export const fetchWishlistsError = (error) => ({
 	error
 })
 
+export const TOGGLE_EDIT_WISHLIST_STATUS = 'TOGGLE_EDIT_WISHLIST_STATUS'
+export const toggleEditWishlistStatus = (list) => ({
+    type: TOGGLE_EDIT_WISHLIST_STATUS,
+    list: list
+})
+
 export const ADD_WISHLIST_FORM = 'ADD_WISHLIST_FORM'
 export const addWishlistForm = (bool) => ({
     type: ADD_WISHLIST_FORM,
     addWishlist: bool
 })
+
 
 export const addNewWishlist = (title) => (dispatch, getState) => {
     dispatch(addNewWishlistRequest)
@@ -97,6 +110,54 @@ export const ADD_NEW_WISHLIST_ERROR = 'ADD_NEW_WISHLIST_ERROR'
 export const addNewWishlistError = (error) => ({
     type: ADD_NEW_WISHLIST_ERROR,
     error
+})
+
+
+export const editWishlistTitle = (oldTitle, newTitle) => (dispatch, getState) => {
+    dispatch(editWishlistTitleRequest)
+
+    let token = getState().auth.authToken
+    let wishlist = getState().wishlist.wishlists.filter(list => list.title === oldTitle)[0]
+
+    let updateWishlist = {
+        listId: wishlist.id,
+        title: newTitle
+    }
+
+    return fetch(`${API_BASE_URL}/wishlists/${wishlist.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(updateWishlist),
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(wishlist => {
+        let wishlistName = wishlist.title
+        dispatch(editWishlistTitleSuccess(wishlist, wishlistName, oldTitle))
+    })
+    .catch(err => {
+        dispatch(editWishlistTitleError(err))
+    })
+};
+
+export const EDIT_WISHLIST_TITLE_REQUEST = 'EDIT_WISHLIST_TITLE_REQUEST'
+export const editWishlistTitleRequest = () => ({
+    type: EDIT_WISHLIST_TITLE_REQUEST
+})
+
+export const EDIT_WISHLIST_TITLE_SUCCESS = 'EDIT_WISHLIST_TITLE_SUCCESS'
+export const editWishlistTitleSuccess = (wishlist, wishlistName, oldTitle) => ({
+    type: EDIT_WISHLIST_TITLE_SUCCESS,
+    wishlist,
+    wishlistName,
+    oldTitle
+})
+export const EDIT_WISHLIST_TITLE_ERROR = 'EDIT_WISHLIST_TITLE_ERROR'
+export const editWishlistTitleError = (err) => ({
+    type: EDIT_WISHLIST_TITLE_ERROR,
+    error: err
 })
 
 

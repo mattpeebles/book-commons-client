@@ -1,8 +1,8 @@
 import { 
-	fetchWishlists, 
-	FETCH_WISHLISTS_SUCCESS, fetchWishlistsSuccess,
+	fetchWishlists, FETCH_WISHLISTS_SUCCESS, fetchWishlistsSuccess,
 	ADD_WISHLIST_FORM, addWishlistForm,
 	addNewWishlist, ADD_NEW_WISHLIST_SUCCESS, addNewWishlistSuccess,
+	editWishlistTitle, EDIT_WISHLIST_TITLE_SUCCESS, editWishlistTitleSuccess,
 	removeWishlist, REMOVE_WISHLIST_SUCCESS, removeWishlistSuccess
 } from './wishlistActions';
 
@@ -61,6 +61,15 @@ describe('fetchWishlists', () => {
 
 			const wishlistNames = ['Biographies', 'SciFi', 'Fantasy', 'Literature']
 	        
+	        
+			const wishlistsEdit = {
+				'Biographies': false,
+				'SciFi': false,
+				'Fantasy': false,
+				'Literature': false
+			}
+
+
 	        global.fetch = jest.fn().mockImplementation(() =>
 	            Promise.resolve({
 	                ok: true,
@@ -74,7 +83,7 @@ describe('fetchWishlists', () => {
 
 	        return fetchWishlists()(dispatch, getState).then(() => {
 	        	expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/wishlists`, {"headers": {"Authorization": `Bearer ${token}`}, "method": "GET"})
-	       		expect(dispatch).toHaveBeenCalledWith(fetchWishlistsSuccess(res.wishlists, wishlistNames))
+	       		expect(dispatch).toHaveBeenCalledWith(fetchWishlistsSuccess(res.wishlists, wishlistNames, wishlistsEdit))
 	        })
 	})
 });
@@ -122,6 +131,44 @@ describe('addNewWishlist', () => {
 		})
 	})
 });
+
+describe('editWishlistTitle', () => {
+	it('should update title in wishlist object', () => {
+		let oldWishlist= getState().wishlist.wishlists[1]
+		let newTitle = 'The Life of Pablo'
+		let oldTitle = 'Kanye'
+
+
+		let newWishlist = {
+			listId: oldWishlist.id,
+			title: newTitle
+		}
+
+		
+		let wishlist = {
+			id: oldWishlist.id,
+			title: 'The Life of Pablo',
+			items: []
+		}
+
+		global.fetch = jest.fn().mockImplementation(() => 
+			Promise.resolve({
+				ok: true,
+				json(){
+					return wishlist
+				}
+			})
+		);
+
+		let dispatch = jest.fn()
+
+		return editWishlistTitle(oldTitle, newTitle)(dispatch, getState).then(() => {
+			expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/wishlists/${newWishlist.listId}`, {"body": `${JSON.stringify(newWishlist)}`, "headers": {"Authorization": `Bearer ${token}`,  "Content-Type": "application/json"}, "method": "PUT"})
+			expect(dispatch).toHaveBeenCalledWith(editWishlistTitleSuccess(wishlist, newTitle, oldTitle))
+		})
+	})
+})
+
 
 describe('removeWishlist', () => {
 	it('should remove wishlist from names and wishlists array', () => {
@@ -173,4 +220,4 @@ describe('removeWishlist', () => {
        		expect(dispatch).toHaveBeenCalledWith(removeWishlistSuccess())
         })
 	})
-})
+});

@@ -19,6 +19,8 @@ import Footer from './components/Footer/Footer'
 import LoginRegister from './components/LoginRegister/LoginRegister'
 
 
+let count = 0;
+
 export class App extends React.Component{
 
 	componentDidMount() {
@@ -66,9 +68,11 @@ export class App extends React.Component{
 			loginRegisterForm = <LoginRegister />
 		}
 
-		if(this.props.loggedIn === true && this.props.firstFetch === false){
+		if(this.props.loggedIn === true && this.props.firstFetch === false && count === 0){
+            count++
             this.props.dispatch(fetchWishlists());
 		}
+
 
 		return(
 			<Router>
@@ -91,7 +95,6 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
-	state: state,
 	firstFetch: state.wishlist.firstFetch,
 	wishlists: state.wishlist.wishlists,
 	token: state.auth.authToken,

@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 
-import {editWishlistTitle, toggleEditWishlistStatus} from '../../../actions/actions'
-import {addWishlistForm, removeWishlist} from '../../../actions/wishlistActions'
+import {toggleEditWishlistStatus} from '../../../actions/actions'
+import {addWishlistForm, removeWishlist, editWishlistTitle} from '../../../actions/wishlistActions'
 
 
 import './WLSettings.css'
@@ -21,9 +21,8 @@ export class WLSettings extends React.Component{
 	editListTitle(e){
 		e.preventDefault()
 		let oldTitle = e.target.id.split('-')[0]
-		console.log(oldTitle)
 		let newTitle = this.input.value
-		this.props.dispatch(editWishlistTitle(newTitle, oldTitle))
+		this.props.dispatch(editWishlistTitle(oldTitle, newTitle))
 	}
 
 	deleteList(e){
@@ -42,24 +41,20 @@ export class WLSettings extends React.Component{
 				
 				let title = list.title
 					//filters wishlists edit, first array item is result, takes value of result
-				// if(this.props.wishlists.filter(list => Object.keys(list).toString() === link)[0][link]){
-				// 	return (
-				// 		<div key={index} className="col-12 col-md-6 settingsContainer">
-				// 			<div className="col">
-				// 				Edit Title
-				// 			</div>
-				// 			<form className="col" id={link+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
-				// 				<input type="text" name="editTitle" placeholder={link} ref={input => this.input = input}/>
-				// 				<input type="submit" name="editSubmit" />
-				// 				<button type="cancel" id={link+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
-				// 			</form>
-				// 		</div>
-				// 	)
-				// }
-												//for book number
-												// 
-
-
+				if(this.props.wishlistsEdit[title] === true){
+					return (
+						<div key={index} className="col-12 col-md-6 settingsContainer">
+							<div className="col">
+								Edit Title
+							</div>
+							<form className="col" id={title+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
+								<input type="text" name="editTitle" placeholder={title} ref={input => this.input = input}/>
+								<input type="submit" name="editSubmit" />
+								<button type="cancel" id={title+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
+							</form>
+						</div>
+					)
+				}
 
 				return (
 							<div key={index} className="col-12 col-md-6 settingsContainer">
@@ -117,7 +112,7 @@ const mapStateToProps = state => ({
 	wishlistsNames: state.wishlist.wishlistNames,
 	wishlists: state.wishlist.wishlists,
 	addWishlist: state.wishlist.addWishlist,
-	wishlistsEdit: state.wishlistsEdit
+	wishlistsEdit: state.wishlist.wishlistsEdit
 })
 
 export default connect(mapStateToProps)(WLSettings)

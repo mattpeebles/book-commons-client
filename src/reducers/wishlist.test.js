@@ -7,6 +7,9 @@ import {
 	addNewWishlistRequest,
 	addNewWishlistSuccess,
 	addNewWishlistError,
+	editWishlistTitleRequest,
+	editWishlistTitleSuccess,
+	editWishlistTitleError,
 	removeWishlistRequest,
 	removeWishlistSuccess,
 	removeWishlistError
@@ -163,6 +166,52 @@ describe('Wishlist Reducer', () => {
 			expect(state.error).to.be.equal(err)
 		})
 	});
+
+	describe('editWishlistTitleRequest', () => {
+		it('should set loading to true and error to null', () => {
+			let state;
+
+			state = reducer(state, editWishlistTitleRequest());
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		})
+	})
+	describe('editWishlistTitleSuccess', () => {
+		it('should set wishlist names and wishlists to new wishlist title', () => {
+			let state;
+
+			let newTitle = 'The Life of Pablo'
+
+			let editWishlist = {
+				id: wishlist1.id,
+				title: newTitle,
+				items: wishlist1.items
+			}
+
+			state = reducer(state, fetchWishlistsSuccess([], []))
+			state = reducer(state, addNewWishlistSuccess(wishlist1, wishlist1.title))
+			state = reducer(state, editWishlistTitleSuccess(editWishlist, newTitle, wishlist1.title));
+			
+			expect(state.wishlists).to.be.a('array')
+			expect(state.wishlists.length).to.be.at.least(1)
+			expect(state.wishlists).to.include(editWishlist)
+			expect(state.wishlists).to.not.include(wishlist1)
+			
+			expect(state.wishlistNames.length).to.be.at.least(1)
+			expect(state.wishlistNames).to.be.a('array')
+			expect(state.wishlistNames).to.include(newTitle)
+			expect(state.wishlistNames).to.not.include(wishlist1.title)
+		})
+	})
+	describe('editWishlistTitleError', () => {
+		it('should set error', () => {
+			let state;
+			let err = 'Invalid Type Error'
+			state = reducer(state, editWishlistTitleError(err));
+			
+			expect(state.error).to.equal(err)
+		})
+	})
 
 	describe('removeWishlistRequest', () => {
 		it('should set loading to true', () =>{

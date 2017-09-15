@@ -4,7 +4,6 @@ import {
 	CHANGE_WISHLIST,
 	TOGGLE_SUPPLEMENT,
 	ADD_NEW_WISHLIST,
-	TOGGLE_EDIT_WISHLIST_STATUS,
 	EDIT_WISHLIST_TITLE,
 	DELETE_WISHLIST
 } from '../actions/actions'
@@ -289,26 +288,6 @@ export default (state, action) => {
 		
 		state = Object.assign({}, state, {
 			wishlists,
-			wishlistsEdit
-		})
-
-		return state
-	}
-
-	if(action.type === TOGGLE_EDIT_WISHLIST_STATUS){
-
-			//targeted list status to updated
-		let listObject = state.wishlistsEdit.filter(list => Object.keys(list).toString() === action.list)[0]
-
-		listObject[action.list] = !listObject[action.list]
-
-			//grabs all others besides targeted
-		let wishlistEditTotal = state.wishlistsEdit.filter(list => Object.keys(list).toString() !== action.list)
-
-			//concats others and updated
-		let wishlistsEdit = [...wishlistEditTotal, listObject]
-
-		state = Object.assign({}, state, {
 			wishlistsEdit
 		})
 
