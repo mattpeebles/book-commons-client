@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {changeWishlist} from '../../actions/actions'
+import {changeWishlist} from '../../actions/wishlistActions'
 
 
 export class NavDropdown extends React.Component{
@@ -32,7 +32,7 @@ export class NavDropdown extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.app.wishlists
+	wishlists: state.wishlist.wishlistNames
 })
 
 export default connect(mapStateToProps)(NavDropdown)

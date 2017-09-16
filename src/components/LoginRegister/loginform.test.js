@@ -6,6 +6,7 @@ import {LoginForm} from './LoginForm'
 const mockLogin = {
     type: 'LOGIN',
 };
+
 jest.mock('../../actions/userActions', () => Object.assign({},
     require.requireActual('../../actions/userActions'),
     {
@@ -16,8 +17,10 @@ jest.mock('../../actions/userActions', () => Object.assign({},
 ));
 
 const mockToggleLoginRegister = {
-    type: 'Toggle_LOGIN_REGISTER',
+    type: 'TOGGLE_LOGIN_REGISTER',
+    form: 'register'
 };
+
 jest.mock('../../actions/userActions', () => Object.assign({},
     require.requireActual('../../actions/userActions'),
     {

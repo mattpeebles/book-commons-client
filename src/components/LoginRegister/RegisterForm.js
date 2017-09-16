@@ -1,16 +1,17 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form';
-import {register, toggleLoginRegister, showLoginRegister} from '../../actions/userActions'
+import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth';
+import {registerUser, } from '../../actions/userActions'
+import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
 
 export class RegisterForm extends React.Component{
 	
     onSubmit(values) {
-        let user = {
-        	email: values.email,
-        	password: values.password
-        }
+        const {email, password} = values
 
-        this.props.dispatch(register(user))
+       return this.props
+        	.dispatch(registerUser(values))
+        	.then(() => this.props.dispatch(login(email, password)))
     }
 
 	render(){
@@ -28,9 +29,27 @@ export class RegisterForm extends React.Component{
 	                onSubmit={this.props.handleSubmit(values =>
 	                    this.onSubmit(values)
                 )}>
-			      <Field name="email" id="email" type="email" component="input" placeholder="Email"/>
-			      <Field name="password" id="password" type="password" component="input" placeholder="Password"/>
-			      <Field name="confirmPassword" id="confirmPassword" type="password" component="input" placeholder="Confirm password"/>
+			      <Field 
+			      	name="email" 
+			      	id="email" 
+			      	type="email" 
+			      	component="input" 
+			      	placeholder="Email"  
+			      	validate={[required, nonEmpty, isTrimmed]}/>
+			      <Field 
+			      	name="password" 
+			      	id="password" 
+			      	type="password" 
+			      	component="input" 
+			      	placeholder="Password" 
+			      	validate={[required, length({min: 10, max: 72}), isTrimmed]}/>
+			      <Field 
+			      	name="confirmPassword" 
+			      	id="confirmPassword" 
+			      	type="password" 
+			      	component="input" 
+			      	placeholder="Confirm password"  
+			      	validate={[required, nonEmpty, matches('password')]}/>
 			      <button className="submitButton">Register</button>
 			    </form>
 			  </div>

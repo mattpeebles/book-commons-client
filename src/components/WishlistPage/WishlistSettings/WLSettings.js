@@ -4,13 +4,13 @@ import {connect} from 'react-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 
-import {addWishlistForm, editWishlistTitle, deleteWishlist, toggleEditWishlistStatus} from '../../../actions/actions'
+import {toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle} from '../../../actions/wishlistActions'
+
 
 import './WLSettings.css'
 
 
 export class WLSettings extends React.Component{
-
 
 	toggleEditForm(e){
 		let value = e.target.id.split('-')[0]
@@ -20,14 +20,14 @@ export class WLSettings extends React.Component{
 	editListTitle(e){
 		e.preventDefault()
 		let oldTitle = e.target.id.split('-')[0]
-		console.log(oldTitle)
 		let newTitle = this.input.value
-		this.props.dispatch(editWishlistTitle(newTitle, oldTitle))
+		this.props.dispatch(editWishlistTitle(oldTitle, newTitle))
 	}
 
 	deleteList(e){
 		let value = e.target.id.split('-')[0]
-		this.props.dispatch(deleteWishlist(value))
+		
+		this.props.dispatch(removeWishlist(value))
 	}
 
 	addWishlistForm(e){
@@ -36,19 +36,20 @@ export class WLSettings extends React.Component{
 
 	render(){
 
-			let formatLinks = this.props.wishlists.map((link, index) => {
+			let formatLinks = this.props.wishlists.map((list, index) => {
 				
+				let title = list.title
 					//filters wishlists edit, first array item is result, takes value of result
-				if(this.props.wishlistsEdit.filter(list => Object.keys(list).toString() === link)[0][link]){
+				if(this.props.wishlistsEdit[title] === true){
 					return (
 						<div key={index} className="col-12 col-md-6 settingsContainer">
 							<div className="col">
 								Edit Title
 							</div>
-							<form className="col" id={link+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
-								<input type="text" name="editTitle" placeholder={link} ref={input => this.input = input}/>
+							<form className="col" id={title+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
+								<input type="text" name="editTitle" placeholder={title} ref={input => this.input = input}/>
 								<input type="submit" name="editSubmit" />
-								<button type="cancel" id={link+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
+								<button type="cancel" id={title+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
 							</form>
 						</div>
 					)
@@ -59,18 +60,18 @@ export class WLSettings extends React.Component{
 								<div className="row">
 									<div className="col">
 										<div className="col">
-											{link}
+											{title}
 										</div>
 										<div className="col">
-											<span className="listTitle">{(this.props.wishlistItems.filter(item => item.wishlist === link)).length}</span> books
+											<span className="listTitle">{list.items.length}</span> books
 										</div>
 									</div>
 									<div className="col-auto row">
 										<div className="col">
-											<button id={link+"-Edit"} className="btn btn-default btn-sm" onClick={e => this.toggleEditForm(e)}>Edit</button>
+											<button id={title+"-Edit"} className="btn btn-default btn-sm" onClick={e => this.toggleEditForm(e)}>Edit</button>
 										</div>
 										<div className="col-auto">
-											<button id={link+"-Delete"} className="btn btn-default btn-sm" onClick={e => this.deleteList(e)}>Delete</button>
+											<button id={title+"-Delete"} className="btn btn-default btn-sm" onClick={e => this.deleteList(e)}>Delete</button>
 										</div>
 									</div>
 								</div>
@@ -106,10 +107,11 @@ export class WLSettings extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.wishlists,
-	wishlistItems: state.wishlistItems,
-	addWishlist: state.addWishlist,
-	wishlistsEdit: state.wishlistsEdit
+	loggedIn: state.auth.loggedIn,
+	wishlistsNames: state.wishlist.wishlistNames,
+	wishlists: state.wishlist.wishlists,
+	addWishlist: state.wishlist.addWishlist,
+	wishlistsEdit: state.wishlist.wishlistsEdit
 })
 
 export default connect(mapStateToProps)(WLSettings)
