@@ -56,10 +56,10 @@ export class NavLinks extends React.Component{
 
 		return(
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
-				<NavSearch />
 				<ul className="navbar-nav mr-auto">
 					{links}
 				</ul>
+				<NavSearch className="navbar-nav mr-auto" />
 			</div>
 		)
 	}
