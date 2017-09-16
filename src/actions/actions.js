@@ -1,15 +1,4 @@
-export const SHOW_LOGIN_REGISTER = 'SHOW_LOGIN_REGISTER'
-export const showLoginRegister = (show) => ({
-	type: SHOW_LOGIN_REGISTER,
-	clicked: show,
-
-})
-
-export const TOGGLE_LOGIN_REGISTER = 'TOGGLE_LOGIN_REGISTER'
-export const toggleLoginRegister = (form) => ({
-	type: TOGGLE_LOGIN_REGISTER,
-	form: form,
-})
+//const {API_BASE_URL} = require('../config');
 
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST'
 export const addToWishlist = (item, list) => ({

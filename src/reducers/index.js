@@ -1,6 +1,4 @@
 import {
-	SHOW_LOGIN_REGISTER,	
-	TOGGLE_LOGIN_REGISTER,
 	// ADD_TO_WISHLIST,
 	// REMOVE_FROM_WISHLIST,
 	CHANGE_WISHLIST,
@@ -14,9 +12,6 @@ import {
 
 
 const initialState = {
-						'navLinks': ['Login/Register', 'Wishlists'],
-						'loginRegisterForm': {clicked: false,
-											  form: 'register'},
 						'supplement': 'author',
 						'details': 'authorSupplement',
 						'results': [
@@ -220,28 +215,6 @@ const initialState = {
 
 export default (state, action) => {
 	state = state || initialState;
-
-	
-	if (action.type === SHOW_LOGIN_REGISTER){
-		state = Object.assign({}, state, {
-			loginRegisterForm: {
-				clicked: action.clicked,
-			}
-		})
-
-		return state
-	}
-
-	if (action.type === TOGGLE_LOGIN_REGISTER){
-		state = Object.assign({}, state, {
-			loginRegisterForm: {
-				clicked: true, 
-				form: action.form
-			}
-		});
-
-		return state
-	}
 
 		//WILL BE FULLY FLESHED OUT IN THE BACKEND	
 	// if(action.type === ADD_TO_WISHLIST){

@@ -76,8 +76,8 @@ export class DropdownItem extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.wishlists,
-	wishlistItems: state.wishlistItems
+	wishlists: state.app.wishlists,
+	wishlistItems: state.app.wishlistItems
 })
 
 export default connect(mapStateToProps)(DropdownItem)

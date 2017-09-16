@@ -1,6 +1,4 @@
 import {
-	showLoginRegister,
-	toggleLoginRegister,
 	addToWishlist,
 	removeFromWishlist,
 	changeWishlist,
@@ -31,27 +29,27 @@ describe('index reducer', () => {
 				'locationUrl': '/'}
 
 
-	describe('showLoginRegister', () => 
-		it('should change to passed in boolean', () => {
-			let state;
-			state = reducer(state, showLoginRegister(true))
-			expect(state.loginRegisterForm.clicked).to.be.equal(true)
-			state = reducer(state, showLoginRegister(false))
-			expect(state.loginRegisterForm.clicked).to.be.equal(false)			
-		})
-	)
+	// describe('showLoginRegister', () => 
+	// 	it('should change to passed in boolean', () => {
+	// 		let state;
+	// 		state = reducer(state, showLoginRegister(true))
+	// 		expect(state.loginRegisterForm.clicked).to.be.equal(true)
+	// 		state = reducer(state, showLoginRegister(false))
+	// 		expect(state.loginRegisterForm.clicked).to.be.equal(false)			
+	// 	})
+	// )
 
-	describe('toggleLoginRegister', () => {
-		it('should toggle betweem register/login form', () => {
-			let state;
-			state = reducer(state, toggleLoginRegister('login'))
-			expect(state.loginRegisterForm.form).to.be.equal('login')
+	// describe('toggleLoginRegister', () => {
+	// 	it('should toggle betweem register/login form', () => {
+	// 		let state;
+	// 		state = reducer(state, toggleLoginRegister('login'))
+	// 		expect(state.loginRegisterForm.form).to.be.equal('login')
 
-			state = reducer(state, toggleLoginRegister('register'))
-			expect(state.loginRegisterForm.form).to.be.equal('register')
+	// 		state = reducer(state, toggleLoginRegister('register'))
+	// 		expect(state.loginRegisterForm.form).to.be.equal('register')
 
-		})
-	})
+	// 	})
+	// })
 
 		//MOVING TO BACKEND
 	// describe('addToWishlist', () => {

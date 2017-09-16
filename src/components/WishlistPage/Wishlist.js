@@ -32,9 +32,9 @@ export class Wishlist extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	currentList: state.currentList,
-	wishlists: state.wishlists,
-	wishlistItems: state.wishlistItems
+	currentList: state.app.currentList,
+	wishlists: state.app.wishlists,
+	wishlistItems: state.app.wishlistItems
 })
 
 export default connect(mapStateToProps)(Wishlist)

@@ -1,25 +1,9 @@
-import {SHOW_LOGIN_REGISTER, showLoginRegister, TOGGLE_LOGIN_REGISTER, toggleLoginRegister, ADD_TO_WISHLIST, addToWishlist,
+import {ADD_TO_WISHLIST, addToWishlist,
 		REMOVE_FROM_WISHLIST, removeFromWishlist, CHANGE_WISHLIST, changeWishlist, TOGGLE_SUPPLEMENT, toggleSupplement, ADD_WISHLIST_FORM, addWishlistForm, 
 		ADD_NEW_WISHLIST, addNewWishlist, TOGGLE_EDIT_WISHLIST_STATUS, toggleEditWishlistStatus, 
 		EDIT_WISHLIST_TITLE, editWishlistTitle, DELETE_WISHLIST, deleteWishlist} from './actions'
 
 import {expect} from 'chai'
-
-describe('showLoginRegister', () => {
-	it('should set clicked to boolean passed in', () => {
-		const action = showLoginRegister(true)
-		expect(action.type).to.be.equal(SHOW_LOGIN_REGISTER)
-		expect(action.clicked).to.be.equal(true)	
-	})
-})
-
-describe('toggleLoginRegister', () => {
-	it('should set form to be equal to passed in value', () => {
-		const action = toggleLoginRegister('form')
-		expect(action.type).to.be.equal(TOGGLE_LOGIN_REGISTER)
-		expect(action.form).to.be.equal('form')
-	})
-})
 
 describe('addToWishlist', () => {
 	const ebook = {
