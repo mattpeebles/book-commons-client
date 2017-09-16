@@ -1,12 +1,12 @@
 import React from 'react'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Route} from 'react-router-dom'
+import { ConnectedRouter } from 'react-router-redux'
+import {history} from './store'
+
+
 
 import {connect} from 'react-redux'
-
-import {
-	fetchWishlists
-} from './actions/wishlistActions'
-
+import {fetchWishlists} from './actions/wishlistActions'
 import {refreshAuthToken} from './actions/auth';
 
 
@@ -75,7 +75,7 @@ export class App extends React.Component{
 
 
 		return(
-			<Router>
+			<ConnectedRouter history={history}>
 				<div>
 					<NavBar />
 					{loginRegisterForm}
@@ -88,7 +88,7 @@ export class App extends React.Component{
 					</main>
 					<Footer />
 				</div>
-			</Router>
+			</ConnectedRouter>
 		)
 	}
 }

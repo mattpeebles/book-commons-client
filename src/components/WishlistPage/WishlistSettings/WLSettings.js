@@ -1,16 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+
 
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
+import LoginRegister from '../../LoginRegister/LoginRegister'
 
-import {toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle} from '../../../actions/wishlistActions'
+import {fetchWishlists,toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle, changeWishlist} from '../../../actions/wishlistActions'
 
 
 import './WLSettings.css'
 
 
 export class WLSettings extends React.Component{
+
+	handleClick(e){
+		this.props.dispatch(changeWishlist(e.target.text))
+	}
 
 	toggleEditForm(e){
 		let value = e.target.id.split('-')[0]
@@ -34,9 +41,22 @@ export class WLSettings extends React.Component{
 		this.props.dispatch(addWishlistForm(true))
 	}
 
+	getWishlists(){
+		this.props.dispatch(fetchWishlists());
+	}
+
 	render(){
 
-			let formatLinks = this.props.wishlists.map((list, index) => {
+			//shows login/register on refresh for a split second
+			//or shows it until user logs in if there is no token
+		if(this.props.wishlists === null){
+			
+			return (
+				<LoginRegister />
+			)
+		}
+
+		let formatLinks = this.props.wishlists.map((list, index) => {
 				
 				let title = list.title
 					//filters wishlists edit, first array item is result, takes value of result
@@ -60,7 +80,7 @@ export class WLSettings extends React.Component{
 								<div className="row">
 									<div className="col">
 										<div className="col">
-											{title}
+											<Link to={`/wishlist/${title.toLowerCase()}`} onClick={e => this.handleClick(e)}>{title}</Link>
 										</div>
 										<div className="col">
 											<span className="listTitle">{list.items.length}</span> books
@@ -107,6 +127,7 @@ export class WLSettings extends React.Component{
 }
 
 const mapStateToProps = state => ({
+	wishlist: state.wishlist,
 	loggedIn: state.auth.loggedIn,
 	wishlistsNames: state.wishlist.wishlistNames,
 	wishlists: state.wishlist.wishlists,

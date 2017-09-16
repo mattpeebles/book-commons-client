@@ -19,7 +19,7 @@ export class Results extends React.Component{
 
 	render(){
 		let dropdownLinks = ['Save to Wishlist']
-		
+
 		return(
 			<main>
 				<Header headerId='header' title="Results" />
@@ -45,7 +45,7 @@ const mapStateToProps = state => ({
 	user: state.user,
 	supplement: state.app.supplement,
 	details: state.app.details,
-	results: state.app.results,
+	results: state.results.results,
 	authorSupplement: state.app.authorSupplement,
 	bookSupplement: state.app.bookSupplement
 })
