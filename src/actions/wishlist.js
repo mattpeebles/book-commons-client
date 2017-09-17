@@ -297,13 +297,16 @@ export const removeBookFromWishlist = (listId, ebookId) => dispatch => {
     dispatch(removeBookFromWishlistRequest())
 
     let updateBody = {
-        listId,
-        ebookId
+        listId: listId,
+        ebookId: ebookId
     };
 
     return fetch(`${API_BASE_URL}/wishlists/${listId}/delete/${ebookId}`, {
         method: 'PUT',
-        body: JSON.stringify(updateBody)
+        body: JSON.stringify(updateBody),
+        headers: {
+            'Content-Type': 'application/json'
+        }
     })
     .then(res => res.json())
     .then(res => {

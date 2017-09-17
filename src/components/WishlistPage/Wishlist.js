@@ -22,7 +22,8 @@ export class Wishlist extends React.Component{
 	}
 
 	componentWillReceiveProps(nextProps){
-		if(nextProps.currentList !== this.props.currentList){
+			//current list has been changed									wishlist has been changed
+		if(nextProps.currentList !== this.props.currentList || nextProps.wishlists !== this.props.wishlists){
 			let listId = this.props.wishlists.filter(list => list.title === nextProps.currentList)[0].id
 
 			this.props.dispatch(fetchWishlistBooks(listId))		

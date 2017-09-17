@@ -12,7 +12,6 @@ export const fetchGutenbergBookId = title => dispatch => {
 		.then(res => {
 			let ids = []
 
-			console.log(res.texts)
 			res.texts.forEach(text => {
 				for(let k in text){
 					ids.push(text[k])

@@ -396,7 +396,7 @@ describe('removeBookFromWishlist', () => {
 
 		return removeBookFromWishlist(listId, ebookId)(dispatch).then(() => {
 			expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/wishlists/${listId}/delete/${ebookId}`, {
-				method: 'PUT', body: JSON.stringify({listId, ebookId})
+				method: 'PUT', body: JSON.stringify({listId, ebookId}), headers: {"Content-Type": "application/json"}
 			});
 			expect(dispatch).toHaveBeenCalledWith(removeBookFromWishlistSuccess(res.wishlist))
 		})
