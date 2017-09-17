@@ -3,7 +3,8 @@ import {
 	addWishlistForm, addNewWishlistRequest, addNewWishlistSuccess, addNewWishlistError,
 	editWishlistTitleRequest, editWishlistTitleSuccess, editWishlistTitleError,
 	removeWishlistRequest, removeWishlistSuccess, removeWishlistError,
-	saveBookToWishlistRequest, saveBookToWishlistSuccess, saveBookToWishlistError
+	saveBookToWishlistRequest, saveBookToWishlistSuccess, saveBookToWishlistError,
+	fetchWishlistBooksRequest, fetchWishlistBooksSuccess, fetchWishlistBooksError
 } from '../actions/wishlist'
 
 import {default as reducer} from './wishlist'
@@ -298,6 +299,81 @@ describe('Wishlist Reducer', () => {
 			let state;
 			let err = 'Invalid Type Error'
 			state = reducer(state, saveBookToWishlistError(err))
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(err)
+		})
+	});
+
+	describe('fetchWishlistBooksRequest', () => {
+		it('should set loading to true', () => {
+			let state;
+
+			state = reducer(state, fetchWishlistBooksRequest())
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('fetchWishlistBooksSuccess', () => {
+		it('should set items as ebooks', () => {
+			let state;
+			let ebooks= [
+				{
+					id: 40394,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: 'Super Rich Kids',
+					author: 'Frank Ocean',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['chanel'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				},
+				{
+					id: 34151345,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: 'Redbone',
+					author: 'Childish Gambino',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['woke'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				},
+				{
+					id: 974514,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: '#29 Strattford Apts',
+					author: 'Bon Iver',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['english'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				}
+			];
+
+			state = reducer(state, fetchWishlistBooksSuccess(ebooks))
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+			expect(state.wishlistItems).to.deep.equal(ebooks)
+		})
+	});
+
+	describe('fetchWishlistBooksError', () => {
+		it('should set error', () => {
+			let state;
+			let err = 'Invalid type error'
+			state = reducer(state, fetchWishlistBooksError(err))
 			expect(state.loading).to.be.equal(false)
 			expect(state.error).to.be.equal(err)
 		})

@@ -57,7 +57,6 @@ export const fetchGutenbergBook = bookId => dispatch => {
 
 			dispatch(fetchGutenbergSuccess(ebook))
 			dispatch(push('/results'))
-
 		})
 		.catch(err => {
 			dispatch(fetchGutenbergError(err))

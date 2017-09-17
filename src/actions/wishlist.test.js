@@ -5,7 +5,8 @@ import {
 	addNewWishlist, ADD_NEW_WISHLIST_SUCCESS, addNewWishlistSuccess,
 	editWishlistTitle, EDIT_WISHLIST_TITLE_SUCCESS, editWishlistTitleSuccess,
 	removeWishlist, REMOVE_WISHLIST_SUCCESS, removeWishlistSuccess,
-	saveBookToWishlist, SAVE_BOOK_TO_WISHLIST_SUCCESS, saveBookToWishlistSuccess, saveBookToWishlistRequest
+	saveBookToWishlist, SAVE_BOOK_TO_WISHLIST_SUCCESS, saveBookToWishlistSuccess, saveBookToWishlistRequest,
+	fetchWishlistBooks, fetchWishlistBooksRequest, fetchWishlistBooksSuccess
 } from './wishlist';
 
 const {API_BASE_URL} = require('../config');
@@ -297,4 +298,73 @@ describe('saveBookToWishlist', () => {
 			expect(dispatch).toHaveBeenCalledWith(saveBookToWishlistSuccess(res))
 		})
 	});
-})
+});
+
+describe('fetchWishlistBooks', () => {
+	it('should return all items in wishlist', () => {
+
+		let listId = 65342;
+
+		let res = {
+			ebooks: [
+				{
+					id: 40394,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: 'Super Rich Kids',
+					author: 'Frank Ocean',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['chanel'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				},
+				{
+					id: 34151345,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: 'Redbone',
+					author: 'Childish Gambino',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['woke'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				},
+				{
+					id: 974514,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: '#29 Strattford Apts',
+					author: 'Bon Iver',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['english'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				}
+			]};
+
+		global.fetch = jest.fn().mockImplementation(() => 
+			Promise.resolve({
+				ok: true,
+				json(){
+					return res
+				}
+			})
+		);
+
+		let dispatch = jest.fn()
+
+		return fetchWishlistBooks(listId)(dispatch).then(() => {
+			expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/ebooks/wishlist/${listId}`)
+			expect(dispatch).toHaveBeenCalledWith(fetchWishlistBooksSuccess(res.ebooks))
+		})
+	})
+});

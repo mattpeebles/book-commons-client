@@ -6,7 +6,8 @@ import {
 	EDIT_WISHLIST_TITLE_REQUEST, EDIT_WISHLIST_TITLE_SUCCESS, EDIT_WISHLIST_TITLE_ERROR,
 	REMOVE_WISHLIST_REQUEST, REMOVE_WISHLIST_SUCCESS, REMOVE_WISHLIST_ERROR,
 	TOGGLE_EDIT_WISHLIST_STATUS,
-	SAVE_BOOK_TO_WISHLIST_REQUEST, SAVE_BOOK_TO_WISHLIST_SUCCESS, SAVE_BOOK_TO_WISHLIST_ERROR
+	SAVE_BOOK_TO_WISHLIST_REQUEST, SAVE_BOOK_TO_WISHLIST_SUCCESS, SAVE_BOOK_TO_WISHLIST_ERROR,
+	FETCH_WISHLIST_BOOKS_REQUEST, FETCH_WISHLIST_BOOKS_SUCCESS, FETCH_WISHLIST_BOOKS_ERROR
 } from '../actions/wishlist'
 
 
@@ -202,6 +203,28 @@ export default (state, action) => {
 	};
 
 	if(action.type === SAVE_BOOK_TO_WISHLIST_ERROR){
+		return Object.assign({}, state, {
+			loading: false,
+			error: action.error
+		})
+	};
+
+	if(action.type === FETCH_WISHLIST_BOOKS_REQUEST){
+		return Object.assign({}, state, {
+			loading: true,
+			error: null
+		})
+	};
+
+	if(action.type === FETCH_WISHLIST_BOOKS_SUCCESS){
+		return Object.assign({}, state, {
+			loading: false,
+			error: null,
+			wishlistItems: action.items
+		})
+	};
+
+	if(action.type === FETCH_WISHLIST_BOOKS_ERROR){
 		return Object.assign({}, state, {
 			loading: false,
 			error: action.error

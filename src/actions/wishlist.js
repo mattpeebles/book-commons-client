@@ -244,21 +244,49 @@ export const saveBookToWishlist = (listId, ebook) => (dispatch, getState)=> {
         dispatch(saveBookToWishlistSuccess(list))
     })
     .catch(err => dispatch(saveBookToWishlistError(err)))
-}
+};
 
 export const SAVE_BOOK_TO_WISHLIST_REQUEST = 'SAVE_BOOK_TO_WISHLIST_REQUEST'
 export const saveBookToWishlistRequest = () => ({
     type: SAVE_BOOK_TO_WISHLIST_REQUEST
-})
+});
 
 export const SAVE_BOOK_TO_WISHLIST_SUCCESS = 'SAVE_BOOK_TO_WISHLIST_SUCCESS'
 export const saveBookToWishlistSuccess = (list) => ({
     type: SAVE_BOOK_TO_WISHLIST_SUCCESS,
     wishlist: list
-})
+});
 
 export const SAVE_BOOK_TO_WISHLIST_ERROR = 'SAVE_BOOK_TO_WISHLIST_ERROR'
 export const saveBookToWishlistError = (err) => ({
     type: SAVE_BOOK_TO_WISHLIST_ERROR,
+    error: err
+});
+
+export const fetchWishlistBooks = listId => dispatch => {
+    dispatch(fetchWishlistBooksRequest())
+
+    return fetch(`${API_BASE_URL}/ebooks/wishlist/${listId}`)
+        .then(res => res.json())
+        .then(res => {
+            let ebooks = res.ebooks
+
+            dispatch(fetchWishlistBooksSuccess(ebooks))
+        })
+        .catch(err => dispatch(fetchWishlistBooksError(err)))
+};
+
+export const FETCH_WISHLIST_BOOKS_REQUEST = 'FETCH_WISHLIST_BOOKS_REQUEST'
+export const fetchWishlistBooksRequest = () => ({
+    type: FETCH_WISHLIST_BOOKS_REQUEST
+})
+export const FETCH_WISHLIST_BOOKS_SUCCESS = 'FETCH_WISHLIST_BOOKS_SUCCESS'
+export const fetchWishlistBooksSuccess = (ebooks) => ({
+    type: FETCH_WISHLIST_BOOKS_SUCCESS,
+    items: ebooks
+})
+export const FETCH_WISHLIST_BOOKS_ERROR = 'FETCH_WISHLIST_BOOKS_ERROR'
+export const fetchWishlistBooksError = (err) => ({
+    type: FETCH_WISHLIST_BOOKS_ERROR,
     error: err
 })
