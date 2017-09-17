@@ -6,7 +6,7 @@ import {history} from './store'
 
 
 import {connect} from 'react-redux'
-import {fetchWishlists} from './actions/wishlistActions'
+import {fetchWishlists} from './actions/wishlist'
 import {refreshAuthToken} from './actions/auth';
 
 
@@ -61,7 +61,6 @@ export class App extends React.Component{
 	}
 
 	render(){
-		
 		let loginRegisterForm;
 				
 		if(this.props.display === true){

@@ -18,7 +18,8 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Wishlist title update
 - [ ] Wishlist remove item
 - [ ] Ebook move item to another wishlist
-- [ ] Ebook save to wishlist
+- [x] Ebook save to wishlist
+- [ ] Display wishlist ebooks
 - [ ] Remove ebook from wishlist
 - [x] Login
 - [x] Register
@@ -27,14 +28,15 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist
 
 ### Actions <a name="todoActions"></a>
-- [ ] Project Gutenberg api call
+- [x] Project Gutenberg api call
 - [ ] Europeana api call
 - [ ] Open Library api call
 - [ ] Feedbooks api call (tentative)
 - [ ] Email/password update - fetch, success, error, request
 - [x] Wishlist title update - fetch, success, error, request
 - [ ] Wishlist remove item - fetch, success, error, request
-- [ ] Ebook save to wishlist - fetch, success, error, request
+- [ ] Wishlist display items - fetch, success, error, request
+- [x] Ebook save to wishlist - fetch, success, error, request
 - [ ] Ebook move item to another wishlist - fetch, success, error, request
 - [ ] Remove ebook from wishlist - fetch, success, error, request
 - [x] Login - fetch, success, error, request
@@ -44,14 +46,15 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist - fetch, success, error, request
 
 ### Reducers <a name="todoReducers"></a>
-- [ ] Project Gutenberg api call - fetch, success, error, request
+- [x] Project Gutenberg api call - fetch, success, error, request
 - [ ] Europeana api call - fetch, success, error, request
 - [ ] Open Library api call - fetch, success, error, request
 - [ ] Feedbooks api call (tentative) - fetch, success, error, request
 - [ ] Email/password update
 - [x] Wishlist title update
 - [ ] Wishlist remove item
-- [ ] Ebook save to wishlist
+- [ ] Wishlist display items
+- [x] Ebook save to wishlist
 - [ ] Ebook move item to another wishlist
 - [ ] Remove ebook from wishlist
 - [x] Login
@@ -61,22 +64,23 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist
 
 ### Components <a name="todoComponents"></a>
-- [ ] Link search bars to external database api calls
-- [ ] Display external database results on results page
+- [x] Link search bars to external database api calls
+- [x] Display external database results on results page
 - [ ] Add functions save to wishlist, delete from wishlist, change wishlist to dropdown links
 - [ ] Add account edit button to navbar
 - [x] Add wishlist title update function and form to wl settings
 
 ### Tests <a name="todoTests"></a>
-- [ ] Project Gutenberg api call - reducer, action
+- [x] Project Gutenberg api call - reducer, action
 - [ ] Europeana api call - reducer, action
 - [ ] Open Library api call - reducer, action
 - [ ] Feedbooks api call (tentative) - reducer, action
 - [ ] User email/password update - reducer, action
+- [ ] Wishlist display items - reducer, action
 - [x] Wishlist title update - reducer, action
 - [ ] Wishlist remove item - reducer, action
 - [ ] Ebook move item to another wishlist - reducer, action
-- [ ] Ebook save to wishlist - reducer, action
+- [x] Ebook save to wishlist - reducer, action
 - [ ] Remove ebook from wishlist - reducer, action
 - [x] Login - reducer, action
 - [x] Register - reducer, action

@@ -4,8 +4,9 @@ import {
 	ADD_WISHLIST_FORM, addWishlistForm, CHANGE_WISHLIST, changeWishlist,
 	addNewWishlist, ADD_NEW_WISHLIST_SUCCESS, addNewWishlistSuccess,
 	editWishlistTitle, EDIT_WISHLIST_TITLE_SUCCESS, editWishlistTitleSuccess,
-	removeWishlist, REMOVE_WISHLIST_SUCCESS, removeWishlistSuccess
-} from './wishlistActions';
+	removeWishlist, REMOVE_WISHLIST_SUCCESS, removeWishlistSuccess,
+	saveBookToWishlist, SAVE_BOOK_TO_WISHLIST_SUCCESS, saveBookToWishlistSuccess, saveBookToWishlistRequest
+} from './wishlist';
 
 const {API_BASE_URL} = require('../config');
 
@@ -94,11 +95,10 @@ describe('toggleEditWishlistStatus', () => {
 	it('should toggle boolean value of wishlist in wishlistEdit', () => {
 		const list = 'Biographies'
 		const action = toggleEditWishlistStatus(list)
-		console.log(action.type)
 		expect(action.type).toEqual(TOGGLE_EDIT_WISHLIST_STATUS)
 		expect(action.list).toEqual(list)
 	})
-})
+});
 
 describe('addWishlistForm', () => {
 	it('should change addwishlist value to boolean passed in', () => {
@@ -116,7 +116,7 @@ describe('changeWishlist', () => {
 		expect(action.type).toEqual(CHANGE_WISHLIST)
 		expect(action.currentList).toEqual(list)
 	})
-})
+});
 
 describe('addNewWishlist', () => {
 	it('should add new wishlist to database and state', () => {
@@ -188,7 +188,7 @@ describe('editWishlistTitle', () => {
 			expect(dispatch).toHaveBeenCalledWith(editWishlistTitleSuccess(wishlist, newTitle, oldTitle))
 		})
 	})
-})
+});
 
 describe('removeWishlist', () => {
 	it('should remove wishlist from names and wishlists array', () => {
@@ -241,3 +241,60 @@ describe('removeWishlist', () => {
         })
 	})
 });
+
+describe('saveBookToWishlist', () => {
+	it('should save ebook id to wishlist', () => {
+		
+		let res = {
+			ebook: {
+				id: 40394,
+				database: 'project gutenberg',
+				icon: '/resources/icons/gutenberg-fav.png',
+				title: 'Super Rich Kids',
+				author: 'Frank Ocean',
+				preview: 'No Preview',
+				publishDate: undefined,
+				languages: ['chanel'],
+				pages: undefined,
+				formats: ['epub'],
+				location: `https://www.gutenberg.org/ebooks`,
+				rights: 'public domain'
+			},
+			list: {
+				id: 323,
+				title: 'GOAT',
+				items: []
+			}
+		}
+
+		let listId = 323
+
+		let addObj = {
+			listId,
+			item: res.id
+		}
+
+		let list = {
+			id: listId,
+			'title': 'GOAT',
+			items: [40394]
+		}
+
+		global.fetch = jest.fn().mockImplementation(() => 
+			Promise.resolve({
+				ok: true,
+				json(){
+					return res
+				}
+			})
+		);
+
+		let dispatch = jest.fn()
+
+		return saveBookToWishlist(listId, res)(dispatch, getState).then(() => {
+			expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/ebooks`, {"body": `${JSON.stringify(res)}`, "headers": {"Authorization": `Bearer ${token}`, "Content-Type": "application/json"}, "method": "POST"})
+			expect(dispatch).toHaveBeenCalledWith(saveBookToWishlistRequest())
+			expect(dispatch).toHaveBeenCalledWith(saveBookToWishlistSuccess(res))
+		})
+	});
+})

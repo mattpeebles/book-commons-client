@@ -7,7 +7,7 @@ import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 import LoginRegister from '../../LoginRegister/LoginRegister'
 
-import {fetchWishlists,toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle, changeWishlist} from '../../../actions/wishlistActions'
+import {fetchWishlists,toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle, changeWishlist} from '../../../actions/wishlist'
 
 
 import './WLSettings.css'

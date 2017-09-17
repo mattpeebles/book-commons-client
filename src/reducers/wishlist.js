@@ -1,21 +1,13 @@
 import {
-	FETCH_WISHLISTS_REQUEST,
-	FETCH_WISHLISTS_SUCCESS,
-	FETCH_WISHLISTS_ERROR,
+	FETCH_WISHLISTS_REQUEST, FETCH_WISHLISTS_SUCCESS, FETCH_WISHLISTS_ERROR,
 	CHANGE_WISHLIST,
 	ADD_WISHLIST_FORM,	
-	ADD_NEW_WISHLIST_REQUEST,	
-	ADD_NEW_WISHLIST_SUCCESS,
-	ADD_NEW_WISHLIST_ERROR,
-	EDIT_WISHLIST_TITLE_REQUEST,
-	EDIT_WISHLIST_TITLE_SUCCESS,
-	EDIT_WISHLIST_TITLE_ERROR,
-	REMOVE_WISHLIST_REQUEST,
-	REMOVE_WISHLIST_SUCCESS,
-	REMOVE_WISHLIST_ERROR,
+	ADD_NEW_WISHLIST_REQUEST, ADD_NEW_WISHLIST_SUCCESS, ADD_NEW_WISHLIST_ERROR,
+	EDIT_WISHLIST_TITLE_REQUEST, EDIT_WISHLIST_TITLE_SUCCESS, EDIT_WISHLIST_TITLE_ERROR,
+	REMOVE_WISHLIST_REQUEST, REMOVE_WISHLIST_SUCCESS, REMOVE_WISHLIST_ERROR,
 	TOGGLE_EDIT_WISHLIST_STATUS,
-
-} from '../actions/wishlistActions'
+	SAVE_BOOK_TO_WISHLIST_REQUEST, SAVE_BOOK_TO_WISHLIST_SUCCESS, SAVE_BOOK_TO_WISHLIST_ERROR
+} from '../actions/wishlist'
 
 
 const initialState = {
@@ -190,6 +182,31 @@ export default (state, action) => {
 		})
 	}
 
+	if(action.type === SAVE_BOOK_TO_WISHLIST_REQUEST){
+		return Object.assign({}, state, {
+			loading: true,
+			error: null
+		})
+	};
+
+	if(action.type === SAVE_BOOK_TO_WISHLIST_SUCCESS){
+		
+			//filter out list with new list id
+		let wishlistsArray = state.wishlists.filter(list => list.id !== action.wishlist.id)
+			//add new list into array
+		let wishlists = [...wishlistsArray, action.wishlist]
+
+		return Object.assign({}, state, {
+			wishlists
+		})
+	};
+
+	if(action.type === SAVE_BOOK_TO_WISHLIST_ERROR){
+		return Object.assign({}, state, {
+			loading: false,
+			error: action.error
+		})
+	};
 
 	return state;
 }

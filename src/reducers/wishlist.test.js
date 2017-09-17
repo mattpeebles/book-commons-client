@@ -1,21 +1,12 @@
 import {
-	fetchWishlists,
-	fetchWishlistsRequest,
-	fetchWishlistsSuccess,
-	fetchWishlistsError,
-	addWishlistForm,
-	addNewWishlistRequest,
-	addNewWishlistSuccess,
-	addNewWishlistError,
-	editWishlistTitleRequest,
-	editWishlistTitleSuccess,
-	editWishlistTitleError,
-	removeWishlistRequest,
-	removeWishlistSuccess,
-	removeWishlistError
-} from '../actions/wishlistActions'
+	fetchWishlistsRequest, fetchWishlistsSuccess, fetchWishlistsError,
+	addWishlistForm, addNewWishlistRequest, addNewWishlistSuccess, addNewWishlistError,
+	editWishlistTitleRequest, editWishlistTitleSuccess, editWishlistTitleError,
+	removeWishlistRequest, removeWishlistSuccess, removeWishlistError,
+	saveBookToWishlistRequest, saveBookToWishlistSuccess, saveBookToWishlistError
+} from '../actions/wishlist'
 
-import {default as reducer} from './wishlistReducer'
+import {default as reducer} from './wishlist'
 import {expect} from 'chai'
 
 describe('Wishlist Reducer', () => {
@@ -29,6 +20,21 @@ describe('Wishlist Reducer', () => {
 				id: 23813413,
 				title: 'Channel Orange',
 				items: []
+			}
+
+			let ebook1 = {
+				id: 40394,
+				database: 'project gutenberg',
+				icon: '/resources/icons/gutenberg-fav.png',
+				title: 'Super Rich Kids',
+				author: 'Frank Ocean',
+				preview: 'No Preview',
+				publishDate: undefined,
+				languages: ['chanel'],
+				pages: undefined,
+				formats: ['epub'],
+				location: `https://www.gutenberg.org/ebooks`,
+				rights: 'public domain'
 			}
 
 	it('should return initial state if nothing is passed in', () => {
@@ -175,7 +181,8 @@ describe('Wishlist Reducer', () => {
 			expect(state.loading).to.be.equal(true)
 			expect(state.error).to.be.equal(null)
 		})
-	})
+	});
+
 	describe('editWishlistTitleSuccess', () => {
 		it('should set wishlist names and wishlists to new wishlist title', () => {
 			let state;
@@ -202,7 +209,8 @@ describe('Wishlist Reducer', () => {
 			expect(state.wishlistNames).to.include(newTitle)
 			expect(state.wishlistNames).to.not.include(wishlist1.title)
 		})
-	})
+	});
+
 	describe('editWishlistTitleError', () => {
 		it('should set error', () => {
 			let state;
@@ -211,7 +219,7 @@ describe('Wishlist Reducer', () => {
 			
 			expect(state.error).to.equal(err)
 		})
-	})
+	});
 
 	describe('removeWishlistRequest', () => {
 		it('should set loading to true', () =>{
@@ -222,7 +230,7 @@ describe('Wishlist Reducer', () => {
 			expect(state.error).to.be.equal(null)
 
 		})
-	})
+	});
 
 	describe('removeWishlistSuccess', () => {
 		it('should call fetchWishlists', () => {
@@ -240,7 +248,7 @@ describe('Wishlist Reducer', () => {
 			expect(state.error).to.be.equal(null)
 
 		})
-	})
+	});
 
 	describe('removeWishlistError', () => {
 		it('should ', () => {
@@ -252,6 +260,48 @@ describe('Wishlist Reducer', () => {
 			expect(state.error).to.be.equal(err)
 			expect(state.loading).to.be.equal(false)
 		})
-	})
+	});
+
+	describe('saveBookToWishlistRequest', () => {
+		it('should set loading to true', () => {
+			let state;
+
+			state = reducer(state, saveBookToWishlistRequest())
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('saveBookToWishlistSuccess', () => {
+		it('should update wishlist items', () => {
+			let state;
+
+			state = reducer(state, fetchWishlistsSuccess([wishlist1], [wishlist1.title]))
+
+					//save book to wishlist automatically returns
+					//updated list with item inside items array
+					//this is mocking that backend function
+			let updateWishlist1 = Object.assign({}, state.wishlists[0], {
+				items: [...state.wishlists[0]['items'], ebook1.id]
+			})
+
+
+			state = reducer(state, saveBookToWishlistSuccess(updateWishlist1))
+			expect(state.wishlists[0].items).to.include(ebook1.id)
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('saveBookToWishlistError', () => {
+		it('should set error to err', () => {
+			let state;
+			let err = 'Invalid Type Error'
+			state = reducer(state, saveBookToWishlistError(err))
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(err)
+		})
+	});
+
 
 })

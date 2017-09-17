@@ -202,3 +202,63 @@ export const removeWishlistError = (error) => ({
     type: REMOVE_WISHLIST_ERROR,
     error
 })
+
+export const saveBookToWishlist = (listId, ebook) => (dispatch, getState)=> {
+    dispatch(saveBookToWishlistRequest())
+
+    let token = getState().auth.authToken
+    let book = JSON.stringify(ebook)
+        
+        //save ebook to database
+        //api checks to see if ebook already exists
+        //in database
+    return fetch(`${API_BASE_URL}/ebooks`, {
+        method: 'POST',
+        body: book,
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => res.json())
+    .then(res => {
+        let ebookId = res.ebook.id;
+
+        let addObj = {
+            listId,
+            item: ebookId
+        }
+
+            //save id to wishlist
+        return fetch(`${API_BASE_URL}/wishlists/${listId}/add/${ebookId}`, {
+            method: 'PUT',
+            body: JSON.stringify(addObj),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+    })
+    .then(res => res.json())
+    .then(list => {
+        dispatch(saveBookToWishlistSuccess(list))
+    })
+    .catch(err => dispatch(saveBookToWishlistError(err)))
+}
+
+export const SAVE_BOOK_TO_WISHLIST_REQUEST = 'SAVE_BOOK_TO_WISHLIST_REQUEST'
+export const saveBookToWishlistRequest = () => ({
+    type: SAVE_BOOK_TO_WISHLIST_REQUEST
+})
+
+export const SAVE_BOOK_TO_WISHLIST_SUCCESS = 'SAVE_BOOK_TO_WISHLIST_SUCCESS'
+export const saveBookToWishlistSuccess = (list) => ({
+    type: SAVE_BOOK_TO_WISHLIST_SUCCESS,
+    wishlist: list
+})
+
+export const SAVE_BOOK_TO_WISHLIST_ERROR = 'SAVE_BOOK_TO_WISHLIST_ERROR'
+export const saveBookToWishlistError = (err) => ({
+    type: SAVE_BOOK_TO_WISHLIST_ERROR,
+    error: err
+})

@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {addToWishlist, removeFromWishlist} from '../../actions/actions'
+import {removeFromWishlist} from '../../actions/actions'
+import {saveBookToWishlist} from '../../actions/wishlist'
 
 export class DropdownItem extends React.Component{
 	
@@ -9,9 +10,9 @@ export class DropdownItem extends React.Component{
 		e.preventDefault()
 		let ebook = this.props.ebook
 		let index = e.target['wishlist'].selectedIndex
-		let list = e.target['wishlist'][index].value
+		let listId = e.target['wishlist'][index].id
 
-		this.props.dispatch(addToWishlist(ebook, list))
+		this.props.dispatch(saveBookToWishlist(listId, ebook))
 	}
 
 	removeEbook(e){
@@ -60,7 +61,7 @@ export class DropdownItem extends React.Component{
 
 			//Results render
 		let options = this.props.wishlists.map((item, index) => {
-			return <option key={index} value={item}>{item}</option>
+			return <option key={index} id={item.id} value={item.title}>{item.title}</option>
 		})
 
 
@@ -76,7 +77,7 @@ export class DropdownItem extends React.Component{
 }
 
 const mapStateToProps = state => ({
-	wishlists: state.wishlist.wishlistNames,
+	wishlists: state.wishlist.wishlists,
 	wishlistItems: state.app.wishlistItems
 })
 

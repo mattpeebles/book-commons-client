@@ -1,8 +1,6 @@
-//import {browserHistory} from 'react-router'
 import { push } from 'react-router-redux'
 
 const {GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
-
 
 export const fetchGutenbergBookId = title => dispatch => {
 	dispatch(fetchGutenbergRequest)
@@ -46,13 +44,15 @@ export const fetchGutenbergBook = bookId => dispatch => {
 			let ebook = {
 				database: 'project gutenberg',
 				icon: '/resources/icons/gutenberg-fav.png',
-				rights: data.rights[0],
-				author: data.author[0],
 				title: data.title[0],
+				author: data.author[0],
+				preview: 'No Preview',
+				publishDate: undefined,
 				languages: data.language,
 				pages: undefined,
 				formats: goodTypes,
-				location: `https://www.gutenberg.org/ebooks/${res.text_id}`
+				location: `https://www.gutenberg.org/ebooks/${res.text_id}`,
+				rights: data.rights[0]
 			}
 
 			dispatch(fetchGutenbergSuccess(ebook))
@@ -63,7 +63,6 @@ export const fetchGutenbergBook = bookId => dispatch => {
 			dispatch(fetchGutenbergError(err))
 		}) 
 }
-
 
 export const FETCH_GUTENBERG_REQUEST = 'FETCH_GUTENBERG_REQUEST'
 export const fetchGutenbergRequest = () => ({

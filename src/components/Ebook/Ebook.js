@@ -23,7 +23,7 @@ export class Ebook extends React.Component{
 
 				return <div className="result col-12 row" id={index} key={index}>
 					<div className="bookInfo col">
-						<BookInfo title={result.title} author={result.author} dropdownType={this.props.dropdownType} dropdownLinks={this.props.dropdownLinks}/>
+						<BookInfo title={result.title} author={result.author} ebook={result} dropdownType={this.props.dropdownType} dropdownLinks={this.props.dropdownLinks}/>
 						<BookDetails preview={result.preview} publishDate={result.publishDate} languages={result.languages} pages={result.pages} />
 						<FormatLocation formats={result.formats} location={result.location} database={result.database} icon={result.icon} />
 					</div>
