@@ -21,6 +21,18 @@ export class DropdownItem extends React.Component{
 		this.props.dispatch(removeBookFromWishlist(listId, ebookId))
 	}
 
+	changeWishlist(e){
+		e.preventDefault()
+		let ebookId = this.props.ebook.id
+		let ebook = this.props.ebook
+		let index = e.target['wishlist'].selectedIndex
+		let newListId = e.target['wishlist'][index].id
+		let oldListId = this.props.wishlists.filter(list => list.title === this.props.currentList)[0].id
+
+		this.props.dispatch(removeBookFromWishlist(oldListId, ebookId))
+		this.props.dispatch(saveBookToWishlist(newListId, ebook))
+	}
+
 	render(){
 
 			//Wishlist render
@@ -34,11 +46,13 @@ export class DropdownItem extends React.Component{
 
 						else if(item === 'Change Wishlist'){
 							let options = this.props.wishlists.map((item, index) => {
-								return <option key={index} value={item.title}>{item.title}</option>
+								if(item.title !== this.props.currentList){
+									return <option key={index} id={item.id} value={item.title}>{item.title}</option>
+								}
 							})
 
 							return (
-								<form key={index} onSubmit={e => this.addBook(e)}>
+								<form key={index} onSubmit={e => this.changeWishlist(e)}>
 									<select name='wishlist'>
 										{options}
 									</select>
