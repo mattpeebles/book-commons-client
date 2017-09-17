@@ -279,14 +279,53 @@ export const fetchWishlistBooks = listId => dispatch => {
 export const FETCH_WISHLIST_BOOKS_REQUEST = 'FETCH_WISHLIST_BOOKS_REQUEST'
 export const fetchWishlistBooksRequest = () => ({
     type: FETCH_WISHLIST_BOOKS_REQUEST
-})
+});
+
 export const FETCH_WISHLIST_BOOKS_SUCCESS = 'FETCH_WISHLIST_BOOKS_SUCCESS'
 export const fetchWishlistBooksSuccess = (ebooks) => ({
     type: FETCH_WISHLIST_BOOKS_SUCCESS,
     items: ebooks
-})
+});
+
 export const FETCH_WISHLIST_BOOKS_ERROR = 'FETCH_WISHLIST_BOOKS_ERROR'
 export const fetchWishlistBooksError = (err) => ({
     type: FETCH_WISHLIST_BOOKS_ERROR,
     error: err
-})
+});
+
+export const removeBookFromWishlist = (listId, ebookId) => dispatch => {
+    dispatch(removeBookFromWishlistRequest())
+
+    let updateBody = {
+        listId,
+        ebookId
+    };
+
+    return fetch(`${API_BASE_URL}/wishlists/${listId}/delete/${ebookId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updateBody)
+    })
+    .then(res => res.json())
+    .then(res => {
+        let list = res.wishlist;
+
+        dispatch(removeBookFromWishlistSuccess(list))
+    })
+    .catch(err => dispatch(removeBookFromWishlistError))
+};
+
+export const REMOVE_BOOK_FROM_WISHLIST_REQUEST = 'REMOVE_BOOK_FROM_WISHLIST_REQUEST'
+export const removeBookFromWishlistRequest = () => ({
+    type: REMOVE_BOOK_FROM_WISHLIST_REQUEST
+});
+export const REMOVE_BOOK_FROM_WISHLIST_SUCCESS = 'REMOVE_BOOK_FROM_WISHLIST_SUCCESS'
+export const removeBookFromWishlistSuccess = (list) => ({
+    type: REMOVE_BOOK_FROM_WISHLIST_SUCCESS,
+    wishlist: list
+});
+export const REMOVE_BOOK_FROM_WISHLIST_ERROR = 'REMOVE_BOOK_FROM_WISHLIST_ERROR'
+export const removeBookFromWishlistError = (err) => ({
+    type: REMOVE_BOOK_FROM_WISHLIST_ERROR,
+    error: err
+});
+

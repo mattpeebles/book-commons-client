@@ -6,7 +6,8 @@ import {
 	editWishlistTitle, EDIT_WISHLIST_TITLE_SUCCESS, editWishlistTitleSuccess,
 	removeWishlist, REMOVE_WISHLIST_SUCCESS, removeWishlistSuccess,
 	saveBookToWishlist, SAVE_BOOK_TO_WISHLIST_SUCCESS, saveBookToWishlistSuccess, saveBookToWishlistRequest,
-	fetchWishlistBooks, fetchWishlistBooksRequest, fetchWishlistBooksSuccess
+	fetchWishlistBooks, fetchWishlistBooksRequest, fetchWishlistBooksSuccess,
+	removeBookFromWishlist, removeBookFromWishlistRequest, REMOVE_BOOK_FROM_WISHLIST_SUCCESS, removeBookFromWishlistSuccess
 } from './wishlist';
 
 const {API_BASE_URL} = require('../config');
@@ -366,5 +367,39 @@ describe('fetchWishlistBooks', () => {
 			expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/ebooks/wishlist/${listId}`)
 			expect(dispatch).toHaveBeenCalledWith(fetchWishlistBooksSuccess(res.ebooks))
 		})
+	})
+});
+
+describe('removeBookFromWishlist', () => {
+	it('should remove bookid from wishlist items', () => {
+		let dispatch = jest.fn();
+
+		let listId = 3958034;
+		let ebookId = 874509;
+
+		let res = {
+			wishlist: {
+				id: listId,
+				title: 'Frank Ocean',
+				items: []
+			}
+		};
+
+		global.fetch = jest.fn().mockImplementation(() => 
+			Promise.resolve({
+				ok: true,
+				json(){
+					return res
+				}
+			})
+		);
+
+		return removeBookFromWishlist(listId, ebookId)(dispatch).then(() => {
+			expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/wishlists/${listId}/delete/${ebookId}`, {
+				method: 'PUT', body: JSON.stringify({listId, ebookId})
+			});
+			expect(dispatch).toHaveBeenCalledWith(removeBookFromWishlistSuccess(res.wishlist))
+		})
+
 	})
 });

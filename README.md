@@ -16,7 +16,7 @@ A public domain book search that aggregates a variety of databases to display re
 ### Integration <a name="todoIntegration"></a>
 - [ ] User email/password update
 - [x] Wishlist title update
-- [ ] Wishlist remove item
+- [x] Wishlist remove item
 - [ ] Ebook move item to another wishlist
 - [x] Ebook save to wishlist
 - [x] Display wishlist ebooks
@@ -78,7 +78,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] User email/password update - reducer, action
 - [x] Wishlist display items - reducer, action
 - [x] Wishlist title update - reducer, action
-- [ ] Wishlist remove item - reducer, action
+- [x] Wishlist remove item - reducer, action
 - [ ] Ebook move item to another wishlist - reducer, action
 - [x] Ebook save to wishlist - reducer, action
 - [ ] Remove ebook from wishlist - reducer, action
