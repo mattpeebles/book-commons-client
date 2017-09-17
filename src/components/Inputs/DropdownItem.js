@@ -34,7 +34,7 @@ export class DropdownItem extends React.Component{
 
 						else if(item === 'Change Wishlist'){
 							let options = this.props.wishlists.map((item, index) => {
-								return <option key={index} value={item}>{item}</option>
+								return <option key={index} value={item.title}>{item.title}</option>
 							})
 
 							return (

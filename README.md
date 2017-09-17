@@ -19,7 +19,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Wishlist remove item
 - [ ] Ebook move item to another wishlist
 - [x] Ebook save to wishlist
-- [ ] Display wishlist ebooks
+- [x] Display wishlist ebooks
 - [ ] Remove ebook from wishlist
 - [x] Login
 - [x] Register
@@ -35,7 +35,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Email/password update - fetch, success, error, request
 - [x] Wishlist title update - fetch, success, error, request
 - [ ] Wishlist remove item - fetch, success, error, request
-- [ ] Wishlist display items - fetch, success, error, request
+- [x] Wishlist display items - fetch, success, error, request
 - [x] Ebook save to wishlist - fetch, success, error, request
 - [ ] Ebook move item to another wishlist - fetch, success, error, request
 - [ ] Remove ebook from wishlist - fetch, success, error, request
@@ -53,7 +53,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Email/password update
 - [x] Wishlist title update
 - [ ] Wishlist remove item
-- [ ] Wishlist display items
+- [x] Wishlist display items
 - [x] Ebook save to wishlist
 - [ ] Ebook move item to another wishlist
 - [ ] Remove ebook from wishlist
@@ -76,7 +76,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Open Library api call - reducer, action
 - [ ] Feedbooks api call (tentative) - reducer, action
 - [ ] User email/password update - reducer, action
-- [ ] Wishlist display items - reducer, action
+- [x] Wishlist display items - reducer, action
 - [x] Wishlist title update - reducer, action
 - [ ] Wishlist remove item - reducer, action
 - [ ] Ebook move item to another wishlist - reducer, action
