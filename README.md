@@ -38,7 +38,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Wishlist display items - fetch, success, error, request
 - [x] Ebook save to wishlist - fetch, success, error, request
 - [ ] Ebook move item to another wishlist - fetch, success, error, request
-- [ ] Remove ebook from wishlist - fetch, success, error, request
+- [x] Remove ebook from wishlist - fetch, success, error, request
 - [x] Login - fetch, success, error, request
 - [x] Register - fetch, success, error, request
 - [x] User persistence

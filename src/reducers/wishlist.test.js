@@ -4,7 +4,8 @@ import {
 	editWishlistTitleRequest, editWishlistTitleSuccess, editWishlistTitleError,
 	removeWishlistRequest, removeWishlistSuccess, removeWishlistError,
 	saveBookToWishlistRequest, saveBookToWishlistSuccess, saveBookToWishlistError,
-	fetchWishlistBooksRequest, fetchWishlistBooksSuccess, fetchWishlistBooksError
+	fetchWishlistBooksRequest, fetchWishlistBooksSuccess, fetchWishlistBooksError,
+	removeBookFromWishlistRequest, removeBookFromWishlistSuccess, removeBookFromWishlistError
 } from '../actions/wishlist'
 
 import {default as reducer} from './wishlist'
@@ -37,6 +38,8 @@ describe('Wishlist Reducer', () => {
 				location: `https://www.gutenberg.org/ebooks`,
 				rights: 'public domain'
 			}
+
+			let err = 'Invalid Type Error'
 
 	it('should return initial state if nothing is passed in', () => {
 		let state;
@@ -165,7 +168,6 @@ describe('Wishlist Reducer', () => {
 	describe('addNewWishlistError', () => {
 		it('should set error in state', () => {
 			let state;
-			let err = 'Invalid Type Error'
 
 			state = reducer(state, addNewWishlistError(err))
 
@@ -215,7 +217,6 @@ describe('Wishlist Reducer', () => {
 	describe('editWishlistTitleError', () => {
 		it('should set error', () => {
 			let state;
-			let err = 'Invalid Type Error'
 			state = reducer(state, editWishlistTitleError(err));
 			
 			expect(state.error).to.equal(err)
@@ -254,7 +255,6 @@ describe('Wishlist Reducer', () => {
 	describe('removeWishlistError', () => {
 		it('should ', () => {
 			let state;	
-			let err = 'Invalid Type Error'
 			state = reducer(state, removeWishlistError(err))
 
 
@@ -297,7 +297,6 @@ describe('Wishlist Reducer', () => {
 	describe('saveBookToWishlistError', () => {
 		it('should set error to err', () => {
 			let state;
-			let err = 'Invalid Type Error'
 			state = reducer(state, saveBookToWishlistError(err))
 			expect(state.loading).to.be.equal(false)
 			expect(state.error).to.be.equal(err)
@@ -372,8 +371,51 @@ describe('Wishlist Reducer', () => {
 	describe('fetchWishlistBooksError', () => {
 		it('should set error', () => {
 			let state;
-			let err = 'Invalid type error'
 			state = reducer(state, fetchWishlistBooksError(err))
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(err)
+		})
+	});
+
+	describe('removeBookFromWishlistRequest', () => {
+		it('should set loading to true', () => {
+			let state;
+			state = reducer(state, removeBookFromWishlistRequest())
+
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('removeBookFromWishlistSuccess', () => {
+		it('should remove ebook from wishlist', () => {
+			let state;
+
+				//prep - put wishlists into state
+			state = reducer(state, fetchWishlistsSuccess([wishlist1, wishlist2], [wishlist1.title, wishlist2.title]))
+			
+				//prep - add ebook id to first wishlist
+			let updateWishlist1 = Object.assign({}, state.wishlists[0], {
+				items: [...state.wishlists[0]['items'], ebook1.id]
+			})
+
+			state = reducer(state, saveBookToWishlistSuccess(updateWishlist1))
+
+
+				//test - remove ebook id from first wishlist
+			state = reducer(state, removeBookFromWishlistSuccess(wishlist1.title, ebook1.id))
+
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+			expect(state.wishlists[0]['items']).to.not.include(ebook1.id)
+		})
+	});
+
+	describe('removeBookFromWishlistError', () => {
+		it('should set error', () => {
+			let state;
+			state = reducer(state, removeBookFromWishlistError(err))
+
 			expect(state.loading).to.be.equal(false)
 			expect(state.error).to.be.equal(err)
 		})

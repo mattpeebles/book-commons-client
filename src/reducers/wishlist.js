@@ -7,7 +7,8 @@ import {
 	REMOVE_WISHLIST_REQUEST, REMOVE_WISHLIST_SUCCESS, REMOVE_WISHLIST_ERROR,
 	TOGGLE_EDIT_WISHLIST_STATUS,
 	SAVE_BOOK_TO_WISHLIST_REQUEST, SAVE_BOOK_TO_WISHLIST_SUCCESS, SAVE_BOOK_TO_WISHLIST_ERROR,
-	FETCH_WISHLIST_BOOKS_REQUEST, FETCH_WISHLIST_BOOKS_SUCCESS, FETCH_WISHLIST_BOOKS_ERROR
+	FETCH_WISHLIST_BOOKS_REQUEST, FETCH_WISHLIST_BOOKS_SUCCESS, FETCH_WISHLIST_BOOKS_ERROR,
+	REMOVE_BOOK_FROM_WISHLIST_REQUEST, REMOVE_BOOK_FROM_WISHLIST_SUCCESS, REMOVE_BOOK_FROM_WISHLIST_ERROR
 } from '../actions/wishlist'
 
 
@@ -230,6 +231,41 @@ export default (state, action) => {
 			error: action.error
 		})
 	};
+
+	if(action.type === REMOVE_BOOK_FROM_WISHLIST_REQUEST){
+		return Object.assign({}, state, {
+			loading: true,
+			error: null
+		})
+	};
+
+	if(action.type === REMOVE_BOOK_FROM_WISHLIST_SUCCESS){
+		
+		let wishlists = []
+
+			//places wishlists in same order in array after item is removed
+		state.wishlists.forEach((item, index) => {
+			if(item.title === action.wishlist.title){
+				wishlists[index] = action.wishlist
+			} else{
+				wishlists[index] = item
+			}
+		})
+
+		return Object.assign({}, state, {
+			loading: false,
+			error: null,
+			wishlists
+		})
+	};
+
+	if(action.type === REMOVE_BOOK_FROM_WISHLIST_ERROR){
+		return Object.assign({}, state, {
+			loading: false,
+			error: action.error
+		})
+	};
+
 
 	return state;
 }
