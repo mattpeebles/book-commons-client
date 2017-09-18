@@ -1,12 +1,39 @@
 import { push } from 'react-router-redux'
 
 const {GOOGLE_KEY} = require('../.keys')
-const {GOOGLE_ID_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
+const {GOOGLE_ID_URL, OPEN_LIBRARY_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
 
 export const EMPTY_RESULTS = "EMPTY_RESULTS"
 export const emptyResults = () => ({
 	type: EMPTY_RESULTS
 })
+
+export const NO_DATABASE_RESULTS = 'NO_DATABASE_RESULTS'
+export const noDatabaseResults = () => ({
+	type: NO_DATABASE_RESULTS
+})
+
+export const BOOK_SUPPLEMENT = 'BOOK_SUPPLEMENT'
+export const bookSupplement = (bookInfo) => ({
+	type: BOOK_SUPPLEMENT,
+	bookInfo
+})
+
+export const TOGGLE_SUPPLEMENT = 'TOGGLE_SUPPLEMENT'
+export const toggleSupplement = (info) => ({
+	type: TOGGLE_SUPPLEMENT,
+	supplement: info,
+	details: `${info}Supplement`
+})
+
+export const fetchBooks = title => dispatch => {
+	dispatch(emptyResults())
+	dispatch(fetchGutenbergBookId(title))
+	dispatch(fetchGoogleBook(title))
+	dispatch(fetchOpenLibraryBook(title))
+	dispatch(push('/results'))
+
+}
 
 // gutenberg
 	export const fetchGutenbergBookId = title => dispatch => {
@@ -27,14 +54,21 @@ export const emptyResults = () => ({
 
 				return ids.sort()
 			})
-			
 				//use id to query guteberg
 			.then(bookIds => {
-				bookIds.forEach(bookId => {
-					dispatch(fetchGutenbergBook(bookId))
-				})
+				
+					//no books were found in gutenberg
+				if(bookIds.length === 0){
+					return dispatch(noDatabaseResults())
+				}
+				else{
+					bookIds.forEach(bookId => {
+						dispatch(fetchGutenbergBook(bookId))
+					})
+				}
 			})
 			.catch(err => {
+				console.log(err)
 				dispatch(fetchGutenbergError(err))
 			}) 
 	}
@@ -43,8 +77,10 @@ export const emptyResults = () => ({
 		return fetch(`${GUTENBERG_BOOK_URL}/${bookId}`)
 			.then(res => res.json())
 			.then(res => {
-				let fileTypes = /pdf|mobi|epub/
+					//regex of approved filetypes
+				let fileTypes = /\.pdf|\.mobi|\.epub/
 				
+					//filters through format uri looking for approved filetypes
 				let goodTypes = res.metadata.formaturi.filter(uri => uri.match(fileTypes) !== null)
 
 				let data = res.metadata
@@ -64,7 +100,6 @@ export const emptyResults = () => ({
 				}
 
 				dispatch(fetchGutenbergSuccess(ebook))
-				dispatch(push('/results'))
 			})
 			.catch(err => {
 				dispatch(fetchGutenbergError(err))
@@ -92,22 +127,31 @@ export const emptyResults = () => ({
 // google books
 	export const fetchGoogleBook = title => dispatch => {
 		dispatch(fetchGoogleRequest)
-		let regTitle = new RegExp(`${title}`, 'i')
+		
+			//passes title into a regex object that removes all special characters
+			//and splits on spaces to make it easier to compare with returned title
+		let regTitle = new RegExp(`${title.split(/[^A-Za-z]/)}`, 'i')
 
-			//https://c-w.github.io/gutenberg-http/	
-			//get id of ebook
 		return fetch(`${GOOGLE_ID_URL} ${title}&download=epub&filter=free-ebooks&key=${GOOGLE_KEY}`)
 			.then(res => res.json())
 			.then(res => {
 				let ebooks = []
 				
 				res.items.forEach((item) => {
-					if(regTitle.test(item.volumeInfo.title)){
+					
+						//res doesn't always contain relevant books
+						//splits returned title in a similar way to above and compares
+						//if it passes then it is returned
+					if(regTitle.test(item.volumeInfo.title.split(/[^A-Za-z]/))){
+						
 						let rights = (item.accessInfo.publicDomain) ? 'Public Domain' : 'Copyrighted'
 
 						let googleFormats = [item.accessInfo.epub, item.accessInfo.pdf]
 
+							//res.item.accessInfo contains epub and pdf keys
+							//adds url to format if it exists
 						let formats = []
+						
 						googleFormats.forEach(item => {
 							if(item.downloadLink !== undefined){
 								formats.push(item.downloadLink)
@@ -126,6 +170,7 @@ export const emptyResults = () => ({
 							formats,
 							location: item.selfLink,
 							rights,
+							googleId: item.id
 						};
 
 						ebooks.push(ebook)
@@ -155,6 +200,75 @@ export const emptyResults = () => ({
 	export const FETCH_GOOGLE_ERROR = 'FETCH_GOOGLE_ERROR'
 	export const fetchGoogleError = (err) => ({
 		type: FETCH_GOOGLE_ERROR,
+		err
+	})
+//
+
+//open library
+	export const fetchOpenLibraryBook = title => dispatch => {
+		dispatch(fetchOpenLibraryRequest())
+		return fetch(`${OPEN_LIBRARY_URL} ${title}&limit=1&mode=ebooks`)
+			.then(res => res.json())
+			.then(res => {
+					
+					//if has_fulltext is false then it is not public domain
+				if(res.docs[0].has_fulltext === false){
+					return dispatch(noDatabaseResults())
+				}
+
+				let data = res.docs[0]
+
+
+					//ia array contains internet archive ids
+					//for whatever reason, they seem to store english links in the second position
+					//this is not always the case - CAVEAT EMPTOR
+				let type = `https://archive.org/download/${data.ia[1]}/${data.ia[1]}`
+
+				let ebook = {
+					database: 'open library',
+					icon: '/resources/icons/open-library-fav.ico',
+					title: data.title,
+					author: data.author_name[0],
+					preview: 'No Preview',
+					publishDate: data.first_publish_year,
+					languages: data.language,
+					pages: undefined,
+					formats: [`${type}.pdf`, `${type}.mobi`, `${type}.epub`],
+					location: `https://openlibrary.org/books/${data.cover_edition_key}`
+				}
+
+				console.log(res)
+
+				let bookInfo = {
+					title: data.title,
+					publishDate: data.first_publish_year,
+					firstSentence: data.first_sentence,
+					cover: `http://covers.openlibrary.org/b/olid/${data.cover_edition_key}-M.jpg`,
+					location: `https://openlibrary.org${data.key}`
+				}
+
+				dispatch(bookSupplement(bookInfo))
+
+				dispatch(fetchOpenLibrarySuccess(ebook))
+
+			})
+			.catch(err => dispatch(fetchOpenLibraryError(err)))
+	};
+
+	export const FETCH_OPEN_LIBRARY_REQUEST = 'FETCH_OPEN_LIBRARY_REQUEST'
+	export const fetchOpenLibraryRequest = () => ({
+		type: FETCH_OPEN_LIBRARY_REQUEST
+	})
+
+	export const FETCH_OPEN_LIBRARY_SUCCESS = 'FETCH_OPEN_LIBRARY_SUCCESS'
+	export const fetchOpenLibrarySuccess = (ebook) => ({
+		type: FETCH_OPEN_LIBRARY_SUCCESS,
+		ebook
+	})
+
+	export const FETCH_OPEN_LIBRARY_ERROR = 'FETCH_OPEN_LIBRARY_ERROR'
+	export const fetchOpenLibraryError = (err) => ({
+		type: FETCH_OPEN_LIBRARY_ERROR,
 		err
 	})
 //

@@ -49,6 +49,7 @@ export class DropdownItem extends React.Component{
 								if(item.title !== this.props.currentList){
 									return <option key={index} id={item.id} value={item.title}>{item.title}</option>
 								}
+								return undefined
 							})
 
 							return (
@@ -93,7 +94,7 @@ export class DropdownItem extends React.Component{
 const mapStateToProps = state => ({
 	wishlists: state.wishlist.wishlists,
 	currentList: state.wishlist.currentList,
-	wishlistItems: state.app.wishlistItems
+	wishlistItems: state.wishlist.wishlistItems
 })
 
 export default connect(mapStateToProps)(DropdownItem)

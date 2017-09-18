@@ -2,15 +2,13 @@ import React from 'react'
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty, isTrimmed} from '../../validators'
 
-import {emptyResults, fetchGutenbergBookId, fetchGoogleBook} from '../../actions/results'
+import {fetchBooks} from '../../actions/results'
 
 export class SearchForm extends React.Component{
 	
     onSubmit(values) {
     	let {title} = values
-       	this.props.dispatch(emptyResults())
-       	this.props.dispatch(fetchGutenbergBookId(title))
-       	this.props.dispatch(fetchGoogleBook(title))
+       	this.props.dispatch(fetchBooks(title))
     }
 
     render(){

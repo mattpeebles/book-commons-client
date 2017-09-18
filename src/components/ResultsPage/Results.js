@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {toggleSupplement} from '../../actions/actions'
+import {toggleSupplement} from '../../actions/results'
 
 import Ebook from '../Ebook/Ebook'
 import Header from '../Header/Header'
@@ -20,6 +20,15 @@ export class Results extends React.Component{
 	render(){
 		let dropdownLinks = ['Save to Wishlist']
 
+		let supplement;
+
+		if(this.props.results.length !== 0){
+			supplement = <div id="supplement-container" className="col-md-4 row">						
+							<NavPills toggleSupplement={this.handleClick.bind(this)} supplement={this.props.supplement}/>
+							<SupplementInfo supplement={this.props.supplement} details={this.props[this.props.details]} />
+						</div>
+		}
+
 		return(
 			<main>
 				<Header headerId='header' title="Results" />
@@ -29,10 +38,8 @@ export class Results extends React.Component{
 						
 						<Ebook results={this.props.results} dropdownType='options' dropdownLinks={dropdownLinks}/>
 
-						<div id="supplement-container" className="col-md-4 row">						
-							<NavPills toggleSupplement={this.handleClick.bind(this)} supplement={this.props.supplement}/>
-							<SupplementInfo supplement={this.props.supplement} details={this.props[this.props.details]} />
-						</div>
+						{supplement}
+
 					</div>
 				</div>
 				<div /> 
@@ -43,11 +50,11 @@ export class Results extends React.Component{
 
 const mapStateToProps = state => ({
 	user: state.user,
-	supplement: state.app.supplement,
-	details: state.app.details,
+	supplement: state.results.supplement,
+	details: state.results.details,
 	results: state.results.results,
-	authorSupplement: state.app.authorSupplement,
-	bookSupplement: state.app.bookSupplement
+	authorSupplement: state.results.authorSupplement,
+	bookSupplement: state.results.bookSupplement
 })
 
 export default connect(mapStateToProps)(Results)

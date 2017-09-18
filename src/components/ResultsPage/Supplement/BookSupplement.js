@@ -9,7 +9,7 @@ export default function BookSupplement(props){
 					<h3>{props.title}</h3>
 				</div>
 				<div id="published" className="supplementDates col-md-12">
-					<h4>{props.published}</h4>
+					<h4>{props.publishDate}</h4>
 				</div>
 			</div>
 			<div id="coverContainer" className="supplementImageContainer col-md-12">
@@ -17,10 +17,10 @@ export default function BookSupplement(props){
 			</div>
 			<div id="summaryContainer" className="col-md-12">
 				<div id="summary">
-					{props.summary}
+					{props.firstSentence}
 				</div>
 			</div>
-			<a id="read-more" href={props.location}><p>Read more</p></a>
+			<a id="read-more" target="_blank" href={props.location}><p>Read more</p></a>
 		</div>
 	)
 }

@@ -10,6 +10,6 @@ import BookSupplement from './Supplement/BookSupplement'
 
 describe('<Results />', () => {
 	it('should render without crashing', () => {
-		shallow(<Results />)
+		shallow(<Results results={[]}/>)
 	})
 })

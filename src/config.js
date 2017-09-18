@@ -6,5 +6,7 @@ module.exports = {
 
 	GUTENBERG_ID_URL: `https://gutenbergapi.org/search/title eq`,
 	GUTENBERG_BOOK_URL: `https://gutenbergapi.org/texts`,
-	GOOGLE_ID_URL: `https://www.googleapis.com/books/v1/volumes?q=intitle:`
+	GOOGLE_ID_URL: `https://www.googleapis.com/books/v1/volumes?q=intitle:`,
+	GOOGLE_BOOK_URL: `https://www.googleapis.com/books/v1/volumes`,
+	OPEN_LIBRARY_URL: `https://openlibrary.org/search.json?q=title:`
 }

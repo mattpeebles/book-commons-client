@@ -2,7 +2,7 @@ import React from 'react'
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty, isTrimmed} from '../../validators'
 
-import {emptyResults, fetchGutenbergBookId, fetchGoogleBook} from '../../actions/results'
+import {fetchBooks} from '../../actions/results'
 
 import './NavSearch.css'
 
@@ -10,9 +10,7 @@ export class NavSearch extends React.Component{
 	
     onSubmit(values) {
     	let {navSearch: title} = values
-       	this.props.dispatch(emptyResults())
-       	this.props.dispatch(fetchGutenbergBookId(title))
-       	this.props.dispatch(fetchGoogleBook(title))
+       	this.props.dispatch(fetchBooks(title))
     }
 
 	render(){

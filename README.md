@@ -29,11 +29,10 @@ A public domain book search that aggregates a variety of databases to display re
 ### Actions <a name="todoActions"></a>
 - [x] Project Gutenberg api call
 - [ ] Europeana api call
-- [ ] Open Library api call
-- [ ] Feedbooks api call (tentative)
+- [x] Open Library api call
 - [ ] Email/password update - fetch, success, error, request
-- [ ] Wikipedia author summary
-- [ ] Wikipedia book summary
+- [ ] Author summary
+- [x] Book summary
 - [x] Wishlist title update - fetch, success, error, request
 - [x] Wishlist remove item - fetch, success, error, request
 - [x] Wishlist display items - fetch, success, error, request
@@ -48,8 +47,7 @@ A public domain book search that aggregates a variety of databases to display re
 ### Reducers <a name="todoReducers"></a>
 - [x] Project Gutenberg api call - fetch, success, error, request
 - [ ] Europeana api call - fetch, success, error, request
-- [ ] Open Library api call - fetch, success, error, request
-- [ ] Feedbooks api call (tentative) - fetch, success, error, request
+- [x] Open Library api call - fetch, success, error, request
 - [ ] Email/password update
 - [x] Wishlist title update
 - [x] Wishlist remove item
@@ -72,8 +70,7 @@ A public domain book search that aggregates a variety of databases to display re
 ### Tests <a name="todoTests"></a>
 - [x] Project Gutenberg api call - reducer, action
 - [ ] Europeana api call - reducer, action
-- [ ] Open Library api call - reducer, action
-- [ ] Feedbooks api call (tentative) - reducer, action
+- [x] Open Library api call - reducer, action
 - [ ] User email/password update - reducer, action
 - [x] Wishlist display items - reducer, action
 - [x] Wishlist title update - reducer, action

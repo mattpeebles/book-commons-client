@@ -1,11 +1,13 @@
 import {
 	emptyResults, EMPTY_RESULTS,
+	toggleSupplement, TOGGLE_SUPPLEMENT,
 	fetchGutenbergBook, fetchGutenbergBookId, fetchGutenbergSuccess, fetchGutenbergRequest,
-	fetchGoogleBook, fetchGoogleSuccess
+	fetchGoogleBook, fetchGoogleSuccess,
+	fetchOpenLibraryBook, fetchOpenLibrarySuccess
 } from './results'
 
 const {GOOGLE_KEY} = require('../.keys')
-const {API_BASE_URL, GOOGLE_ID_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL, } = require('../config');
+const {API_BASE_URL, GOOGLE_ID_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL, OPEN_LIBRARY_URL} = require('../config');
 
 
 describe('emptyResults', () => {
@@ -14,6 +16,16 @@ describe('emptyResults', () => {
 		expect(action.type).toEqual(EMPTY_RESULTS)
 	})
 });
+
+describe('toggleSupplement', () => {
+	it('should update supplement and supplement details in state', () => {
+		const supplement = 'Author'
+		const action = toggleSupplement(supplement)
+		expect(action.type).toEqual(TOGGLE_SUPPLEMENT)
+		expect(action.supplement).toEqual(supplement)
+		expect(action.details).toEqual(`${supplement}Supplement`)
+	})
+})
 
 describe('fetchGutenbergBookId', () => {
 	it('should return ebook from gutenberg', () => {
@@ -56,7 +68,7 @@ describe('fetchGutenbergBook', () => {
 				pages: undefined,
 				preview: 'No Preview',
 				publishDate: undefined,
-				formaturi: ['txt', 'cheese', 'pdf', 'epub', 'ejadfa'],
+				formaturi: ['.txt', '.cheese', '.pdf', '.epub', '.ejadfa'],
 				formats: ['epub'],
 			}
 		}
@@ -73,7 +85,7 @@ describe('fetchGutenbergBook', () => {
 			pages: undefined,
 			preview: data.preview,
 			publishDate: data.publishDate,
-			formats: ['pdf', 'epub'],
+			formats: ['.pdf', '.epub'],
 			location: `https://www.gutenberg.org/ebooks/${res.text_id}`
 		}
 
@@ -89,8 +101,7 @@ describe('fetchGutenbergBook', () => {
 		let dispatch = jest.fn()
 		return fetchGutenbergBook(bookId)(dispatch).then(() => {
 			expect(fetch).toHaveBeenCalledWith(`${GUTENBERG_BOOK_URL}/${bookId}`)
-			expect(dispatch).toHaveBeenCalledWith({"payload": {"args": ["/results"], "method": "push"}, "type": "@@router/CALL_HISTORY_METHOD"})
-			expect(dispatch.mock.calls[0]).toEqual([fetchGutenbergSuccess(ebook)])
+			expect(dispatch).toHaveBeenCalledWith(fetchGutenbergSuccess(ebook))
 		})
 	})
 });
@@ -162,6 +173,7 @@ describe('fetchGoogleBook', () => {
 
 		let ebook = {
 			"database":"google books",
+			"googleId": "-TwXAAAAYAAJ",
 			"icon":"/resources/icons/google-books.ico",
 			"title":"Emma",
 			"author":"Jane Austen",
@@ -181,4 +193,51 @@ describe('fetchGoogleBook', () => {
 			expect(dispatch).toHaveBeenCalledWith(fetchGoogleSuccess(ebook))
 		})
 	})
-})
+});
+
+describe('fetchOpenLibraryBook', () => {
+	it('should return open library book', () => {
+		let title = 'Emma'
+		let res = {
+			docs: [
+				{
+					"title":"Emma",
+					"author_name":["Jane Austen"],
+					"preview":"No Preview",
+					"first_publish_year":1816,
+					"language":["dut","eng"],
+					"ia":['emmaAUST', 'emmaaus00aust'],
+					"cover_edition_key":"OL24348229M"
+				}
+			]
+		}
+
+		global.fetch = jest.fn().mockImplementation(() => 
+			Promise.resolve({
+				ok: true,
+				json(){
+					return res
+				}
+			})
+		);
+
+		let ebook = {
+			"database":"open library",
+			"icon":"/resources/icons/open-library-fav.ico",
+			"title":"Emma",
+			"author": "Jane Austen",
+			"preview": "No Preview",
+			"publishDate": 1816,
+			"languages":["dut","eng"],
+			"formats":["https://archive.org/download/emmaaus00aust/emmaaus00aust.pdf","https://archive.org/download/emmaaus00aust/emmaaus00aust.mobi","https://archive.org/download/emmaaus00aust/emmaaus00aust.epub"],
+			"location":"https://openlibrary.org/books/OL24348229M"
+		}
+
+		let dispatch = jest.fn()
+
+		return fetchOpenLibraryBook(title)(dispatch).then(() => {
+			expect(fetch).toHaveBeenCalledWith(`${OPEN_LIBRARY_URL} ${title}&limit=1&mode=ebooks`)
+			expect(dispatch).toHaveBeenCalledWith(fetchOpenLibrarySuccess(ebook))
+		})
+	})
+});
