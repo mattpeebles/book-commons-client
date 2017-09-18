@@ -128,6 +128,7 @@ export default (state, action) => {
 		let wishlistNamesArray = state.wishlistNames.filter(title => title !== oldTitle)
 		
 		let wishlists = []
+		let wishlistNames = [];
 
 			//places wishlists in same order in array after edit
 		state.wishlists.forEach((item, index) => {
@@ -138,7 +139,13 @@ export default (state, action) => {
 			}
 		})
 
-		let wishlistNames = [...wishlistNamesArray, wishlistName]
+		state.wishlistNames.forEach((item, index) => {
+			if(item === oldTitle){
+				wishlistNames[index] = wishlistName
+			} else{
+				wishlistNames[index] = item
+			}
+		})
 		
 		let wishlistsEdit = [];
 

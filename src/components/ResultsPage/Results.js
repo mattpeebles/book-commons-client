@@ -29,6 +29,14 @@ export class Results extends React.Component{
 						</div>
 		}
 
+		if(this.props.loading){
+			return (
+				<div>
+					<img src="/resources/icons/flip-book-loader.gif" alt='Loading Icon' />
+				</div>
+			)
+		}
+
 		return(
 			<main>
 				<Header headerId='header' title="Results" />
@@ -49,6 +57,7 @@ export class Results extends React.Component{
 }
 
 const mapStateToProps = state => ({
+	loading: state.results.loading,
 	user: state.user,
 	supplement: state.results.supplement,
 	details: state.results.details,
