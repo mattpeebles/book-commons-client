@@ -1,7 +1,6 @@
 import { push } from 'react-router-redux'
 
-const {GOOGLE_KEY} = require('../.keys')
-const {GOOGLE_ID_URL, OPEN_LIBRARY_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
+const {GOOGLE_KEY, GOOGLE_ID_URL, OPEN_LIBRARY_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
 
 export const EMPTY_RESULTS = "EMPTY_RESULTS"
 export const emptyResults = () => ({

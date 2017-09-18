@@ -6,8 +6,7 @@ import {
 	fetchOpenLibraryBook, fetchOpenLibrarySuccess
 } from './results'
 
-const {GOOGLE_KEY} = require('../.keys')
-const {API_BASE_URL, GOOGLE_ID_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL, OPEN_LIBRARY_URL} = require('../config');
+const {API_BASE_URL, GOOGLE_KEY, GOOGLE_ID_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL, OPEN_LIBRARY_URL} = require('../config');
 
 
 describe('emptyResults', () => {
