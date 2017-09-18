@@ -5,6 +5,6 @@ module.exports = {
 	'http://localhost:4040/api',
 
 	GUTENBERG_ID_URL: `https://gutenbergapi.org/search/title eq`,
-	GUTENBERG_BOOK_URL: `https://gutenbergapi.org/texts`
-
+	GUTENBERG_BOOK_URL: `https://gutenbergapi.org/texts`,
+	GOOGLE_ID_URL: `https://www.googleapis.com/books/v1/volumes?q=intitle:`
 }

@@ -1,7 +1,7 @@
 import {
-	FETCH_GUTENBERG_REQUEST,
-	FETCH_GUTENBERG_SUCCESS,
-	FETCH_GUTENBERG_ERROR
+	EMPTY_RESULTS,
+	FETCH_GUTENBERG_REQUEST, FETCH_GUTENBERG_SUCCESS, FETCH_GUTENBERG_ERROR,
+	FETCH_GOOGLE_REQUEST, FETCH_GOOGLE_SUCCESS, FETCH_GOOGLE_ERROR
 } from '../actions/results'
 
 const initialState = {
@@ -29,6 +29,12 @@ const initialState = {
 export default (state, action) => {
 	state = state || initialState
 
+	if(action.type === EMPTY_RESULTS){
+		return Object.assign({}, state, {
+			results: []
+		})
+	}
+
 	if(action.type === FETCH_GUTENBERG_REQUEST){
 		return Object.assign({}, state, {
 			loading: true,
@@ -44,6 +50,30 @@ export default (state, action) => {
 	};
 
 	if(action.type === FETCH_GUTENBERG_SUCCESS){
+		let results = [...state.results, action.ebook]
+
+		return Object.assign({}, state, {
+			loading: false,
+			error: null,
+			results
+		})
+	};
+
+	if(action.type === FETCH_GOOGLE_REQUEST){
+		return Object.assign({}, state, {
+			loading: true,
+			error: null
+		})
+	};
+
+	if(action.type === FETCH_GOOGLE_ERROR){
+		return Object.assign({}, state, {
+			loading: false,
+			error: action.err
+		})
+	};
+
+	if(action.type === FETCH_GOOGLE_SUCCESS){
 		let results = [...state.results, action.ebook]
 
 		return Object.assign({}, state, {

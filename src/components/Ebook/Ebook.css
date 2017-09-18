@@ -16,6 +16,10 @@
 		border-top: 1px solid black;
 	}
 
+	.result:last-child{
+		border-bottom: 1px solid black;
+	}
+
 	.wishlistSelect{
 
 	}
@@ -46,7 +50,7 @@
 	}
 
 
-	.location{
+	.database{
 		font-size: 10px;
 		text-align: right;
 	}
@@ -54,7 +58,6 @@
 	.icon{
 		width: 12px;
 		height: 12px;
-		background-color: red;
 		margin-right: 1%;
 	}
 
@@ -67,6 +70,10 @@
 			height: auto;
 			margin-bottom: 1%;
 			border: none;
+		}
+
+		.result:last-child{
+			border-bottom: none;
 		}
 
 		.wishlistSelect{
@@ -96,10 +103,6 @@
 		}
 
 
-		.location{
-			text-align: right;
-		}
-
 		.format{
 			text-align: left;
 		}
@@ -108,14 +111,13 @@
 			display: initial;
 		}
 
-		.location{
+		.database{
 			font-size: 12px;
 		}
 
 		.icon{
 			width: 12px;
 			height: 12px;
-			background-color: red;
 			margin-right: 1%;
 		}
 	/**/

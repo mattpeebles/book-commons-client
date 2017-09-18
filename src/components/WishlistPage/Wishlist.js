@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import { push } from 'react-router-redux'
 
 import {fetchWishlistBooks} from '../../actions/wishlist'
-import {showLoginRegister} from '../../actions/auth'
 
 import Ebook from '../Ebook/Ebook'
 import Header from '../Header/Header'

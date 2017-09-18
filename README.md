@@ -32,6 +32,8 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Open Library api call
 - [ ] Feedbooks api call (tentative)
 - [ ] Email/password update - fetch, success, error, request
+- [ ] Wikipedia author summary
+- [ ] Wikipedia book summary
 - [x] Wishlist title update - fetch, success, error, request
 - [x] Wishlist remove item - fetch, success, error, request
 - [x] Wishlist display items - fetch, success, error, request

@@ -1,7 +1,10 @@
 import { 
 fetchGutenbergRequest,
 fetchGutenbergSuccess,
-fetchGutenbergError
+fetchGutenbergError,
+fetchGoogleRequest,
+fetchGoogleSuccess,
+fetchGoogleError
 } from '../actions/results'
 
 import {default as reducer} from './results'
@@ -56,5 +59,53 @@ describe('results reducer', () => {
 		});
 	});
 
+
+	describe('fetchGoogleRequest', () => {
+		it('should set loading to true', () => {
+			let state;
+
+			state = reducer(state, fetchGoogleRequest())
+
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		});
+	});
+
+	describe('fetchGoogleSuccess', () => {
+		it('should include ebook into result', () => {
+			let state;
+			let ebook = {
+				database: 'project gutenberg',
+				icon: '/resources/icons/gutenberg-fav.png',
+				rights: 'public domain',
+				author: 'kanye west',
+				title: 'who will survive in america',
+				languages: ['en'],
+				pages: 1776,
+				formats: ['epub'],
+				location: `https://www.gutenberg.org/ebooks/goat`
+			}
+
+			state = reducer(state, fetchGoogleSuccess(ebook))
+ 			expect(state.results).to.be.a('array')
+			expect(state.results).to.include(ebook)
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+
+
+		});
+	});
+
+	describe('fetchGoogleError', () => {
+		it('should set error and loading false', () => {
+			let state;
+			let err = 'Invalid Type Error'
+
+			state = reducer(state, fetchGoogleError(err))
+
+			expect(state.error).to.be.equal(err)
+			expect(state.loading).to.be.equal(false)
+		});
+	});
 
 })
