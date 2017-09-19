@@ -13,7 +13,7 @@ export default function AuthorSupplement(props){
 				</div>
 			</div>
 			<div id="photoContainer" className="supplementImageContainer col-md-12">
-				<img id="photo" alt="authorPhoto" className="supplementImage" src={props.image} />
+				<img id="authorPhoto" alt="authorPhoto" className="supplementImage" src={props.image} />
 			</div>
 			<div id="summaryContainer" className="col-md-12">
 				<div id="summary">

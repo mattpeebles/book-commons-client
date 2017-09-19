@@ -1,5 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { push } from 'react-router-redux'
+
 
 import {toggleSupplement} from '../../actions/results'
 
@@ -12,6 +14,12 @@ import './Results.css'
 
 export class Results extends React.Component{
 
+	componentWillReceiveProps(nextProps){
+		if(nextProps.resultsFromDatabase === null){
+			this.props.dispatch(push('/'))
+		}
+	}
+
 	handleClick(info){
 		this.props.dispatch(toggleSupplement(info))
 	}
@@ -21,6 +29,7 @@ export class Results extends React.Component{
 		let dropdownLinks = ['Save to Wishlist']
 
 		let supplement;
+
 
 		if(this.props.results.length !== 0){
 			supplement = <div id="supplement-container" className="col-md-4 row">						
@@ -58,6 +67,7 @@ export class Results extends React.Component{
 
 const mapStateToProps = state => ({
 	loading: state.results.loading,
+	resultsFromDatabase: state.results.resultsFromDatabase,
 	user: state.user,
 	supplement: state.results.supplement,
 	details: state.results.details,

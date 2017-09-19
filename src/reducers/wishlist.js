@@ -124,8 +124,6 @@ export default (state, action) => {
 	if (action.type === EDIT_WISHLIST_TITLE_SUCCESS){
 		
 		const {wishlistName, oldTitle, wishlist} = action
-
-		let wishlistNamesArray = state.wishlistNames.filter(title => title !== oldTitle)
 		
 		let wishlists = []
 		let wishlistNames = [];

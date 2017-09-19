@@ -18,6 +18,12 @@ export const bookSupplement = (bookInfo) => ({
 	bookInfo
 })
 
+export const AUTHOR_SUPPLEMENT = 'AUTHOR_SUPPLEMENT'
+export const authorSupplement = (authorInfo) => ({
+	type: AUTHOR_SUPPLEMENT,
+	authorInfo
+})
+
 export const TOGGLE_SUPPLEMENT = 'TOGGLE_SUPPLEMENT'
 export const toggleSupplement = (info) => ({
 	type: TOGGLE_SUPPLEMENT,
@@ -26,12 +32,16 @@ export const toggleSupplement = (info) => ({
 })
 
 export const fetchBooks = title => dispatch => {
+		//clears results before each search
 	dispatch(emptyResults())
+	
+	let wikiTitle = title.replace(' ', '_')
+	dispatch(wikiBook(wikiTitle))
+
 	dispatch(fetchGutenbergBookId(title))
 	dispatch(fetchGoogleBook(title))
 	dispatch(fetchOpenLibraryBook(title))
 	dispatch(push('/results'))
-
 }
 
 // gutenberg
@@ -209,13 +219,16 @@ export const fetchBooks = title => dispatch => {
 		return fetch(`${OPEN_LIBRARY_URL} ${title}&limit=1&mode=ebooks`)
 			.then(res => res.json())
 			.then(res => {
-					
+				let data = res.docs[0]			
 					//if has_fulltext is false then it is not public domain
-				if(res.docs[0].has_fulltext === false){
+					//gets book and author info for supplement here as well
+				if(data.has_fulltext === false){
+					let wikiAuthor = data.author_name[0].replace(' ', '_')
+					let wikiTitle = title.replace(' ', '_')
+					dispatch(wikipediaAuthor(wikiAuthor))
+					dispatch(wikiBook(wikiTitle))
 					return dispatch(noDatabaseResults())
 				}
-
-				let data = res.docs[0]
 
 
 					//ia array contains internet archive ids
@@ -236,17 +249,17 @@ export const fetchBooks = title => dispatch => {
 					location: `https://openlibrary.org/books/${data.cover_edition_key}`
 				}
 
-				console.log(res)
+				// let bookInfo = {
+				// 	title: data.title,
+				// 	publishDate: data.first_publish_year,
+				// 	firstSentence: data.first_sentence,
+				// 	cover: `http://covers.openlibrary.org/b/olid/${data.cover_edition_key}-M.jpg`,
+				// 	location: `https://openlibrary.org${data.key}`
+				// }
 
-				let bookInfo = {
-					title: data.title,
-					publishDate: data.first_publish_year,
-					firstSentence: data.first_sentence,
-					cover: `http://covers.openlibrary.org/b/olid/${data.cover_edition_key}-M.jpg`,
-					location: `https://openlibrary.org${data.key}`
-				}
-
-				dispatch(bookSupplement(bookInfo))
+				let wikiAuthor = data.author_name[0].replace(' ', '_')
+				dispatch(wikipediaAuthor(wikiAuthor))
+				//dispatch(bookSupplement(bookInfo))
 
 				dispatch(fetchOpenLibrarySuccess(ebook))
 
@@ -271,3 +284,63 @@ export const fetchBooks = title => dispatch => {
 		err
 	})
 //
+
+export const wikipediaAuthor = name => dispatch => {
+	return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
+		.then(res => res.json())
+		.then(res => {
+			let dateIndex1 = res.extract.indexOf('(')
+			let dateIndex2 = res.extract.indexOf(')')
+			let dates = res.extract.slice(dateIndex1+1, dateIndex2).replace(';', '').trim()
+
+			let authorInfo = {
+				name: res.title,
+				dates: dates,
+				image: res.thumbnail.source,
+				summary: `${res.extract.slice(0, 250)}...`,
+				location: `https://en.wikipedia.org/wiki/${name}`
+			}
+			dispatch(authorSupplement(authorInfo))
+		})
+		.catch(err => {
+			console.log(err)
+		})
+}
+
+export const wikiBook = name => dispatch => {
+	return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
+		.then(res => res.json())
+		.then(res => {
+			if(res.description === "Wikimedia disambiguation page"){
+				return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}_(novel)`)
+					.then(res => res.json())
+					.then(res => {
+						let bookInfo = {
+							title: res.title,
+							publishDate: undefined,
+							firstSentence: `${res.extract.slice(0, 250)}...`,
+							cover: res.thumbnail.source,
+							location: `https://en.wikipedia.org/wiki/${name}_(novel)`
+						};
+
+						dispatch(bookSupplement(bookInfo))
+					})
+			}
+
+			let bookInfo = {
+				title: res.title,
+				publishDate: undefined,
+				firstSentence: `${res.extract.slice(0, 250)}...`,
+				cover: res.thumbnail.source,
+				location: `https://en.wikipedia.org/wiki/${name}`
+			}
+
+			console.log(res)
+
+			dispatch(bookSupplement(bookInfo))
+
+		})
+		.catch(err => {
+			console.log(err)
+		})	
+}
