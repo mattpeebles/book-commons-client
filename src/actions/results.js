@@ -348,9 +348,9 @@ export const fetchBooks = title => dispatch => {
 
 		return fetch(`${API_BASE_URL}/ebooks/amazon/${title}`)
 			.then(res => res.json())
-			.then(ebooks => {
-				let length = ebooks.length
-				ebooks.forEach(ebook => {
+			.then(res => {
+				let length = res.ebooks.length
+				res.ebooks.forEach(ebook => {
 					dispatch(fetchAmazonBooksSuccess(ebook, length))
 				})
 			})
