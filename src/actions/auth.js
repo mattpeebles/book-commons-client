@@ -113,4 +113,30 @@ export const logout = () => (dispatch) => {
     dispatch(setAuthToken(null))
     dispatch(setCurrentUser(null))
     dispatch(setNavLinks(['Login/Register']))
+};
+
+export const changeUserInfo = infoObj => (dispatch, getState) => {
+    let token = getState().auth.authToken;
+    let userId = getState().auth.currentUser._id;
+    let updateObj = {
+        userId
+    }
+
+    Object.keys(infoObj).forEach(key => {
+        updateObj[key] = infoObj[key]
+    })
+
+    return fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updateObj),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(res => res.json())
+    .then(res => {
+        storeAuthInfo(res.token, dispatch)
+    })
+
 }

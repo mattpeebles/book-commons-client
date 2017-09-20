@@ -47,7 +47,7 @@ export class NavDropdown extends React.Component{
 				}
 
 				return (
-				    <a key={index} id={link.toLowerCase()} className="dropdown-item">{link}</a>
+				    <Link key={index} className="dropdown-item" to={`/settings/user/${link.toLowerCase().split(' ').join('/')}`}>{link}</Link>
 				)
 
 

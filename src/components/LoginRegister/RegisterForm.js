@@ -42,7 +42,7 @@ export class RegisterForm extends React.Component{
 			      	type="password" 
 			      	component="input" 
 			      	placeholder="Password" 
-			      	validate={[required, length({min: 10, max: 72}), isTrimmed]}/>
+			      	validate={[required, length({min: 8, max: 72}), isTrimmed]}/>
 			      <Field 
 			      	name="confirmPassword" 
 			      	id="confirmPassword" 

@@ -17,6 +17,7 @@ import WLSettings from './components/WishlistPage/WishlistSettings/WLSettings'
 import NavBar from './components/Navbar/NavBar'
 import Footer from './components/Footer/Footer'
 import LoginRegister from './components/LoginRegister/LoginRegister'
+import ChangeUserSettings from './components/UserSettings/ChangeUserSettingsPage'
 
 
 let count = 0;
@@ -82,6 +83,8 @@ export class App extends React.Component{
 						
 						<Route exact path='/settings/wishlist' component={WLSettings} />						
 						<Route path='/wishlist/:id' component={Wishlist} />
+						<Route path='/settings/user/change/:setting' component={ChangeUserSettings} />
+
 					</main>
 					<Footer />
 				</div>
