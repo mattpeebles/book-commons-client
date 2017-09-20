@@ -32,7 +32,7 @@ export class Ebook extends React.Component{
 		}
 
 		return (
-			<div id="results" className="col-12 col-md-8">
+			<div id="results">
 				{results}
 			</div>
 		)

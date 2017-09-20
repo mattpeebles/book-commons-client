@@ -6,6 +6,7 @@ import { push } from 'react-router-redux'
 import {toggleSupplement} from '../../actions/results'
 
 import Ebook from '../Ebook/Ebook'
+import AmazonBook from '../Ebook/AmazonBook'
 import Header from '../Header/Header'
 import NavPills from '../Inputs/NavPills'
 import SupplementInfo from './Supplement/SupplementInfo'
@@ -13,12 +14,6 @@ import SupplementInfo from './Supplement/SupplementInfo'
 import './Results.css'
 
 export class Results extends React.Component{
-
-	componentWillReceiveProps(nextProps){
-		if(nextProps.resultsFromDatabase === null){
-			this.props.dispatch(push('/'))
-		}
-	}
 
 	handleClick(info){
 		this.props.dispatch(toggleSupplement(info))
@@ -29,10 +24,11 @@ export class Results extends React.Component{
 		let dropdownLinks = ['Save to Wishlist']
 
 		let supplement;
+		let amazon;
 
 
-		if(this.props.results.length !== 0){
-			supplement = <div id="supplement-container" className="col-md-4 row">						
+		if(this.props.results.length !== 0 || this.props.amazonResult.length !== 0){
+			supplement = <div id="supplement-container" className="row">						
 							<NavPills toggleSupplement={this.handleClick.bind(this)} supplement={this.props.supplement}/>
 							<SupplementInfo supplement={this.props.supplement} details={this.props[this.props.details]} />
 						</div>
@@ -46,6 +42,10 @@ export class Results extends React.Component{
 			)
 		}
 
+		if(this.props.results.length < 2){
+			amazon = <AmazonBook results={this.props.amazonResult} />
+		}
+
 		return(
 			<main>
 				<Header headerId='header' title="Results" />
@@ -53,10 +53,13 @@ export class Results extends React.Component{
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={this.props.results} dropdownType='options' dropdownLinks={dropdownLinks}/>
-
-						{supplement}
-
+						<div className="col-sm-12 col-md-8">
+							<Ebook results={this.props.results} dropdownType='options' dropdownLinks={dropdownLinks}/>
+							{amazon}
+						</div>
+						<div className="col-sm-12 col-md-4">
+							{supplement}
+						</div>
 					</div>
 				</div>
 				<div /> 
@@ -66,8 +69,10 @@ export class Results extends React.Component{
 }
 
 const mapStateToProps = state => ({
+	amazonResult: state.results.amazonResults,
+	resultsLength: state.results.resultsLength,
 	loading: state.results.loading,
-	resultsFromDatabase: state.results.resultsFromDatabase,
+	dbCalled: state.results.dbCalled,
 	user: state.user,
 	supplement: state.results.supplement,
 	details: state.results.details,

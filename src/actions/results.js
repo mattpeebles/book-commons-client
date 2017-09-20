@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux'
 
-const {GOOGLE_KEY, GOOGLE_ID_URL, OPEN_LIBRARY_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
+const {API_BASE_URL, GOOGLE_KEY, GOOGLE_ID_URL, OPEN_LIBRARY_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
 
 export const EMPTY_RESULTS = "EMPTY_RESULTS"
 export const emptyResults = () => ({
@@ -8,8 +8,9 @@ export const emptyResults = () => ({
 })
 
 export const NO_DATABASE_RESULTS = 'NO_DATABASE_RESULTS'
-export const noDatabaseResults = () => ({
-	type: NO_DATABASE_RESULTS
+export const noDatabaseResults = db => ({
+	type: NO_DATABASE_RESULTS,
+	db
 })
 
 export const BOOK_SUPPLEMENT = 'BOOK_SUPPLEMENT'
@@ -37,11 +38,12 @@ export const fetchBooks = title => dispatch => {
 	
 	let wikiTitle = title.replace(' ', '_')
 	dispatch(wikiBook(wikiTitle))
-
+	dispatch(amazonBooks(title))
 	dispatch(fetchGutenbergBookId(title))
 	dispatch(fetchGoogleBook(title))
 	dispatch(fetchOpenLibraryBook(title))
 	dispatch(push('/results'))
+
 }
 
 // gutenberg
@@ -68,7 +70,7 @@ export const fetchBooks = title => dispatch => {
 				
 					//no books were found in gutenberg
 				if(bookIds.length === 0){
-					return dispatch(noDatabaseResults())
+					return dispatch(noDatabaseResults('gutenberg'))
 				}
 				else{
 					bookIds.forEach(bookId => {
@@ -184,6 +186,8 @@ export const fetchBooks = title => dispatch => {
 
 						ebooks.push(ebook)
 					}
+
+					dispatch(noDatabaseResults('google'))
 				});
 
 				ebooks.forEach(ebook => {
@@ -227,8 +231,10 @@ export const fetchBooks = title => dispatch => {
 					let wikiTitle = title.replace(' ', '_')
 					dispatch(wikipediaAuthor(wikiAuthor))
 					dispatch(wikiBook(wikiTitle))
-					return dispatch(noDatabaseResults())
+					return dispatch(noDatabaseResults('open library'))
 				}
+
+				console.log(data)
 
 
 					//ia array contains internet archive ids
@@ -249,18 +255,8 @@ export const fetchBooks = title => dispatch => {
 					location: `https://openlibrary.org/books/${data.cover_edition_key}`
 				}
 
-				// let bookInfo = {
-				// 	title: data.title,
-				// 	publishDate: data.first_publish_year,
-				// 	firstSentence: data.first_sentence,
-				// 	cover: `http://covers.openlibrary.org/b/olid/${data.cover_edition_key}-M.jpg`,
-				// 	location: `https://openlibrary.org${data.key}`
-				// }
-
 				let wikiAuthor = data.author_name[0].replace(' ', '_')
 				dispatch(wikipediaAuthor(wikiAuthor))
-				//dispatch(bookSupplement(bookInfo))
-
 				dispatch(fetchOpenLibrarySuccess(ebook))
 
 			})
@@ -285,62 +281,95 @@ export const fetchBooks = title => dispatch => {
 	})
 //
 
-export const wikipediaAuthor = name => dispatch => {
-	return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
-		.then(res => res.json())
-		.then(res => {
-			let dateIndex1 = res.extract.indexOf('(')
-			let dateIndex2 = res.extract.indexOf(')')
-			let dates = res.extract.slice(dateIndex1+1, dateIndex2).replace(';', '').trim()
+//wikipedia
+	export const wikipediaAuthor = name => dispatch => {
+		return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
+			.then(res => res.json())
+			.then(res => {
+				let dateIndex1 = res.extract.indexOf('(')
+				let dateIndex2 = res.extract.indexOf(')')
+				let dates = res.extract.slice(dateIndex1+1, dateIndex2).replace(';', '').trim()
 
-			let authorInfo = {
-				name: res.title,
-				dates: dates,
-				image: res.thumbnail.source,
-				summary: `${res.extract.slice(0, 250)}...`,
-				location: `https://en.wikipedia.org/wiki/${name}`
-			}
-			dispatch(authorSupplement(authorInfo))
-		})
-		.catch(err => {
-			console.log(err)
-		})
-}
+				let authorInfo = {
+					name: res.title,
+					dates: dates,
+					image: res.thumbnail.source,
+					summary: `${res.extract.slice(0, 250)}...`,
+					location: `https://en.wikipedia.org/wiki/${name}`
+				}
+				dispatch(authorSupplement(authorInfo))
+			})
+			.catch(err => {
+				console.log(err)
+			})
+	}
 
-export const wikiBook = name => dispatch => {
-	return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
-		.then(res => res.json())
-		.then(res => {
-			if(res.description === "Wikimedia disambiguation page"){
-				return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}_(novel)`)
-					.then(res => res.json())
-					.then(res => {
-						let bookInfo = {
-							title: res.title,
-							publishDate: undefined,
-							firstSentence: `${res.extract.slice(0, 250)}...`,
-							cover: res.thumbnail.source,
-							location: `https://en.wikipedia.org/wiki/${name}_(novel)`
-						};
+	export const wikiBook = name => dispatch => {
+		return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
+			.then(res => res.json())
+			.then(res => {
+				if(res.description === "Wikimedia disambiguation page"){
+					return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}_(novel)`)
+						.then(res => res.json())
+						.then(res => {
+							let bookInfo = {
+								title: res.title,
+								publishDate: undefined,
+								firstSentence: `${res.extract.slice(0, 250)}...`,
+								cover: res.thumbnail.source,
+								location: `https://en.wikipedia.org/wiki/${name}_(novel)`
+							};
 
-						dispatch(bookSupplement(bookInfo))
-					})
-			}
+							dispatch(bookSupplement(bookInfo))
+						})
+				}
 
-			let bookInfo = {
-				title: res.title,
-				publishDate: undefined,
-				firstSentence: `${res.extract.slice(0, 250)}...`,
-				cover: res.thumbnail.source,
-				location: `https://en.wikipedia.org/wiki/${name}`
-			}
+				let bookInfo = {
+					title: res.title,
+					publishDate: undefined,
+					firstSentence: `${res.extract.slice(0, 250)}...`,
+					cover: res.thumbnail.source,
+					location: `https://en.wikipedia.org/wiki/${name}`
+				}
 
-			console.log(res)
+				console.log(res)
 
-			dispatch(bookSupplement(bookInfo))
+				dispatch(bookSupplement(bookInfo))
 
-		})
-		.catch(err => {
-			console.log(err)
-		})	
-}
+			})
+			.catch(err => {
+				console.log(err)
+			})	
+	}
+//
+
+//amazon
+	export const amazonBooks = title => dispatch=> {
+
+		return fetch(`${API_BASE_URL}/ebooks/amazon/${title}`)
+			.then(res => res.json())
+			.then(ebooks => {
+				let length = ebooks.length
+				ebooks.forEach(ebook => {
+					dispatch(fetchAmazonBooksSuccess(ebook, length))
+				})
+			})
+			.catch(err => {
+				console.log(err)
+				dispatch(fetchAmazonBooksError(err))
+			})
+	}
+
+	export const FETCH_AMAZON_BOOKS_SUCCESS = 'FETCH_AMAZON_BOOKS_SUCCESS'
+	export const fetchAmazonBooksSuccess = (ebook, length) => ({
+		type: FETCH_AMAZON_BOOKS_SUCCESS,
+		ebook,
+		length
+	})
+
+	export const FETCH_AMAZON_BOOKS_ERROR = 'FETCH_AMAZON_BOOKS_ERROR'
+	export const fetchAmazonBooksError = err => ({
+		type: FETCH_AMAZON_BOOKS_ERROR,
+		err
+	})
+//

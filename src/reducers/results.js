@@ -3,16 +3,20 @@ import {
 	FETCH_GUTENBERG_REQUEST, FETCH_GUTENBERG_SUCCESS, FETCH_GUTENBERG_ERROR,
 	FETCH_GOOGLE_REQUEST, FETCH_GOOGLE_SUCCESS, FETCH_GOOGLE_ERROR,
 	FETCH_OPEN_LIBRARY_REQUEST, FETCH_OPEN_LIBRARY_SUCCESS, FETCH_OPEN_LIBRARY_ERROR,
+	FETCH_AMAZON_BOOKS_SUCCESS, FETCH_AMAZON_BOOKS_ERROR,
 	BOOK_SUPPLEMENT, AUTHOR_SUPPLEMENT, TOGGLE_SUPPLEMENT
 } from '../actions/results'
 
 const initialState = {
 						loading: false,
 						error: null,
+						dbCalled: [],
 						'resultsFromDatabase': null,
 						'supplement': 'author',
 						'details': 'authorSupplement',
 						'results': [],
+						'amazonResults': [],
+						resultsLength: 0,
 						'authorSupplement': {},
 						'bookSupplement': {},
 			}
@@ -25,14 +29,19 @@ export default (state, action) => {
 		return Object.assign({}, state, {
 			results: [],
 			authorSupplement: {},
-			bookSupplement: {}
+			bookSupplement: {},
+			amazonResults: [],
+			resultsLength: 0
 		})
 	}
 
 	if(action.type === NO_DATABASE_RESULTS){
+		let dbCalled = [...state.dbCalled, action.db]
+
 		return Object.assign({}, state, {
 			loading: false,
-			resultsFromDatabase: false
+			resultsFromDatabase: false,
+			dbCalled
 		})
 	}
 
@@ -135,6 +144,43 @@ export default (state, action) => {
 			error: null,
 			resultsFromDatabase: true,
 			results
+		})
+	};
+
+	if(action.type === FETCH_OPEN_LIBRARY_ERROR){
+		return Object.assign({}, state, {
+			loading: false,
+			error: action.err
+		})
+	};
+
+	if(action.type === FETCH_OPEN_LIBRARY_SUCCESS){
+		let results = [...state.results, action.ebook]
+
+		return Object.assign({}, state, {
+			loading: false,
+			error: null,
+			resultsFromDatabase: true,
+			results
+		})
+	};
+
+	if(action.type === FETCH_AMAZON_BOOKS_ERROR){
+		return Object.assign({}, state, {
+			loading: false,
+			error: action.err
+		})
+	};
+
+	if(action.type === FETCH_AMAZON_BOOKS_SUCCESS){
+		let amazonResults = [...state.amazonResults, action.ebook]
+
+		return Object.assign({}, state, {
+			loading: false,
+			error: null,
+			dbCalled: ['Amazon'],
+			amazonResults,
+			resultsLength: action.length
 		})
 	};
 
