@@ -234,9 +234,6 @@ export const fetchBooks = title => dispatch => {
 					return dispatch(noDatabaseResults('open library'))
 				}
 
-				console.log(data)
-
-
 					//ia array contains internet archive ids
 					//for whatever reason, they seem to store english links in the second position
 					//this is not always the case - CAVEAT EMPTOR
@@ -331,8 +328,6 @@ export const fetchBooks = title => dispatch => {
 					cover: res.thumbnail.source,
 					location: `https://en.wikipedia.org/wiki/${name}`
 				}
-
-				console.log(res)
 
 				dispatch(bookSupplement(bookInfo))
 

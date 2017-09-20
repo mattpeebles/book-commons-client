@@ -31,7 +31,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] Europeana api call
 - [x] Open Library api call
 - [ ] Email/password update - fetch, success, error, request
-- [ ] Author summary
+- [x] Author summary
 - [x] Book summary
 - [x] Wishlist title update - fetch, success, error, request
 - [x] Wishlist remove item - fetch, success, error, request
