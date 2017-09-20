@@ -63,7 +63,7 @@ export const login = (email, password) => dispatch => {
             .then(res => res.json())
             .then(({authToken}) => {
                 storeAuthInfo(authToken, dispatch)
-                dispatch(setNavLinks(['Wishlists', 'Logout']))
+                dispatch(setNavLinks(['Wishlists', 'Signed in']))
             })
             .catch(err => {
                 const {code} = err;
@@ -94,7 +94,7 @@ export const refreshAuthToken = () => (dispatch, getState) => {
         .then(res => res.json())
         .then(({authToken}) => {
             storeAuthInfo(authToken, dispatch)
-            dispatch(setNavLinks(['Wishlists', 'Logout']))
+            dispatch(setNavLinks(['Wishlists', 'Signed in']))
         })
         .catch(err => {
             const {code} = err;

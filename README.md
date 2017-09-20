@@ -64,7 +64,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Link search bars to external database api calls
 - [x] Display external database results on results page
 - [x] Add functions save to wishlist, delete from wishlist, change wishlist to dropdown links
-- [ ] Add account edit button to navbar
+- [x] Add account edit button to navbar
 - [x] Add wishlist title update function and form to wl settings
 
 ### Tests <a name="todoTests"></a>

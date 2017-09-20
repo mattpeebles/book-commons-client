@@ -3,19 +3,14 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 import {showLoginRegister} from '../../actions/auth'
-import {logout} from '../../actions/auth'
 
 import NavSearch from './NavSearch'
 import NavDropdown from './NavDropdown'
 
 export class NavLinks extends React.Component{
 
-	logout(){
-		this.props.dispatch(logout())
-	}
-
 	render(){ 
-		let links = this.props.links.map((link, index) => {
+		let links = this.props.navLinks.map((link, index) => {
 
 
 			if (link === "Wishlists" && this.props.wishlists.length === 0){
@@ -38,12 +33,11 @@ export class NavLinks extends React.Component{
 			    )
 			}
 
-			if(link === 'Logout'){
+			if(link === 'Signed in'){
+				let title = `${link} as ${this.props.user.email.split('@')[0]}`
 				return (
-					<li key={index} id={link} className="nav-item">
-			        	<a className="nav-link" onClick={() => this.props.dispatch(logout())}>{link}</a>
-			    	</li>
-		    	)
+					<NavDropdown id={link+"-Dropdown"} key={index} title={title} links={['Change Email', 'Change Password', 'Logout']}/> 
+				)
 			}
 
 			return (
@@ -61,6 +55,8 @@ export class NavLinks extends React.Component{
 			navSearch = <NavSearch className="navbar-nav mr-auto" />
 		}
 
+		console.log(links)
+
 		return(
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
@@ -73,10 +69,11 @@ export class NavLinks extends React.Component{
 }
 
 const mapStateToProps = state => ({
+	navLinks: state.auth.navLinks,
 	router: state.router,
 	display: state.auth.loginRegisterForm.display,
 	loggedIn: state.auth.loggedIn,
-	user: state.user.user,
+	user: state.auth.currentUser,
 	links: state.auth.navLinks,
 	wishlists: state.wishlist.wishlists,
 	wishlistNames: state.wishlist.wishlistNames

@@ -55,6 +55,7 @@ export default function reducer(state = initialState, action) {
     }
 
     if(action.type === SET_NAV_LINKS){
+        console.log(action.navLinks)
         return Object.assign({}, state, {
             navLinks: action.navLinks,
         })
