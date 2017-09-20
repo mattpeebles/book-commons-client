@@ -14,19 +14,6 @@ jest.mock('../../actions/userActions', () => Object.assign({},
     }
 ));
 
-const mockLogout = {
-    type: 'LOGOUT'
-};
-jest.mock('../../actions/auth', () => Object.assign({},
-    require.requireActual('../../actions/auth'),
-    {
-        logout: jest.fn().mockImplementation(() => {
-            return mockLogout;
-        })
-    }
-));
-
-
 
 import {NavLinks} from './NavLinks'
 
@@ -34,20 +21,20 @@ describe('<NavLinks />', () => {
 	it('Should render without crashing', () => {
 		const router = {location: '/'}
 		const links = ['Login', 'Register']
-		shallow(<NavLinks router={router} links={links}/>)
+		shallow(<NavLinks router={router} navLinks={links}/>)
 	})
 
 	it('should render all links', () => {
 		const links = ['Login', 'Register']
 		const router = {location: '/'}
-		const wrapper = shallow(<NavLinks router={router} links={links}/>)
+		const wrapper = shallow(<NavLinks router={router} navLinks={links}/>)
 		expect(wrapper.find('ul').children().length).toEqual(links.length)
 	})
 
 	it('should render href appropriately', () => {
 		const router = {location: '/'}
 		const links = ['Login', 'Register']
-		const wrapper = shallow(<NavLinks router={router} links={links}/>)
+		const wrapper = shallow(<NavLinks router={router} navLinks={links}/>)
 		wrapper.find('a').nodes.forEach((node, index) => {
 			expect(node.props.href).toEqual(`/${links[index].toLowerCase()}`)
 		})
@@ -57,19 +44,20 @@ describe('<NavLinks />', () => {
 		const router = {location: '/'}
 		const dispatch = jest.fn()
 		const links = ['Login/Register']
-		const wrapper = shallow(<NavLinks links={links} router={router} dispatch={dispatch}/>)
+		const wrapper = shallow(<NavLinks navLinks={links} router={router} dispatch={dispatch}/>)
 
 		wrapper.find('#Login/Register').children().simulate('click')
 		expect(dispatch).toHaveBeenCalledWith(mockShowLoginRegister)
 	})
 
-	it('should render Logout appropriately', () => {
+	it('should render Signed in appropriately', () => {
 		const router = {location: '/'}
 		const dispatch = jest.fn()
-		const links = ['Logout']
-		const wrapper = shallow(<NavLinks links={links} router={router} dispatch={dispatch}/>)
+		const links = ['Signed in']
+		const wrapper = shallow(<NavLinks navLinks={links} router={router} user={{"email": "kanye@west.com"}} dispatch={dispatch}/>)
 
-		wrapper.find('#Logout').children().simulate('click')
-		expect(dispatch).toHaveBeenCalledWith(mockLogout)	
+		expect(wrapper.find('#signedIn-Dropdown').node.props.title).toEqual('Signed in as kanye')
+		//children().simulate('click')
+		//expect(dispatch).toHaveBeenCalledWith(mockLogout)	
 	})
 })

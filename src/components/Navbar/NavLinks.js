@@ -36,7 +36,7 @@ export class NavLinks extends React.Component{
 			if(link === 'Signed in'){
 				let title = `${link} as ${this.props.user.email.split('@')[0]}`
 				return (
-					<NavDropdown id={link+"-Dropdown"} key={index} title={title} links={['Change Email', 'Change Password', 'Logout']}/> 
+					<NavDropdown id={"signedIn-Dropdown"} key={index} title={title} links={['Change Email', 'Change Password', 'Logout']}/> 
 				)
 			}
 
@@ -54,8 +54,6 @@ export class NavLinks extends React.Component{
 		if(this.props.router.location.pathname !== '/'){
 			navSearch = <NavSearch className="navbar-nav mr-auto" />
 		}
-
-		console.log(links)
 
 		return(
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">

@@ -27,7 +27,7 @@ export class NavDropdown extends React.Component{
 
 
 			return(
-				<li className="nav-item dropdown">
+				<li className="nav-item dropdown" id={this.props.id}>
 			        <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          {this.props.title}
 			        </a>
@@ -42,19 +42,19 @@ export class NavDropdown extends React.Component{
 			const links = this.props.links.map((link, index) => {
 				if(link === 'Logout'){
 					return (
-				        <a key={index} className="dropdown-item" onClick={() => this.props.dispatch(logout())}>{link}</a>
+				        <a key={index} id={link.toLowerCase()} className="dropdown-item" onClick={() => this.props.dispatch(logout())}>{link}</a>
 			    	)
 				}
 
 				return (
-				    <a key={index} className="dropdown-item">{link}</a>
+				    <a key={index} id={link.toLowerCase()} className="dropdown-item">{link}</a>
 				)
 
 
 			});
 
 			return(
-				<li className="nav-item dropdown">
+				<li className="nav-item dropdown" id={this.props.id}>
 			        <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          {this.props.title}
 			        </a>
