@@ -67,15 +67,20 @@ describe('auth reducer', () => {
 
 	describe('setCurrentUser', () => {
 		const user = {
-			id: 13149038134,
 			email: 'chance@rapper.com',
+			wishlists: [],
+			_id: 13149038134,
 			password: 'same drugs'
 		};
 
 		let state;
 
 		state = reducer(state, setCurrentUser(user))
-		expect(state.currentUser).to.be.equal(user)
+
+		expect(state.currentUser.email).to.be.equal(user.email)
+		expect(state.currentUser.wishlists).to.be.equal(user.wishlists)
+		expect(state.currentUser._id).to.be.equal(user._id)
+		expect(state.currentUser.password).to.be.equal(undefined)
 		expect(state.loginRegisterForm.display).to.be.equal(false)
 		expect(state.loggedIn).to.be.equal(true)
 	})

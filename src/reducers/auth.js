@@ -44,9 +44,15 @@ export default function reducer(state = initialState, action) {
             //if currentUser is set to null, logout was called
             //sets logged in to false
         let loggedIn = (action.currentUser === null) ? false : true
+        let {email, wishlists} = action.currentUser
+        let _id = (action.currentUser.id === undefined)? action.currentUser._id : action.currentUser.id
 
         return Object.assign({}, state, {
-            currentUser: action.currentUser,
+            currentUser: {
+                email,
+                wishlists,
+                _id
+            },
             loginRegisterForm: {
                 display: false
             },

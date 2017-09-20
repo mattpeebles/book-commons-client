@@ -14,7 +14,7 @@ A public domain book search that aggregates a variety of databases to display re
 ## TODO <a name="todo"></a>
 
 ### Integration <a name="todoIntegration"></a>
-- [ ] User email/password update
+- [x] User email/password update
 - [x] Wishlist title update
 - [x] Wishlist remove item
 - [x] Ebook move item to another wishlist
@@ -30,7 +30,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Project Gutenberg api call
 - [ ] Europeana api call
 - [x] Open Library api call
-- [ ] Email/password update - fetch, success, error, request
+- [x] Email/password update - fetch, success, error, request
 - [x] Author summary
 - [x] Book summary
 - [x] Wishlist title update - fetch, success, error, request
@@ -61,17 +61,25 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist
 
 ### Components <a name="todoComponents"></a>
+- [ ] add feedback to forms
+- [ ] require current password to be validated to change user settings
+- [ ] add feedback upon submit to:
+	- [ ] Login
+	- [ ] Register
+	- [ ] Save to wishlist
+	- [ ] Change Email
+	- [ ] Change Password
 - [x] Link search bars to external database api calls
 - [x] Display external database results on results page
 - [x] Add functions save to wishlist, delete from wishlist, change wishlist to dropdown links
-- [ ] Add account edit button to navbar
+- [x] Add account edit button to navbar
 - [x] Add wishlist title update function and form to wl settings
 
 ### Tests <a name="todoTests"></a>
 - [x] Project Gutenberg api call - reducer, action
 - [ ] Europeana api call - reducer, action
 - [x] Open Library api call - reducer, action
-- [ ] User email/password update - reducer, action
+- [x] User email/password update - reducer, action
 - [x] Wishlist display items - reducer, action
 - [x] Wishlist title update - reducer, action
 - [x] Wishlist remove item - reducer, action

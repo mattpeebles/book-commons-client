@@ -11,7 +11,7 @@ export default function NavBar(props){
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<NavBrand name={'Book Commons'}/>
 			<NavButton />
-			<NavLinks links={props.links}/>
+			<NavLinks/>
 		</nav>
 	)
 }
