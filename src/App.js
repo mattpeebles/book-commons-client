@@ -6,7 +6,7 @@ import {history} from './store'
 
 
 import {connect} from 'react-redux'
-import {fetchWishlists} from './actions/wishlistActions'
+import {fetchWishlists} from './actions/wishlist'
 import {refreshAuthToken} from './actions/auth';
 
 
@@ -61,9 +61,7 @@ export class App extends React.Component{
 	}
 
 	render(){
-		
 		let loginRegisterForm;
-				
 		if(this.props.display === true){
 			loginRegisterForm = <LoginRegister />
 		}
@@ -72,7 +70,6 @@ export class App extends React.Component{
             count++
             this.props.dispatch(fetchWishlists());
 		}
-
 
 		return(
 			<ConnectedRouter history={history}>
@@ -96,6 +93,7 @@ export class App extends React.Component{
 
 const mapStateToProps = state => ({
 	firstFetch: state.wishlist.firstFetch,
+	wishlist: state.wishlist,
 	wishlists: state.wishlist.wishlists,
 	token: state.auth.authToken,
 	user: state.auth.currentUser,

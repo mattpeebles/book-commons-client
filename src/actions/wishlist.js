@@ -202,3 +202,133 @@ export const removeWishlistError = (error) => ({
     type: REMOVE_WISHLIST_ERROR,
     error
 })
+
+export const saveBookToWishlist = (listId, ebook) => (dispatch, getState)=> {
+    dispatch(saveBookToWishlistRequest())
+
+    let token = getState().auth.authToken
+    let book = JSON.stringify(ebook)
+        
+        //save ebook to database
+        //api checks to see if ebook already exists
+        //in database
+    return fetch(`${API_BASE_URL}/ebooks`, {
+        method: 'POST',
+        body: book,
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(res => res.json())
+    .then(res => {
+        let ebookId = res.ebook.id;
+
+        let addObj = {
+            listId,
+            item: ebookId
+        }
+
+            //save id to wishlist
+        return fetch(`${API_BASE_URL}/wishlists/${listId}/add/${ebookId}`, {
+            method: 'PUT',
+            body: JSON.stringify(addObj),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        })
+    })
+    .then(res => res.json())
+    .then(list => {
+        dispatch(saveBookToWishlistSuccess(list))
+    })
+    .catch(err => dispatch(saveBookToWishlistError(err)))
+};
+
+export const SAVE_BOOK_TO_WISHLIST_REQUEST = 'SAVE_BOOK_TO_WISHLIST_REQUEST'
+export const saveBookToWishlistRequest = () => ({
+    type: SAVE_BOOK_TO_WISHLIST_REQUEST
+});
+
+export const SAVE_BOOK_TO_WISHLIST_SUCCESS = 'SAVE_BOOK_TO_WISHLIST_SUCCESS'
+export const saveBookToWishlistSuccess = (list) => ({
+    type: SAVE_BOOK_TO_WISHLIST_SUCCESS,
+    wishlist: list
+});
+
+export const SAVE_BOOK_TO_WISHLIST_ERROR = 'SAVE_BOOK_TO_WISHLIST_ERROR'
+export const saveBookToWishlistError = (err) => ({
+    type: SAVE_BOOK_TO_WISHLIST_ERROR,
+    error: err
+});
+
+export const fetchWishlistBooks = listId => dispatch => {
+    dispatch(fetchWishlistBooksRequest())
+
+    return fetch(`${API_BASE_URL}/ebooks/wishlist/${listId}`)
+        .then(res => res.json())
+        .then(res => {
+            let ebooks = res.ebooks
+
+            dispatch(fetchWishlistBooksSuccess(ebooks))
+        })
+        .catch(err => dispatch(fetchWishlistBooksError(err)))
+};
+
+export const FETCH_WISHLIST_BOOKS_REQUEST = 'FETCH_WISHLIST_BOOKS_REQUEST'
+export const fetchWishlistBooksRequest = () => ({
+    type: FETCH_WISHLIST_BOOKS_REQUEST
+});
+
+export const FETCH_WISHLIST_BOOKS_SUCCESS = 'FETCH_WISHLIST_BOOKS_SUCCESS'
+export const fetchWishlistBooksSuccess = (ebooks) => ({
+    type: FETCH_WISHLIST_BOOKS_SUCCESS,
+    items: ebooks
+});
+
+export const FETCH_WISHLIST_BOOKS_ERROR = 'FETCH_WISHLIST_BOOKS_ERROR'
+export const fetchWishlistBooksError = (err) => ({
+    type: FETCH_WISHLIST_BOOKS_ERROR,
+    error: err
+});
+
+export const removeBookFromWishlist = (listId, ebookId) => dispatch => {
+    dispatch(removeBookFromWishlistRequest())
+
+    let updateBody = {
+        listId: listId,
+        ebookId: ebookId
+    };
+
+    return fetch(`${API_BASE_URL}/wishlists/${listId}/delete/${ebookId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updateBody),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(res => {
+        let list = res.wishlist;
+
+        dispatch(removeBookFromWishlistSuccess(list))
+    })
+    .catch(err => dispatch(removeBookFromWishlistError))
+};
+
+export const REMOVE_BOOK_FROM_WISHLIST_REQUEST = 'REMOVE_BOOK_FROM_WISHLIST_REQUEST'
+export const removeBookFromWishlistRequest = () => ({
+    type: REMOVE_BOOK_FROM_WISHLIST_REQUEST
+});
+export const REMOVE_BOOK_FROM_WISHLIST_SUCCESS = 'REMOVE_BOOK_FROM_WISHLIST_SUCCESS'
+export const removeBookFromWishlistSuccess = (list) => ({
+    type: REMOVE_BOOK_FROM_WISHLIST_SUCCESS,
+    wishlist: list
+});
+export const REMOVE_BOOK_FROM_WISHLIST_ERROR = 'REMOVE_BOOK_FROM_WISHLIST_ERROR'
+export const removeBookFromWishlistError = (err) => ({
+    type: REMOVE_BOOK_FROM_WISHLIST_ERROR,
+    error: err
+});
+

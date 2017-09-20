@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {addWishlistForm, addNewWishlist} from '../../../actions/wishlistActions'
+import {addWishlistForm, addNewWishlist} from '../../../actions/wishlist'
 
 export class AddWishlist extends React.Component{
      

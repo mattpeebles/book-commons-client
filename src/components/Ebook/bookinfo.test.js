@@ -2,7 +2,7 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import {should, expect} from 'chai'
 
-import BookInfo from './BookInfo'
+import {BookInfo} from './BookInfo'
 
 
 describe('<BookInfo />', ()=> {

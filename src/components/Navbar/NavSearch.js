@@ -2,17 +2,16 @@ import React from 'react'
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty, isTrimmed} from '../../validators'
 
-import {fetchGutenbergBookId} from '../../actions/results'
+import {fetchBooks} from '../../actions/results'
 
 import './NavSearch.css'
 
 export class NavSearch extends React.Component{
 	
-	onSubmit(values) {
-		console.log('hello')
-		let {navSearch: title} = values
-	   	this.props.dispatch(fetchGutenbergBookId(title))
-	}
+    onSubmit(values) {
+    	let {navSearch: title} = values
+       	this.props.dispatch(fetchBooks(title))
+    }
 
 	render(){
 		return (

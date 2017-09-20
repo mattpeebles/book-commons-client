@@ -24,7 +24,6 @@
 		}
 
 		.supplementImageContainer{
-			height: 150px;
 			width: 150px;
 			margin-bottom: 1%;
 			position: relative;
@@ -32,16 +31,17 @@
 			margin-right: auto;
 		}
 
-		#photoContainer{
-			background-color: red;
+		#photoContainer,#coverContainer{
+			text-align: center;
+			width: 100%;
+			margin-bottom: 2%;
 		}
 
-		#coverContainer{
-			background-color: blue;
+		#cover, #authorPhoto{
+			width: 150px;
 		}
 
 		#summaryContainer{
-			height: 250px;
 			overflow: hidden;
 		}
 

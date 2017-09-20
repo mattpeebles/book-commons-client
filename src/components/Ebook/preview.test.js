@@ -12,7 +12,7 @@ describe('<Preview />', ()=> {
 	})
 
 	it('should say No Preview when none is passed', () => {
-		let preview = 'none'
+		let preview = 'No Preview'
 		let wrapper = shallow(<Preview preview={preview} />)
 
 		expect(wrapper.text()).to.be.equal('No Preview')

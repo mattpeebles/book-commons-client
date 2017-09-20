@@ -1,21 +1,14 @@
 import {
-	fetchWishlists,
-	fetchWishlistsRequest,
-	fetchWishlistsSuccess,
-	fetchWishlistsError,
-	addWishlistForm,
-	addNewWishlistRequest,
-	addNewWishlistSuccess,
-	addNewWishlistError,
-	editWishlistTitleRequest,
-	editWishlistTitleSuccess,
-	editWishlistTitleError,
-	removeWishlistRequest,
-	removeWishlistSuccess,
-	removeWishlistError
-} from '../actions/wishlistActions'
+	fetchWishlistsRequest, fetchWishlistsSuccess, fetchWishlistsError,
+	addWishlistForm, addNewWishlistRequest, addNewWishlistSuccess, addNewWishlistError,
+	editWishlistTitleRequest, editWishlistTitleSuccess, editWishlistTitleError,
+	removeWishlistRequest, removeWishlistSuccess, removeWishlistError,
+	saveBookToWishlistRequest, saveBookToWishlistSuccess, saveBookToWishlistError,
+	fetchWishlistBooksRequest, fetchWishlistBooksSuccess, fetchWishlistBooksError,
+	removeBookFromWishlistRequest, removeBookFromWishlistSuccess, removeBookFromWishlistError
+} from '../actions/wishlist'
 
-import {default as reducer} from './wishlistReducer'
+import {default as reducer} from './wishlist'
 import {expect} from 'chai'
 
 describe('Wishlist Reducer', () => {
@@ -30,6 +23,23 @@ describe('Wishlist Reducer', () => {
 				title: 'Channel Orange',
 				items: []
 			}
+
+			let ebook1 = {
+				id: 40394,
+				database: 'project gutenberg',
+				icon: '/resources/icons/gutenberg-fav.png',
+				title: 'Super Rich Kids',
+				author: 'Frank Ocean',
+				preview: 'No Preview',
+				publishDate: undefined,
+				languages: ['chanel'],
+				pages: undefined,
+				formats: ['epub'],
+				location: `https://www.gutenberg.org/ebooks`,
+				rights: 'public domain'
+			}
+
+			let err = 'Invalid Type Error'
 
 	it('should return initial state if nothing is passed in', () => {
 		let state;
@@ -158,7 +168,6 @@ describe('Wishlist Reducer', () => {
 	describe('addNewWishlistError', () => {
 		it('should set error in state', () => {
 			let state;
-			let err = 'Invalid Type Error'
 
 			state = reducer(state, addNewWishlistError(err))
 
@@ -175,7 +184,8 @@ describe('Wishlist Reducer', () => {
 			expect(state.loading).to.be.equal(true)
 			expect(state.error).to.be.equal(null)
 		})
-	})
+	});
+
 	describe('editWishlistTitleSuccess', () => {
 		it('should set wishlist names and wishlists to new wishlist title', () => {
 			let state;
@@ -202,16 +212,16 @@ describe('Wishlist Reducer', () => {
 			expect(state.wishlistNames).to.include(newTitle)
 			expect(state.wishlistNames).to.not.include(wishlist1.title)
 		})
-	})
+	});
+
 	describe('editWishlistTitleError', () => {
 		it('should set error', () => {
 			let state;
-			let err = 'Invalid Type Error'
 			state = reducer(state, editWishlistTitleError(err));
 			
 			expect(state.error).to.equal(err)
 		})
-	})
+	});
 
 	describe('removeWishlistRequest', () => {
 		it('should set loading to true', () =>{
@@ -222,7 +232,7 @@ describe('Wishlist Reducer', () => {
 			expect(state.error).to.be.equal(null)
 
 		})
-	})
+	});
 
 	describe('removeWishlistSuccess', () => {
 		it('should call fetchWishlists', () => {
@@ -240,18 +250,176 @@ describe('Wishlist Reducer', () => {
 			expect(state.error).to.be.equal(null)
 
 		})
-	})
+	});
 
 	describe('removeWishlistError', () => {
 		it('should ', () => {
 			let state;	
-			let err = 'Invalid Type Error'
 			state = reducer(state, removeWishlistError(err))
 
 
 			expect(state.error).to.be.equal(err)
 			expect(state.loading).to.be.equal(false)
 		})
-	})
+	});
+
+	describe('saveBookToWishlistRequest', () => {
+		it('should set loading to true', () => {
+			let state;
+
+			state = reducer(state, saveBookToWishlistRequest())
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('saveBookToWishlistSuccess', () => {
+		it('should update wishlist items', () => {
+			let state;
+
+			state = reducer(state, fetchWishlistsSuccess([wishlist1], [wishlist1.title]))
+
+					//save book to wishlist automatically returns
+					//updated list with item inside items array
+					//this is mocking that backend function
+			let updateWishlist1 = Object.assign({}, state.wishlists[0], {
+				items: [...state.wishlists[0]['items'], ebook1.id]
+			})
+
+
+			state = reducer(state, saveBookToWishlistSuccess(updateWishlist1))
+			expect(state.wishlists[0].items).to.include(ebook1.id)
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('saveBookToWishlistError', () => {
+		it('should set error to err', () => {
+			let state;
+			state = reducer(state, saveBookToWishlistError(err))
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(err)
+		})
+	});
+
+	describe('fetchWishlistBooksRequest', () => {
+		it('should set loading to true', () => {
+			let state;
+
+			state = reducer(state, fetchWishlistBooksRequest())
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('fetchWishlistBooksSuccess', () => {
+		it('should set items as ebooks', () => {
+			let state;
+			let ebooks= [
+				{
+					id: 40394,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: 'Super Rich Kids',
+					author: 'Frank Ocean',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['chanel'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				},
+				{
+					id: 34151345,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: 'Redbone',
+					author: 'Childish Gambino',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['woke'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				},
+				{
+					id: 974514,
+					database: 'project gutenberg',
+					icon: '/resources/icons/gutenberg-fav.png',
+					title: '#29 Strattford Apts',
+					author: 'Bon Iver',
+					preview: 'No Preview',
+					publishDate: undefined,
+					languages: ['english'],
+					pages: undefined,
+					formats: ['epub'],
+					location: `https://www.gutenberg.org/ebooks`,
+					rights: 'public domain'
+				}
+			];
+
+			state = reducer(state, fetchWishlistBooksSuccess(ebooks))
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+			expect(state.wishlistItems).to.deep.equal(ebooks)
+		})
+	});
+
+	describe('fetchWishlistBooksError', () => {
+		it('should set error', () => {
+			let state;
+			state = reducer(state, fetchWishlistBooksError(err))
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(err)
+		})
+	});
+
+	describe('removeBookFromWishlistRequest', () => {
+		it('should set loading to true', () => {
+			let state;
+			state = reducer(state, removeBookFromWishlistRequest())
+
+			expect(state.loading).to.be.equal(true)
+			expect(state.error).to.be.equal(null)
+		})
+	});
+
+	describe('removeBookFromWishlistSuccess', () => {
+		it('should remove ebook from wishlist', () => {
+			let state;
+
+				//prep - put wishlists into state
+			state = reducer(state, fetchWishlistsSuccess([wishlist1, wishlist2], [wishlist1.title, wishlist2.title]))
+			
+				//prep - add ebook id to first wishlist
+			let updateWishlist1 = Object.assign({}, state.wishlists[0], {
+				items: [...state.wishlists[0]['items'], ebook1.id]
+			})
+
+			state = reducer(state, saveBookToWishlistSuccess(updateWishlist1))
+
+
+				//test - remove ebook id from first wishlist
+			state = reducer(state, removeBookFromWishlistSuccess(wishlist1.title, ebook1.id))
+
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(null)
+			expect(state.wishlists[0]['items']).to.not.include(ebook1.id)
+		})
+	});
+
+	describe('removeBookFromWishlistError', () => {
+		it('should set error', () => {
+			let state;
+			state = reducer(state, removeBookFromWishlistError(err))
+
+			expect(state.loading).to.be.equal(false)
+			expect(state.error).to.be.equal(err)
+		})
+	});
+
 
 })

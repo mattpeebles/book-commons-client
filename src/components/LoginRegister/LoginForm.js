@@ -1,8 +1,7 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form';
 
-import {login} from '../../actions/auth';
-import {toggleLoginRegister, showLoginRegister} from '../../actions/auth'
+import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth'
 
 export class LoginForm extends React.Component{
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form';
 import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth';
-import {registerUser, } from '../../actions/userActions'
+import {registerUser} from '../../actions/userActions'
 import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
 
 export class RegisterForm extends React.Component{

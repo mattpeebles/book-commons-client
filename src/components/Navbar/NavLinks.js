@@ -54,18 +54,26 @@ export class NavLinks extends React.Component{
 		    )
 		})
 
+		let navSearch;
+
+				//displays navbar search on routes other than home
+		if(this.props.router.location.pathname !== '/'){
+			navSearch = <NavSearch className="navbar-nav mr-auto" />
+		}
+
 		return(
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
 					{links}
 				</ul>
-				<NavSearch className="navbar-nav mr-auto" />
+				{navSearch}
 			</div>
 		)
 	}
 }
 
 const mapStateToProps = state => ({
+	router: state.router,
 	display: state.auth.loginRegisterForm.display,
 	loggedIn: state.auth.loggedIn,
 	user: state.user.user,
