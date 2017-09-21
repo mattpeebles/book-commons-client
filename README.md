@@ -66,7 +66,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [ ] add feedback upon submit to:
 	- [ ] Login
 	- [ ] Register
-	- [ ] Save to wishlist
+	- [x] Save to wishlist
 	- [x] Change Email
 	- [x] Change Password
 - [x] Link search bars to external database api calls

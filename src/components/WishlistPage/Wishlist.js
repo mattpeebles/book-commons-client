@@ -55,7 +55,10 @@ export class Wishlist extends React.Component{
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
 						
-						<Ebook results={this.props.wishlistItems} dropdownType='wishlistDrop' dropdownLinks={dropdownLinks}/>
+
+						<div className="col-sm-12 col-md-8">
+							<Ebook results={this.props.wishlistItems} dropdownType='wishlistDrop' dropdownLinks={dropdownLinks}/>
+						</div>
 						<WishlistsContainer links={this.props.wishlistNames}/>
 					</div>
 				</div>
