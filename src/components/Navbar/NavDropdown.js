@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 
 import {changeWishlist} from '../../actions/wishlist'
-import {logout} from '../../actions/auth'
+import {logout, changeUserInfoInit} from '../../actions/auth'
 
 
 export class NavDropdown extends React.Component{
@@ -47,7 +47,7 @@ export class NavDropdown extends React.Component{
 				}
 
 				return (
-				    <Link key={index} className="dropdown-item" to={`/settings/user/${link.toLowerCase().split(' ').join('/')}`}>{link}</Link>
+				    <Link key={index} className="dropdown-item" to={`/settings/user/${link.toLowerCase().split(' ').join('/')}`} onClick={() => this.props.dispatch(changeUserInfoInit())}>{link}</Link>
 				)
 
 

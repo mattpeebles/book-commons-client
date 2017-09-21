@@ -1,8 +1,12 @@
 import {SET_AUTH_TOKEN, SET_CURRENT_USER, SHOW_LOGIN_REGISTER,    
-    TOGGLE_LOGIN_REGISTER, SET_NAV_LINKS, CHANGE_USER_INFO_ERROR} from '../actions/auth';
+    TOGGLE_LOGIN_REGISTER, SET_NAV_LINKS, 
+    CHANGE_USER_INFO_INIT, CHANGE_USER_INFO_REQUEST, CHANGE_USER_INFO_SUCCESS, CHANGE_USER_INFO_ERROR
+} from '../actions/auth';
 
 const initialState = {
     error: null,
+    loading: false,
+    userInfoChanged: null,
     loginRegisterForm: {display: false,
                          form: 'login'},
     navLinks: ['Login/Register'],
@@ -67,11 +71,37 @@ export default function reducer(state = initialState, action) {
         })
     }
 
-    if(action.type === CHANGE_USER_INFO_ERROR){
-        console.log(action.type)
+    if(action.type === CHANGE_USER_INFO_INIT){
         return Object.assign({}, state, {
-            error: action.err,
+            loading: false,
+            error: null,
+            userInfoChanged: false,
         })
     }
+
+    if(action.type === CHANGE_USER_INFO_REQUEST){
+        return Object.assign({}, state, {
+            loading: true,
+            error: null,
+            userInfoChanged: false,
+        })
+    }
+
+    if(action.type === CHANGE_USER_INFO_SUCCESS){
+        return Object.assign({}, state, {
+            loading: false,
+            error: null,
+            userInfoChanged: true
+        })
+    }
+
+    if(action.type === CHANGE_USER_INFO_ERROR){
+        return Object.assign({}, state, {
+            error: action.err,
+            loading: false,
+            userInfoChanged: false
+        })
+    }
+
     return state;
 }

@@ -115,7 +115,14 @@ export const logout = () => (dispatch) => {
     dispatch(setNavLinks(['Login/Register']))
 };
 
+
+export const CHANGE_USER_INFO_INIT = 'CHANGE_USER_INFO_INIT'
+export const changeUserInfoInit = () => ({
+    type: CHANGE_USER_INFO_INIT
+})
+
 export const changeUserInfo = infoObj => (dispatch, getState) => {
+    dispatch(changeUserInfoRequest())
     let token = getState().auth.authToken;
     let userId = getState().auth.currentUser._id;
     let updateObj = {
@@ -156,23 +163,27 @@ export const changeUserInfo = infoObj => (dispatch, getState) => {
     .then(res => res.json())
     .then(res => {
         storeAuthInfo(res.token, dispatch)
+        dispatch(changeUserInfoSuccess())
     })
     .catch(err => {
-        const {reason, message, location} = err;
-       // console.log(err)
+        const {reason} = err;
         if (reason === 'ValidationError') {
-            // Convert ValidationErrors into SubmissionErrors for Redux Form
-
            return dispatch(changeUserInfoError(err))
         }
 
-        return Promise.reject(
-            new SubmissionError({
-                _error: 'Error submitting message'
-            })
-        );
+        return dispatch(changeUserInfoError(err))
     });
-}
+};
+
+export const CHANGE_USER_INFO_REQUEST = 'CHANGE_USER_INFO_REQUEST'
+export const changeUserInfoRequest = () => ({
+    type: CHANGE_USER_INFO_REQUEST
+})
+
+export const CHANGE_USER_INFO_SUCCESS = 'CHANGE_USER_INFO_SUCCESS'
+export const changeUserInfoSuccess = () => ({
+    type: CHANGE_USER_INFO_SUCCESS
+})
 
 export const CHANGE_USER_INFO_ERROR = 'CHANGE_USER_INFO_ERROR'
 export const changeUserInfoError = err => ({

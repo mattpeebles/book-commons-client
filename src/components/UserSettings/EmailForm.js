@@ -1,6 +1,6 @@
 import React from 'react'
-import {reduxForm, Field, SubmissionError, focus} from 'redux-form';
-import {API_BASE_URL} from '../../config';
+import {reduxForm, Field, focus} from 'redux-form';
+import { push } from 'react-router-redux'
 import {required, nonEmpty, matches, isTrimmed} from '../../validators'
 import Input from '../Inputs/Input'
 import {changeUserInfo, changeUserInfoError} from '../../actions/auth'
@@ -30,6 +30,23 @@ export class EmailForm extends React.Component{
     }
 
 	render(){
+
+		if(this.props.auth.loading === true){
+			return (
+				<div>
+					<img src="/resources/icons/flip-book-loader.gif" alt='Loading Icon' />
+				</div>
+			)
+		}
+
+		if(this.props.auth.userInfoChanged === true){
+			setTimeout(() => this.props.dispatch(push('/')), 3000)
+			return (
+				<div>
+					Email changed
+				</div>
+			)
+		}
 
 	    let errorMessage;
 	    if (this.props.error || this.props.auth.error){
