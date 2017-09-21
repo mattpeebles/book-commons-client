@@ -9,7 +9,7 @@ import {changeUserInfo} from '../../actions/auth'
 export class PasswordForm extends React.Component{
 
     onSubmit(values) {
-    	const {newPassword: password} = values
+    	const {newPassword: password, confirmPassword, currentPassword} = values
 
     	let infoObj ={
 			password

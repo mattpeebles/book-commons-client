@@ -134,9 +134,48 @@ export const changeUserInfo = infoObj => (dispatch, getState) => {
             'Authorization': `Bearer ${token}`
         }
     })
+    .then(res => {
+        if (!res.ok) {
+            if (
+                res.headers.has('content-type') &&
+                res.headers
+                    .get('content-type')
+                    .startsWith('application/json')
+            ) {
+                // It's a nice JSON error returned by us, so decode it
+                return res.json().then(err => Promise.reject(err));
+            }
+            // It's a less informative error returned by express
+            return Promise.reject({
+                code: res.status,
+                message: res.statusText
+            });
+        }
+        return res
+    })
     .then(res => res.json())
     .then(res => {
         storeAuthInfo(res.token, dispatch)
     })
+    .catch(err => {
+        const {reason, message, location} = err;
+       // console.log(err)
+        if (reason === 'ValidationError') {
+            // Convert ValidationErrors into SubmissionErrors for Redux Form
 
+           return dispatch(changeUserInfoError(err))
+        }
+
+        return Promise.reject(
+            new SubmissionError({
+                _error: 'Error submitting message'
+            })
+        );
+    });
 }
+
+export const CHANGE_USER_INFO_ERROR = 'CHANGE_USER_INFO_ERROR'
+export const changeUserInfoError = err => ({
+    type: CHANGE_USER_INFO_ERROR,
+    err
+})

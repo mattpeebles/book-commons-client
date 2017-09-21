@@ -1,7 +1,8 @@
 import {SET_AUTH_TOKEN, SET_CURRENT_USER, SHOW_LOGIN_REGISTER,    
-    TOGGLE_LOGIN_REGISTER, SET_NAV_LINKS} from '../actions/auth';
+    TOGGLE_LOGIN_REGISTER, SET_NAV_LINKS, CHANGE_USER_INFO_ERROR} from '../actions/auth';
 
 const initialState = {
+    error: null,
     loginRegisterForm: {display: false,
                          form: 'login'},
     navLinks: ['Login/Register'],
@@ -63,6 +64,13 @@ export default function reducer(state = initialState, action) {
     if(action.type === SET_NAV_LINKS){
         return Object.assign({}, state, {
             navLinks: action.navLinks,
+        })
+    }
+
+    if(action.type === CHANGE_USER_INFO_ERROR){
+        console.log(action.type)
+        return Object.assign({}, state, {
+            error: action.err,
         })
     }
     return state;
