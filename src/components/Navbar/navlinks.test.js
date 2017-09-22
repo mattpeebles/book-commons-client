@@ -5,8 +5,8 @@ const mockShowLoginRegister = {
     type: 'SHOW_LOGIN_REGISTER',
     display: true
 };
-jest.mock('../../actions/userActions', () => Object.assign({},
-    require.requireActual('../../actions/userActions'),
+jest.mock('../../actions/auth', () => Object.assign({},
+    require.requireActual('../../actions/auth'),
     {
         showLoginRegister: jest.fn().mockImplementation(() => {
             return mockShowLoginRegister;

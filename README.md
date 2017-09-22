@@ -61,11 +61,10 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist
 
 ### Components <a name="todoComponents"></a>
-- [ ] add feedback to forms
 - [x] require current password to be validated to change user settings
 - [ ] add feedback upon submit to:
 	- [ ] Login
-	- [ ] Register
+	- [x] Register
 	- [x] Save to wishlist
 	- [x] Change Email
 	- [x] Change Password
@@ -79,7 +78,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Project Gutenberg api call - reducer, action
 - [ ] Europeana api call - reducer, action
 - [x] Open Library api call - reducer, action
-- [x] User email/password update - reducer, action
+- [x] User email/passworxd update - reducer, action
 - [x] Wishlist display items - reducer, action
 - [x] Wishlist title update - reducer, action
 - [x] Wishlist remove item - reducer, action

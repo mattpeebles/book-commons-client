@@ -1,5 +1,5 @@
 import React from 'react'
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm, Field, focus} from 'redux-form';
 
 import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth'
 
@@ -40,4 +40,8 @@ export class LoginForm extends React.Component{
 
 
 export default reduxForm({
-	form: 'login'})(LoginForm)
+	form: 'login',
+	onSubmitFail: (errors, dispatch) => {
+	        dispatch(focus('login', Object.keys(errors)[0]))
+	    }
+})(LoginForm)

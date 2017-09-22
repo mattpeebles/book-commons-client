@@ -1,5 +1,6 @@
 import {SET_AUTH_TOKEN, SET_CURRENT_USER, SHOW_LOGIN_REGISTER,    
     TOGGLE_LOGIN_REGISTER, SET_NAV_LINKS, 
+    REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR,
     CHANGE_USER_INFO_INIT, CHANGE_USER_INFO_REQUEST, CHANGE_USER_INFO_SUCCESS, CHANGE_USER_INFO_ERROR
 } from '../actions/auth';
 
@@ -46,11 +47,20 @@ export default function reducer(state = initialState, action) {
 
     if (action.type === SET_CURRENT_USER) {
         
+        if(action.currentUser === null){
+            return Object.assign({}, state, {
+                currentUser: null,
+                loginRegisterForm: {
+                    display: false
+                },
+                loggedIn: false
+            })
+        }
+
             //if currentUser is set to null, logout was called
             //sets logged in to false
-        let loggedIn = (action.currentUser === null) ? false : true
         let {email, wishlists} = action.currentUser
-        let _id = (action.currentUser.id === undefined)? action.currentUser._id : action.currentUser.id
+        let _id = (action.currentUser.id === undefined) ? action.currentUser._id : action.currentUser.id
 
         return Object.assign({}, state, {
             currentUser: {
@@ -61,13 +71,34 @@ export default function reducer(state = initialState, action) {
             loginRegisterForm: {
                 display: false
             },
-            loggedIn
+            loggedIn: true
         });
     }
 
     if(action.type === SET_NAV_LINKS){
         return Object.assign({}, state, {
             navLinks: action.navLinks,
+        })
+    }
+
+    if(action.type === REGISTER_USER_REQUEST){
+        return Object.assign({}, state, {
+            loading: true,
+            error: null,
+        })
+    }
+
+    if(action.type === REGISTER_USER_SUCCESS){
+        return Object.assign({}, state, {
+            loading: false,
+            error: null,
+        })
+    }
+
+    if(action.type === REGISTER_USER_ERROR){
+        return Object.assign({}, state, {
+            error: action.err,
+            loading: false,
         })
     }
 

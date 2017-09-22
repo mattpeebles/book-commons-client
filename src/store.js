@@ -6,7 +6,6 @@ import {routerReducer, routerMiddleware} from 'react-router-redux'
 
 import reducer from './reducers/index' 
 import authReducer from './reducers/auth'
-import userReducer from './reducers/userReducer'
 import resultsReducer from './reducers/results'
 import wishlistReducer from './reducers/wishlist'
 import {loadAuthToken} from './local-storage'
@@ -24,7 +23,6 @@ export const store = createStore(
         form: formReducer,
         results: resultsReducer,
         app: reducer,
-        user: userReducer,
         wishlist: wishlistReducer
     }), applyMiddleware(thunk, historyMid))
 
