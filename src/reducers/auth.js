@@ -10,7 +10,7 @@ const initialState = {
     userInfoChanged: null,
     loginRegisterForm: {display: false,
                          form: 'login'},
-    navLinks: ['Login/Register'],
+    navLinks: ['Login/Register', 'Demo'],
     loggedIn: false,
     authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null
@@ -62,11 +62,14 @@ export default function reducer(state = initialState, action) {
         let {email, wishlists} = action.currentUser
         let _id = (action.currentUser.id === undefined) ? action.currentUser._id : action.currentUser.id
 
+        let type = (action.currentUser.type === undefined) ? 'user' : 'demo'
+
         return Object.assign({}, state, {
             currentUser: {
                 email,
                 wishlists,
-                _id
+                _id,
+                type
             },
             loginRegisterForm: {
                 display: false

@@ -1,6 +1,6 @@
 import React from 'react'
 import {reduxForm, Field, focus} from 'redux-form';
-
+import Input from '../Inputs/Input'
 import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth'
 
 export class LoginForm extends React.Component{
@@ -9,10 +9,30 @@ export class LoginForm extends React.Component{
 
     	const {email, password} = values
         
-        this.props.dispatch(login(email, password))
+        return this.props.dispatch(login(email, password))
     }
 
 	render(){
+		
+		let errorMessage;
+	    
+	    if (this.props.error || (this.props.auth.error)){
+	        let message = (this.props.error) ? this.props.error : this.props.auth.error.message
+	        errorMessage = (
+	            <div className="message message-error">{message}</div>
+	        );
+	        focus('email', 'password')
+	    }
+
+		let successMessage;
+	    if (this.props.submitSucceeded && this.props.auth.error === null) {
+	        successMessage = (
+	            <div className="message message-success">
+	                Message submitted successfully
+	            </div>
+	        );
+	    }
+
 		return(
 			<div className="module form-module">
 			  <div className="toggle"><i className="fa fa-times fa-pencil"></i>
@@ -27,9 +47,15 @@ export class LoginForm extends React.Component{
 	                onSubmit={this.props.handleSubmit(values =>
 	                    this.onSubmit(values)
                 )}>
-			      <Field name="email" id="email" component="input" type="text" placeholder="Email"/>
-			      <Field name="password" id="password" component="input" type="password" placeholder="Password"/>
-			      <button className="submitButton">Login</button>
+				 	{successMessage}
+            		{errorMessage}
+			      <Field name="email" id="email" component={Input} type="text" placeholder="Email"/>
+			      <Field name="password" id="password" component={Input} type="password" placeholder="Password"/>
+	                <button
+	                    type="submit"
+	                    disabled={this.props.pristine || this.props.submitting}>
+	                   	Login
+					</button>	
 			    </form>
 			  </div>
 			  <div className="cta"><a href="/">Forgot your password?</a></div>

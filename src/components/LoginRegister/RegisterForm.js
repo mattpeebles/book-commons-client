@@ -6,6 +6,7 @@ import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
 
 export class RegisterForm extends React.Component{
 	
+    
     onSubmit(values) {
         const {email, password, confirmPassword} = values
 
@@ -22,28 +23,26 @@ export class RegisterForm extends React.Component{
 	       	email,
 	       	password
        }
-       return this.props
-        	.dispatch(registerUser(newUser))
-        	.then(() => {
-        		this.props.dispatch(login(email, password))
-        	})
+
+       return this.props.dispatch(registerUser(newUser))
+        	.then(() => this.props.dispatch(login(email, password)))
     }
 
 	render(){
-		
+
+
 		let errorMessage;
 	    
-	    		//Redux Form is not consistent with placing labels on errors
-	    		//On this form it will on place an error automatically if a user tries to
-	    		//enter an email already been used.
-	    		//Otherwise, this manually places an error message on the screen
-	    if (this.props.error || (this.props.auth.error && this.props.auth.error !== 'Email already taken')){
-	        console.log(this.props.auth.error)
+	    if (this.props.error || this.props.auth.error){
 	        let message = (this.props.error) ? this.props.error : this.props.auth.error.message
-	        errorMessage = (
-	            <div className="message message-error">{message}</div>
-	        );
-	        focus('email', this.props.auth.error.location)
+	        
+	       		//prevents this message from being displayed twice
+	       if(message !== 'Email already taken'){
+		        errorMessage = (
+		            <div className="message message-error">{message}</div>
+		        );
+		        focus('register', this.props.auth.error.location)
+		    }
 	    }
 
 
@@ -73,7 +72,6 @@ export class RegisterForm extends React.Component{
                 )}>
 				 	{successMessage}
             		{errorMessage}
-			      <label htmlFor="email">Email</label>
 			      <Field 
 			      	name="email" 
 			      	type="email"
@@ -82,18 +80,18 @@ export class RegisterForm extends React.Component{
 			      	validate={[required, nonEmpty, isTrimmed]}
 			      />
 
-			      <label htmlFor="password">Password</label>
 			      <Field 
 			      	name="password" 
 			      	type="password" 
 			      	component={Input}
+			      	placeholder='Password'
 			      	validate={[required, length({min: 8, max: 72}), isTrimmed]}/>
 
-			      <label htmlFor="confirmPassword">Confirm Password</label>
 			      <Field 
 			      	name="confirmPassword" 
 			      	type="password" 
 			      	component={Input}
+			      	placeholder="Confirm password"
 			      	validate={[required, nonEmpty, matches('password')]}/>
 	                <button
 	                    type="submit"

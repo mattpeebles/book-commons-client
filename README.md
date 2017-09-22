@@ -14,6 +14,7 @@ A public domain book search that aggregates a variety of databases to display re
 ## TODO <a name="todo"></a>
 
 ### Integration <a name="todoIntegration"></a>
+- [ ] Add demo feature
 - [x] User email/password update
 - [x] Wishlist title update
 - [x] Wishlist remove item
@@ -61,9 +62,10 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist
 
 ### Components <a name="todoComponents"></a>
+- [ ] Add Demo
 - [x] require current password to be validated to change user settings
-- [ ] add feedback upon submit to:
-	- [ ] Login
+- [x] add feedback upon submit to:
+	- [x] Login
 	- [x] Register
 	- [x] Save to wishlist
 	- [x] Change Email

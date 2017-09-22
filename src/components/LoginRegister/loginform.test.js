@@ -40,7 +40,7 @@ describe('<LoginForm />', () => {
 	it('should dispatch login on submit', () => {
 		const callback = jest.fn()
 		const dispatch = jest.fn()
-		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} />)
+		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} auth={{error:null}} />)
 		wrapper.find('form').simulate('submit')
 		expect(callback).toHaveBeenCalled()
 	})
@@ -48,7 +48,7 @@ describe('<LoginForm />', () => {
 	it('should call dispatch toggleLoginRegister', () => {
 		const callback = jest.fn()
 		const dispatch = jest.fn()
-		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} />)
+		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} auth={{error:null}}/>)
 
 		wrapper.find('.toggleButton').simulate('click')
 

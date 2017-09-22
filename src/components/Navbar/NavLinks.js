@@ -2,16 +2,41 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {showLoginRegister} from '../../actions/auth'
+import faker from 'faker'
+
+import {demoUser, login, showLoginRegister} from '../../actions/auth'
 
 import NavSearch from './NavSearch'
 import NavDropdown from './NavDropdown'
 
 export class NavLinks extends React.Component{
 
+	demo(){
+		let email = faker.internet.email()
+    	let password = faker.internet.password()
+
+    	let user = {
+    		email,
+    		password
+    	}
+
+    	return this.props.dispatch(demoUser(user))
+    		.then(() => {
+        		return this.props.dispatch(login(email, password))
+    		})
+
+	}
+
 	render(){ 
 		let links = this.props.navLinks.map((link, index) => {
 
+			if (link === 'Demo'){
+				return (
+					<li key={index} id={link} className="nav-item">
+			        	<a className="nav-link" onClick={() => this.demo()}>{link}</a>
+			    	</li>
+			    )
+			}
 
 			if (link === "Wishlists" && this.props.wishlists.length === 0){
 				return (
@@ -35,6 +60,11 @@ export class NavLinks extends React.Component{
 
 			if(link === 'Signed in'){
 				let title = `${link} as ${this.props.user.email.split('@')[0]}`
+				
+				if(this.props.user.type === 'demo'){
+					title = 'Demo Account'
+				}
+
 				return (
 					<NavDropdown id={"signedIn-Dropdown"} key={index} title={title} links={['Change Email', 'Change Password', 'Logout']}/> 
 				)

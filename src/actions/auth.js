@@ -62,6 +62,21 @@ const storeAuthInfo = (authToken, dispatch) => {
     dispatch(setCurrentUser(decodedToken.user));
 };
 
+
+export const demoUser = user => dispatch => {
+
+    return fetch(`${API_BASE_URL}/users/demo`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => {
+        return res.json()
+    })
+}
+
 export const registerUser = user => dispatch => {
     dispatch(registerUserRequest())
     return fetch(`${API_BASE_URL}/users`, {
@@ -122,7 +137,7 @@ export const login = (email, password) => dispatch => {
         })
             // Reject any requests which don't return a 200 status, creating
             // errors which follow a consistent format
-            //.then(res => normalizeResponseErrors(res))
+            .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({authToken}) => {
                 storeAuthInfo(authToken, dispatch)
@@ -175,7 +190,7 @@ export const logout = () => (dispatch) => {
     clearAuthToken()
     dispatch(setAuthToken(null))
     dispatch(setCurrentUser(null))
-    dispatch(setNavLinks(['Login/Register']))
+    dispatch(setNavLinks(['Login/Register', 'Demo']))
 };
 
 
