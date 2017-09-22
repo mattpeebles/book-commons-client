@@ -7,8 +7,8 @@ const mockLogin = {
     type: 'LOGIN',
 };
 
-jest.mock('../../actions/userActions', () => Object.assign({},
-    require.requireActual('../../actions/userActions'),
+jest.mock('../../actions/auth', () => Object.assign({},
+    require.requireActual('../../actions/auth'),
     {
         login: jest.fn().mockImplementation(() => {
             return mockLogin;
@@ -21,8 +21,8 @@ const mockToggleLoginRegister = {
     form: 'register'
 };
 
-jest.mock('../../actions/userActions', () => Object.assign({},
-    require.requireActual('../../actions/userActions'),
+jest.mock('../../actions/auth', () => Object.assign({},
+    require.requireActual('../../actions/auth'),
     {
         toggleLoginRegister: jest.fn().mockImplementation(() => {
             return mockToggleLoginRegister;
@@ -34,13 +34,13 @@ jest.mock('../../actions/userActions', () => Object.assign({},
 describe('<LoginForm />', () => {
 	it('should render without crashing', () => {
 		const callback = jest.fn()
-		shallow(<LoginForm handleSubmit={callback}/>)
+		shallow(<LoginForm handleSubmit={callback} auth={{error:null}}/>)
 	})
 
 	it('should dispatch login on submit', () => {
 		const callback = jest.fn()
 		const dispatch = jest.fn()
-		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} />)
+		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} auth={{error:null}} />)
 		wrapper.find('form').simulate('submit')
 		expect(callback).toHaveBeenCalled()
 	})
@@ -48,7 +48,7 @@ describe('<LoginForm />', () => {
 	it('should call dispatch toggleLoginRegister', () => {
 		const callback = jest.fn()
 		const dispatch = jest.fn()
-		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} />)
+		const wrapper = shallow(<LoginForm handleSubmit={callback} dispatch={dispatch} auth={{error:null}}/>)
 
 		wrapper.find('.toggleButton').simulate('click')
 

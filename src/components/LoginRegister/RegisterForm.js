@@ -1,20 +1,60 @@
 import React from 'react'
-import {reduxForm, Field} from 'redux-form';
-import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth';
-import {registerUser} from '../../actions/userActions'
+import {reduxForm, Field, focus} from 'redux-form';
+import {registerUser, registerUserError, login, toggleLoginRegister, showLoginRegister} from '../../actions/auth';
+import Input from '../Inputs/Input'
 import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
 
 export class RegisterForm extends React.Component{
 	
+    
     onSubmit(values) {
-        const {email, password} = values
+        const {email, password, confirmPassword} = values
 
-       return this.props
-        	.dispatch(registerUser(values))
+       if(password !== confirmPassword){
+       	    let err = {
+    			location: 'confirmPassword',
+    			message: 'Passwords do not match'
+    		}
+    		return this.props.dispatch(registerUserError(err))
+    		
+       }
+
+       let newUser = {
+	       	email,
+	       	password
+       }
+
+       return this.props.dispatch(registerUser(newUser))
         	.then(() => this.props.dispatch(login(email, password)))
     }
 
 	render(){
+
+
+		let errorMessage;
+	    
+	    if (this.props.error || this.props.auth.error){
+	        let message = (this.props.error) ? this.props.error : this.props.auth.error.message
+	        
+	       		//prevents this message from being displayed twice
+	       if(message !== 'Email already taken'){
+		        errorMessage = (
+		            <div className="message message-error">{message}</div>
+		        );
+		        focus('register', this.props.auth.error.location)
+		    }
+	    }
+
+
+		let successMessage;
+	    if (this.props.submitSucceeded && this.props.auth.error === null) {
+	        successMessage = (
+	            <div className="message message-success">
+	                Message submitted successfully
+	            </div>
+	        );
+	    }
+
 		return(
 			<div className="module form-module">
 			  <div className="toggle">
@@ -23,35 +63,42 @@ export class RegisterForm extends React.Component{
 			  <div className="closeForm">
 				<button className="btn btn-danger" onClick={() => this.props.dispatch(showLoginRegister(false))}>X</button>
 			  </div>
+			  
 			  <div className="form">
 			    <h2>Create an account</h2>
 				<form
 	                onSubmit={this.props.handleSubmit(values =>
 	                    this.onSubmit(values)
                 )}>
+				 	{successMessage}
+            		{errorMessage}
 			      <Field 
 			      	name="email" 
-			      	id="email" 
-			      	type="email" 
-			      	component="input" 
-			      	placeholder="Email"  
-			      	validate={[required, nonEmpty, isTrimmed]}/>
+			      	type="email"
+			      	placeholder="Email"
+			      	component={Input}
+			      	validate={[required, nonEmpty, isTrimmed]}
+			      />
+
 			      <Field 
 			      	name="password" 
-			      	id="password" 
 			      	type="password" 
-			      	component="input" 
-			      	placeholder="Password" 
+			      	component={Input}
+			      	placeholder='Password'
 			      	validate={[required, length({min: 8, max: 72}), isTrimmed]}/>
+
 			      <Field 
 			      	name="confirmPassword" 
-			      	id="confirmPassword" 
 			      	type="password" 
-			      	component="input" 
-			      	placeholder="Confirm password"  
+			      	component={Input}
+			      	placeholder="Confirm password"
 			      	validate={[required, nonEmpty, matches('password')]}/>
-			      <button className="submitButton">Register</button>
-			    </form>
+	                <button
+	                    type="submit"
+	                    disabled={this.props.pristine || this.props.submitting}>
+	                   	Register
+					</button>			    
+				</form>
 			  </div>
 			  <div className="cta"><a href="/">Forgot your password?</a></div>
 			</div>
@@ -61,4 +108,8 @@ export class RegisterForm extends React.Component{
 
 
 export default reduxForm({
-	form: 'register'})(RegisterForm)
+	form: 'register',
+	onSubmitFail: (errors, dispatch) => {
+        dispatch(focus('register', Object.keys(errors)[0]))
+    }
+})(RegisterForm)

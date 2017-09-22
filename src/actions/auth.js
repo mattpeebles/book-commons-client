@@ -35,6 +35,24 @@ export const setNavLinks = navLinks => ({
     navLinks
 })
 
+const normalizeResponseErrors = res => {
+    if (!res.ok) {
+        if (
+            res.headers.has('content-type') &&
+            res.headers.get('content-type').startsWith('application/json')
+        ) {
+            // It's a nice JSON error returned by us, so decode it
+            return res.json().then(err => Promise.reject(err));
+        }
+        // It's a less informative error returned by express
+        return Promise.reject({
+            code: res.status,
+            message: res.statusText
+        });
+    }
+    return res;
+};
+
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
@@ -43,6 +61,66 @@ const storeAuthInfo = (authToken, dispatch) => {
     dispatch(setAuthToken(authToken));
     dispatch(setCurrentUser(decodedToken.user));
 };
+
+
+export const demoUser = user => dispatch => {
+
+    return fetch(`${API_BASE_URL}/users/demo`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => {
+        return res.json()
+    })
+}
+
+export const registerUser = user => dispatch => {
+    dispatch(registerUserRequest())
+    return fetch(`${API_BASE_URL}/users`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+        dispatch(registerUserSuccesss())
+        return res.json()
+    })
+    .catch(err => {
+        const {reason, message, location} = err;
+        if (reason === 'ValidationError') {
+            dispatch(registerUserError(err))
+            // Convert ValidationErrors into SubmissionErrors for Redux Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+    });
+};
+
+export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST';
+export const registerUserRequest = () => ({
+    type: REGISTER_USER_REQUEST
+});
+
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
+export const registerUserSuccesss = () => ({
+    type: REGISTER_USER_SUCCESS
+});
+
+export const REGISTER_USER_ERROR = 'REGISTER_USER_ERROR';
+export const registerUserError = (err) => ({
+    type: REGISTER_USER_ERROR,
+    err
+});
+
 
 export const login = (email, password) => dispatch => {
     // Base64 encode the string email:password, used in the basic
@@ -59,7 +137,7 @@ export const login = (email, password) => dispatch => {
         })
             // Reject any requests which don't return a 200 status, creating
             // errors which follow a consistent format
-            //.then(res => normalizeResponseErrors(res))
+            .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({authToken}) => {
                 storeAuthInfo(authToken, dispatch)
@@ -112,10 +190,17 @@ export const logout = () => (dispatch) => {
     clearAuthToken()
     dispatch(setAuthToken(null))
     dispatch(setCurrentUser(null))
-    dispatch(setNavLinks(['Login/Register']))
+    dispatch(setNavLinks(['Login/Register', 'Demo']))
 };
 
+
+export const CHANGE_USER_INFO_INIT = 'CHANGE_USER_INFO_INIT'
+export const changeUserInfoInit = () => ({
+    type: CHANGE_USER_INFO_INIT
+})
+
 export const changeUserInfo = infoObj => (dispatch, getState) => {
+    dispatch(changeUserInfoRequest())
     let token = getState().auth.authToken;
     let userId = getState().auth.currentUser._id;
     let updateObj = {
@@ -134,9 +219,52 @@ export const changeUserInfo = infoObj => (dispatch, getState) => {
             'Authorization': `Bearer ${token}`
         }
     })
+    .then(res => {
+        if (!res.ok) {
+            if (
+                res.headers.has('content-type') &&
+                res.headers
+                    .get('content-type')
+                    .startsWith('application/json')
+            ) {
+                // It's a nice JSON error returned by us, so decode it
+                return res.json().then(err => Promise.reject(err));
+            }
+            // It's a less informative error returned by express
+            return Promise.reject({
+                code: res.status,
+                message: res.statusText
+            });
+        }
+        return res
+    })
     .then(res => res.json())
     .then(res => {
         storeAuthInfo(res.token, dispatch)
+        dispatch(changeUserInfoSuccess())
     })
+    .catch(err => {
+        const {reason} = err;
+        if (reason === 'ValidationError') {
+           return dispatch(changeUserInfoError(err))
+        }
 
-}
+        return dispatch(changeUserInfoError(err))
+    });
+};
+
+export const CHANGE_USER_INFO_REQUEST = 'CHANGE_USER_INFO_REQUEST'
+export const changeUserInfoRequest = () => ({
+    type: CHANGE_USER_INFO_REQUEST
+})
+
+export const CHANGE_USER_INFO_SUCCESS = 'CHANGE_USER_INFO_SUCCESS'
+export const changeUserInfoSuccess = () => ({
+    type: CHANGE_USER_INFO_SUCCESS
+})
+
+export const CHANGE_USER_INFO_ERROR = 'CHANGE_USER_INFO_ERROR'
+export const changeUserInfoError = err => ({
+    type: CHANGE_USER_INFO_ERROR,
+    err
+})

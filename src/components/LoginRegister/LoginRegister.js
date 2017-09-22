@@ -9,17 +9,18 @@ import './LoginRegister.css'
 export function LoginRegister(props){
 
 		if(props.form === 'login'){
-			return 	<LoginForm />
+			return 	<LoginForm auth={props.auth} />
 		}
 
 		else{
-			return <RegisterForm />
+			return <RegisterForm auth={props.auth} />
 		}
 }
 
 
 const mapStateToProps = state => ({
-	form: state.auth.loginRegisterForm.form
+	form: state.auth.loginRegisterForm.form,
+	auth: state.auth
 })
 
 export default connect(mapStateToProps)(LoginRegister)

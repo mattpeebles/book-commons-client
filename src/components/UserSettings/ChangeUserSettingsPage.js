@@ -11,18 +11,19 @@ export class ChangeUserSettings extends React.Component{
 		let location = locationArray[locationArray.length - 1]
 
 		if(location === 'email'){
-			return 	<EmailForm />
+			return 	<EmailForm auth={this.props.auth}/>
 		}
 
 		else{
-			return <PasswordForm />
+			return <PasswordForm auth={this.props.auth}/>
 		}
 	}
 }
 
 
 const mapStateToProps = state => ({
-	router: state.router
+	router: state.router,
+	auth: state.auth
 })
 
 export default connect(mapStateToProps)(ChangeUserSettings)

@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {push} from 'react-router-redux'
 
 import {saveBookToWishlist, removeBookFromWishlist} from '../../actions/wishlist'
 
@@ -10,8 +11,10 @@ export class DropdownItem extends React.Component{
 		let ebook = this.props.ebook
 		let index = e.target['wishlist'].selectedIndex
 		let listId = e.target['wishlist'][index].id
+		let name = e.target['wishlist'][index].value
 
 		this.props.dispatch(saveBookToWishlist(listId, ebook))
+		this.props.dispatch(push(`/wishlist/${name.toLowerCase()}`))
 	}
 
 	removeEbook(e){
@@ -46,6 +49,7 @@ export class DropdownItem extends React.Component{
 
 						else if(item === 'Change Wishlist'){
 							let options = this.props.wishlists.map((item, index) => {
+									//doesn't add current list to options
 								if(item.title !== this.props.currentList){
 									return <option key={index} id={item.id} value={item.title}>{item.title}</option>
 								}

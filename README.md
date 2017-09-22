@@ -14,6 +14,7 @@ A public domain book search that aggregates a variety of databases to display re
 ## TODO <a name="todo"></a>
 
 ### Integration <a name="todoIntegration"></a>
+- [ ] Add demo feature
 - [x] User email/password update
 - [x] Wishlist title update
 - [x] Wishlist remove item
@@ -48,7 +49,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Project Gutenberg api call - fetch, success, error, request
 - [ ] Europeana api call - fetch, success, error, request
 - [x] Open Library api call - fetch, success, error, request
-- [ ] Email/password update
+- [x] Email/password update
 - [x] Wishlist title update
 - [x] Wishlist remove item
 - [x] Wishlist display items
@@ -61,14 +62,14 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist
 
 ### Components <a name="todoComponents"></a>
-- [ ] add feedback to forms
-- [ ] require current password to be validated to change user settings
-- [ ] add feedback upon submit to:
-	- [ ] Login
-	- [ ] Register
-	- [ ] Save to wishlist
-	- [ ] Change Email
-	- [ ] Change Password
+- [ ] Add Demo
+- [x] require current password to be validated to change user settings
+- [x] add feedback upon submit to:
+	- [x] Login
+	- [x] Register
+	- [x] Save to wishlist
+	- [x] Change Email
+	- [x] Change Password
 - [x] Link search bars to external database api calls
 - [x] Display external database results on results page
 - [x] Add functions save to wishlist, delete from wishlist, change wishlist to dropdown links
@@ -79,7 +80,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Project Gutenberg api call - reducer, action
 - [ ] Europeana api call - reducer, action
 - [x] Open Library api call - reducer, action
-- [x] User email/password update - reducer, action
+- [x] User email/passworxd update - reducer, action
 - [x] Wishlist display items - reducer, action
 - [x] Wishlist title update - reducer, action
 - [x] Wishlist remove item - reducer, action

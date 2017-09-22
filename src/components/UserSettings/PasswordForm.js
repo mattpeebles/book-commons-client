@@ -1,24 +1,68 @@
 import React from 'react'
-import {reduxForm, Field} from 'redux-form';
+import { push } from 'react-router-redux'
+import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
 
-import {changeUserInfo} from '../../actions/auth'
-
-
+import {changeUserInfo, changeUserInfoError} from '../../actions/auth'
 
 export class PasswordForm extends React.Component{
 
     onSubmit(values) {
-    	const {newPassword: password} = values
+    	const {newPassword: password, confirmPassword, currentPassword} = values
+
+    	if(password !== confirmPassword){
+    		let err = {
+    			location: 'confirmPassword',
+    			message: 'Passwords do not match'
+    		}
+    		return this.props.dispatch(changeUserInfoError(err))
+    	}
 
     	let infoObj ={
-			password
+			confirmPassword,
+			password,
+			currentPassword
 		}
         
 		this.props.dispatch(changeUserInfo(infoObj))
     }
 
 	render(){
+
+		let errorMessage;
+	    if (this.props.error || this.props.auth.error){
+	        errorMessage = (
+	            <div className="message message-error">{this.props.error || this.props.auth.error.message}</div>
+	        );
+	        focus('email', this.props.auth.error.location)
+	    }
+
+
+		let successMessage;
+	    if (this.props.submitSucceeded && this.props.auth.error === null) {
+	        successMessage = (
+	            <div className="message message-success">
+	                Message submitted successfully
+	            </div>
+	        );
+	    }
+
+		if(this.props.auth.loading === true){
+			return (
+				<div>
+					<img src="/resources/icons/flip-book-loader.gif" alt='Loading Icon' />
+				</div>
+			)
+		}
+
+		if(this.props.auth.userInfoChanged === true){
+			setTimeout(() => this.props.dispatch(push('/')), 3000)
+			return (
+				<div>
+					Password changed
+				</div>
+			)
+		}
 
 		return( 
 			<div className="form">
@@ -27,6 +71,8 @@ export class PasswordForm extends React.Component{
 				    onSubmit={this.props.handleSubmit(values =>
 				        this.onSubmit(values)
 				)}>
+				 	{successMessage}
+            		{errorMessage}
 					<div className="form-group">
 						<label htmlFor="currentPassword">Current Password</label>
 						<Field 
@@ -64,7 +110,11 @@ export class PasswordForm extends React.Component{
 					  />
 					</div>
 					<div className="form-group">
-						<input type="submit" className="submitButton" value="Change Password" /> 
+		                <button
+		                    type="submit"
+		                    disabled={this.props.pristine || this.props.submitting}>
+		                    Change Password
+						</button>
 					</div>
 				</form>
 			</div>
