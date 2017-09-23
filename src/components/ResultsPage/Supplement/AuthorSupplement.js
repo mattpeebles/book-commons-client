@@ -1,26 +1,41 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-export default function AuthorSupplement(props){
+import {toggleSupplement} from '../../../actions/results'
 
-	return (
-		<div id="author" className="col-md-12 supplementType">
-			<div id="infoContainer" className="col-md-12">
-				<div id="authorName" className=" supplementName col-md-12">
-					<h3>{props.name}</h3>
-				</div>
-				<div id="authorDates" className="supplementDates col-md-12">
-					<h4>{props.dates}</h4>
-				</div>
+export class  AuthorSupplement extends React.Component{
+
+	handleClick(e){
+		this.props.dispatch(toggleSupplement('book'))
+	}
+
+	render(){
+		return (
+			
+			<div className="card text-center">
+			  <div className="card-header">
+			    <ul className="nav nav-tabs card-header-tabs">
+			      <li className="nav-item">
+			        <button className="nav-link active">Author</button>
+			      </li>
+			      <li className="nav-item">
+			        <button className="nav-link" onClick={() => this.handleClick()}>Book</button>
+			      </li>
+			    </ul>
+			  </div>
+			  <h4 className="card-header cardTitle">{this.props.name}</h4>
+			  <div className="centered">
+			 	 <img className="card-img-top supplementPhoto" src={this.props.image} alt="author" />
+			  </div>
+			  <div className="card-body">
+			    <h4 className="card-title">{this.props.dates}</h4>
+			    <p className="card-text">{this.props.summary}</p>
+			    <a href={this.props.location} target="_blank" className="btn btn-primary">Read More</a>
+			  </div>
 			</div>
-			<div id="photoContainer" className="supplementImageContainer col-md-12">
-				<img id="authorPhoto" alt="authorPhoto" className="supplementImage" src={props.image} />
-			</div>
-			<div id="summaryContainer" className="col-md-12">
-				<div id="summary">
-					{props.summary}
-				</div>
-			</div>
-			<a id="read-more" href={props.location}><p>Read more</p></a>
-		</div>
-	)
+		
+		)
+	}
 }
+
+export default connect()(AuthorSupplement)

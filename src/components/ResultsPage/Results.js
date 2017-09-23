@@ -6,7 +6,6 @@ import {toggleSupplement} from '../../actions/results'
 import Ebook from '../Ebook/Ebook'
 import AmazonBook from '../Ebook/AmazonBook'
 import Header from '../Header/Header'
-import NavPills from '../Inputs/NavPills'
 import SupplementInfo from './Supplement/SupplementInfo'
 
 import './Results.css'
@@ -27,7 +26,6 @@ export class Results extends React.Component{
 
 		if(this.props.results.length !== 0 || this.props.amazonResult.length !== 0){
 			supplement = <div id="supplement-container" className="row">						
-							<NavPills toggleSupplement={this.handleClick.bind(this)} supplement={this.props.supplement}/>
 							<SupplementInfo supplement={this.props.supplement} details={this.props[this.props.details]} />
 						</div>
 		}

@@ -56,12 +56,10 @@ export default function reducer(state = initialState, action) {
                 loggedIn: false
             })
         }
-
             //if currentUser is set to null, logout was called
             //sets logged in to false
         let {email, wishlists} = action.currentUser
         let _id = (action.currentUser.id === undefined) ? action.currentUser._id : action.currentUser.id
-
         let type = (action.currentUser.type === undefined) ? 'user' : 'demo'
 
         return Object.assign({}, state, {

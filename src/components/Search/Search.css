@@ -1,15 +1,7 @@
-#searchContainer {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  text-align: center;
-
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
+.buffer{
+  height: 28vh;
+  width: 100%;
 }
-
 
 #header{
 	margin-bottom: 3%;
@@ -19,11 +11,79 @@
 	font-size: 18px;
 }
 
-#bookSearch{
-	width: 50%;
-	margin-bottom: 2%;
+#searchContainer{
+    width: auto;
 }
+
+#searchGroup{
+  width: 95%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#searchAddon{
+  margin-bottom: 2%;
+  height: 30px;
+}
+
+#bookSearch{
+  height: 30px;
+	width: 100%;
+	margin-bottom: 2%;
+  border: 2px solid black;
+  border-left: none;
+}
+
+#bookSearchSubmit{
+  background-color: #1865B5;
+  color: white;
+  border: 3px solid black;
+  transition: box-shadow .33s ease-out;
+}
+
+#bookSearchSubmit:hover{
+  background-color: #1865B5;
+  box-shadow: 60px -10px #1865B5, inset 4.1em -0.5em #6DCCC4;
+}
+
+#bookSearchSubmit:active{
+  background-color: #E196BD;
+  box-shadow: -60px 10px #E196BD, inset -4.1em 0.5em #6DCCC4;
+  transition: none;
+}
+
 
 #advanced{
 	font-size: 16px;
+}
+
+#searchContainerGroup {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
+  background-color: #6DCCC4;
+  color: white;
+}
+
+#searchContainerGroup h1{
+  /*text-shadow: -.5px 0 #000000,0 .5px #000000, .5px 0 #000000,0 -.5px #000000*/
+}
+
+#borderDiv{
+  border: 20px solid black;
+  min-height: 225px;
+  /*height: set by jquery*/
+  width: 100%;
+  position: absolute;
+  left: 10%;
+  top: 20%;
+}
+
+#searchAddon{
+  border: 2px solid black;
+  border-right: none;
+  background-color: #E196BD;
+  color: white;
 }

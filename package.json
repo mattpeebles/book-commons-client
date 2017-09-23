@@ -13,6 +13,7 @@
     "faker": "^4.1.0",
     "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
+    "langs": "^2.0.0",
     "react": "^15.6.1",
     "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
@@ -23,7 +24,8 @@
     "react-scripts": "^1.0.11",
     "redux": "^3.7.2",
     "redux-form": "^7.0.4",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "to-title-case": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

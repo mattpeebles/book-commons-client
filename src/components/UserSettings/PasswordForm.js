@@ -2,6 +2,7 @@ import React from 'react'
 import { push } from 'react-router-redux'
 import {reduxForm, Field, focus} from 'redux-form';
 import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
+import Input from '../Inputs/Input'
 
 import {changeUserInfo, changeUserInfoError} from '../../actions/auth'
 
@@ -24,7 +25,7 @@ export class PasswordForm extends React.Component{
 			currentPassword
 		}
         
-		this.props.dispatch(changeUserInfo(infoObj))
+		return this.props.dispatch(changeUserInfo(infoObj))
     }
 
 	render(){
@@ -65,7 +66,7 @@ export class PasswordForm extends React.Component{
 		}
 
 		return( 
-			<div className="form">
+			<div className="form userSettingsForm">
 				<h2>Change Password</h2>
 				<form
 				    onSubmit={this.props.handleSubmit(values =>
@@ -79,7 +80,7 @@ export class PasswordForm extends React.Component{
 							name="currentPassword" 
 							id="currentPassword"
 							className="form-control" 
-							component="input" 
+							component={Input} 
 							type="password" 
 							placeholder="Current password"
 							validate={[required, nonEmpty]}
@@ -91,7 +92,7 @@ export class PasswordForm extends React.Component{
 					      name="newPassword" 
 					      id="newPassword"
 					      className="form-control" 
-					      component="input" 
+					      component={Input} 
 					      type="password" 
 					      placeholder="New passwod"
 						  validate={[required, length({min: 8, max: 72}), isTrimmed]}
@@ -103,7 +104,7 @@ export class PasswordForm extends React.Component{
 					      name="confirmPassword" 
 					      id="confirmPassword"
 					      className="form-control" 
-					      component="input" 
+					      component={Input}
 					      type="password" 
 					      placeholder="Confirm email" 
 						  validate={[required, nonEmpty, isTrimmed, matches('newPassword')]}

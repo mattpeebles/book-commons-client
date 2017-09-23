@@ -2,7 +2,7 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import {expect, should} from 'chai'
 
-import AuthorSupplement from './AuthorSupplement'
+import {AuthorSupplement} from './AuthorSupplement'
 
 let authorInfo = {
 	name: 'M. Ipsum',

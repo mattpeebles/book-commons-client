@@ -34,33 +34,40 @@ export class LoginForm extends React.Component{
 	    }
 
 		return(
-			<div className="module form-module">
-			  <div className="toggle"><i className="fa fa-times fa-pencil"></i>
-				<button className="toggleButton btn btn-default" onClick={() => this.props.dispatch(toggleLoginRegister('register'))}>Register</button>
-			  </div>
-			  <div className="closeForm">
-				<button className="btn btn-danger" onClick={() => this.props.dispatch(showLoginRegister(false))}>X</button>
-			  </div>			  
-			  <div className="form">
-			    <h2>Login to your account</h2>
-				<form
-	                onSubmit={this.props.handleSubmit(values =>
-	                    this.onSubmit(values)
-                )}>
-				 	{successMessage}
-            		{errorMessage}
-			      <Field name="email" id="email" component={Input} type="text" placeholder="Email"/>
-			      <Field name="password" id="password" component={Input} type="password" placeholder="Password"/>
-	                <button
-	                    type="submit"
-	                    disabled={this.props.pristine || this.props.submitting}>
-	                   	Login
-					</button>	
-			    </form>
-			  </div>
-			  <div className="cta"><a href="/">Forgot your password?</a></div>
+			<div className="loginRegisterContainer">	
+				<div className="module form-module">
+				  <div className="toggle"><i className="fa fa-times fa-pencil"></i>
+					<button className="toggleButton btn btn-default" onClick={() => this.props.dispatch(toggleLoginRegister('register'))}>Register</button>
+				  </div>
+				  <div className="closeForm">
+					<button className="btn" onClick={() => this.props.dispatch(showLoginRegister(false))}>X</button>
+				  </div>			  
+				  <div className="form">
+				    <h2>Login to your account</h2>
+					<form
+		                onSubmit={this.props.handleSubmit(values =>
+		                    this.onSubmit(values)
+		            )}>
+					 	{successMessage}
+		        		{errorMessage}
+				      <Field name="email" id="email" component={Input} type="text" placeholder="Email"/>
+				      <Field name="password" id="password" component={Input} type="password" placeholder="Password"/>
+		                
+					<div className='form-group'>
+						<button
+						    type="submit"
+						    className="submitButton"
+						    disabled={this.props.pristine || this.props.submitting}>
+						   	Login
+						</button>	
+					</div>
+
+				    </form>
+				  </div>
+				  <div className="cta"><a href="/">Forgot your password?</a></div>
+				</div>
 			</div>
-		)
+		)	
 	}
 }
 

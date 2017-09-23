@@ -7,15 +7,15 @@ import Languages from './Languages'
 
 describe('<Languages />', ()=> {
 	it('should render without crashing', ()=>{
-		shallow(<Languages languages={["english", "french"]} />)
+		shallow(<Languages languages={["eng", "fr"]} />)
 	})
 
 	it('should display array in component', () => {
-		let languages = ["english", "french"]
+		let languages = ["en", "fr"]
 		let languageStr = languages.toString().replace(/[,]/g, ' ')
 
 		let wrapper = shallow(<Languages languages={languages} />)
 
-		expect(wrapper.find('.bookLanguage').text()).to.equal(`Language: ${languageStr}`)
+		expect(wrapper.find('.bookLanguage').text()).to.equal(`Language: English Français`)
 	})
 })

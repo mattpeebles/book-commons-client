@@ -6,7 +6,21 @@
 	}
 /**/
 
+.card{
+	width: 90%;
+}
 
+.card-header.cardTitle{
+	background-color: transparent;
+}
+
+.supplementPhoto{
+	width: 175px;
+}
+
+.centered{
+	text-align: center;
+}
 
 @media screen and (min-width: 700px){
 

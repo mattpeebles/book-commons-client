@@ -1,3 +1,26 @@
+#navSubmit{
+	box-shadow: 30px -20px #1865B5, inset 2.1em -1.35em #f8f9fa;
+	color: black;
+	border: 1px solid black;
+	transition: box-shadow .33s ease-in;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+#navSubmit:hover{
+	background-color: #1865B5;
+	box-shadow: none;
+	color: white;
+}
+
+#navSubmit:active{
+	background-color: #E196BD;
+	box-shadow: none;
+	color: white;
+}
+
 #navBookSearch{
+	border: 1px solid black;
+	height: 31px;
 	width: 175px;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {push} from 'react-router-redux'
 
 
 import Header from '../../Header/Header'
@@ -14,6 +15,12 @@ import './WLSettings.css'
 
 
 export class WLSettings extends React.Component{
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.currentUser === null){
+			this.props.dispatch(push('/'))
+		}
+	}
 
 	handleClick(e){
 		this.props.dispatch(changeWishlist(e.target.text))
@@ -132,7 +139,8 @@ const mapStateToProps = state => ({
 	wishlistsNames: state.wishlist.wishlistNames,
 	wishlists: state.wishlist.wishlists,
 	addWishlist: state.wishlist.addWishlist,
-	wishlistsEdit: state.wishlist.wishlistsEdit
+	wishlistsEdit: state.wishlist.wishlistsEdit,
+	currentUser: state.auth.currentUser
 })
 
 export default connect(mapStateToProps)(WLSettings)

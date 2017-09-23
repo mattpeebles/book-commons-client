@@ -4,6 +4,8 @@ import {push} from 'react-router-redux'
 
 import {saveBookToWishlist, removeBookFromWishlist} from '../../actions/wishlist'
 
+import './DropdownItem.css'
+
 export class DropdownItem extends React.Component{
 	
 	addBook(e){
@@ -85,7 +87,7 @@ export class DropdownItem extends React.Component{
 
 
 		return (
-			<form onSubmit={e => this.addBook(e)}>
+			<form className="dropdownForm" onSubmit={e => this.addBook(e)}>
 				<select name='wishlist'>
 					{options}
 				</select>

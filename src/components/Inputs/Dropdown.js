@@ -2,6 +2,8 @@ import React from 'react'
 
 import DropdownItem from './DropdownItem'
 
+import './Dropdown.css'
+
 export default function Dropdown(props){
 	
 	return(

@@ -46,9 +46,9 @@ export default (state, action) => {
 	}
 
 	if(action.type === BOOK_SUPPLEMENT){
-		let {title, publishDate, firstSentence, cover, location} = action.bookInfo
+		let {title, publishDate, cover, summary, location} = action.bookInfo
 
-		let bookSupplement = {title, publishDate, cover, firstSentence, location}
+		let bookSupplement = {title, publishDate, cover, summary, location}
 
 		return Object.assign({}, state, {
 			bookSupplement

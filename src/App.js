@@ -62,6 +62,7 @@ export class App extends React.Component{
 	}
 
 	render(){
+		console.log(this.props.user)
 		let loginRegisterForm;
 		if(this.props.display === true){
 			loginRegisterForm = <LoginRegister />

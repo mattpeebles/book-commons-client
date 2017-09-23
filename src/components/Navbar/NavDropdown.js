@@ -28,16 +28,17 @@ export class NavDropdown extends React.Component{
 
 			return(
 				<li className="nav-item dropdown" id={this.props.id}>
-			        <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			        <button className="nav-link dropdown-toggle navbarDropdownMenuLink" id="wishlistsMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          {this.props.title}
-			        </a>
-			        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+			        </button>
+			        <div className="dropdown-menu" aria-labelledby="wishlistsMenuLink">
 		       			{links}
 			        </div>
 			    </li>
 			)	
 		}
 
+			//user settings
 		else{
 			const links = this.props.links.map((link, index) => {
 				if(link === 'Logout'){
@@ -55,10 +56,10 @@ export class NavDropdown extends React.Component{
 
 			return(
 				<li className="nav-item dropdown" id={this.props.id}>
-			        <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			        <button className="nav-link dropdown-toggle navbarDropdownMenuLink" id="accountSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          {this.props.title}
-			        </a>
-			        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+			        </button>
+			        <div className="dropdown-menu" aria-labelledby="accountSettingsLink">
 		       			{links}
 			        </div>
 			    </li>
