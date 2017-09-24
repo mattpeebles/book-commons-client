@@ -4,7 +4,7 @@ import React from 'react'
 export default function PublishDate(props){
 
 	if(props.publishDate === undefined){
-		return <div></div>
+		return <div className="col-auto"></div>
 	}
 
 	return(

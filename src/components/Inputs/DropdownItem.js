@@ -59,7 +59,7 @@ export class DropdownItem extends React.Component{
 							})
 
 							return (
-								<form key={index} onSubmit={e => this.changeWishlist(e)}>
+								<form key={index} className="dropdownWishlistForm" onSubmit={e => this.changeWishlist(e)}>
 									<select name='wishlist'>
 										{options}
 									</select>

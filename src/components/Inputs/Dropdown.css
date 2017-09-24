@@ -1,7 +1,79 @@
-#dropdownMenuButton{
-/*	background-color: #3C1518;
-	color: #F7C548;*/
+
+  /*results page dropdown*/
+
+.result:nth-child(1n+1) #dropdownMenuButton{  
+	box-shadow: 15px 15px #E196BD, inset .83em .83em white;
+	background-color: #E196BD;
+	color: black;
+	border: 3px solid black;
+	width: auto;
+	transition: box-shadow .33s ease-out;
 }
+
+.result:nth-child(1n+1) #dropdownMenuButton:hover{
+  box-shadow: none;
+  background-color: #1865B5;
+  color: white;
+  border: 3px solid black;
+}
+
+.result:nth-child(1n+1) #dropdownMenuButton:active{
+  background-color: #FFF965;
+  box-shadow: -15px 15px #FFF965, inset -.83em .83em white;
+  transition: none;
+  color: black;
+  transition: box-shadow .33s ease-in;
+}
+
+.result:nth-child(2n+1) #dropdownMenuButton{  
+	box-shadow: -15px -15px #FFF965, inset -.83em -.83em white;
+	background-color: #FFF965;
+	color: black;
+	border: 3px solid black;
+	width: auto;
+	transition: box-shadow .33s ease-out;
+}
+
+.result:nth-child(2n+1) #dropdownMenuButton:hover{
+  box-shadow: none;
+  background-color: #E196BD;
+  color: white;
+  border: 3px solid black;
+}
+
+.result:nth-child(2n+1) #dropdownMenuButton:active{
+  background-color: #FFF965;
+  box-shadow: -15px 15px #FFF965, inset -.83em .83em white;
+  transition: none;
+  color: black;
+  transition: box-shadow .33s ease-in;
+}
+
+
+.result:nth-child(3n+1) #dropdownMenuButton{  
+	box-shadow: 15px -15px #6DCCC4, inset .83em -.83em white;
+	background-color: #6DCCC4;
+	color: black;
+	border: 3px solid black;
+	width: auto;
+	transition: box-shadow .33s ease-out;
+}
+
+.result:nth-child(3n+1) #dropdownMenuButton:hover{
+  box-shadow: none;
+  background-color: #FA4236;
+  color: white;
+  border: 3px solid black;
+}
+
+.result:nth-child(3n+1) #dropdownMenuButton:active{
+  background-color: #FFF965;
+  box-shadow: -15px 15px #FFF965, inset -.83em .83em white;
+  transition: none;
+  color: black;
+  transition: box-shadow .33s ease-in;
+}
+
 
 /*.dropdown-menu{
 	width: 15rem;

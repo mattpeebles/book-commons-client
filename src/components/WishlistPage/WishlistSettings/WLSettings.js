@@ -75,12 +75,14 @@ export class WLSettings extends React.Component{
 							</div>
 							<form className="col" id={title+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
 								<input type="text" name="editTitle" placeholder={title} ref={input => this.input = input}/>
-								<input type="submit" name="editSubmit" />
+								<input type="submit" name="editSubmit" value="Add"/>
 								<button type="cancel" id={title+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
 							</form>
 						</div>
 					)
 				}
+
+				let bookNum = (list.items.length === 1) ? 'book' : 'books'
 
 				return (
 							<div key={index} className="col-12 col-md-6 settingsContainer">
@@ -90,15 +92,15 @@ export class WLSettings extends React.Component{
 											<Link to={`/wishlist/${title.toLowerCase()}`} onClick={e => this.handleClick(e)}>{title}</Link>
 										</div>
 										<div className="col">
-											<span className="listTitle">{list.items.length}</span> books
+											<span className="listTitle">{list.items.length}</span> {bookNum}
 										</div>
 									</div>
 									<div className="col-auto row">
 										<div className="col">
-											<button id={title+"-Edit"} className="btn btn-default btn-sm" onClick={e => this.toggleEditForm(e)}>Edit</button>
+											<button id={title+"-Edit"} className="btn btn-default btn-sm editWishlist" onClick={e => this.toggleEditForm(e)}>Edit</button>
 										</div>
 										<div className="col-auto">
-											<button id={title+"-Delete"} className="btn btn-default btn-sm" onClick={e => this.deleteList(e)}>Delete</button>
+											<button id={title+"-Delete"} className="btn btn-default btn-sm deleteWishlist" onClick={e => this.deleteList(e)}>Delete</button>
 										</div>
 									</div>
 								</div>
@@ -122,10 +124,14 @@ export class WLSettings extends React.Component{
 
 		return (
 			<div className="container" >
-				<Header headerId="header" subtitleId="subtitle" title="Settings" subtitle="Wishlists"/>
+				<div id="wishlistSettingsContainer">
+					<Header headerId="header" subtitleId="subtitle" title="Settings" subtitle="Wishlists"/>
+				</div>
 				{addButton}
-				<div className="row">
+				<div className="row">	
 					{newWishlist}
+				</div>
+				<div className="row">
 					{formatLinks}
 				</div>
 			</div>

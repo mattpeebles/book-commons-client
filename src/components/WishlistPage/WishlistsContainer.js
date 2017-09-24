@@ -2,6 +2,8 @@ import React from 'react'
 
 import WishlistLinks from './WishlistLinks'
 
+import './WishlistsContainer.css'
+
 export default function WishlistsContainer(props){
 	return(
 		<div id="wishlists-container" className="col-md-4">

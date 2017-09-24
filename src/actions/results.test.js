@@ -1,4 +1,5 @@
 import {
+	TOGGLE_ABOUT, toggleAbout,
 	emptyResults, EMPTY_RESULTS,
 	toggleSupplement, TOGGLE_SUPPLEMENT,
 	fetchGutenbergBook, fetchGutenbergBookId, fetchGutenbergSuccess, fetchGutenbergRequest,
@@ -8,6 +9,13 @@ import {
 
 const {API_BASE_URL, GOOGLE_KEY, GOOGLE_ID_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL, OPEN_LIBRARY_URL} = require('../config');
 
+
+describe('toggleAbout', () => {
+	it('should toggle about boolean', () => {
+		let action = toggleAbout()
+		expect(action.type).toEqual(TOGGLE_ABOUT)
+	})
+})
 
 describe('emptyResults', () => {
 	it('should empty results array', () => {

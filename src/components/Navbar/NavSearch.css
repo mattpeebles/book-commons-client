@@ -1,10 +1,11 @@
 #navSubmit{
-	box-shadow: 30px -20px #1865B5, inset 2.1em -1.35em #f8f9fa;
+	box-shadow: 30px -20px #FFF965, inset 2.1em -1.35em #f8f9fa;
 	color: black;
 	border: 1px solid black;
 	transition: box-shadow .33s ease-in;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+	background-color: #FFF965;
 }
 
 #navSubmit:hover{

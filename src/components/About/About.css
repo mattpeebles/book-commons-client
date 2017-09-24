@@ -1,0 +1,12 @@
+.about {
+  position: absolute;
+  background: #ffffff;
+  max-width: 320px;
+  width: 100%;
+  border: 15px solid black;
+  right: 0;
+  left: 0;
+  margin: 5% auto;
+  z-index: 2;
+  background-color: white;
+}

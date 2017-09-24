@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import faker from 'faker'
 
 import {demoUser, login, showLoginRegister} from '../../actions/auth'
+import {toggleAbout} from '../../actions/results'
 
 import NavSearch from './NavSearch'
 import NavDropdown from './NavDropdown'
@@ -27,8 +28,20 @@ export class NavLinks extends React.Component{
 
 	}
 
+	about(){
+		this.props.dispatch(toggleAbout())
+	}
+
 	render(){ 
 		let links = this.props.navLinks.map((link, index) => {
+
+			if (link === 'About'){
+				return (
+					<li key={index} id={link} className="nav-item">
+			        	<a className="nav-link" onClick={() => this.about()}>{link}</a>
+			    	</li>
+			    )
+			}
 
 			if (link === 'Demo'){
 				return (

@@ -1,41 +1,286 @@
+#wishlistSettingsContainer{
+	border: 5px solid black;
+	text-align: left;
+	width: 45%;
+	background-color: #FFF965;
+	color: #333;
+	box-shadow: -15px -15px #FFF965, inset -.83em -.83em white;
+	margin-bottom: 5%;
+}
+
 .addContainer{
 	margin-bottom: 20px;
 	text-align: center;
 }
 
-.addWishlist{
-	text-align: center;
-	border-top: 1px solid black;
-	padding: 15px;
-	font-size: 18px;
+.addWLButton{
+	border: 2px solid black;
+	background-color: #6DCCC4;
+	color: #333;
+	box-shadow: 15px -15px #6DCCC4, inset .83em -.83em white;
+	transition: box-shadow .33s ease-out;
 }
 
+.addWLButton:hover{
+	background-color: #FFF965;
+	color: #333;
+	box-shadow: -15px -15px #FFF965, inset -.83em -.83em white;
+}
+
+.addWLButton:active{
+	background-color: #1865B5;
+	color: white;
+	box-shadow: none;
+}
+
+	/*form to add wishlist*/
+.addWishlist{
+	border: 3px solid black;
+	background-color: white;
+	padding: 15px;
+	font-size: 18px;
+	color: #333;
+	margin-bottom: 2%;
+}
+
+.addWishlistTitle{
+	margin-bottom: 2%;
+	text-align: left;
+}
+
+.addWishlistTitle > h4{
+	border: 2px solid black;
+	width: 35%;
+	background-color: #6DCCC4;
+	box-shadow: -13px -10px #6DCCC4, inset -.5em -.35em white;
+}
+
+.addWishlist input, .addWishlist button{
+	border: 2px solid black;
+	background-color: white;
+	color: #333;
+	margin-right: 2%
+}
+
+.addWishlist input[type='submit']{
+	background-color: #1865B5;
+	color: #333;
+	box-shadow: 15px -15px #1865B5, inset .83em -.83em white;
+	transition: box-shadow .33s ease-out;
+}
+
+.addWishlist input[type='submit']:hover{
+	background-color: #1865B5;
+	color: #333;
+	box-shadow: -15px -15px #1865B5, inset -.83em -.83em white;
+}
+
+.addWishlist input[type='submit']:active{
+	background-color: #1865B5;
+	color: #333;
+	box-shadow: none;
+}
+
+	/*new wishlist cancel*/
+.addWishlist button{
+	background-color: #FA4236;
+	box-shadow: 15px -15px #FA4236, inset .83em -.83em white;
+	transition: box-shadow .33s ease-out;
+}
+
+.addWishlist button:hover{
+	background-color: #FA4236;
+	color: #333;
+	box-shadow: -15px -15px #FA4236, inset -.83em -.83em white;
+}
+
+.addWishlist button:active{
+	background-color: #FA4236;
+	color: #333;
+	box-shadow: none;
+}
+
+	/*each wishlist settings container*/
 .settingsContainer{
-	border-top: 1px solid black;
+	border-top: 3px solid black;
 	font-size: 18px;
 	padding: 15px;
+	background-color: white;
 }
 
 .settingsContainer:last-child{
-	border-bottom: 1px solid black;
+	border-bottom: 3px solid black;
+}
+
+.settingsContainer button {
+	border: 2px solid black;
+	color: #333;
+}
+
+.editWishlist{
+	border: 2px solid black;
+	background-color: #E196BD;
+	color: #333;
+	box-shadow: -15px 10px #E196BD, inset -.92em .61em white;
+	transition: box-shadow .33s ease-out;
+}
+
+.editWishlist:hover{
+	background-color: #E196BD;
+	color: #333;
+	box-shadow: -15px -10px #E196BD, inset -.95em -.6em white;
+}
+
+.editWishlist:active{
+	background-color: #E196BD;
+	color: white;
+	box-shadow: none;
+}
+
+.deleteWishlist{
+	border: 2px solid black;
+	background-color: #FA4236;
+	color: #333;
+	box-shadow: 10px -10px #FA4236, inset .6em -.6em white;
+	transition: box-shadow .33s ease-out;
+}
+
+.deleteWishlist:hover{
+	background-color: #FA4236;
+	color: #333;
+	box-shadow: 10px 15px #FA4236, inset .6em .95em white;
+}
+
+.deleteWishlist:active{
+	background-color: #FA4236;
+	color: white;
+	box-shadow: none;
 }
 
 
 @media screen and (min-width: 700px){
+	#wishlistSettingsContainer{
+		box-shadow: -15px 15px #FFF965, inset -.83em .83em white;
+		margin-bottom: 3%;
+}
+
 	.settingsContainer{
 		border: 1px solid black;
 		font-size: 18px;
 		padding: 15px;
 	}
 
-	.settingsContainer:last-child{
+		/*form to add wishlist*/
+	.addWishlist{
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.addWishlistTitle{
+	}
+
+	.addWishlistTitle > h4{
+		width: 45%;
+	}
+
+	.addWishlist form{
+		width: 100%;
+		text-align: left;
+	}
+
+	.addWishlist input, .addWishlist button{
+		margin-right: 1%;
+	}
+
+	.addWishlist input[type='submit']{
+		color: white;
+		box-shadow: -5px 8px #1865B5, inset -.15em .3em white;
+		margin-left: 2%;
+	}
+
+	.addWishlist input[type='submit']:hover{
+		background-color: #1865B5;
+		color: white;
+		box-shadow: 5px -8px #1865B5, inset .15em -.3em white;
+	}
+
+	.addWishlist input[type='submit']:active{
+		background-color: #1865B5;
+		color: #333;
+		box-shadow: none;
+	}
+
+		/*new wishlist cancel*/
+	.addWishlist button{
+		background-color: #FA4236;
+		box-shadow: 15px -15px #FA4236, inset .72em -.72em white;
+	}
+
+	.addWishlist button:hover{
+		background-color: #FA4236;
+		color: #333;
+		box-shadow: 15px 10px #FA4236, inset .72em .46em white;
+	}
+
+	.addWishlist button:active{
+		background-color: #FA4236;
+		color: white;
+		box-shadow: none;
+	}
+
+		/*each wishlist settings container*/
+	.settingsContainer{
+		border: 3px solid black;
 
 	}
 
-	.addWishlist{
-		text-align: center;
-		border: 1px solid black;
-		padding: 15px;
-		font-size: 18px;
+	.settingsContainer:last-child{
+		border-bottom: 3px solid black;
+	}
+
+	.settingsContainer button {
+		border: 2px solid black;
+		color: #333;
+	}
+
+	.editWishlist{
+		border: 2px solid black;
+		background-color: #E196BD;
+		color: #333;
+		box-shadow: -15px 10px #E196BD, inset -.92em .61em white;
+		transition: box-shadow .33s ease-out;
+	}
+
+	.editWishlist:hover{
+		background-color: #E196BD;
+		color: #333;
+		box-shadow: -15px -10px #E196BD, inset -.95em -.6em white;
+	}
+
+	.editWishlist:active{
+		background-color: #E196BD;
+		color: white;
+		box-shadow: none;
+	}
+
+	.deleteWishlist{
+		border: 2px solid black;
+		background-color: #FA4236;
+		color: #333;
+		box-shadow: 10px -10px #FA4236, inset .6em -.6em white;
+		transition: box-shadow .33s ease-out;
+	}
+
+	.deleteWishlist:hover{
+		background-color: #FA4236;
+		color: #333;
+		box-shadow: 10px 15px #FA4236, inset .6em .95em white;
+	}
+
+	.deleteWishlist:active{
+		background-color: #FA4236;
+		color: white;
+		box-shadow: none;
 	}
 }

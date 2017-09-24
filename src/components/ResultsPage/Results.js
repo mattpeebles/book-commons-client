@@ -43,7 +43,7 @@ export class Results extends React.Component{
 		}
 
 		return(
-			<main>
+			<main id="resultsPage">
 				<Header headerId='header' title="Results" />
 
 				<div id="main-container" className="container-fluid">

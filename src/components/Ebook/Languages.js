@@ -33,7 +33,7 @@ export default function Languages(props){
 				}
 			}
 		return 	(
-			<div className="bookLanguage col">Lang<span className="abbr">uage</span>: {languages.toString().replace(/[,]/g, ' ')}</div>
+			<div className="bookLanguage col text-right">Lang<span className="abbr">uage</span>: {languages.toString().replace(/[,]/g, ' ')}</div>
 		)
 	}
 }

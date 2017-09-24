@@ -18,7 +18,7 @@ import NavBar from './components/Navbar/NavBar'
 import Footer from './components/Footer/Footer'
 import LoginRegister from './components/LoginRegister/LoginRegister'
 import ChangeUserSettings from './components/UserSettings/ChangeUserSettingsPage'
-
+import About from './components/About/About'
 
 let count = 0;
 
@@ -62,7 +62,6 @@ export class App extends React.Component{
 	}
 
 	render(){
-		console.log(this.props.user)
 		let loginRegisterForm;
 		if(this.props.display === true){
 			loginRegisterForm = <LoginRegister />
@@ -73,11 +72,17 @@ export class App extends React.Component{
             this.props.dispatch(fetchWishlists());
 		}
 
+		let about;
+		if(this.props.showAbout === true){
+			about = <About />
+		}
+
 		return(
 			<ConnectedRouter history={history}>
 				<div>
 					<NavBar />
 					{loginRegisterForm}
+					{about}
 					<main>
 						<Route exact path='/' component={LandingPage} />
 						<Route exact path='/results' component={Results} />
@@ -100,6 +105,7 @@ const mapStateToProps = state => ({
 	wishlist: state.wishlist,
 	wishlists: state.wishlist.wishlists,
 	token: state.auth.authToken,
+	showAbout: state.results.showAbout,
 	user: state.auth.currentUser,
 	display: state.auth.loginRegisterForm.display,
 	loggedIn: state.auth.loggedIn,

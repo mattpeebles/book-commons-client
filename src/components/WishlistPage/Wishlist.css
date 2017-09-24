@@ -1,8 +1,52 @@
 
-#header{
+.wishlistHeader{
 	margin-top: 2%;
+	text-align: left;
+	border: 5px solid black;
+	width:45%;
+	background-color: #FFF965;
+	color: #333;
+	box-shadow: -15px -15px #FFF965, inset -.83em -.83em white;
+
 }
 
+#settings{
+	text-align: center;
+	border-radius: 50%;
+}
+
+#settings > button{
+	background-color: #FFF965;
+	box-shadow: -15px 15px #FFF965, inset -.83em .83em white;
+	text-align: center;
+	border-radius: 50%;
+	border: 3px solid black;
+}
+
+#settings > button:hover{
+	background-color: #6DCCC4;
+	box-shadow: 15px -15px #6DCCC4, inset .83em -.83em white;
+	border: 3px solid black;
+	color: #333;
+}
+
+#settings > button:active{
+	background-color: #1865B5;
+	box-shadow: none;
+	color: white;
+}
+
+.material-icons{
+	line-height: none;
+	display: block
+}
+
+/*#wishlistName{
+	border: 3px solid black;
+	background-color: white;
+	width: 30%;
+	color: #333;
+}*/
 
 #main-container{
 	min-height: auto;
@@ -26,16 +70,20 @@
 		padding: 0;
 	}
 
-/*author*/
-
-	#wishlists-container{
-		display: none;
-	}
-/**/
-
 
 
 @media screen and (min-width: 768px){
+
+	.wishlistHeader{
+		margin-top: 2%;
+		text-align: left;
+		border: 5px solid black;
+		width:30%;
+		background-color: #FFF965;
+		color: #333;
+		box-shadow: -15px -15px #FFF965, inset -.83em -.83em white;
+
+	}
 
 	#main-container{
 		min-height: auto;
@@ -51,39 +99,5 @@
 		#results{
 			height: auto;
 		}
-
-	/*wishlist*/
-
-		#wishlists-container{
-			display: inherit;
-			text-align: center;
-			position: fixed;
-			right: 0
-		}
-
-		#wishlists-row{
-			position: relative;
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		#wishlistTitle{
-			text-align: center;
-		}
-
-		#wishlists{
-			height: auto;
-			border: 1px solid black;
-		}
-
-		#lists-container{
-			height: auto;
-			text-align: left;
-		}
-
-		#wishlistLists{
-			text-align: left;
-		}
-
 	/**/
 }

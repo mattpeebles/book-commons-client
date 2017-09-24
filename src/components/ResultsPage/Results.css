@@ -1,4 +1,4 @@
-#header{
+#resultsPage > #header{
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
@@ -38,7 +38,7 @@
 		line-height: 1.75em;
 	}
 
-	#header{
+	#resultsPage > #header{
 		background-color: #FFF965;
 		box-shadow: 150px -10px #FFF965, inset 3.7em -0.2em #F6F6F6;
 	}

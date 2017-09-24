@@ -17,8 +17,8 @@ export class AddWishlist extends React.Component{
 		return(
 					<div className="col-12 col-md-6 addWishlist">
 						<div className="row">
-							<div className="col-12">
-								New Wishlist
+							<div className="col-12 addWishlistTitle">
+								<h4>New Wishlist</h4>
 							</div>
 							<div className="col-12">
 								<form onSubmit={e => this.submitWishlist(e)}>

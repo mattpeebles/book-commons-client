@@ -30,7 +30,7 @@ export class BookSupplement extends React.Component{
 				  <div className="card-body">
 				    <h4 className="card-title">{this.props.dates}</h4>
 				    <p className="card-text">{this.props.summary}</p>
-				    <a href={this.props.location} target="_blank" className="btn btn-primary">Read More</a>
+				    <a href={this.props.location} target="_blank" className="btn btn-primary supplementButton">Read More</a>
 				  </div>
 				</div>
 		)

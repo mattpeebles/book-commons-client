@@ -2,6 +2,11 @@ import { push } from 'react-router-redux'
 import toTitleCase from 'to-title-case'
 const {API_BASE_URL, GOOGLE_KEY, GOOGLE_ID_URL, OPEN_LIBRARY_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
 
+export const TOGGLE_ABOUT = 'TOGGLE_ABOUT'
+export const toggleAbout = () => ({
+	type: TOGGLE_ABOUT
+})
+
 export const EMPTY_RESULTS = "EMPTY_RESULTS"
 export const emptyResults = () => ({
 	type: EMPTY_RESULTS
