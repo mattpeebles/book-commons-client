@@ -33,6 +33,11 @@ export const fetchWishlists = () => (dispatch, getState) => {
         })
 }
 
+export const RESET_WISHLIST_STATE = 'RESET_WISHLIST_STATE'
+export const resetWishlistState = () => ({
+    type: RESET_WISHLIST_STATE
+})
+
 export const FETCH_WISHLISTS_REQUEST = 'FETCH_WISHLISTS_REQUEST'
 export const fetchWishlistsRequest = () => ({
 	type: FETCH_WISHLISTS_REQUEST

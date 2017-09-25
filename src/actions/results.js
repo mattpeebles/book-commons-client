@@ -1,6 +1,11 @@
 import { push } from 'react-router-redux'
-
+import toTitleCase from 'to-title-case'
 const {API_BASE_URL, GOOGLE_KEY, GOOGLE_ID_URL, OPEN_LIBRARY_URL, GUTENBERG_ID_URL, GUTENBERG_BOOK_URL} = require('../config');
+
+export const TOGGLE_ABOUT = 'TOGGLE_ABOUT'
+export const toggleAbout = () => ({
+	type: TOGGLE_ABOUT
+})
 
 export const EMPTY_RESULTS = "EMPTY_RESULTS"
 export const emptyResults = () => ({
@@ -32,10 +37,14 @@ export const toggleSupplement = (info) => ({
 	details: `${info}Supplement`
 })
 
-export const fetchBooks = title => dispatch => {
+export const fetchBooks = term => dispatch => {
 		//clears results before each search
 	dispatch(emptyResults())
 	
+	let sTerm = term.toString()
+
+	let title = toTitleCase(sTerm)
+
 	let wikiTitle = title.replace(' ', '_')
 	dispatch(wikiBook(wikiTitle))
 	dispatch(amazonBooks(title))
@@ -312,7 +321,7 @@ export const fetchBooks = title => dispatch => {
 							let bookInfo = {
 								title: res.title,
 								publishDate: undefined,
-								firstSentence: `${res.extract.slice(0, 250)}...`,
+								summary: `${res.extract.slice(0, 250)}...`,
 								cover: res.thumbnail.source,
 								location: `https://en.wikipedia.org/wiki/${name}_(novel)`
 							};

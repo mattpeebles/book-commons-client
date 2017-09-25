@@ -1,57 +1,92 @@
+.card{
+	display: none;
+}
 
-/*author*/
-
-	#supplement-container{
-		display: none;
+@media screen and (min-width: 768px){
+	.card{
+		display: inherit;
+		width: 90%;
+		border: none;
 	}
-/**/
 
+	div.card-header{
+		border-bottom: 5px solid black;
+		padding-top: 0;
+	}
 
+	h4.card-header{
+		border-top: 1px solid black;
+		border-bottom: none;
+	}
 
-@media screen and (min-width: 700px){
+	h4.card-header, .cardTitle, div.centered{
+		border-left: 5px solid black;
+		border-right: 5px solid black;
+		border-top: white;
+		color: #333;
+	}
 
+	button.nav-link.active{
+		border-bottom: 3px solid white;
+	}
 
-		#supplement-container{
-			height: 100%;
-			display: inherit;
-		}
+	.nav-tabs button.nav-link{
+		border: 1.5px solid transparent;
+	}
 
-		.supplementType{
-			height: auto;
-			width: 100%;
-			text-align: center;
-			border: 1px solid black;
-		}
+	.nav-tabs button.nav-link.active{
+		border: 5px solid black;
+		border-bottom: 3px solid white;
+	}
 
-		.supplementImageContainer{
-			width: 150px;
-			margin-bottom: 1%;
-			position: relative;
-			margin-left: auto;
-			margin-right: auto;
-		}
+	.card-header-tabs{
+		margin-bottom: -1.02rem;
+	}
 
-		#photoContainer,#coverContainer{
-			text-align: center;
-			width: 100%;
-			margin-bottom: 2%;
-		}
+	.card-body{
+		border: 5px solid black;
+		border-top: none;
+		color: #333;
+	}
 
-		#cover, #authorPhoto{
-			width: 150px;
-		}
+	.card-header.cardTitle{
+		padding-top: 1em;
+		background-color: transparent;
+	}
 
-		#summaryContainer{
-			overflow: hidden;
-		}
+	.supplementPhoto{
+		width: 175px;
+	}
 
-		#summary{
-			text-align: left;
-		}
+	.centered{
+		text-align: center;
+	}
 
-		#read-more > p{
-			margin-bottom: 0;
-			padding-bottom: 0;
-		}
-	/**/
+	.supplementButton {
+	  box-shadow: 35px -20px #6DCCC4, inset 2em -1.1em white;
+	  background-color: #6DCCC4;
+	  color: black;
+	  border: 3px solid black;
+	  width: auto;
+	  transition: box-shadow .33s ease-out;
+	}
+
+	.supplementButton:hover{
+	  box-shadow: none;
+	  background-color: #1865B5;
+	  color: white;
+	  border: 3px solid black;
+	}
+
+	.supplementButton:active{
+	  background-color: #FFF965;
+	  box-shadow: -35px 10px #FFF965, inset -2.1em 0.4em white;
+	  transition: none;
+	  color: black;
+	  transition: box-shadow .33s ease-in;
+	}
+
+	.supplementPhoto, .supplementCover{
+	  box-shadow: -35px 10px #FFF965, inset -2.1em 0.4em white;
+	}
 }

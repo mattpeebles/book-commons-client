@@ -1,0 +1,94 @@
+
+.dropdown.show > div.dropdown-menu.show{
+	width: 300px;
+	border: 3px solid #333;
+}
+
+select{
+	margin-right: 3%;
+	border: 2px solid black;
+	background-color: transparent;
+	width: auto;
+	border-radius: 0px;
+	height: 30px;
+}
+
+	/*results dropdown*/
+
+.result:nth-child(1n+1) .dropdownForm input {
+	border: 2px solid black;
+	color: #333;
+	background-color: #FA4236;
+	box-shadow: 15px 15px #FA4236, inset .83em .83em white;
+}
+
+.result:nth-child(2n+1) .dropdownForm input {
+	border: 2px solid black;
+	color: #333;
+	background-color: #FFF965;
+	box-shadow: 15px 15px #FFF965, inset .83em .83em white;
+}
+
+.result:nth-child(3n+1) .dropdownForm input {
+	border: 2px solid black;
+	color: #333;
+	background-color: #6DCCC4;
+	box-shadow: 15px 15px #6DCCC4, inset .83em .83em white;
+}
+
+/*wishlist dropdown*/
+	/*form*/
+
+	.dropdownWishlistForm{
+		position: relative;
+		margin-left: auto;
+		margin-right: 2%;
+		margin-bottom: 3%;
+		text-align: center;
+	}
+
+	/*change wishlist*/
+
+	.result .dropdownWishlistForm input {
+		margin-left: 3%;
+		text-align: right;
+		border: 2px solid black;
+		color: #333;
+		background-color: #6DCCC4;
+		box-shadow: 20px -5px #6DCCC4, inset 1.15em -.2em white;
+	}
+
+	.result .dropdownWishlistForm input:hover {
+		background-color: #6DCCC4;
+		box-shadow: none;
+		color: white;
+	}
+
+	/*delete button*/
+	.dropdown.show > div.dropdown-menu.show > div > div > button {
+		width: auto;
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.dropdown.show > div.dropdown-menu.show > div > div > button{
+		border: 2px solid black;
+		color: #333;
+		background-color: #FA4236;
+		box-shadow: 15px 15px #FA4236, inset .83em .83em white;
+	}
+
+	.dropdown.show > div.dropdown-menu.show > div > div > button:hover{
+		border: 2px solid black;
+		color: white;
+		background-color: #FA4236;
+		box-shadow: none;
+	}
+
+	.dropdown.show > div.dropdown-menu.show > div > div > button:active{
+		border: 2px solid black;
+		color: white;
+		background-color: #FA4236;
+		box-shadow: none;
+	}

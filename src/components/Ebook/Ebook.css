@@ -13,11 +13,10 @@
 		margin-left: auto;
 		margin-right: auto;
 		font-size: 14px;
-		border-top: 1px solid black;
-	}
-
-	.result:last-child{
-		border-bottom: 1px solid black;
+		border: 3px solid black;
+		background-color: white;
+		margin-bottom: 3%;
+		color: #333;
 	}
 
 	.wishlistSelect{
@@ -49,6 +48,9 @@
 		display: none;
 	}
 
+	.audioBook{
+		margin-bottom: 0;
+	}
 
 	.database{
 		font-size: 10px;
@@ -69,11 +71,7 @@
 			width: 90%;
 			height: auto;
 			margin-bottom: 1%;
-			border: none;
-		}
-
-		.result:last-child{
-			border-bottom: none;
+			border: 5px solid black;
 		}
 
 		.wishlistSelect{

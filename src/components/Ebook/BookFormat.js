@@ -1,6 +1,11 @@
 import React from 'react'
 
 export default function BookFormat(props){
+	
+	if(props.formats.length === 0){
+		return <p className="col audioBook">Audio Book</p> 
+	}
+
 	let formats = props.formats.map((format, index) => {
 		let type = (/pdf|epub|mobi/).exec(format)[0]
 

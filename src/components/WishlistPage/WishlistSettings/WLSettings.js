@@ -1,11 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-
+import {push} from 'react-router-redux'
 
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
+import EditWishlistForm from './EditWishlistForm'
 import LoginRegister from '../../LoginRegister/LoginRegister'
+
 
 import {fetchWishlists,toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle, changeWishlist} from '../../../actions/wishlist'
 
@@ -14,6 +16,12 @@ import './WLSettings.css'
 
 
 export class WLSettings extends React.Component{
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.currentUser === null){
+			this.props.dispatch(push('/'))
+		}
+	}
 
 	handleClick(e){
 		this.props.dispatch(changeWishlist(e.target.text))
@@ -62,18 +70,11 @@ export class WLSettings extends React.Component{
 					//filters wishlists edit, first array item is result, takes value of result
 				if(this.props.wishlistsEdit[title] === true){
 					return (
-						<div key={index} className="col-12 col-md-6 settingsContainer">
-							<div className="col">
-								Edit Title
-							</div>
-							<form className="col" id={title+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
-								<input type="text" name="editTitle" placeholder={title} ref={input => this.input = input}/>
-								<input type="submit" name="editSubmit" />
-								<button type="cancel" id={title+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
-							</form>
-						</div>
+						<EditWishlistForm key={index} title={title} index={index}/>
 					)
 				}
+
+				let bookNum = (list.items.length === 1) ? 'book' : 'books'
 
 				return (
 							<div key={index} className="col-12 col-md-6 settingsContainer">
@@ -83,15 +84,15 @@ export class WLSettings extends React.Component{
 											<Link to={`/wishlist/${title.toLowerCase()}`} onClick={e => this.handleClick(e)}>{title}</Link>
 										</div>
 										<div className="col">
-											<span className="listTitle">{list.items.length}</span> books
+											<span className="listTitle">{list.items.length}</span> {bookNum}
 										</div>
 									</div>
 									<div className="col-auto row">
 										<div className="col">
-											<button id={title+"-Edit"} className="btn btn-default btn-sm" onClick={e => this.toggleEditForm(e)}>Edit</button>
+											<button id={title+"-Edit"} className="btn btn-default btn-sm editWishlist" onClick={e => this.toggleEditForm(e)}>Edit</button>
 										</div>
 										<div className="col-auto">
-											<button id={title+"-Delete"} className="btn btn-default btn-sm" onClick={e => this.deleteList(e)}>Delete</button>
+											<button id={title+"-Delete"} className="btn btn-default btn-sm deleteWishlist" onClick={e => this.deleteList(e)}>Delete</button>
 										</div>
 									</div>
 								</div>
@@ -115,10 +116,14 @@ export class WLSettings extends React.Component{
 
 		return (
 			<div className="container" >
-				<Header headerId="header" subtitleId="subtitle" title="Settings" subtitle="Wishlists"/>
+				<div id="wishlistSettingsContainer">
+					<Header headerId="header" subtitleId="subtitle" title="Settings" subtitle="Wishlists"/>
+				</div>
 				{addButton}
-				<div className="row">
+				<div className="row">	
 					{newWishlist}
+				</div>
+				<div className="row">
 					{formatLinks}
 				</div>
 			</div>
@@ -132,7 +137,8 @@ const mapStateToProps = state => ({
 	wishlistsNames: state.wishlist.wishlistNames,
 	wishlists: state.wishlist.wishlists,
 	addWishlist: state.wishlist.addWishlist,
-	wishlistsEdit: state.wishlist.wishlistsEdit
+	wishlistsEdit: state.wishlist.wishlistsEdit,
+	currentUser: state.auth.currentUser
 })
 
 export default connect(mapStateToProps)(WLSettings)

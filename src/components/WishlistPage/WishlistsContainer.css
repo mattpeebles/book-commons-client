@@ -1,0 +1,84 @@
+#wishlists-container{
+	display: none;
+}
+
+@media screen and (min-width: 768px){
+
+	#wishlists-container{
+		display: inherit;
+		text-align: center;
+		position: fixed;
+		right: 1.5rem;
+		border: 5px solid black;
+		background-color: white;
+		width: 85%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#wishlists-row{
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+		width: 95%;
+	}
+
+	#wishlistTitle{
+		text-align: center;
+		border: 3px solid black;
+		width: 60%;
+		margin-top: 2%;
+		position: relative;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 10px;
+		background-color: #FFF965;
+		box-shadow: -15px 15px #FFF965, inset -.83em .83em white;
+		color: #333;
+	}
+
+	#wishlistTitle > h3{
+		margin: 0;
+	}
+
+	#wishlists{
+		height: auto;
+		width: 100%;
+	}
+
+	#lists-container{
+		height: auto;
+		text-align: left;
+		width: 100%;
+	}
+
+	#wishlistsList{
+		text-align: left;
+	}
+
+	#wishlistsList > ol{
+		list-style: none;
+		text-align: center;
+		font-size: 18px;
+		padding: 0;
+	}
+
+	#wishlistsList > ol > div > li{
+		margin-top: 2%;
+  		transition: background-color .33s ease-in;
+
+	}
+
+	#wishlistsList > ol > div > li > a {
+		color: black;
+	}
+
+	#wishlistsList > ol > div > li:hover{
+		background-color: pink;
+	}
+
+	#wishlistsList > ol > div > li > a:hover{
+		color: white;
+	}
+
+}

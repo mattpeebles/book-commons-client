@@ -3,7 +3,7 @@ import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
-
+import {resetWishlistState} from '../actions/wishlist'
 
 export const SHOW_LOGIN_REGISTER = 'SHOW_LOGIN_REGISTER'
 export const showLoginRegister = (show) => ({
@@ -63,8 +63,8 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 
-export const demoUser = user => dispatch => {
-
+export const demoUser = user => dispatch => {    
+    console.log('demo')
     return fetch(`${API_BASE_URL}/users/demo`, {
         method: 'POST',
         body: JSON.stringify(user),
@@ -125,6 +125,7 @@ export const registerUserError = (err) => ({
 export const login = (email, password) => dispatch => {
     // Base64 encode the string email:password, used in the basic
     // auth field
+    console.log('logged in')
     const token = btoa(`${email}:${password}`);
     
     return (
@@ -141,7 +142,7 @@ export const login = (email, password) => dispatch => {
             .then(res => res.json())
             .then(({authToken}) => {
                 storeAuthInfo(authToken, dispatch)
-                dispatch(setNavLinks(['Wishlists', 'Signed in']))
+                dispatch(setNavLinks(['About', 'Wishlists', 'Signed in']))
             })
             .catch(err => {
                 const {code} = err;
@@ -172,7 +173,7 @@ export const refreshAuthToken = () => (dispatch, getState) => {
         .then(res => res.json())
         .then(({authToken}) => {
             storeAuthInfo(authToken, dispatch)
-            dispatch(setNavLinks(['Wishlists', 'Signed in']))
+            dispatch(setNavLinks(['About', 'Wishlists', 'Signed in']))
         })
         .catch(err => {
             const {code} = err;
@@ -188,9 +189,10 @@ export const refreshAuthToken = () => (dispatch, getState) => {
 
 export const logout = () => (dispatch) => {
     clearAuthToken()
+    dispatch(resetWishlistState())
     dispatch(setAuthToken(null))
     dispatch(setCurrentUser(null))
-    dispatch(setNavLinks(['Login/Register', 'Demo']))
+    dispatch(setNavLinks(['About', 'Login/Register', 'Demo']))
 };
 
 

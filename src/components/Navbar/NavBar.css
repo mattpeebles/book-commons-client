@@ -1,3 +1,50 @@
 nav{
 	z-index: 1030;
 }
+
+a.nav-link{
+	text-align: left;
+}
+
+.navbar-light button.navbar-toggler{
+	border: 3px solid black;
+	background-color: #E196BD;
+}
+
+.custon-toggler{
+	border-color: white;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+button.navbarDropdownMenuLink{
+	background-color: transparent;
+	border: none;
+}
+
+.nav-item > div.show{
+	width: 10%;
+	background-color: #E196BD;
+	border: 2px solid black;
+	transition: .15s ease-in;
+}
+
+.nav-item > div.show:hover{
+	width: 10%;
+	background-color: transparent;
+	border: none;
+}
+
+.nav-item  a.dropdown-item:hover{
+	background-color: #6DCCC4;
+	border: 4px solid black;
+}
+
+
+@media screen and (min-width: 992px){
+	.nav-link{
+		text-align: right;
+	}	
+}

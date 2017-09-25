@@ -26,7 +26,7 @@ export class EmailForm extends React.Component{
 			currentPassword
 		}
         
-		this.props.dispatch(changeUserInfo(infoObj))
+		return this.props.dispatch(changeUserInfo(infoObj))
     }
 
 	render(){
@@ -68,7 +68,7 @@ export class EmailForm extends React.Component{
 
 
 		return( 
-			<div className="form">
+			<div className="form userSettingsForm">
 				<h2>Change Email</h2>
 				<form
 				    onSubmit={this.props.handleSubmit(values =>
@@ -77,16 +77,16 @@ export class EmailForm extends React.Component{
 				 	{successMessage}
             		{errorMessage}
 					<div className="form-group">
-					<label htmlFor="newEmail">New Email</label>
-					<Field 
-						name="newEmail" 
-						id="newEmail"
-						className="form-control" 
-						component={Input} 
-						type="email" 
-						placeholder="New email"
-						validate={[required, nonEmpty, isTrimmed]}
-					/>
+						<label htmlFor="newEmail">New Email</label>
+						<Field 
+							name="newEmail" 
+							id="newEmail"
+							className="form-control" 
+							component={Input} 
+							type="email" 
+							placeholder="New email"
+							validate={[required, nonEmpty, isTrimmed]}
+						/>
 					</div>
 					<div className="form-group">
 						<label htmlFor="confirmEmail">Confirm Email</label>
@@ -112,6 +112,7 @@ export class EmailForm extends React.Component{
 							validate={[required, nonEmpty]}
 						/>
 					</div>
+					
 					<div className="form-group">
 		                <button
 		                    type="submit"

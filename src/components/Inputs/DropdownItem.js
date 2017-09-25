@@ -4,6 +4,8 @@ import {push} from 'react-router-redux'
 
 import {saveBookToWishlist, removeBookFromWishlist} from '../../actions/wishlist'
 
+import './DropdownItem.css'
+
 export class DropdownItem extends React.Component{
 	
 	addBook(e){
@@ -44,7 +46,11 @@ export class DropdownItem extends React.Component{
 					let items = this.props.dropdownLinks.map((item, index) => {
 						
 						if(item === 'Delete'){
-							return (<button className="dropdown-item" key={index} onClick={e => this.removeEbook(e)}>{item}</button>)
+							return (
+								<div key={index} className="col-12">
+									<button className="dropdown-item btn btn-sm"  onClick={e => this.removeEbook(e)}>{item}</button>
+								</div>
+							)
 						}
 
 						else if(item === 'Change Wishlist'){
@@ -57,11 +63,11 @@ export class DropdownItem extends React.Component{
 							})
 
 							return (
-								<form key={index} onSubmit={e => this.changeWishlist(e)}>
+								<form key={index} className="dropdownWishlistForm col-12" onSubmit={e => this.changeWishlist(e)}>
 									<select name='wishlist'>
 										{options}
 									</select>
-									<input type='submit' value='Change Wishlist' />
+									<input type='submit' className='btn btn-sm' value='Change Wishlist' />
 								</form>
 							)
 						}
@@ -72,7 +78,7 @@ export class DropdownItem extends React.Component{
 
 
 				return (
-					<div>
+					<div className="row">
 						{items}
 					</div>
 				)		
@@ -85,7 +91,7 @@ export class DropdownItem extends React.Component{
 
 
 		return (
-			<form onSubmit={e => this.addBook(e)}>
+			<form className="dropdownForm" onSubmit={e => this.addBook(e)}>
 				<select name='wishlist'>
 					{options}
 				</select>

@@ -3,8 +3,6 @@ import {Route} from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import {history} from './store'
 
-
-
 import {connect} from 'react-redux'
 import {fetchWishlists} from './actions/wishlist'
 import {refreshAuthToken} from './actions/auth';
@@ -18,7 +16,7 @@ import NavBar from './components/Navbar/NavBar'
 import Footer from './components/Footer/Footer'
 import LoginRegister from './components/LoginRegister/LoginRegister'
 import ChangeUserSettings from './components/UserSettings/ChangeUserSettingsPage'
-
+import About from './components/About/About'
 
 let count = 0;
 
@@ -63,6 +61,7 @@ export class App extends React.Component{
 
 	render(){
 		let loginRegisterForm;
+	
 		if(this.props.display === true){
 			loginRegisterForm = <LoginRegister />
 		}
@@ -72,11 +71,17 @@ export class App extends React.Component{
             this.props.dispatch(fetchWishlists());
 		}
 
+		let about;
+		if(this.props.showAbout === true){
+			about = <About />
+		}
+
 		return(
 			<ConnectedRouter history={history}>
 				<div>
 					<NavBar />
 					{loginRegisterForm}
+					{about}
 					<main>
 						<Route exact path='/' component={LandingPage} />
 						<Route exact path='/results' component={Results} />
@@ -95,10 +100,12 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
+	auth: state.auth,
 	firstFetch: state.wishlist.firstFetch,
 	wishlist: state.wishlist,
 	wishlists: state.wishlist.wishlists,
 	token: state.auth.authToken,
+	showAbout: state.results.showAbout,
 	user: state.auth.currentUser,
 	display: state.auth.loginRegisterForm.display,
 	loggedIn: state.auth.loggedIn,

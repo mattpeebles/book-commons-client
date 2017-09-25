@@ -1,4 +1,5 @@
 import { 
+toggleAbout,
 fetchGutenbergRequest,
 fetchGutenbergSuccess,
 fetchGutenbergError,
@@ -8,13 +9,22 @@ fetchGoogleError,
 fetchOpenLibraryRequest,
 fetchOpenLibrarySuccess,
 fetchOpenLibraryError,
-
 } from '../actions/results'
 
 import {default as reducer} from './results'
 import {expect, should} from 'chai'
 describe('results reducer', () => {
 	
+	describe('toggleAbout', () => {
+		let state;
+
+		state = reducer(state, toggleAbout())
+		expect(state.showAbout).to.be.equal(true)
+
+		state = reducer(state, toggleAbout())
+		expect(state.showAbout).to.be.equal(false)
+	})
+
 	describe('fetchGutenbergRequest', () => {
 		it('should set loading to true', () => {
 			let state;

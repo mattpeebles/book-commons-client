@@ -3,21 +3,23 @@
 
 /* Form Module */
 .form-module {
-  position: relative;
+  position: absolute;
   background: #ffffff;
   max-width: 320px;
   width: 100%;
-  border-top: 5px solid #33b5e5;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
+  border: 15px solid black;
+  right: 0;
+  left: 0;
+  margin: 5% auto;
   z-index: 2;
 }
+
 .form-module .toggle {
   cursor: pointer;
   position: absolute;
-  top: -0;
+  top: 5px;
   left: -0;
-  background: #33b5e5;
+  background-color: #6DCCC4;
   height: 30px;
   margin: -5px 0 0;
   color: #ffffff;
@@ -26,12 +28,23 @@
   text-align: center;
 }
 
-.closeForm {
+.toggleButton {
+  cursor: pointer;
+  background: #6DCCC4;
+  width: 100%;
+  border: 0;
+  padding: 10px 15px;
+  color: #ffffff;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.closeForm{
   cursor: pointer;
   position: absolute;
-  top: -0;
+  top: 5px;
   right: -0;
-  background: red;
+  background: #FA4236;
   height: 30px;
   margin: -5px 0 0;
   color: #ffffff;
@@ -42,7 +55,7 @@
 
 .closeForm button {
   cursor: pointer;
-  background: red;
+  background: #FA4236;
   width: 100%;
   border: 0;
   padding: 10px 15px;
@@ -53,18 +66,18 @@
 
 .form-module .form {
   padding: 40px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+  text-align: center;
 }
 
-.form-module .form:nth-child(2) {
-  display: block;
-}
 .form-module h2 {
-  margin: 0 0 20px;
-  color: #33b5e5;
+  color: #1865B5;
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
 }
+
 .form-module input {
   outline: none;
   display: block;
@@ -77,25 +90,40 @@
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
 }
+
 .form-module input:focus {
-  border: 1px solid #33b5e5;
+  border: 2px solid black;
   color: #333333;
 }
-.toggleButton, .submitButton {
-  cursor: pointer;
-  background: #33b5e5;
-  width: 100%;
-  border: 0;
-  padding: 10px 15px;
-  color: #ffffff;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
+
+.submitButton:disabled {
+  border: 1px solid buttonface;
+  background-color: buttonface;
+  color: graytext;
 }
-.form-module .submitButton:hover {
-  background: #178ab4;
+
+.submitButton {
+  background-color: #1865B5;
+  color: white;
+  border: 3px solid black;
+  width: auto;
+  transition: box-shadow .33s ease-out;
 }
+
+.submitButton:hover:enabled{
+  background-color: #6DCCC4;
+  box-shadow: 35px -20px #6DCCC4, inset 2.3em -1.2em white;
+  color: black;
+}
+
+.submitButton:active:enabled {
+  background-color: #FFF965;
+  box-shadow: -35px 10px #FFF965, inset -2.3em 0.5em white;
+  transition: none;
+}
+
 .form-module .cta {
-  background: #f2f2f2;
+  background: #E196BD;
   width: 100%;
   padding: 15px 40px;
   box-sizing: border-box;
@@ -104,6 +132,7 @@
   text-align: center;
 }
 .form-module .cta a {
-  color: #333333;
+  cursor: pointer;
+  color: white;
   text-decoration: none;
 }

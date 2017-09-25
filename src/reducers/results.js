@@ -1,5 +1,6 @@
 import {
 	EMPTY_RESULTS, NO_DATABASE_RESULTS,
+	TOGGLE_ABOUT,
 	FETCH_GUTENBERG_REQUEST, FETCH_GUTENBERG_SUCCESS, FETCH_GUTENBERG_ERROR,
 	FETCH_GOOGLE_REQUEST, FETCH_GOOGLE_SUCCESS, FETCH_GOOGLE_ERROR,
 	FETCH_OPEN_LIBRARY_REQUEST, FETCH_OPEN_LIBRARY_SUCCESS, FETCH_OPEN_LIBRARY_ERROR,
@@ -10,6 +11,7 @@ import {
 const initialState = {
 						loading: false,
 						error: null,
+						showAbout: false,
 						dbCalled: [],
 						'resultsFromDatabase': null,
 						'supplement': 'author',
@@ -24,6 +26,12 @@ const initialState = {
 
 export default (state, action) => {
 	state = state || initialState
+
+	if(action.type === TOGGLE_ABOUT){
+		return Object.assign({}, state, {
+			showAbout: !(state.showAbout)
+		})
+	}
 
 	if(action.type === EMPTY_RESULTS){
 		return Object.assign({}, state, {
@@ -46,9 +54,9 @@ export default (state, action) => {
 	}
 
 	if(action.type === BOOK_SUPPLEMENT){
-		let {title, publishDate, firstSentence, cover, location} = action.bookInfo
+		let {title, publishDate, cover, summary, location} = action.bookInfo
 
-		let bookSupplement = {title, publishDate, cover, firstSentence, location}
+		let bookSupplement = {title, publishDate, cover, summary, location}
 
 		return Object.assign({}, state, {
 			bookSupplement

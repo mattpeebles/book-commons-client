@@ -1,6 +1,18 @@
-#header{
+#resultsHeader{
+	text-align: left;
+}
+
+#resultsHeader > #header{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: 2%;
 	text-align: center;
+	color: #333;
+	border: 3px solid #333;
+	width: 30%;
+  	background-color: #FFF965;
+  	box-shadow: 60px -10px #FFF965, inset 1.4em -0.2em #F6F6F6;
 }
 
 
@@ -28,6 +40,11 @@
 	body{
 		text-align: center;
 		line-height: 1.75em;
+	}
+
+	#resultsPage > #header{
+		background-color: #FFF965;
+		box-shadow: 150px -10px #FFF965, inset 3.7em -0.2em #F6F6F6;
 	}
 
 	#main-container{

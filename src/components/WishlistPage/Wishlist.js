@@ -50,9 +50,11 @@ export class Wishlist extends React.Component{
 
 		return(
 			<main>
-				<Link id="settings" to="/settings/wishlist"><button className="btn btn-default"><img alt='cog-icon' src="https://useiconic.com/open-iconic/svg/cog.svg" /></button></Link>
-				<Header headerId="header" title="Wishlist" subtitle={this.props.currentList} subtitleId="wishListName" />
 				<div id="main-container" className="container-fluid">
+					<Link id="settings" to="/settings/wishlist"><button className="btn btn-default"><i className="material-icons md-48">settings</i></button></Link>
+					<div className="wishlistHeader">
+						<Header headerId="header" title="Wishlist" subtitle={this.props.currentList} subtitleId="wishlistName" />
+					</div>
 					<div id="main-row" className="row">
 						
 

@@ -13,21 +13,24 @@ export class SearchForm extends React.Component{
 
     render(){
 		return (
-			<div className="col-12">
+			<div className="col-12 align-middle">
 				<form id="bookSearchForm"  
 					onSubmit={this.props.handleSubmit(values =>
 		                    this.onSubmit(values))}>
-					<div className="form-group">
-						<Field
-					      	name="title" 
-					      	id="bookSearch" 
-					      	type="text" 
-					      	component="input" 
-					      	placeholder="Search the public domain"  
-					      	validate={[required, nonEmpty, isTrimmed]}
-						/>
+					<div className="form-group row">
+						<div className='input-group' id="searchGroup">
+							<span className="input-group-addon" id="searchAddon">Title</span>
+							<Field
+						      	name="title" 
+						      	id="bookSearch" 
+						      	type="text" 
+						      	component="input" 
+						      	placeholder="Search the public domain"  
+						      	validate={[required, nonEmpty, isTrimmed]}
+							/>
+						</div>
 					</div>
-					<div className="form-group">
+					<div className="form-group text-center">
 						<input id='bookSearchSubmit' type='submit' value="Commons Search" />
 					</div>
 				</form>

@@ -1,4 +1,5 @@
 import {
+	RESET_WISHLIST_STATE,
 	FETCH_WISHLISTS_REQUEST, FETCH_WISHLISTS_SUCCESS, FETCH_WISHLISTS_ERROR,
 	CHANGE_WISHLIST,
 	ADD_WISHLIST_FORM,	
@@ -27,6 +28,22 @@ const initialState = {
 export default (state, action) => {
 	state = state || initialState;
 
+
+		//resets wishlist state on logout so that wishlists don't affect
+		//an account made one after the other without refreshing the browser
+	if(action.type === RESET_WISHLIST_STATE){
+		return Object.assign({}, state, {
+			loading: false,
+			error: null,
+			firstFetch: true,
+			currentList: undefined,
+			wishlistNames: [],
+			wishlists: [],
+			wishlistsEdit: {},
+			wishlistItems: [],
+			addWishlist: false
+		})
+	}
 
 	if(action.type === FETCH_WISHLISTS_REQUEST){
 		return Object.assign({}, state, {

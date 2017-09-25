@@ -12,7 +12,9 @@ export class AmazonBook extends React.Component{
 				
 				return	<div key={index} className="product-box">
 						    <a target="_blank" href={result.DetailPageURL[0]}>
-						        <img alt="cover" src={result.ImageSets[0].ImageSet[0].MediumImage[0].URL[0]} width='122' height='160' />
+						        <div className="productPhoto">
+						        	<img alt="cover" src={result.ImageSets[0].ImageSet[0].MediumImage[0].URL[0]} width='122' height='160' />
+						    	</div>
 						    </a>
 						    <div className="product-title">
 						        <h3>{result.ItemAttributes[0].Title[0]}</h3>

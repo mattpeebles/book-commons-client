@@ -2,7 +2,7 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import {expect, should} from 'chai'
 
-import BookSupplement from './BookSupplement'
+import {BookSupplement} from './BookSupplement'
 
 	let bookInfo = {
 								title: 'Lorem',

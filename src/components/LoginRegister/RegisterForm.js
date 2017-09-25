@@ -61,7 +61,7 @@ export class RegisterForm extends React.Component{
 				<button className="toggleButton btn btn-default" onClick={() => this.props.dispatch(toggleLoginRegister('login'))}>Login</button>
 			  </div>
 			  <div className="closeForm">
-				<button className="btn btn-danger" onClick={() => this.props.dispatch(showLoginRegister(false))}>X</button>
+				<button className="btn" onClick={() => this.props.dispatch(showLoginRegister(false))}>X</button>
 			  </div>
 			  
 			  <div className="form">
@@ -72,34 +72,47 @@ export class RegisterForm extends React.Component{
                 )}>
 				 	{successMessage}
             		{errorMessage}
-			      <Field 
-			      	name="email" 
-			      	type="email"
-			      	placeholder="Email"
-			      	component={Input}
-			      	validate={[required, nonEmpty, isTrimmed]}
-			      />
-
-			      <Field 
-			      	name="password" 
-			      	type="password" 
-			      	component={Input}
-			      	placeholder='Password'
-			      	validate={[required, length({min: 8, max: 72}), isTrimmed]}/>
-
-			      <Field 
-			      	name="confirmPassword" 
-			      	type="password" 
-			      	component={Input}
-			      	placeholder="Confirm password"
-			      	validate={[required, nonEmpty, matches('password')]}/>
-	                <button
-	                    type="submit"
-	                    disabled={this.props.pristine || this.props.submitting}>
-	                   	Register
-					</button>			    
+			      
+					<div className="form-group">
+					  <Field 
+					  	name="email" 
+					  	type="email"
+					  	placeholder="Email"
+					  	component={Input}
+					  	validate={[required, nonEmpty, isTrimmed]}
+					  />
+					</div>
+				      
+					<div className="form-group">
+					  <Field 
+					  	name="password" 
+					  	type="password" 
+					  	component={Input}
+					  	placeholder='Password'
+					  	validate={[required, length({min: 8, max: 72}), isTrimmed]}
+					  />
+					</div>
+				      
+					<div className="form-group">
+					  <Field 
+					  	name="confirmPassword" 
+					  	type="password" 
+					  	component={Input}
+					  	placeholder="Confirm password"
+					  	validate={[required, nonEmpty, matches('password')]}
+					  />
+					</div>
+			      	<div className="form-group">
+		                <button
+		                    type="submit"
+		                    className="submitButton"
+		                    disabled={this.props.pristine || this.props.submitting}>
+		                   	Register
+						</button>
+					</div>			    
 				</form>
 			  </div>
+			  
 			  <div className="cta"><a href="/">Forgot your password?</a></div>
 			</div>
 		)

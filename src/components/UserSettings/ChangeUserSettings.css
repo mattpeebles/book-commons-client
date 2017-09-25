@@ -1,0 +1,51 @@
+.userSettingsForm{
+	background-color: #6DCCC4;
+	text-align: center;
+	width: 85%;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3em;
+	border: 20px solid black;
+	padding: 5px;
+	color: white;
+}
+
+.userSettingsForm input {
+	width: 80%;
+	border: 1px solid black;
+}
+
+.userSettingsForm button:disabled {
+	border: 1px solid buttonface;
+	background-color: buttonface;
+	color: graytext;
+}
+
+.userSettingsForm button {
+	background-color: #1865B5;
+	color: white;
+	border: 3px solid black;
+	transition: box-shadow .33s ease-out;
+}
+
+.userSettingsForm button:hover:enabled{
+	background-color: #1865B5;
+	box-shadow: 60px -10px #1865B5, inset 4.1em -0.5em #6DCCC4;
+}
+
+.userSettingsForm button:active:enabled {
+	background-color: #E196BD;
+	box-shadow: -60px 10px #E196BD, inset -4.1em 0.5em #6DCCC4;
+	transition: none;
+}
+
+
+@media screen and (min-width: 700px){
+	.userSettingsForm{
+		width: 50%;
+	}
+
+
+
+}
