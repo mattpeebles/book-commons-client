@@ -2,6 +2,10 @@ nav{
 	z-index: 1030;
 }
 
+a.nav-link{
+	text-align: left;
+}
+
 .navbar-light button.navbar-toggler{
 	border: 3px solid black;
 	background-color: #E196BD;
@@ -36,4 +40,11 @@ button.navbarDropdownMenuLink{
 .nav-item  a.dropdown-item:hover{
 	background-color: #6DCCC4;
 	border: 4px solid black;
+}
+
+
+@media screen and (min-width: 992px){
+	.nav-link{
+		text-align: right;
+	}	
 }

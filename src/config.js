@@ -3,7 +3,7 @@ module.exports = {
 
 	GOOGLE_KEY: 'AIzaSyDfAQ4X_e2kx8IC0K2bd0Um_pMnAHP2uus',
 
-	 API_BASE_URL: process.env.REACT_APP_API_BASE_URL || 
+	 API_BASE_URL: process.env.REACT_APP_API_BASE_URL ||
 	'http://localhost:4040/api',
 
 	GUTENBERG_ID_URL: `https://gutenbergapi.org/search/title eq`,

@@ -7,6 +7,8 @@ import Ebook from '../Ebook/Ebook'
 import AmazonBook from '../Ebook/AmazonBook'
 import Header from '../Header/Header'
 import SupplementInfo from './Supplement/SupplementInfo'
+import NoResults from '../NoResults/NoResults'
+
 
 import './Results.css'
 
@@ -18,19 +20,26 @@ export class Results extends React.Component{
 
 
 	render(){
+		
+		let {amazonResult, loading,
+			details, results, supplement, authorSupplement, bookSupplement} = this.props
+
 		let dropdownLinks = ['Save to Wishlist']
 
-		let supplement;
+		let supplementDiv;
 		let amazon;
+		let noResults;
 
-
-		if(this.props.results.length !== 0 || this.props.amazonResult.length !== 0){
-			supplement = <div id="supplement-container" className="row">						
-							<SupplementInfo supplement={this.props.supplement} details={this.props[this.props.details]} />
+		if((results.length !== 0 || amazonResult.length !== 0) && (Object.keys(authorSupplement).length !== 0 && Object.keys(bookSupplement).length !== 0)){
+			supplementDiv = <div id="supplement-container" className="row">						
+							<SupplementInfo supplement={supplement} details={this.props[details]} />
 						</div>
 		}
 
-		if(this.props.loading){
+
+		let header = <Header headerId='header' title="Results" />
+
+		if(loading){
 			return (
 				<div>
 					<img src="/resources/icons/flip-book-loader.gif" alt='Loading Icon' />
@@ -38,23 +47,31 @@ export class Results extends React.Component{
 			)
 		}
 
-		if(this.props.results.length < 2){
-			amazon = <AmazonBook results={this.props.amazonResult} />
+		if(results.length < 2){
+			amazon = <AmazonBook results={amazonResult} />
+		}
+
+
+		if(results.length === 0) {
+			noResults = <NoResults />
+			header = undefined;
 		}
 
 		return(
 			<main id="resultsPage">
-				<Header headerId='header' title="Results" />
-
+				
+				<div id="resultsHeader">
+					{header}
+				</div>
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
-						
+						{noResults}	
 						<div className="col-sm-12 col-md-8">
-							<Ebook results={this.props.results} dropdownType='options' dropdownLinks={dropdownLinks}/>
+							<Ebook results={results} dropdownType='options' dropdownLinks={dropdownLinks}/>
 							{amazon}
 						</div>
 						<div className="col-sm-12 col-md-4">
-							{supplement}
+							{supplementDiv}
 						</div>
 					</div>
 				</div>
@@ -66,10 +83,7 @@ export class Results extends React.Component{
 
 const mapStateToProps = state => ({
 	amazonResult: state.results.amazonResults,
-	resultsLength: state.results.resultsLength,
 	loading: state.results.loading,
-	dbCalled: state.results.dbCalled,
-	user: state.user,
 	supplement: state.results.supplement,
 	details: state.results.details,
 	results: state.results.results,

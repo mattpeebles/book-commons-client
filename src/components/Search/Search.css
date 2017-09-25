@@ -36,21 +36,22 @@
 }
 
 #bookSearchSubmit{
-  background-color: #1865B5;
-  color: white;
+  background-color: #FFF965;
+  color: #333;
   border: 3px solid black;
   transition: box-shadow .33s ease-out;
+  box-shadow: -60px -10px #FFF965, inset -4.1em -0.5em #6DCCC4;
 }
 
 #bookSearchSubmit:hover{
-  background-color: #1865B5;
-  box-shadow: 60px -10px #1865B5, inset 4.1em -0.5em #6DCCC4;
+  background-color: #FA4236;
+  box-shadow: 60px 10px #FA4236, inset 4.1em 0.5em #6DCCC4;
 }
 
 #bookSearchSubmit:active{
   background-color: #E196BD;
-  box-shadow: -60px 10px #E196BD, inset -4.1em 0.5em #6DCCC4;
-  transition: none;
+  box-shadow: none;
+  color: white;
 }
 
 

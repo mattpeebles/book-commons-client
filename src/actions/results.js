@@ -41,7 +41,9 @@ export const fetchBooks = term => dispatch => {
 		//clears results before each search
 	dispatch(emptyResults())
 	
-	let title = toTitleCase(term)
+	let sTerm = term.toString()
+
+	let title = toTitleCase(sTerm)
 
 	let wikiTitle = title.replace(' ', '_')
 	dispatch(wikiBook(wikiTitle))

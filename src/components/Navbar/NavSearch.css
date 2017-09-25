@@ -1,20 +1,30 @@
+#navSearch{
+	width: 175px;
+	margin-right: 3%;
+}
+
 #navSubmit{
 	box-shadow: 30px -20px #FFF965, inset 2.1em -1.35em #f8f9fa;
 	color: black;
 	border: 1px solid black;
 	transition: box-shadow .33s ease-in;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
 	background-color: #FFF965;
+	margin-left: 2%;
 }
 
-#navSubmit:hover{
+#navSubmit:disabled{
+	background-color: buttonface;
+	color: graytext;
+	box-shadow: none;
+}
+
+#navSubmit:hover:enabled{
 	background-color: #1865B5;
 	box-shadow: none;
 	color: white;
 }
 
-#navSubmit:active{
+#navSubmit:active:enabled{
 	background-color: #E196BD;
 	box-shadow: none;
 	color: white;
@@ -24,4 +34,10 @@
 	border: 1px solid black;
 	height: 31px;
 	width: 175px;
+}
+
+@media screen and (min-width: 992px){
+	#navSearchForm{
+		width: 31%;
+	}	
 }

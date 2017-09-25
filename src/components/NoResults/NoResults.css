@@ -1,0 +1,11 @@
+#noResults{
+	border: 5px solid black;
+	background-color: #6DCCC4;
+	width: 85%;
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	color: #333;
+	box-shadow: 25px -20px #6DCCC4, inset 1.4em -1.1em #F6F6F6;
+
+}

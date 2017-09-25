@@ -1,0 +1,161 @@
+/*edit wishlist title*/
+
+.settingsContainer #editForm{
+	color: #333;
+}
+
+.settingsContainer #editForm h4{
+	border: 2px solid black;
+	width: 40%;
+	box-shadow: 10px 15px #FA4236;
+	margin-bottom: 2%;
+}
+
+#editForm form {
+	width: 100%;
+	padding-right: 0;
+	margin-top: 5%;
+}
+
+#editForm form > div.form-input {
+	margin-right: 5%;
+}
+
+#editForm .form-input > label{
+	font-size: 16px;
+}
+
+
+.settingsContainer #editForm form input, .editTitleSubmit, .editTitleCancel{
+	border: 2px solid black;
+	background-color: white;
+} 
+
+.editWishlistButtonGroup{
+	width: 35%;
+	margin-left: auto;
+	text-align: right;
+}
+
+
+.editTitleSubmit{
+	margin-right: 15%;
+	background-color: #1865B5;
+	box-shadow: -5px -22px #1865B5, inset -.2em -1.45em white;
+}
+
+.editTitleSubmit:disabled{
+	margin-right: 2%;
+	color: graytext;
+	box-shadow: none;
+	background-color: buttonface;
+}
+
+.editTitleSubmit:hover:enabled{
+	background-color: #FFF965;
+	box-shadow: 5px -15px #FFF965, inset .2em -.7em white;
+}
+
+.editTitleSubmit:active:enabled{
+	background-color: #6DCCC4;
+	box-shadow: none;
+	color: white;
+}
+
+.editTitleCancel{
+	margin-left: 3%;
+	margin-right: 2%;
+	background-color: #FA4236;
+	box-shadow: 10px 10px #FA4236, inset .55em .55em white;
+}
+
+.editTitleCancel:hover{
+	background-color: #FA4236;
+	box-shadow: 10px -10px #FA4236, inset .47em -.47em white;
+}
+
+.editTitleCancel:active{
+	background-color: #FA4236;
+	box-shadow: none;
+	color: white;
+}
+
+
+@media screen and (max-width: 320px){
+	.editTitleSubmit{
+		margin-right: 0;
+	}
+
+	.editWishlistButtonGroup{
+		width: 45%;
+		margin-left: auto;
+		text-align: right;
+	}
+}
+
+@media screen and (min-width: 700px){
+	/*edit wishlist title*/
+
+	.settingsContainer #editForm{
+
+	}
+
+	.settingsContainer #editForm h4{
+		box-shadow: -10px -10px #6DCCC4;
+		margin-bottom: 5%;
+	}
+
+	#editForm form{
+		width: 100%;
+		padding-right: 0;
+		text-align: left;
+	}
+
+	#editForm .form-input{
+		width: 60%;
+	}
+
+	.editWishlistButtonGroup{
+		width: 40%;
+		margin-left: auto;
+		text-align: right;
+		position: relative;
+	}
+
+	.settingsContainer #editForm form input, .settingsContainer #editForm form button{
+		margin-right: 2%;
+	} 
+
+	.editTitleSubmit{
+		margin-right: 1%;
+		background-color: #FFF965;
+		box-shadow: -5px -15px #FFF965, inset -.25em -.8em white;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+
+	.editTitleSubmit:hover:enabled{
+		background-color: #E196BD;
+		box-shadow: 5px -15px #E196BD, inset .2em -.9em white;
+	}
+
+	.editTitleSubmit:active:enabled{
+
+	}
+
+	.editTitleCancel{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+
+	}
+
+	.editTitleCancel:hover:enabled{
+		box-shadow: 10px -10px #FA4236, inset .55em -.55em white;
+	}
+
+	.editTitleCancel:active:enabled{
+
+	}
+}

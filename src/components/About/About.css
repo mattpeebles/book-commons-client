@@ -1,7 +1,7 @@
 .about {
   position: absolute;
   background: #ffffff;
-  max-width: 320px;
+  max-width: 450px;
   width: 100%;
   border: 15px solid black;
   right: 0;
@@ -9,4 +9,14 @@
   margin: 5% auto;
   z-index: 2;
   background-color: white;
+}
+
+.closeAbout{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.about > ol{
+  text-align: left;
 }

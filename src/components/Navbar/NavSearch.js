@@ -1,5 +1,6 @@
 import React from 'react'
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm, Field, focus} from 'redux-form';
+import Input from '../Inputs/Input'
 import {required, nonEmpty, isTrimmed} from '../../validators'
 
 import {fetchBooks} from '../../actions/results'
@@ -23,15 +24,26 @@ export class NavSearch extends React.Component{
 					name="navSearch" 
 			      	id="navBookSearch" 
 			      	type="text" 
-			      	component="input" 
+			      	component={Input}
 			      	placeholder="Search the public domain"  
 			      	validate={[required, nonEmpty, isTrimmed]}
 					aria-label="Search" />
-			    <input id="navSubmit" className="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit" value="Search"/>
+
+				<button
+					id="navSubmit"
+				    type="submit"
+				    className="btn btn-outline-success btn-sm my-2 my-sm-0"
+				    disabled={this.props.pristine || this.props.submitting}>
+				   	Search
+				</button>	
 		  </form>
 		)
 	}
 }
 
 export default reduxForm({
-	form: 'search'})(NavSearch)
+	form: 'navSearch',
+	onSubmitFail: (errors, dispatch) => {
+		        dispatch(focus('navSearch', Object.keys(errors)[0]))
+		    }
+})(NavSearch)

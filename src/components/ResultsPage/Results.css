@@ -1,4 +1,8 @@
-#resultsPage > #header{
+#resultsHeader{
+	text-align: left;
+}
+
+#resultsHeader > #header{
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;

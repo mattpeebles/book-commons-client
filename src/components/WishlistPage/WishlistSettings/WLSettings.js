@@ -3,10 +3,11 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {push} from 'react-router-redux'
 
-
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
+import EditWishlistForm from './EditWishlistForm'
 import LoginRegister from '../../LoginRegister/LoginRegister'
+
 
 import {fetchWishlists,toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle, changeWishlist} from '../../../actions/wishlist'
 
@@ -69,16 +70,7 @@ export class WLSettings extends React.Component{
 					//filters wishlists edit, first array item is result, takes value of result
 				if(this.props.wishlistsEdit[title] === true){
 					return (
-						<div key={index} className="col-12 col-md-6 settingsContainer">
-							<div className="col">
-								Edit Title
-							</div>
-							<form className="col" id={title+"-EditForm"} onSubmit={e => this.editListTitle(e)}>
-								<input type="text" name="editTitle" placeholder={title} ref={input => this.input = input}/>
-								<input type="submit" name="editSubmit" value="Add"/>
-								<button type="cancel" id={title+"-Cancel"} onClick={e=>this.toggleEditForm(e)}>Cancel</button>
-							</form>
-						</div>
+						<EditWishlistForm key={index} title={title} index={index}/>
 					)
 				}
 

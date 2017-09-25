@@ -4,32 +4,23 @@ import {connect} from 'react-redux';
 import BookDetails from './BookDetails'
 import BookInfo from './BookInfo'
 import FormatLocation from './FormatLocation'
-import NoResults from '../NoResults/NoResults'
 
 import './Ebook.css'
 
 export class Ebook extends React.Component{
 		
 	render(){
-		let results;
+			
+		let results = this.props.results.map((result, index) => {
 
-
-		if(this.props.results.length === 0) {
-			results = <NoResults />
-		}
-
-		else{
-			results = this.props.results.map((result, index) => {
-
-				return <div className="result col-12 row" id={index} key={index}>
-					<div className="bookInfo col">
-						<BookInfo title={result.title} author={result.author} ebook={result} dropdownType={this.props.dropdownType} dropdownLinks={this.props.dropdownLinks}/>
-						<BookDetails preview={result.preview} publishDate={result.publishDate} languages={result.languages} pages={result.pages} />
-						<FormatLocation formats={result.formats} location={result.location} database={result.database} icon={result.icon} />
-					</div>
+			return <div className="result col-12 row" id={index} key={index}>
+				<div className="bookInfo col">
+					<BookInfo title={result.title} author={result.author} ebook={result} dropdownType={this.props.dropdownType} dropdownLinks={this.props.dropdownLinks}/>
+					<BookDetails preview={result.preview} publishDate={result.publishDate} languages={result.languages} pages={result.pages} />
+					<FormatLocation formats={result.formats} location={result.location} database={result.database} icon={result.icon} />
 				</div>
-			})	
-		}
+			</div>
+		})	
 
 		return (
 			<div id="results">

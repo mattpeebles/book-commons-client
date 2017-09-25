@@ -10,7 +10,7 @@ const initialState = {
     userInfoChanged: null,
     loginRegisterForm: {display: false,
                          form: 'login'},
-    navLinks: ['Login/Register', 'Demo'],
+    navLinks: ['About', 'Login/Register', 'Demo'],
     loggedIn: false,
     authToken: null, // authToken !== null does not mean it has been validated
     currentUser: null

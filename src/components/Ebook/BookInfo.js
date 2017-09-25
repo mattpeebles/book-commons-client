@@ -4,9 +4,8 @@ import {connect} from 'react-redux'
 import Dropdown from '../Inputs/Dropdown'
 export class BookInfo extends React.Component{
 
-	render(){
-		
-		let dropdown = (this.props.loggedIn) ? <Dropdown ebook={this.props.ebook} type={this.props.dropdownType} dropdownLinks={this.props.dropdownLinks}/> : undefined
+	render(){		
+		let dropdown = (this.props.loggedIn && this.props.wishlistNames.length > 0) ? <Dropdown ebook={this.props.ebook} type={this.props.dropdownType} dropdownLinks={this.props.dropdownLinks}/> : undefined
 
 		return (
 			<div className="row">
@@ -26,6 +25,7 @@ export class BookInfo extends React.Component{
 const mapStateToProps = state => ({
 	auth: state.auth,
 	loggedIn: state.auth.loggedIn,
+	wishlistNames: state.wishlist.wishlistNames
 })
 
 export default connect(mapStateToProps)(BookInfo)

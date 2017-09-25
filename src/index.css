@@ -7,18 +7,17 @@ body {
   padding-bottom: 70px;
   background: #FFE0B5;
   color: #666666;
-  font-family: 'RobotoDraft', 'Roboto', sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Raleway', sans-serif;
   background-image: url('/resources/OMEGGK0.jpg');
 }
 
 #header{
-  font-family: 'Teko', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #subtitle{
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }

@@ -3,8 +3,6 @@ import {Route} from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import {history} from './store'
 
-
-
 import {connect} from 'react-redux'
 import {fetchWishlists} from './actions/wishlist'
 import {refreshAuthToken} from './actions/auth';
@@ -63,6 +61,7 @@ export class App extends React.Component{
 
 	render(){
 		let loginRegisterForm;
+	
 		if(this.props.display === true){
 			loginRegisterForm = <LoginRegister />
 		}
@@ -101,6 +100,7 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
+	auth: state.auth,
 	firstFetch: state.wishlist.firstFetch,
 	wishlist: state.wishlist,
 	wishlists: state.wishlist.wishlists,
