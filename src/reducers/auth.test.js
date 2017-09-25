@@ -21,7 +21,7 @@ describe('auth reducer', () => {
 		state = reducer(undefined, {type: '__UNKNOWN'});
 		expect(state.loginRegisterForm.display).to.be.equal(false);
 		expect(state.loginRegisterForm.form).to.be.equal('login');
-		expect(state.navLinks).to.deep.equal(['Login/Register', 'Demo']);
+		expect(state.navLinks).to.deep.equal(['About', 'Login/Register', 'Demo']);
 		expect(state.loggedIn).to.equal(false);
 		expect(state.authToken).to.equal(null);
 		expect(state.currentUser).to.equal(null);

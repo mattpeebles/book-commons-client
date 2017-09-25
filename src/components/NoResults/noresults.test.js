@@ -7,7 +7,7 @@ import {NoResults} from './NoResults'
 
 describe('<NoResults />', ()=> {
 	it('should render without crashing', ()=>{
-		shallow(<NoResults />)
+		shallow(<NoResults amazonResults={[]}/>)
 	})
 
 })
