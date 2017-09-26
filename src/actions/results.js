@@ -237,9 +237,7 @@ export const fetchBooks = term => dispatch => {
 					//gets book and author info for supplement here as well
 				if(data.has_fulltext === false){
 					let wikiAuthor = data.author_name[0].replace(' ', '_')
-					let wikiTitle = title.replace(' ', '_')
 					dispatch(wikipediaAuthor(wikiAuthor))
-					dispatch(wikiBook(wikiTitle))
 					return dispatch(noDatabaseResults('open library'))
 				}
 

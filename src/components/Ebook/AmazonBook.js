@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import Header from '../Header/Header'
+
 import './AmazonBook.css'
 
 export class AmazonBook extends React.Component{
@@ -39,7 +41,12 @@ export class AmazonBook extends React.Component{
 		return(
 			<div>
 				<div id="amazonResultsContainer" className="row">
-					{results}
+					<div id="amazonResultTitle" className='col-12'>
+						<Header headerId="header" title="Buy Online" />
+					</div>
+					<div className='col-12'>
+						{results}
+					</div>
 				</div>
 			</div>
 		)

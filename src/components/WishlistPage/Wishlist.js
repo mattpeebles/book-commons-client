@@ -21,7 +21,11 @@ export class Wishlist extends React.Component{
 	}
 
 	componentWillReceiveProps(nextProps){
-			//current list has been changed									wishlist has been changed
+		if(nextProps.loggedIn === false){
+			this.props.dispatch(push('/'))
+		}
+
+			//current list has been changed						wishlist has been changed
 		if(nextProps.currentList !== this.props.currentList || nextProps.wishlists !== this.props.wishlists){
 			let listId = this.props.wishlists.filter(list => list.title === nextProps.currentList)[0].id
 

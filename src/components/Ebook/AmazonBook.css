@@ -1,8 +1,18 @@
 #amazonResultsContainer{
-	width: 85%;
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
+	padding-left: 3%;
+}
+
+#amazonResultTitle > #header{
+	background: #6DCCC4;
+	border: 2px solid black;
+	color: #333;
+	width: 40%;
+	text-align: left;
+	margin-top: 3%;
+	box-shadow: -45px 10px #6DCCC4, inset -1.07em 0.2em #F6F6F6;
 }
 
 .product-box {
@@ -24,11 +34,11 @@
 
 
 .product-box:nth-child(2n+1) .productPhoto{
-	box-shadow: -15px -10px #6DCCC4;
+	box-shadow: -10px -10px #6DCCC4;
 }
 
 .product-box:nth-child(3n + 1) .productPhoto{
-	box-shadow: 15px 5px #E196BD;
+	box-shadow: 10px 5px #E196BD;
 }
 
 .productPhoto > img{

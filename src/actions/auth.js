@@ -125,7 +125,6 @@ export const registerUserError = (err) => ({
 export const login = (email, password) => dispatch => {
     // Base64 encode the string email:password, used in the basic
     // auth field
-    console.log('logged in')
     const token = btoa(`${email}:${password}`);
     
     return (

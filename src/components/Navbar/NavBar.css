@@ -4,6 +4,7 @@ nav{
 
 a.nav-link{
 	text-align: left;
+	cursor: pointer;
 }
 
 .navbar-light button.navbar-toggler{
@@ -11,7 +12,7 @@ a.nav-link{
 	background-color: #E196BD;
 }
 
-.custon-toggler{
+.custom-toggler{
 	border-color: white;
 }
 
@@ -22,6 +23,7 @@ a.nav-link{
 button.navbarDropdownMenuLink{
 	background-color: transparent;
 	border: none;
+	cursor: pointer;
 }
 
 .nav-item > div.show{
@@ -33,7 +35,7 @@ button.navbarDropdownMenuLink{
 
 .nav-item > div.show:hover{
 	width: 10%;
-	background-color: transparent;
+	background-color: white;
 	border: none;
 }
 

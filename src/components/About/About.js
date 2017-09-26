@@ -32,8 +32,10 @@ export class About extends React.Component{
 				<hr />
 				<h3>Credits</h3>
 				<p>Background Image <a href="http://www.freepik.com" target="_blank" rel="noopener noreferrer"> Designed by D3Images / Freepik</a></p>
-			
-				<button className="btn" onClick={() => this.props.dispatch(toggleAbout())}>Got It</button>
+				
+				<div id="aboutButtonContainer">
+					<button className="btn" onClick={() => this.props.dispatch(toggleAbout())}>Got It</button>
+				</div>
 			</div>
 		)	
 	}

@@ -1,6 +1,7 @@
 import React from 'react'
 import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser, registerUserError, login, toggleLoginRegister, showLoginRegister} from '../../actions/auth';
+import {addNewWishlist} from '../../actions/wishlist'
 import Input from '../Inputs/Input'
 import {required, nonEmpty, matches, length, isTrimmed} from '../../validators'
 
@@ -26,6 +27,8 @@ export class RegisterForm extends React.Component{
 
        return this.props.dispatch(registerUser(newUser))
         	.then(() => this.props.dispatch(login(email, password)))
+        	.then(() => this.props.dispatch(addNewWishlist('Favorite')))
+
     }
 
 	render(){

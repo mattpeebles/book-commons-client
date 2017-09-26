@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import faker from 'faker'
 
 import {demoUser, login, showLoginRegister} from '../../actions/auth'
+import {addNewWishlist} from '../../actions/wishlist'
 import {toggleAbout} from '../../actions/results'
 
 import NavSearch from './NavSearch'
@@ -22,9 +23,9 @@ export class NavLinks extends React.Component{
     	}
 
     	return this.props.dispatch(demoUser(user))
-    		.then(() => {
-        		return this.props.dispatch(login(email, password))
-    		})
+    		.then(() => this.props.dispatch(login(email, password)))
+        	.then(() => this.props.dispatch(addNewWishlist('Favorite')))
+
 
 	}
 

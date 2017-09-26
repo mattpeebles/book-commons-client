@@ -63,7 +63,7 @@ A public domain book search that aggregates a variety of databases to display re
 - [x] Delete wishlist
 
 ### Components <a name="todoComponents"></a>
-- [ ] Add validation to Wishlist settings forms
+- [x] Add validation to Wishlist settings forms
 - [x] Add Demo
 - [x] require current password to be validated to change user settings
 - [x] add feedback upon submit to:

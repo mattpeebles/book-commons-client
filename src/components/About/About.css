@@ -20,3 +20,8 @@
 .about > ol{
   text-align: left;
 }
+
+
+#aboutButtonContainer{
+  text-align: center;
+}

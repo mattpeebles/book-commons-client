@@ -100,6 +100,7 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
+	router: state.router,
 	auth: state.auth,
 	firstFetch: state.wishlist.firstFetch,
 	wishlist: state.wishlist,
