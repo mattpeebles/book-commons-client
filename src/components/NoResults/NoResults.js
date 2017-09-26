@@ -1,9 +1,8 @@
+// subcomponent of Results
+
 import React from 'react'
 import {connect} from 'react-redux'
-
-
 import SearchForm from '../Search/SearchForm'
-
 
 import './NoResults.css'
 

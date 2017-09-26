@@ -1,5 +1,6 @@
-import React from 'react'
+// called in BookDetails
 
+import React from 'react'
 
 export default function BookPages(props){
 	

@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import {routerReducer, routerMiddleware} from 'react-router-redux'
 
-import reducer from './reducers/index' 
 import authReducer from './reducers/auth'
 import resultsReducer from './reducers/results'
 import wishlistReducer from './reducers/wishlist'
@@ -22,7 +21,6 @@ export const store = createStore(
         auth: authReducer,
         form: formReducer,
         results: resultsReducer,
-        app: reducer,
         wishlist: wishlistReducer
     }), applyMiddleware(thunk, historyMid))
 

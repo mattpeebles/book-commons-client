@@ -1,3 +1,5 @@
+// subcomponet of index
+
 import React from 'react'
 import {Route} from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'

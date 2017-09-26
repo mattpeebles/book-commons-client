@@ -1,3 +1,5 @@
+// subcomponent of NoResults, Search
+
 import React from 'react'
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty, isTrimmed} from '../../validators'

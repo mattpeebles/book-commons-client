@@ -1,3 +1,5 @@
+// subcomponent of Results, Wishlists
+
 import React from 'react'
 import {connect} from 'react-redux';
 

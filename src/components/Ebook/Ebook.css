@@ -75,6 +75,16 @@
 
 
 @media screen and (min-width: 700px){
+	#publicResultTitle > #header{
+		background: #E196BD;
+		border: 2px solid black;
+		color: #333;
+		width: 45%;
+		text-align: left;
+		margin-top: 3%;
+		box-shadow: 45px 10px #E196BD, inset 1.07em 0.2em #F6F6F6;
+	}
+
 		.result{
 			padding-left: 0;
 			padding-right: 0;

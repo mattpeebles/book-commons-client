@@ -1,3 +1,5 @@
+// subcomponent of Header
+
 import React from 'react'
 
 export default function Subtitle(props){

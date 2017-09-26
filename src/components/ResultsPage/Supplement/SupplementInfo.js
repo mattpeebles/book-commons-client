@@ -1,3 +1,5 @@
+// subcomponent of Results
+
 import React from 'react'
 
 import AuthorSupplement from './AuthorSupplement'

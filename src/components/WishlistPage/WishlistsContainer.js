@@ -1,3 +1,5 @@
+// subcomponent of Wishlist
+
 import React from 'react'
 
 import WishlistLinks from './WishlistLinks'

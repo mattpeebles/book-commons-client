@@ -35,6 +35,8 @@ export const setNavLinks = navLinks => ({
     navLinks
 })
 
+
+    //function formats errors in a way for redux-form to interpret easily
 const normalizeResponseErrors = res => {
     if (!res.ok) {
         if (
@@ -53,8 +55,9 @@ const normalizeResponseErrors = res => {
     return res;
 };
 
-// Stores the auth token in state and localStorage, and decodes and stores
-// the user data stored in the token
+
+    // Stores the auth token in state and localStorage, and decodes and stores
+    // the user data stored in the token
 const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken); 
     saveAuthToken(authToken);
@@ -63,6 +66,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 };
 
 
+    //Creates demo user
 export const demoUser = user => dispatch => {    
     console.log('demo')
     return fetch(`${API_BASE_URL}/users/demo`, {
@@ -164,21 +168,18 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
-            // Provide our existing token as credentials to get a new one
             Authorization: `Bearer ${authToken}`
         }
     })
-        //.then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then(({authToken}) => {
             storeAuthInfo(authToken, dispatch)
             dispatch(setNavLinks(['About', 'Wishlists', 'Signed in']))
         })
         .catch(err => {
+                //if there is an error, sign user out
             const {code} = err;
             if (code === 401) {
-                // We couldn't get a refresh token because our current credentials
-                // are invalid or expired, so clear them and sign us out
                 dispatch(setCurrentUser(null));
                 dispatch(setAuthToken(null));
                 clearAuthToken(authToken);
@@ -200,6 +201,7 @@ export const changeUserInfoInit = () => ({
     type: CHANGE_USER_INFO_INIT
 })
 
+    //function to change user email or password
 export const changeUserInfo = infoObj => (dispatch, getState) => {
     dispatch(changeUserInfoRequest())
     let token = getState().auth.authToken;
@@ -208,6 +210,9 @@ export const changeUserInfo = infoObj => (dispatch, getState) => {
         userId
     }
 
+        //allows for future expansion of function without
+        //having to create an individual function for each
+        //user object change
     Object.keys(infoObj).forEach(key => {
         updateObj[key] = infoObj[key]
     })

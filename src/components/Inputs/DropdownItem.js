@@ -1,3 +1,5 @@
+// subcomponent of Dropdown
+
 import React from 'react'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'

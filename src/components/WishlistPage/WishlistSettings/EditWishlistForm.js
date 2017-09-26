@@ -1,3 +1,5 @@
+// subcomponent of WLSettings
+
 import React from 'react'
 import {reduxForm, Field, focus} from 'redux-form';
 import Input from '../../Inputs/Input'

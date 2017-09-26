@@ -1,3 +1,5 @@
+// subcomponent of ./ebook/BookInfo
+
 import React from 'react'
 
 import DropdownItem from './DropdownItem'

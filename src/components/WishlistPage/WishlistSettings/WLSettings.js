@@ -1,3 +1,5 @@
+// subcomponent of App
+
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -6,8 +8,6 @@ import {push} from 'react-router-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 import EditWishlistForm from './EditWishlistForm'
-import LoginRegister from '../../LoginRegister/LoginRegister'
-
 
 import {fetchWishlists,toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle, changeWishlist} from '../../../actions/wishlist'
 
@@ -54,15 +54,6 @@ export class WLSettings extends React.Component{
 	}
 
 	render(){
-
-			//shows login/register on refresh for a split second
-			//or shows it until user logs in if there is no token
-		if(this.props.wishlists === null){
-			
-			return (
-				<LoginRegister />
-			)
-		}
 
 		let formatLinks = this.props.wishlists.map((list, index) => {
 				

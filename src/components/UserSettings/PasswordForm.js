@@ -1,3 +1,5 @@
+// subcomponent of ChangeUserSettingsPage
+
 import React from 'react'
 import { push } from 'react-router-redux'
 import {reduxForm, Field, focus} from 'redux-form';

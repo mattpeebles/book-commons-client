@@ -1,3 +1,5 @@
+//subcomponent of Ebook
+
 import React from 'react'
 
 import Preview from './Preview'

@@ -1,3 +1,5 @@
+// subcomponent of FormatLocation
+
 import React from 'react'
 
 import BookFormat from './BookFormat'

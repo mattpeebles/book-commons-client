@@ -1,3 +1,5 @@
+// subcomponent of LoginRegister
+
 import React from 'react'
 import {reduxForm, Field, focus} from 'redux-form';
 import {registerUser, registerUserError, login, toggleLoginRegister, showLoginRegister} from '../../actions/auth';
