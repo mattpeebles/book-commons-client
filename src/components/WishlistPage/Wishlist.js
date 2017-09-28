@@ -36,6 +36,7 @@ export class Wishlist extends React.Component{
 	}
 
 	componentDidMount(){
+
 		if(this.props.wishlists !== null){
 			let listId = this.props.wishlists.filter(list => list.title === this.props.currentList)[0].id
 

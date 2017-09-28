@@ -17,6 +17,13 @@ import './WLSettings.css'
 
 export class WLSettings extends React.Component{
 
+
+	componentWillMount(){
+		if(this.props.loggedIn === false || this.props.wishlists === null){
+			this.props.dispatch(push('/'))
+		}
+	}
+
 	componentWillReceiveProps(nextProps){
 		if(nextProps.currentUser === null){
 			this.props.dispatch(push('/'))
@@ -54,45 +61,48 @@ export class WLSettings extends React.Component{
 	}
 
 	render(){
+		let formatLinks;
+		let newWishlist;
+		let addButton;
 
-		let formatLinks = this.props.wishlists.map((list, index) => {
-				
-				let title = list.title
-					//filters wishlists edit, first array item is result, takes value of result
-				if(this.props.wishlistsEdit[title] === true){
+		if(this.props.wishlists !== null){
+
+			formatLinks = this.props.wishlists.map((list, index) => {
+					
+					let title = list.title
+						//filters wishlists edit, first array item is result, takes value of result
+					if(this.props.wishlistsEdit[title] === true){
+						return (
+							<EditWishlistForm key={index} title={title} index={index}/>
+						)
+					}
+
+					let bookNum = (list.items.length === 1) ? 'book' : 'books'
+
 					return (
-						<EditWishlistForm key={index} title={title} index={index}/>
-					)
-				}
-
-				let bookNum = (list.items.length === 1) ? 'book' : 'books'
-
-				return (
-							<div key={index} className="col-12 col-md-6 settingsContainer">
-								<div className="row">
-									<div className="col">
+								<div key={index} className="col-12 col-md-6 settingsContainer">
+									<div className="row">
 										<div className="col">
-											<Link to={`/wishlist/${title.toLowerCase()}`} onClick={e => this.handleClick(e)}>{title}</Link>
+											<div className="col">
+												<Link to={`/wishlist/${title.toLowerCase()}`} onClick={e => this.handleClick(e)}>{title}</Link>
+											</div>
+											<div className="col">
+												<span className="listTitle">{list.items.length}</span> {bookNum}
+											</div>
 										</div>
-										<div className="col">
-											<span className="listTitle">{list.items.length}</span> {bookNum}
-										</div>
-									</div>
-									<div className="col-auto row">
-										<div className="col">
-											<button id={title+"-Edit"} className="btn btn-default btn-sm editWishlist" onClick={e => this.toggleEditForm(e)}>Edit</button>
-										</div>
-										<div className="col-auto">
-											<button id={title+"-Delete"} className="btn btn-default btn-sm deleteWishlist" onClick={e => this.deleteList(e)}>Delete</button>
+										<div className="col-auto row">
+											<div className="col">
+												<button id={title+"-Edit"} className="btn btn-default btn-sm editWishlist" onClick={e => this.toggleEditForm(e)}>Edit</button>
+											</div>
+											<div className="col-auto">
+												<button id={title+"-Delete"} className="btn btn-default btn-sm deleteWishlist" onClick={e => this.deleteList(e)}>Delete</button>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						)
-		})
-
-		let newWishlist;
-		let addButton;
+							)
+			})
+		}
 
 		if(this.props.addWishlist === true){
 			newWishlist = <AddWishlist />

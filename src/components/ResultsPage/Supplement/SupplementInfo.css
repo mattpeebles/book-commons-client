@@ -1,68 +1,68 @@
-.card{
+.supplement .card{
 	display: none;
 }
 
 @media screen and (min-width: 768px){
-	.card{
+	.supplement .card{
 		display: inherit;
 		width: 90%;
 		border: none;
 	}
 
-	div.card-header{
+	.supplement div.card-header{
 		border-bottom: 5px solid black;
 		padding-top: 0;
 	}
 
-	h4.card-header{
+	.supplement h4.card-header{
 		border-top: 1px solid black;
 		border-bottom: none;
 	}
 
-	h4.card-header, .cardTitle, div.centered{
+	.supplement h4.card-header, .cardTitle, div.centered{
 		border-left: 5px solid black;
 		border-right: 5px solid black;
 		border-top: white;
 		color: #333;
 	}
 
-	button.nav-link.active{
+	.supplement button.nav-link.active{
 		border-bottom: 3px solid white;
 	}
 
-	.nav-tabs button.nav-link{
+	.supplement .nav-tabs button.nav-link{
 		border: 1.5px solid transparent;
 	}
 
-	.nav-tabs button.nav-link.active{
+	.supplement .nav-tabs button.nav-link.active{
 		border: 5px solid black;
 		border-bottom: 3px solid white;
 	}
 
-	.card-header-tabs{
+	.supplement .card-header-tabs{
 		margin-bottom: -1.02rem;
 	}
 
-	.card-body{
+	.supplement .card-body{
 		border: 5px solid black;
 		border-top: none;
 		color: #333;
 	}
 
-	.card-header.cardTitle{
+	.supplement .card-header.cardTitle{
 		padding-top: 1em;
 		background-color: transparent;
 	}
 
-	.supplementPhoto{
+	.supplement .supplementPhoto{
 		width: 175px;
 	}
 
-	.centered{
+	.supplement .centered{
 		text-align: center;
 	}
 
-	.supplementButton {
+	.supplement .supplementButton {
 	  box-shadow: 35px -20px #6DCCC4, inset 2em -1.1em white;
 	  background-color: #6DCCC4;
 	  color: black;
@@ -71,14 +71,14 @@
 	  transition: box-shadow .33s ease-out;
 	}
 
-	.supplementButton:hover{
+	.supplement .supplementButton:hover{
 	  box-shadow: none;
 	  background-color: #1865B5;
 	  color: white;
 	  border: 3px solid black;
 	}
 
-	.supplementButton:active{
+	.supplement .supplementButton:active{
 	  background-color: #FFF965;
 	  box-shadow: -35px 10px #FFF965, inset -2.1em 0.4em white;
 	  transition: none;
@@ -86,7 +86,7 @@
 	  transition: box-shadow .33s ease-in;
 	}
 
-	.supplementPhoto, .supplementCover{
+	.supplement .supplementPhoto, .supplementCover{
 	  box-shadow: -35px 10px #FFF965, inset -2.1em 0.4em white;
 	}
 }

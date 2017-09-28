@@ -44,7 +44,6 @@ export class DropdownItem extends React.Component{
 
 			//Wishlist render
 		if(this.props.type === 'wishlistDrop'){
-				
 					let items = this.props.dropdownLinks.map((item, index) => {
 						
 						if(item === 'Delete'){
@@ -56,23 +55,30 @@ export class DropdownItem extends React.Component{
 						}
 
 						else if(item === 'Change Wishlist'){
-							let options = this.props.wishlists.map((item, index) => {
-									//doesn't add current list to options
-								if(item.title !== this.props.currentList){
-									return <option key={index} id={item.id} value={item.title}>{item.title}</option>
-								}
-								return undefined
-							})
+							
+							if(this.props.wishlistNames.length > 1){
+								let options = this.props.wishlists.map((item, index) => {
+										//doesn't add current list to options
+									if(item.title !== this.props.currentList){
+										return <option key={index} id={item.id} value={item.title}>{item.title}</option>
+									}
+									return undefined
+								});
 
-							return (
-								<form key={index} className="dropdownWishlistForm col-12" onSubmit={e => this.changeWishlist(e)}>
-									<select name='wishlist'>
-										{options}
-									</select>
-									<input type='submit' className='btn btn-sm' value='Change Wishlist' />
-								</form>
-							)
-						}
+								return (
+									<form key={index} className="dropdownWishlistForm col-12" onSubmit={e => this.changeWishlist(e)}>
+										<select name='wishlist'>
+											{options}
+										</select>
+										<input type='submit' className='btn btn-sm' value='Change Wishlist' />
+									</form>
+								)
+							}
+
+							else{
+								return undefined
+							}
+						};
 
 						return item
 						
@@ -106,7 +112,8 @@ export class DropdownItem extends React.Component{
 const mapStateToProps = state => ({
 	wishlists: state.wishlist.wishlists,
 	currentList: state.wishlist.currentList,
-	wishlistItems: state.wishlist.wishlistItems
+	wishlistItems: state.wishlist.wishlistItems,
+	wishlistNames: state.wishlist.wishlistNames
 })
 
 export default connect(mapStateToProps)(DropdownItem)

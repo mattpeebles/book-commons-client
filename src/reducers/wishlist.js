@@ -115,12 +115,14 @@ export default (state, action) => {
 		let wishlistNames = [...state.wishlistNames, action.wishlistName]
 		let wishlists = [...state.wishlists, action.wishlist]
 		
+		let currentList = (wishlistNames !== undefined) ? wishlistNames[0] : undefined
 
 		return Object.assign({}, state, {
 			loading: false,
 			error: null,
 			wishlistNames,
-			wishlists
+			wishlists,
+			currentList
 		})
 	}
 
@@ -193,10 +195,13 @@ export default (state, action) => {
 		})
 	}
 	if (action.type === REMOVE_WISHLIST_SUCCESS){
-
+		let currentList = (state.wishlistNames !== undefined) ? state.wishlistNames[0] : undefined
+		
 		return Object.assign({}, state, {
 			loading: false,
-			error: null
+			error: null,
+			currentList,
+			wishlistItems: []
 		})
 	}
 	if (action.type === REMOVE_WISHLIST_ERROR){
@@ -221,7 +226,8 @@ export default (state, action) => {
 		let wishlists = [...wishlistsArray, action.wishlist]
 
 		return Object.assign({}, state, {
-			wishlists
+			wishlists,
+			currentList: action.wishlist.title
 		})
 	};
 

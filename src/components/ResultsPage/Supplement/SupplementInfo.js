@@ -10,9 +10,17 @@ import './SupplementInfo.css'
 export default function SupplementInfo(props){
 
 		if(props.supplement === 'book'){
-			return (<BookSupplement {...props.details}/>)
+			return (
+				<div className="supplement">
+					<BookSupplement {...props.details}/>
+				</div>
+			)
 		}
 		else{
-			return (<AuthorSupplement {...props.details}/>)
+			return (
+				<div className="supplement">
+					<AuthorSupplement {...props.details}/>
+				</div>
+			)
 		}
 }

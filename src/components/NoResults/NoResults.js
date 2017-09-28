@@ -9,13 +9,9 @@ import './NoResults.css'
 export function NoResults(props){
 
 	return (
-		<div className="col-sm-12">
-			<div id="noResultsHead">
-				<h3>Bummer</h3>
-				<p>We've come up empty on free ebooks</p>
-			</div>
+		<div id="noResultsContainer" className="col-sm-12">
 			<div id="noResults">
-				<h3>Search Again?</h3>
+				<h3 id="noResultsHead">Bummer - Search Again?</h3>
 				<SearchForm />
 			</div>
 		</div>

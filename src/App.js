@@ -8,9 +8,8 @@ import {history} from './store'
 import {connect} from 'react-redux'
 import {fetchWishlists} from './actions/wishlist'
 import {refreshAuthToken} from './actions/auth';
+import {toggleAbout} from './actions/results'
 
-
-import LandingPage from './components/LandingPage/LandingPage'
 
 import Search from './components/Search/Search'
 import Results from './components/ResultsPage/Results'
@@ -38,6 +37,7 @@ export class App extends React.Component{
         if (nextProps.loggedIn && !this.props.loggedIn) {
             // When we are logged in, refresh the auth token periodically
             this.startPeriodicRefresh();
+            this.props.dispatch(toggleAbout())
         } else if (!nextProps.loggedIn && this.props.loggedIn) {
             // Stop refreshing when we log out
             this.stopPeriodicRefresh();
@@ -87,7 +87,6 @@ export class App extends React.Component{
 					{loginRegisterForm}
 					{about}
 					<main>
-						<Route exact path='/landing' component={LandingPage} />
 						<Route exact path='/' component={Search} />
 						<Route exact path='/results' component={Results} />
 						

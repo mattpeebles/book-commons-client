@@ -260,7 +260,10 @@ export const toggleEditWishlistStatus = (list) => ({
             })
             .then(res => res.json())
             .then(list => {
-                dispatch(saveBookToWishlistSuccess(list))
+                if(list.message !== "Item already exists in wishlist"){
+                    dispatch(saveBookToWishlistSuccess(list))
+                }
+
             })
             .catch(err => dispatch(saveBookToWishlistError(err)))
         };
