@@ -30,37 +30,37 @@ Registered users are able to create wishlists to store ebooks for later referenc
 ### Basic Features <a name="screenshotBasic"></a>
 
 Search by Title
-![alt text](/resources/gifs/searchTitle.gif "Search")
+![alt text](./public/resources/gifs/searchTitle.gif "Search")
 
 Results
-![alt text](/resources/gifs/resultsExplanation.gif "Results")
+![alt text](./public/resources/gifs/resultsExplanation.gif "Results")
 
 Supplement Info
-![alt text](/resources/gifs/supplementInfo.gif "Supplement Info")
+![alt text](./public/resources/gifs/supplementInfo.gif "Supplement Info")
 
 No Wishlists
-![alt text](/resources/gifs/noWishlist.gif "No Wishlist")
+![alt text](./public/resources/gifs/noWishlist.gif "No Wishlist")
 
 
 ### User Features <a name="screenshotUser"></a>
 
 Add Wishlist
-![alt text](/resources/gifs/addWishlist.gif "Add Wishlist")
+![alt text](./public/resources/gifs/addWishlist.gif "Add Wishlist")
 
 Save Ebook to Wishlist
-![alt text](/resources/gifs/saveEbook.gif "Save Ebook")
+![alt text](./public/resources/gifs/saveEbook.gif "Save Ebook")
 
 Move Ebook between Wishlist
-![alt text](/resources/gifs/moveEbook.gif "Move Ebook")
+![alt text](./public/resources/gifs/moveEbook.gif "Move Ebook")
 
 Remove Ebook from Wishlist
-![alt text](/resources/gifs/removeEbook.gif "Remove Ebook")
+![alt text](./public/resources/gifs/removeEbook.gif "Remove Ebook")
 
 Edit Wishlist
-![alt text](/resources/gifs/addWishlist.gif "Add Wishlist")
+![alt text](./public/resources/gifs/addWishlist.gif "Add Wishlist")
 
 Delete Wishlist
-![alt text](/resources/gifs/deleteWishlist.gif "Delete Wishlist")
+![alt text](./public/resources/gifs/deleteWishlist.gif "Delete Wishlist")
 
 ## Technology <a name="technology"></a>
 
