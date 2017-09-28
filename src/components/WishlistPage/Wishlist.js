@@ -57,7 +57,7 @@ export class Wishlist extends React.Component{
 
 		return(
 			<main>
-				<div id="main-container" className="container-fluid">
+				<div id="main-container" className="container-fluid wishlistPage">
 					<Link id="settings" to="/settings/wishlist"><button className="btn btn-default"><i className="material-icons md-48">settings</i></button></Link>
 					<div className="wishlistHeader">
 						<Header headerId="header" title="Wishlist" subtitle={this.props.currentList} subtitleId="wishlistName" />
