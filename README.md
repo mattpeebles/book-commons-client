@@ -5,6 +5,8 @@
 
 1. [Introduction](#introduction)
 2. [Screenshots](#screenshot)
+	1. [User Features](#screenshotBasic)
+	2. [Basic Features](#screenshotUser)
 3. [Technology](#technology)
  	1. [Front End](#techFront)
  	2. [Back End](#techBack)
@@ -24,6 +26,41 @@ Registered users are able to create wishlists to store ebooks for later referenc
 
 
 ## Screenshots <a name="screenshot"></a>
+
+### Basic Features <a name="screenshotBasic"></a>
+
+Search by Title
+![alt text](/resources/gifs/searchTitle.gif "Search")
+
+Results
+![alt text](/resources/gifs/resultsExplanation.gif "Results")
+
+Supplement Info
+![alt text](/resources/gifs/supplementInfo.gif "Supplement Info")
+
+No Wishlists
+![alt text](/resources/gifs/noWishlist.gif "No Wishlist")
+
+
+### User Features <a name="screenshotUser"></a>
+
+Add Wishlist
+![alt text](/resources/gifs/addWishlist.gif "Add Wishlist")
+
+Save Ebook to Wishlist
+![alt text](/resources/gifs/saveEbook.gif "Save Ebook")
+
+Move Ebook between Wishlist
+![alt text](/resources/gifs/moveEbook.gif "Move Ebook")
+
+Remove Ebook from Wishlist
+![alt text](/resources/gifs/removeEbook.gif "Remove Ebook")
+
+Edit Wishlist
+![alt text](/resources/gifs/addWishlist.gif "Add Wishlist")
+
+Delete Wishlist
+![alt text](/resources/gifs/deleteWishlist.gif "Delete Wishlist")
 
 ## Technology <a name="technology"></a>
 

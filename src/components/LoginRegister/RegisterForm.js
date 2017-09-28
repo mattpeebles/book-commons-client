@@ -118,7 +118,7 @@ export class RegisterForm extends React.Component{
 				</form>
 			  </div>
 			  
-			  <div className="cta"><a href="/">Forgot your password?</a></div>
+				{/*<div className="cta"><a href="/">Forgot your password?</a></div>*/}
 			</div>
 		)
 	}
