@@ -1,3 +1,5 @@
+// component called in BookDetails
+
 import React from 'react'
 import langs from 'langs'
 
@@ -11,6 +13,7 @@ export default function Languages(props){
 	else {
 		let languages = []
 
+				//translates languages from abbreviation to local full length
 			if(typeof props.languages === 'object'){
 				props.languages.forEach(lang => {
 					if(langs.has('1', `${lang}`)){

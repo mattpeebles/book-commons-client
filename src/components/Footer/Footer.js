@@ -1,3 +1,4 @@
+// subcomponent of App
 import React from 'react'
 
 import './Footer.css'

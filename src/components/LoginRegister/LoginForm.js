@@ -1,6 +1,9 @@
+// subcomponent of LoginRegister
+
 import React from 'react'
 import {reduxForm, Field, focus} from 'redux-form';
 import Input from '../Inputs/Input'
+
 import {login, toggleLoginRegister, showLoginRegister} from '../../actions/auth'
 
 export class LoginForm extends React.Component{
@@ -64,7 +67,7 @@ export class LoginForm extends React.Component{
 
 				    </form>
 				  </div>
-				  <div className="cta"><a href="/">Forgot your password?</a></div>
+				  {/*<div className="cta"><a href="/">Forgot your password?</a></div>*/}
 				</div>
 			</div>
 		)	

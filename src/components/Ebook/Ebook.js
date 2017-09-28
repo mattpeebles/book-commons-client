@@ -1,6 +1,9 @@
+// subcomponent of Results, Wishlists
+
 import React from 'react'
 import {connect} from 'react-redux';
 
+import Header from '../Header/Header'
 import BookDetails from './BookDetails'
 import BookInfo from './BookInfo'
 import FormatLocation from './FormatLocation'
@@ -24,6 +27,9 @@ export class Ebook extends React.Component{
 
 		return (
 			<div id="results">
+				<div id="publicResultTitle" className='col-12'>
+					<Header headerId="header" title="Free Ebooks" />
+				</div>
 				{results}
 			</div>
 		)

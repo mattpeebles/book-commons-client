@@ -1,3 +1,5 @@
+// subcomponent of App
+
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -6,8 +8,6 @@ import {push} from 'react-router-redux'
 import Header from '../../Header/Header'
 import AddWishlist from './AddWishlist'
 import EditWishlistForm from './EditWishlistForm'
-import LoginRegister from '../../LoginRegister/LoginRegister'
-
 
 import {fetchWishlists,toggleEditWishlistStatus, addWishlistForm, removeWishlist, editWishlistTitle, changeWishlist} from '../../../actions/wishlist'
 
@@ -16,6 +16,13 @@ import './WLSettings.css'
 
 
 export class WLSettings extends React.Component{
+
+
+	componentWillMount(){
+		if(this.props.loggedIn === false || this.props.wishlists === null){
+			this.props.dispatch(push('/'))
+		}
+	}
 
 	componentWillReceiveProps(nextProps){
 		if(nextProps.currentUser === null){
@@ -54,54 +61,48 @@ export class WLSettings extends React.Component{
 	}
 
 	render(){
+		let formatLinks;
+		let newWishlist;
+		let addButton;
 
-			//shows login/register on refresh for a split second
-			//or shows it until user logs in if there is no token
-		if(this.props.wishlists === null){
-			
-			return (
-				<LoginRegister />
-			)
-		}
+		if(this.props.wishlists !== null){
 
-		let formatLinks = this.props.wishlists.map((list, index) => {
-				
-				let title = list.title
-					//filters wishlists edit, first array item is result, takes value of result
-				if(this.props.wishlistsEdit[title] === true){
+			formatLinks = this.props.wishlists.map((list, index) => {
+					
+					let title = list.title
+						//filters wishlists edit, first array item is result, takes value of result
+					if(this.props.wishlistsEdit[title] === true){
+						return (
+							<EditWishlistForm key={index} title={title} index={index}/>
+						)
+					}
+
+					let bookNum = (list.items.length === 1) ? 'book' : 'books'
+
 					return (
-						<EditWishlistForm key={index} title={title} index={index}/>
-					)
-				}
-
-				let bookNum = (list.items.length === 1) ? 'book' : 'books'
-
-				return (
-							<div key={index} className="col-12 col-md-6 settingsContainer">
-								<div className="row">
-									<div className="col">
+								<div key={index} className="col-12 col-md-6 settingsContainer">
+									<div className="row">
 										<div className="col">
-											<Link to={`/wishlist/${title.toLowerCase()}`} onClick={e => this.handleClick(e)}>{title}</Link>
+											<div className="col">
+												<Link to={`/wishlist/${title.toLowerCase()}`} onClick={e => this.handleClick(e)}>{title}</Link>
+											</div>
+											<div className="col">
+												<span className="listTitle">{list.items.length}</span> {bookNum}
+											</div>
 										</div>
-										<div className="col">
-											<span className="listTitle">{list.items.length}</span> {bookNum}
-										</div>
-									</div>
-									<div className="col-auto row">
-										<div className="col">
-											<button id={title+"-Edit"} className="btn btn-default btn-sm editWishlist" onClick={e => this.toggleEditForm(e)}>Edit</button>
-										</div>
-										<div className="col-auto">
-											<button id={title+"-Delete"} className="btn btn-default btn-sm deleteWishlist" onClick={e => this.deleteList(e)}>Delete</button>
+										<div className="col-auto row">
+											<div className="col">
+												<button id={title+"-Edit"} className="btn btn-default btn-sm editWishlist" onClick={e => this.toggleEditForm(e)}>Edit</button>
+											</div>
+											<div className="col-auto">
+												<button id={title+"-Delete"} className="btn btn-default btn-sm deleteWishlist" onClick={e => this.deleteList(e)}>Delete</button>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						)
-		})
-
-		let newWishlist;
-		let addButton;
+							)
+			})
+		}
 
 		if(this.props.addWishlist === true){
 			newWishlist = <AddWishlist />

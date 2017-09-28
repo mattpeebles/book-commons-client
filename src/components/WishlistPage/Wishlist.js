@@ -1,3 +1,5 @@
+// subcomponent of App
+
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -21,7 +23,11 @@ export class Wishlist extends React.Component{
 	}
 
 	componentWillReceiveProps(nextProps){
-			//current list has been changed									wishlist has been changed
+		if(nextProps.loggedIn === false){
+			this.props.dispatch(push('/'))
+		}
+
+			//current list has been changed						wishlist has been changed
 		if(nextProps.currentList !== this.props.currentList || nextProps.wishlists !== this.props.wishlists){
 			let listId = this.props.wishlists.filter(list => list.title === nextProps.currentList)[0].id
 
@@ -30,6 +36,7 @@ export class Wishlist extends React.Component{
 	}
 
 	componentDidMount(){
+
 		if(this.props.wishlists !== null){
 			let listId = this.props.wishlists.filter(list => list.title === this.props.currentList)[0].id
 
@@ -50,7 +57,7 @@ export class Wishlist extends React.Component{
 
 		return(
 			<main>
-				<div id="main-container" className="container-fluid">
+				<div id="main-container" className="container-fluid wishlistPage">
 					<Link id="settings" to="/settings/wishlist"><button className="btn btn-default"><i className="material-icons md-48">settings</i></button></Link>
 					<div className="wishlistHeader">
 						<Header headerId="header" title="Wishlist" subtitle={this.props.currentList} subtitleId="wishlistName" />

@@ -1,3 +1,5 @@
+// subcomponet of index
+
 import React from 'react'
 import {Route} from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
@@ -6,9 +8,10 @@ import {history} from './store'
 import {connect} from 'react-redux'
 import {fetchWishlists} from './actions/wishlist'
 import {refreshAuthToken} from './actions/auth';
+import {toggleAbout} from './actions/results'
 
 
-import LandingPage from './components/LandingPage'
+import Search from './components/Search/Search'
 import Results from './components/ResultsPage/Results'
 import Wishlist from './components/WishlistPage/Wishlist'
 import WLSettings from './components/WishlistPage/WishlistSettings/WLSettings'
@@ -34,6 +37,7 @@ export class App extends React.Component{
         if (nextProps.loggedIn && !this.props.loggedIn) {
             // When we are logged in, refresh the auth token periodically
             this.startPeriodicRefresh();
+            this.props.dispatch(toggleAbout())
         } else if (!nextProps.loggedIn && this.props.loggedIn) {
             // Stop refreshing when we log out
             this.stopPeriodicRefresh();
@@ -83,7 +87,7 @@ export class App extends React.Component{
 					{loginRegisterForm}
 					{about}
 					<main>
-						<Route exact path='/' component={LandingPage} />
+						<Route exact path='/' component={Search} />
 						<Route exact path='/results' component={Results} />
 						
 						<Route exact path='/settings/wishlist' component={WLSettings} />						
@@ -100,6 +104,7 @@ export class App extends React.Component{
 
 
 const mapStateToProps = state => ({
+	router: state.router,
 	auth: state.auth,
 	firstFetch: state.wishlist.firstFetch,
 	wishlist: state.wishlist,

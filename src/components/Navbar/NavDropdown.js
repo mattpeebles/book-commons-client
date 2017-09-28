@@ -1,3 +1,5 @@
+// subcomponent of NavLinks
+
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -33,6 +35,7 @@ export class NavDropdown extends React.Component{
 			        </button>
 			        <div className="dropdown-menu" aria-labelledby="wishlistsMenuLink">
 		       			{links}
+		       			<Link className="dropdown-item" to={`/settings/wishlist`} >Wishlist Settings</Link>
 			        </div>
 			    </li>
 			)	

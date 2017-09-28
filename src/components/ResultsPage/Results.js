@@ -1,3 +1,5 @@
+// subcomponent of App
+
 import React from 'react'
 import {connect} from 'react-redux'
 
@@ -29,6 +31,8 @@ export class Results extends React.Component{
 		let supplementDiv;
 		let amazon;
 		let noResults;
+		let header = <Header headerId='header' title="Results" />
+
 
 		if((results.length !== 0 || amazonResult.length !== 0) && (Object.keys(authorSupplement).length !== 0 && Object.keys(bookSupplement).length !== 0)){
 			supplementDiv = <div id="supplement-container" className="row">						
@@ -37,7 +41,7 @@ export class Results extends React.Component{
 		}
 
 
-		let header = <Header headerId='header' title="Results" />
+
 
 		if(loading){
 			return (
@@ -47,7 +51,7 @@ export class Results extends React.Component{
 			)
 		}
 
-		if(results.length < 2){
+		if(results.length < 2 && amazonResult.length > 0){
 			amazon = <AmazonBook results={amazonResult} />
 		}
 
@@ -65,9 +69,9 @@ export class Results extends React.Component{
 				</div>
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
-						{noResults}	
 						<div className="col-sm-12 col-md-8">
 							<Ebook results={results} dropdownType='options' dropdownLinks={dropdownLinks}/>
+							{noResults}	
 							{amazon}
 						</div>
 						<div className="col-sm-12 col-md-4">

@@ -37,22 +37,29 @@ export const toggleSupplement = (info) => ({
 	details: `${info}Supplement`
 })
 
+
+		//Main function of Book Commons
+		//calls all database queries from on title search
 export const fetchBooks = term => dispatch => {
 		//clears results before each search
 	dispatch(emptyResults())
 	
+		//ensures term is al
 	let sTerm = term.toString()
 
 	let title = toTitleCase(sTerm)
 
+		//supplement search
 	let wikiTitle = title.replace(' ', '_')
 	dispatch(wikiBook(wikiTitle))
+	
+		//database searches
 	dispatch(amazonBooks(title))
 	dispatch(fetchGutenbergBookId(title))
 	dispatch(fetchGoogleBook(title))
 	dispatch(fetchOpenLibraryBook(title))
+	
 	dispatch(push('/results'))
-
 }
 
 // gutenberg
@@ -74,7 +81,7 @@ export const fetchBooks = term => dispatch => {
 
 				return ids.sort()
 			})
-				//use id to query guteberg
+				//use id to query gutenberg
 			.then(bookIds => {
 				
 					//no books were found in gutenberg
@@ -194,9 +201,10 @@ export const fetchBooks = term => dispatch => {
 						};
 
 						ebooks.push(ebook)
-					}
+					}else{
+						dispatch(noDatabaseResults('google'))
+					};
 
-					dispatch(noDatabaseResults('google'))
 				});
 
 				ebooks.forEach(ebook => {
@@ -237,9 +245,7 @@ export const fetchBooks = term => dispatch => {
 					//gets book and author info for supplement here as well
 				if(data.has_fulltext === false){
 					let wikiAuthor = data.author_name[0].replace(' ', '_')
-					let wikiTitle = title.replace(' ', '_')
 					dispatch(wikipediaAuthor(wikiAuthor))
-					dispatch(wikiBook(wikiTitle))
 					return dispatch(noDatabaseResults('open library'))
 				}
 
@@ -292,6 +298,10 @@ export const fetchBooks = term => dispatch => {
 		return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
 			.then(res => res.json())
 			.then(res => {
+				
+					//wikipedia does not store author life span dates in json
+					//but it does store it in the summary within the first set of
+					//parentheses
 				let dateIndex1 = res.extract.indexOf('(')
 				let dateIndex2 = res.extract.indexOf(')')
 				let dates = res.extract.slice(dateIndex1+1, dateIndex2).replace(';', '').trim()
@@ -314,6 +324,9 @@ export const fetchBooks = term => dispatch => {
 		return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}`)
 			.then(res => res.json())
 			.then(res => {
+
+					//In the case of books with common names (e.g. Jane Austen's Emma)
+					//this fetches the appends _(novel) to the fetch request to return the novel
 				if(res.description === "Wikimedia disambiguation page"){
 					return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${name}_(novel)`)
 						.then(res => res.json())

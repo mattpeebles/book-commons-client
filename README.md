@@ -4,93 +4,95 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [TODO](#todo)
+2. [Screenshots](#screenshot)
+	1. [User Features](#screenshotBasic)
+	2. [Basic Features](#screenshotUser)
+3. [Technology](#technology)
+ 	1. [Front End](#techFront)
+ 	2. [Back End](#techBack)
+4. [API](#api)
 
 ## Introduction <a name="introduction"></a>
 
-A public domain book search that aggregates a variety of databases to display results in one convenient page. Allows users to create wishlists of public domain books to download them at their convenience.
+`A public domain book search that aggregates a variety of databases to display results in one convenient page. Allows users to create wishlists of public domain books to download them at their convenience.`
+
+Book Commons aggregates public domain ebooks from three different databases - Google Books, Open Library, and Project Gutenberg. Europeana and Feedbooks integration are planned for future versions. Each result has a list of formats available for download and a link to the database. While these links very often point to the correct version, there are times (especially with Open Library results) that the links point to non-existant pages. Future work is aimed at refining these results and always returning correct links. 
+
+In the case of no or very few public domain results, Book Commons provides a list of Amazon book links for purchase. The goal with book commons is to provide a link to the book if it exists. 
+
+Desktop users can also very supplemental information about the book and author next to the results.
+
+Registered users are able to create wishlists to store ebooks for later reference or download. Users can create as many wishlists and add as many ebooks to them as they please. 
 
 
-## TODO <a name="todo"></a>
+## Screenshots <a name="screenshot"></a>
+
+### Basic Features <a name="screenshotBasic"></a>
+
+Search by Title
+![alt text](./public/resources/gifs/searchTitle.gif "Search")
+
+Results
+![alt text](./public/resources/gifs/resultsExplanation.gif "Results")
+
+Supplement Info
+![alt text](./public/resources/gifs/supplementInfo.gif "Supplement Info")
+
+No Wishlists
+![alt text](./public/resources/gifs/noWishlist.gif "No Wishlist")
 
 
-### Integration <a name="todoIntegration"></a>
-- [x] Add demo feature
-- [x] User email/password update
-- [x] Wishlist title update
-- [x] Wishlist remove item
-- [x] Ebook move item to another wishlist
-- [x] Ebook save to wishlist
-- [x] Display wishlist ebooks
-- [x] Login
-- [x] Register
-- [x] User persistence
-- [x] Add wishlist
-- [x] Delete wishlist
+### User Features <a name="screenshotUser"></a>
 
-### Actions <a name="todoActions"></a>
-- [x] Project Gutenberg api call
-- [ ] Europeana api call
-- [x] Open Library api call
-- [x] Email/password update - fetch, success, error, request
-- [x] Author summary
-- [x] Book summary
-- [x] Wishlist title update - fetch, success, error, request
-- [x] Wishlist remove item - fetch, success, error, request
-- [x] Wishlist display items - fetch, success, error, request
-- [x] Ebook save to wishlist - fetch, success, error, request
-- [x] Ebook move item to another wishlist - fetch, success, error, request
-- [x] Login - fetch, success, error, request
-- [x] Register - fetch, success, error, request
-- [x] User persistence
-- [x] Add wishlist - fetch, success, error, request
-- [x] Delete wishlist - fetch, success, error, request
+Add Wishlist
+![alt text](./public/resources/gifs/addWishlist.gif "Add Wishlist")
 
-### Reducers <a name="todoReducers"></a>
-- [x] Project Gutenberg api call - fetch, success, error, request
-- [ ] Europeana api call - fetch, success, error, request
-- [x] Open Library api call - fetch, success, error, request
-- [x] Email/password update
-- [x] Wishlist title update
-- [x] Wishlist remove item
-- [x] Wishlist display items
-- [x] Ebook save to wishlist
-- [x] Ebook move item to another wishlist
-- [x] Login
-- [x] Register
-- [x] User persistence
-- [x] Add wishlist
-- [x] Delete wishlist
+Save Ebook to Wishlist
+![alt text](./public/resources/gifs/saveEbook.gif "Save Ebook")
 
-### Components <a name="todoComponents"></a>
-- [ ] Add validation to Wishlist settings forms
-- [x] Add Demo
-- [x] require current password to be validated to change user settings
-- [x] add feedback upon submit to:
-	- [x] Login
-	- [x] Register
-	- [x] Save to wishlist
-	- [x] Change Email
-	- [x] Change Password
-- [x] Link search bars to external database api calls
-- [x] Display external database results on results page
-- [x] Add functions save to wishlist, delete from wishlist, change wishlist to dropdown links
-- [x] Add account edit button to navbar
-- [x] Add wishlist title update function and form to wl settings
+Move Ebook between Wishlist
+![alt text](./public/resources/gifs/moveEbook.gif "Move Ebook")
 
-### Tests <a name="todoTests"></a>
-- [x] Project Gutenberg api call - reducer, action
-- [ ] Europeana api call - reducer, action
-- [x] Open Library api call - reducer, action
-- [x] User email/passworxd update - reducer, action
-- [x] Wishlist display items - reducer, action
-- [x] Wishlist title update - reducer, action
-- [x] Wishlist remove item - reducer, action
-- [x] Ebook move item to another wishlist - reducer, action
-- [x] Ebook save to wishlist - reducer, action
-- [x] Remove ebook from wishlist - reducer, action
-- [x] Login - reducer, action
-- [x] Register - reducer, action
-- [x] User persistence - reducer, action
-- [x] Add wishlist - reducer, action
-- [x] Delete wishlist - reducer, action
+Remove Ebook from Wishlist
+![alt text](./public/resources/gifs/removeEbook.gif "Remove Ebook")
+
+Edit Wishlist
+![alt text](./public/resources/gifs/addWishlist.gif "Add Wishlist")
+
+Delete Wishlist
+![alt text](./public/resources/gifs/deleteWishlist.gif "Delete Wishlist")
+
+## Technology <a name="technology"></a>
+
+### Front End <a name="techFront"></a>
+Hosted on Netlify
+- React/Redux
+- HTML
+- CSS
+- Bootstrap 4
+- Javascript/ES6
+- Jquery
+- Testing
+	- Enzyme
+	- Mocha/Chai
+	- Jest
+
+### Back End <a name="techBack"></a>
+Server hosted on heroku
+Database hosted on mlab
+- Node
+- Express
+- MongoDB/Mongoose
+- Testing
+	-Mocha/Chai
+- ES6
+
+## API <a name="api"></a>
+
+For an explanation of the back-end api, checkout the [Book Commons API Repository](https://github.com/mattpeebles/book-commons-api)
+
+## Future Plans <a name="future"></a>
+
+- [ ] Refine format links to always provide a good linke
+- [ ] Integrate Europeana and Feedbooks database results
+- [ ] Allow users to recover account in case of lost password

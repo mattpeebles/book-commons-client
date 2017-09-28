@@ -7,16 +7,253 @@
   right: 0;
   left: 0;
   margin: 5% auto;
+  margin-bottom: 15%;
   z-index: 2;
   background-color: white;
+  padding: 3%;
+  color: #333;
 }
 
-.closeAbout{
-  position: absolute;
-  right: 0;
-  top: 0;
+#aboutAbout > p{
+  margin-bottom: 8%;
 }
 
-.about > ol{
+.about .card{
   text-align: left;
+  margin-bottom: 2%;
+  border: none;
+  width: 95%;
+}
+
+.accordionTitle{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#basicFeatureTitle{
+  background-color: #FA4236;
+  box-shadow: 20px -15px #FA4236, inset .6em -.4em white; 
+  transition: box-shadow .33s ease-in;
+}
+
+#basicFeatureTitle:active{
+  background-color: #E196BD;
+  box-shadow: none;
+  color: white;
+}
+
+.about #basicFeaturesAccord .collapsed > .card-header{
+  border: 1px solid black;
+  border-radius: 0px;
+  text-align: left;
+  background-color: white;
+  color: #333;
+  box-shadow: -1px .5px #FA4236, inset 1em 0em #FA4236;
+  transition: box-shadow .33s ease-in;
+}
+
+.about #basicFeaturesAccord a:not(.collapsed) > .card-header{
+  background-color: #6DCCC4;
+  color: #333;
+  box-shadow: 0px 0px #6DCCC4, inset -8em 0em white;
+  transition: box-shadow .33s ease-in;
+  border: 1px solid black;
+}
+
+#userFeatureTitle{
+  background-color: #1865B5;
+  box-shadow: -20px -15px #1865B5, inset -.6em -.4em white;
+  transition: box-shadow .33s ease-in;
+}
+
+#userFeatureTitle:active{
+  background-color: #E196BD;
+  box-shadow: none; 
+  color: white;
+}
+
+.about #userFeaturesAccord .collapsed > .card-header{
+  border: 1px solid black;
+  border-radius: 0px;
+  text-align: left;
+  background-color: white;
+  color: #333;
+  box-shadow: 0px 0px #1865B5, inset 1em 0em #1865B5;
+  transition: box-shadow .33s ease-in;
+}
+
+.about #userFeaturesAccord a:not(.collapsed) > .card-header{
+  background-color: #FFF965;
+  color: #333;
+  box-shadow: 0px 0px #FFF965, inset -8em 0em white;
+  transition: box-shadow .33s ease-in;
+  border: 1px solid black;
+}
+
+.card-body{
+  border: 1px solid black;
+  border-top: none;
+}
+
+#aboutAbout ol{
+  text-align: left;
+}
+
+#aboutButtonContainer{
+  text-align: center;
+}
+
+#aboutClose{
+  border: 2px solid black;
+  color: #333;
+}
+
+#aboutClose{
+  background-color: #FFF965;
+  box-shadow: -30px 15px #FFF965, inset -1.75em .83em white;
+}
+
+#aboutClose:hover{
+  background-color: #E196BD;
+  box-shadow: 30px -15px #E196BD, inset 1.75em -.83em white;
+}
+
+#aboutClose:active{
+  background-color: #FA4236;
+  box-shadow: none;
+  color: white;
+}
+
+.accordionTitle{
+  margin-top: 5%;
+  border: 3px solid black;
+  background-color: white;
+  color: #333;
+  width: 50%;
+}
+
+#basicFeaturesAccordion, #userFeaturesAccordion{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+#basicFeaturesAccordion{
+  margin-bottom: 10%;
+}
+
+#landingButtonContainer{
+  text-align: center;
+  margin-top: 5%;
+}
+
+@media screen and (min-width: 700px){
+
+  .about {
+    position: absolute;
+    background: #ffffff;
+    max-width: 750px;
+    width: 100%;
+    border: 15px solid black;
+    right: 0;
+    left: 0;
+    margin: 5% auto;
+    z-index: 2;
+    background-color: white;
+  }
+
+
+.about .card{
+  text-align: left;
+  margin-bottom: 2%;
+  border: none;
+  width: 65%;
+}
+
+#basicFeaturesAccordion{
+  margin-bottom: 8%;
+}
+
+#basicFeatureTitle{
+  background-color: #FA4236;
+  box-shadow: 25px -25px #FA4236, inset .8em -.8em white; 
+  transition: box-shadow .33s ease-in;
+}
+
+#basicFeatureTitle:hover{
+  background-color: #6DCCC4;
+  box-shadow: -25px -25px #6DCCC4, inset -.8em -.8em white;
+}
+
+#basicFeatureTitle:active{
+  background-color: #E196BD;
+  box-shadow: none;
+  color: white;
+}
+
+.about #basicFeaturesAccord .collapsed > .card-header{
+  border: 1px solid black;
+  border-radius: 0px;
+  text-align: left;
+  background-color: white;
+  color: #333;
+  box-shadow: 0px 0px #FA4236, inset 1em 0em #FA4236;
+  transition: box-shadow .33s ease-in;
+}
+
+.about #basicFeaturesAccord .collapsed > .card-header:hover{
+    box-shadow: 0px 0px #6DCCC4, inset 8em 0em #6DCCC4;
+    transition: box-shadow .33s ease-in;
+}
+
+.about #basicFeaturesAccord a:not(.collapsed) > .card-header{
+  background-color: #6DCCC4;
+  color: #333;
+  box-shadow: 0px 0px #6DCCC4, inset -8em 0em white;
+  transition: box-shadow .33s ease-in;
+  border: 1px solid black;
+}
+
+#userFeatureTitle{
+  background-color: #1865B5;
+  box-shadow: -25px -25px #1865B5, inset -.8em -.8em white;
+  transition: box-shadow .33s ease-in;
+}
+
+#userFeatureTitle:hover{
+  background-color: #FFF965;
+  box-shadow: 25px 25px #FFF965, inset .8em .8em white; 
+}
+
+#userFeatureTitle:active{
+  background-color: #E196BD;
+  box-shadow: none;
+  color: white;
+}
+
+.about #userFeaturesAccord .collapsed > .card-header{
+  border: 1px solid black;
+  border-radius: 0px;
+  text-align: left;
+  background-color: white;
+  color: #333;
+  box-shadow: 0px 0px #1865B5, inset 1em 0em #1865B5;
+  transition: box-shadow .33s ease-in;
+}
+
+.about #userFeaturesAccord .collapsed > .card-header:hover{
+    box-shadow: 0px 0px #FFF965, inset 8em 0em #FFF965;
+    transition: box-shadow .33s ease-in;
+}
+
+.about #userFeaturesAccord a:not(.collapsed) > .card-header{
+  background-color: #FFF965;
+  color: #333;
+  box-shadow: 0px 0px #FFF965, inset -8em 0em white;
+  transition: box-shadow .33s ease-in;
+  border: 1px solid black;
+}
+
 }

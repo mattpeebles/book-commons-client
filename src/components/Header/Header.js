@@ -1,3 +1,5 @@
+// subcomponent of AmazonBook, Ebook, Results, Search, WLSettings, Wishlist
+
 import React from 'react'
 
 import Subtitle from './Subtitle'

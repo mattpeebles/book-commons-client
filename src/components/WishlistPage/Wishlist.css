@@ -1,3 +1,6 @@
+.wishlistPage #publicResultTitle{
+	display: none;
+}
 
 .wishlistHeader{
 	margin-top: 2%;
