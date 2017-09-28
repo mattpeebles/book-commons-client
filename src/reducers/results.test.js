@@ -19,10 +19,10 @@ describe('results reducer', () => {
 		let state;
 
 		state = reducer(state, toggleAbout())
-		expect(state.showAbout).to.be.equal(true)
+		expect(state.showAbout).to.be.equal(false)
 
 		state = reducer(state, toggleAbout())
-		expect(state.showAbout).to.be.equal(false)
+		expect(state.showAbout).to.be.equal(true)
 	})
 
 	describe('fetchGutenbergRequest', () => {

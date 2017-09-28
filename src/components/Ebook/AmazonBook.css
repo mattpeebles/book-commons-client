@@ -32,15 +32,6 @@
 	margin-left: auto;
 }
 
-
-.product-box:nth-child(2n+1) .productPhoto{
-	box-shadow: -10px -10px #6DCCC4;
-}
-
-.product-box:nth-child(3n + 1) .productPhoto{
-	box-shadow: 10px 5px #E196BD;
-}
-
 .productPhoto > img{
 	width: 100%;
 }

@@ -11,7 +11,7 @@ import {
 const initialState = {
 						loading: false,
 						error: null,
-						showAbout: false,
+						showAbout: true,
 						dbCalled: [],
 						'resultsFromDatabase': null,
 						'supplement': 'author',

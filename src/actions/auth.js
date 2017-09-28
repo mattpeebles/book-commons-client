@@ -68,7 +68,6 @@ const storeAuthInfo = (authToken, dispatch) => {
 
     //Creates demo user
 export const demoUser = user => dispatch => {    
-    console.log('demo')
     return fetch(`${API_BASE_URL}/users/demo`, {
         method: 'POST',
         body: JSON.stringify(user),

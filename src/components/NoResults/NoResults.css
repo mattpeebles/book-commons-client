@@ -1,11 +1,17 @@
+
+#noResultsHead{
+	margin-top: 5%;
+	border: 2px solid black;
+	background-color: white;
+	color: #333;
+	margin-bottom: 3%;
+}
+
 #noResults{
-	border: 5px solid black;
-	background-color: #6DCCC4;
-	width: 85%;
+	border: 3px solid black;
+	background-color: rgba(255, 255,255, 0.5);
 	position: relative;
 	margin-left: auto;
 	margin-right: auto;
 	color: #333;
-	box-shadow: 25px -20px #6DCCC4, inset 1.4em -1.1em #F6F6F6;
-
 }

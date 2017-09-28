@@ -10,7 +10,9 @@ import {fetchWishlists} from './actions/wishlist'
 import {refreshAuthToken} from './actions/auth';
 
 
-import LandingPage from './components/LandingPage'
+import LandingPage from './components/LandingPage/LandingPage'
+
+import Search from './components/Search/Search'
 import Results from './components/ResultsPage/Results'
 import Wishlist from './components/WishlistPage/Wishlist'
 import WLSettings from './components/WishlistPage/WishlistSettings/WLSettings'
@@ -85,7 +87,8 @@ export class App extends React.Component{
 					{loginRegisterForm}
 					{about}
 					<main>
-						<Route exact path='/' component={LandingPage} />
+						<Route exact path='/landing' component={LandingPage} />
+						<Route exact path='/' component={Search} />
 						<Route exact path='/results' component={Results} />
 						
 						<Route exact path='/settings/wishlist' component={WLSettings} />						

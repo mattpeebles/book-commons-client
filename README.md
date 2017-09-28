@@ -27,7 +27,7 @@ Registered users are able to create wishlists to store ebooks for later referenc
 
 ## Technology <a name="technology"></a>
 
-###Front End <a name="techFront"></a>
+### Front End <a name="techFront"></a>
 Hosted on Netlify
 - React/Redux
 - HTML
@@ -40,7 +40,7 @@ Hosted on Netlify
 	- Mocha/Chai
 	- Jest
 
-###Back End <a name="techBack"></a>
+### Back End <a name="techBack"></a>
 Server hosted on heroku
 Database hosted on mlab
 - Node

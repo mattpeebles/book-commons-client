@@ -8,24 +8,18 @@ import './NoResults.css'
 
 export function NoResults(props){
 
-	let {amazonResults} = props
-
-	let purchase = (amazonResults.length === 0) ? undefined : 'You can get them the old fashioned way below, though'  
-
 	return (
 		<div className="col-sm-12">
-			<div id="noResults">
+			<div id="noResultsHead">
 				<h3>Bummer</h3>
 				<p>We've come up empty on free ebooks</p>
-				<p>{purchase}</p>
+			</div>
+			<div id="noResults">
+				<h3>Search Again?</h3>
 				<SearchForm />
 			</div>
 		</div>
 	)
 }
 
-const mapStateToProps = state => ({
-	amazonResults: state.results.amazonResults
-})
-
-export default connect(mapStateToProps)(NoResults)
+export default connect()(NoResults)

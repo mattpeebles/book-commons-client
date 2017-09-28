@@ -201,9 +201,10 @@ export const fetchBooks = term => dispatch => {
 						};
 
 						ebooks.push(ebook)
-					}
+					}else{
+						dispatch(noDatabaseResults('google'))
+					};
 
-					dispatch(noDatabaseResults('google'))
 				});
 
 				ebooks.forEach(ebook => {

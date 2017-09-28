@@ -31,7 +31,6 @@ export class Results extends React.Component{
 		let supplementDiv;
 		let amazon;
 		let noResults;
-		let ebook;
 		let header = <Header headerId='header' title="Results" />
 
 
@@ -60,8 +59,6 @@ export class Results extends React.Component{
 		if(results.length === 0) {
 			noResults = <NoResults />
 			header = undefined;
-		}else{
-			ebook = <Ebook results={results} dropdownType='options' dropdownLinks={dropdownLinks}/>
 		}
 
 		return(
@@ -72,9 +69,9 @@ export class Results extends React.Component{
 				</div>
 				<div id="main-container" className="container-fluid">
 					<div id="main-row" className="row">
-						{noResults}	
 						<div className="col-sm-12 col-md-8">
-							{ebook}
+							<Ebook results={results} dropdownType='options' dropdownLinks={dropdownLinks}/>
+							{noResults}	
 							{amazon}
 						</div>
 						<div className="col-sm-12 col-md-4">
