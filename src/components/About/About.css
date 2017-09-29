@@ -6,11 +6,12 @@
   border: 15px solid black;
   right: 0;
   left: 0;
-  margin: 5% auto;
-  margin-bottom: 15%;
+  margin: auto;
+  margin-bottom: 20%;
   z-index: 2;
   background-color: white;
   padding: 3%;
+  height: auto;
   color: #333;
 }
 
@@ -105,11 +106,9 @@
 }
 
 #aboutClose{
+  margin-bottom: 15%;
   border: 2px solid black;
   color: #333;
-}
-
-#aboutClose{
   background-color: #FFF965;
   box-shadow: -30px 15px #FFF965, inset -1.75em .83em white;
 }
@@ -142,11 +141,6 @@
 
 #basicFeaturesAccordion{
   margin-bottom: 10%;
-}
-
-#landingButtonContainer{
-  text-align: center;
-  margin-top: 5%;
 }
 
 @media screen and (min-width: 700px){
@@ -256,4 +250,12 @@
   border: 1px solid black;
 }
 
+
+#aboutClose{
+  margin-bottom: 0;
+  border: 2px solid black;
+  color: #333;
+  background-color: #FFF965;
+  box-shadow: -30px 15px #FFF965, inset -1.75em .83em white;
+}
 }

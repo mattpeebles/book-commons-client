@@ -34,7 +34,7 @@ export class About extends React.Component{
 			<div className="about">
 				<div id="aboutAbout">
 					<h3>About</h3>
-						<p>Book Commons is your one stop shop for all public domain ebooks. We try our best to return ebooks in three formats - pdf, mobi, and epub.</p>							
+					<p>Book Commons is your one stop shop for all public domain ebooks. We try our best to return ebooks in three formats - pdf, mobi, and epub.</p>							
 					<div id='basicFeatures'>
 						<div id='basicFeaturesHead'>
 						    <a className="collapsed" data-toggle="collapse" href="#basicFeaturesAccord" aria-expanded="false" aria-controls="basicFeaturesAccord">
